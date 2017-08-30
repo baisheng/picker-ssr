@@ -13,7 +13,10 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "js-cookie": "^2.1.4",
+    "jwt-decode": "^2.2.0",
     "nuxt": "^1.0.0-rc3",
+    "vee-validate": "^2.0.0-rc.14",
     "vue-awesome": "^2.3.1"
   },
   "devDependencies": {

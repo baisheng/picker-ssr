@@ -1,5 +1,8 @@
 const nodeExternals = require('webpack-node-externals')
 module.exports = {
+  router: {
+    middleware: 'check-auth'
+  },
   /*
   ** Headers of the page
   */
@@ -42,9 +45,12 @@ module.exports = {
         ]
       }
     },
-    vendor: ['axios', 'vue-awesome']
+    vendor: ['axios', 'vue-awesome', 'vee-validate']
   },
-  plugins: ['~plugins/vue-awesome.js'],
+  plugins: [
+    '~plugins/vue-awesome.js',
+    '~plugins/vee-validate.js'
+  ],
   css: [
     {src: '~assets/stylesheets/style.scss', lang: 'scss'}
   ]

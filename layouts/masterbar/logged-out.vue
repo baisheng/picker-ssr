@@ -39,7 +39,7 @@
       title: String,
       sectionName: {
         type: String,
-        default: ''
+        default: 'signup'
       },
       redirectUri: String
     },
