@@ -2,7 +2,10 @@
   <main class="picker-login__main main">
     <div class="picker-login__container">
       <div class="login__form-header-wrapper">
-        <div class="login__form-header">登录到您的帐户</div>
+        <div class="login__form-header">
+          {{ org.data.basic.name }}
+          登录到您的帐户
+        </div>
       </div>
       <form @submit.prevent="handleSubmit">
         <card className="login__form">
@@ -27,7 +30,7 @@
             href="//picker.cc/tos/" target="_blank" rel="noopener noreferrer">服务条款</a><!-- react-text: 48 -->。
             <!-- /react-text --></p>
           <div class="login__form-action">
-            <button type="submit" class="button form-button is-primary">登录</button>
+            <button type="submit" class="button form-button is-primary" :class="isLogin ? 'is-busy' : ''">登录</button>
           </div>
         </card>
       </form>
@@ -43,10 +46,10 @@
 <script>
   /* eslint-disable no-unused-vars */
 
-  import Card from '~/components/card'
+  import { Card } from '~/components/card'
   import {setToken, checkSecret, extractInfoFromHash} from '~/utils/auth'
   import FormInputValidation from '~/components/forms/form-input-validation'
-  import axios from 'axios'
+//  import axios from 'axios'
 
   export default {
     layout: 'logged-out',
@@ -57,39 +60,36 @@
     },
     data () {
       return {
+        isLogin: false,
         form: {
           user_login: '',
           user_pass: ''
-        },
-        orgInfo: {
-          basic: {
-            logo_url: null
-          }
         }
       }
     },
+    fetch ({ store }) {
+      return store.dispatch('loadOrgInfo', {axios: store.$axios})
+    },
     computed: {
+      org () {
+        return this.$store.state.org.orgInfo
+      },
       logo_url () {
         return this.orgInfo.basic.logo_url === undefined || null ? '../assets/img/logo.png' : this.orgInfo.basic.logo_url
       }
     },
     methods: {
-      handleSubmit () {
-        this.$validator.validateAll().then(async (result) => {
+      async handleSubmit ({ app }) {
+        const that = this
+        that.isLogin = true
+        await this.$validator.validateAll().then(async (result) => {
           if (result) {
-            await this.$store.dispatch('login', this.form)
+            await this.$store.dispatch('login', {form: this.form, axios: this.$axios})
+            that.isLogin = false
             this.$router.replace('/')
-
-            // eslint-disable-next-line
-            /*
-            axios.post(
-              'http://picker.la/api/signin', this.form).then((res) => {
-              console.log(JSON.stringify(res.data.data))
-              setToken(res.data.data.token)
-            })
-            */
             return
           }
+          that.isLogin = false
           console.log('Correct them errors!')
         })
       }

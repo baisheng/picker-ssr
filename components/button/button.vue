@@ -1,6 +1,7 @@
 <template>
-  <a :class="classes" :href="href" v-if="href"></a>
-  <button :type="htmlType" :class="classes" :disabled="disabled" @click="handleClick" v-else>
+  <!--<a :class="classes" :href="href" v-if="href"></a>-->
+  <button :type="htmlType" :class="classes" :disabled="disabled" @click="handleClick">
+    <slot></slot>
   </button>
 </template>
 <script>
@@ -40,7 +41,15 @@
       long: {
         type: Boolean,
         default: false
-      }
+      },
+      compact: {
+        type: Boolean
+      },
+      primary: Boolean,
+      scary: Boolean,
+      busy: Boolean,
+      borderless: Boolean,
+      rel: String
     },
     data () {
       return {
@@ -52,7 +61,11 @@
         return [
           `${prefixCls}`,
           {
-
+            'is-compact': this.compact,
+            'is-primary': this.primary,
+            'is-scary': this.scary,
+            'is-busy': this.busy,
+            'is-borderless': this.borderless
           }
         ]
       }

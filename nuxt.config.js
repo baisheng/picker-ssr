@@ -1,5 +1,10 @@
 const nodeExternals = require('webpack-node-externals')
+// const apiConfig = require('./api.config')
 module.exports = {
+  cache: {
+    max: 20,
+    maxAge: 600000
+  },
   router: {
     middleware: 'check-auth'
   },
@@ -45,9 +50,44 @@ module.exports = {
         ]
       }
     },
-    vendor: ['axios', 'vue-awesome', 'vee-validate']
+    vendor: ['vue-awesome', 'vee-validate']
+  },
+  // 为JS和Vue文件定制babel配置。https://nuxtjs.org/api/configuration-build/#analyze
+  // babel: {
+  //   presets: ['es2015', 'stage-2'],
+  //   plugins: [
+  //     'transform-async-to-generator',
+  //     'transform-runtime'
+  //   ],
+  //   comments: true
+  // },
+  // dev: (process.env.NODE_ENV !== 'production'),
+  // env: {
+  //   baseUrl: apiConfig.baseUrl,
+  //   HOST_URL: apiConfig.socketHost
+  // },
+  modules: [
+    // Simple usage
+    '@nuxtjs/axios',
+    // With options
+    ['@nuxtjs/axios', { credentials: false }]
+  ],
+
+  // You can optionally use global options instead of inline form
+  axios: {
+    credentials: false,
+    redirectError: {
+      401: '/login'
+    },
+    requestInterceptor: (config, { store }) => {
+      if (store.state.token) {
+        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
+      }
+      return config
+    }
   },
   plugins: [
+    // '~plugins/axios.js',
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js'
   ],

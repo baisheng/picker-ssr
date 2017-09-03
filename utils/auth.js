@@ -17,7 +17,20 @@ export const extractInfoFromHash = () => {
     secret: state
   }
 }
-
+export const getTokenFromCookie = (req) => {
+  if (!req.headers.cookie) return
+  const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
+  if (!jwtCookie) return
+  const jwt = jwtCookie.split('=')[1]
+  return jwt
+  // } else {
+  //   return window.localStorage.getItem('token')
+  // }
+  // return window.localStorage.getItem('token')
+}
+export const getToken = () => {
+  return window.localStorage.getItem('token')
+}
 export const setToken = (token) => {
   if (process.SERVER_BUILD) return
   window.localStorage.setItem('token', token)

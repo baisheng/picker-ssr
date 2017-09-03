@@ -5,7 +5,7 @@
 
 .login__form-userdata {
   label {
-    color: $gray-dark;
+    color: $dark80;
     display: block;
     font-size: 14px;
     line-height: 1.5;
@@ -40,7 +40,7 @@
   text-align: center;
 
   .gridicon {
-    color: $blue-wordpress;
+    color: $primary;
   }
 }
 
@@ -120,7 +120,7 @@
   margin: 0 10px 10px;
 }
 
-.wp-login__links {
+.picker-login__links {
   a {
     font-size: 14px;
 
@@ -133,49 +133,3 @@
   }
 }
 
-.two-factor-authentication__auth-code-preview {
-  width: 100%;
-  display: block;
-  margin-bottom: 16px;
-}
-
-.two-factor-authentication__form-button {
-  width: 100%;
-}
-
-.card.two-factor-authentication__form-action {
-  background: $white;
-}
-
-.two-factor-authentication__small-print {
-  clear: both;
-  font-size: 11px;
-  padding: 1em 0;
-}
-
-.login__social-connect-prompt-logos {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.login__social-connect-prompt-logo {
-  height: 72px;
-  width: 72px;
-}
-
-.login__social-connect-prompt-dots {
-  margin: 0 5px;
-}
-
-.login__social-connect-prompt-logo.wordpress {
-  color: $blue-wordpress;
-}
-
-.login__social-connect-prompt-message {
-  margin: 20px 0;
-}
-
-.login__social-connect-prompt-action .button {
-  width: 100%;
-}

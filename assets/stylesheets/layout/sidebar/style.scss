@@ -68,7 +68,8 @@
 
 // Sidebar group headings
 .sidebar__heading {
-  color: darken($gray, 10%);
+  //color: darken($gray, 10%);
+  color: $dark80;
   font-weight: 600;
   font-size: 12px;
   margin: 16px 8px 6px 14px;

@@ -2,6 +2,7 @@
   import { oneOf } from '../../utils/assist'
 
   export default {
+    name: 'Card',
     props: {
       tagName: {
         type: String,
