@@ -38,9 +38,9 @@
                     <h2 class="sidebar__heading">管理</h2>
                     <ul>
                       <li class="selected">
-                       <a href="/podcast/detail">
+                       <a href="/posts">
                          <icon name="dot-circle-o" class="gridicon"></icon>
-                         <span class="menu-link-text">播客</span>
+                         <span class="menu-link-text">音频</span>
                        </a>
                         <a href="/post" class="sidebar__button">添加</a>
                         <!--<a href="/page/bluepx.wordpress.com" class="sidebar__button">添加</a>-->

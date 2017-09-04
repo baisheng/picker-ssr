@@ -155,17 +155,17 @@
           </select>
             <p class="form-setting-explanation">
               <a target="_blank" rel="noopener noreferrer"
-                                                   href="http://en.support.wordpress.com/user-roles/">
-              <svg version="1.1" role="presentation" width="12.571428571428571" height="16" viewBox="0 0 1408 1792"
-                   class="gridicon">
-                <path
-                  d="M1408 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
-                
-              </svg>
-              <span>
+                 href="http://en.support.wordpress.com/user-roles/">
+                <svg version="1.1" role="presentation" width="12.571428571428571" height="16" viewBox="0 0 1408 1792"
+                     class="gridicon">
+                  <path
+                    d="M1408 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
+                  
+                </svg>
+                <span>
                 添加作者
               </span>
-            </a></p>
+              </a></p>
           </fieldset>
           <fieldset class="form-fieldset"><label for="message" class="form-label">
             内容介绍
@@ -203,6 +203,7 @@
   import FoldableCard from '~/components/foldable-card'
 
   export default {
+    middleware: 'authenticated',
     data () {
       return {
         post: {
@@ -229,6 +230,12 @@
           text: "Burlywood"
         }]
       }
+    },
+    validate ({ params }) {
+      return (!!params.id && !Object.is(Number(params.id), NaN))
+    },
+    async fetch ({store, params}) {
+      await store.dispatch('loadPodcastDetail', {axios: store.$axios}, params)
     },
     props: {},
     components: {

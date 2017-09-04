@@ -1,7 +1,7 @@
 <template>
   <main data-reactroot="" class="connected-applications main" role="main">
 
-
+    <!--{{ podcast }}-->
     <header-cake @click="test" @click-title="test" isCompact>
       添加内容
     </header-cake>
@@ -12,7 +12,7 @@
             class="plugin-icon__img"
             src="https://i0.wp.com/wpcom.files.wordpress.com/2016/01/icon300px.png?w=100">
         </div>
-        <h3>{{ post.title }}</h3>
+        <h3>{{ podcast.title }}</h3>
       </div>
       <button type="submit" class="button form-button is-compact is-active" slot="summary">
         发布
@@ -37,7 +37,7 @@
                        placeholder="请输入标题"
                        size="1"
                        class="token-field__input"
-                       v-model="post.title">
+                       v-model="podcast.title">
               </div>
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
@@ -68,7 +68,8 @@
             </label>
             <div class="counted-textarea">
               <textarea name="message" id="message" maxlength="500" placeholder=""
-                        class="counted-textarea__input form-textarea" v-model="post.content"></textarea>
+                        class="counted-textarea__input form-textarea" v-model="podcast.content">
+              </textarea>
               <div class="counted-textarea__count-panel">
                 {{ wordCount }} 个字
               </div>
@@ -137,10 +138,11 @@
             标题
           </label>
             <div tabindex="-1" class="token-field">
-              <div tabindex="-1" class="token-field__input-container"><input type="text" autocapitalize="none"
-                                                                             autocomplete="off" value=""
-                                                                             placeholder="请输入标题" size="1"
-                                                                             class="token-field__input"></div>
+              <div tabindex="-1" class="token-field__input-container">
+                <input type="text" autocapitalize="none"
+                       autocomplete="off" value=""
+                       placeholder="请输入标题" size="1"
+                       class="token-field__input"></div>
               <ul tabindex="-1" class="token-field__suggestions-list"></ul>
             </div>
           </div>
@@ -155,17 +157,17 @@
           </select>
             <p class="form-setting-explanation">
               <a target="_blank" rel="noopener noreferrer"
-                                                   href="http://en.support.wordpress.com/user-roles/">
-              <svg version="1.1" role="presentation" width="12.571428571428571" height="16" viewBox="0 0 1408 1792"
-                   class="gridicon">
-                <path
-                  d="M1408 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
-                
-              </svg>
-              <span>
+                 href="http://en.support.wordpress.com/user-roles/">
+                <svg version="1.1" role="presentation" width="12.571428571428571" height="16" viewBox="0 0 1408 1792"
+                     class="gridicon">
+                  <path
+                    d="M1408 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
+                  
+                </svg>
+                <span>
                 添加作者
               </span>
-            </a></p>
+              </a></p>
           </fieldset>
           <fieldset class="form-fieldset"><label for="message" class="form-label">
             内容介绍
@@ -180,31 +182,60 @@
         </form>
       </foldable-card>
 
-      <card>
-        <div class="color-list">
-          <div
-            class="color-item"
-            v-for="color in colors" v-dragging="{ item: color, list: colors, group: 'color' }"
-            :key="color.text">
-
-            {{color.text}}
+      <!--<foldable-card v-for="item in .children" :key="detailData.id" compact clickableHeader>-->
+        <foldable-card v-for="item in podcast.children" :key="item.id" compact clickableHeader v-dragging="{item: item, list: podcast.children}">
+        <div class="connected-application-item__header" slot="header">
+          <div class="plugin-icon connected-application-icon">
+            <img
+              class="plugin-icon__img"
+              src="https://i0.wp.com/wpcom.files.wordpress.com/2016/01/icon300px.png?w=100">
           </div>
+          <h3>{{ item.title }}</h3>
         </div>
-      </card>
+        <button type="submit" class="button form-button is-compact is-active" slot="summary">
+          发布
+        </button>
+        <div slot="expandedSummary">
+          <button type="button" class="button is-error is-compact is-scary">下架</button>
+        </div>
+
+        <form>
+          <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
+            标题
+          </label>
+            <div tabindex="-1" class="token-field">
+              <div tabindex="-1" class="token-field__input-container">
+                <input type="text" autocapitalize="none"
+                       autocomplete="off" value=""
+                       placeholder="请输入标题" size="1"
+                       class="token-field__input" v-model="item.title">
+              </div>
+              <ul tabindex="-1" class="token-field__suggestions-list"></ul>
+            </div>
+          </div>
+        </form>
+
+      </foldable-card>
+
     </div>
   </main>
 </template>
 
 <script>
-  /* eslint-disable quotes */
+  /* eslint-disable quotes,indent,no-undef */
 
   import EditorSidebar from '~/components/editor/sidebar'
   import HeaderCake from '~/components/header-cake'
   import FoldableCard from '~/components/foldable-card'
+  import {Card} from '~/components/card'
 
   export default {
+    middleware: 'authenticated',
     data () {
       return {
+        podcast: {
+          content: ''
+        },
         post: {
           title: '无标题',
           content: ''
@@ -230,15 +261,67 @@
         }]
       }
     },
+    validate ({params}) {
+      return (!!params.id && !Object.is(Number(params.id), NaN))
+    },
+//    async asyncData({ app }) {
+//      const ip = await app.$axios.$get('http://icanhazip.com')
+//      return { ip }
+//    }
+    async asyncData ({app, params}) {
+      const baseUrl = 'http://vanq.picker.la/api'
+      let data = (await app.$axios.get(`${baseUrl}/podcast/${params.id}`)).data
+      console.log(data)
+      return {
+        podcast: data.data
+      }
+//      const { data } = await axios.get(`https://proxy-uuptfgaypk.now.sh/topics/hot.json`)
+//      await app.$axios.$get(`${baseUrl}/podcast/${params.id}`)
+//        .then(response => {
+//          console.log('lalal')
+//          const success = !!response.data && Object.is(response.errno, 0)
+//          console.log(response)
+//          if (success) {
+//            console.log(response.data)
+//            that.podcast = response.data
+//            return { podcast: response.data }
+//            console.log(that.podcast)
+//          }
+//          return { podcast: response.data.data }
+
+//          if (success) commit('podcast/GET_DETAIL_SUCCESS', response.data)
+//          if (!success) commit('podcast/GET_DETAIL_FAILURE')
+//          return Promise.resolve({ podcast: response.data.data })
+//        }, err => {
+//          commit('podcast/GET_DETAIL_FAILURE', err)
+//          console.log(err)
+//          return Promise.reject(err)
+//        })
+//      await store.dispatch('loadPodcastDetail', {axios: store.$axios, params})
+    },
     props: {},
     components: {
       EditorSidebar,
       HeaderCake,
+      Card,
       FoldableCard
     },
+    mounted () {
+
+    },
     computed: {
+      detailData: {
+        get () {
+//          return Object.assign({}, this.$store.state.podcast.detail.data)
+// eslint-disable-next-line indent
+//          return this.$store.state.podcast.detail.data
+        },
+        set (value) {
+//          this.$store.commit('podcast/UPDATE_DETAIL', value)
+        }
+      },
       wordCount () {
-        return this._wordCount(this.post.content)
+//        return this._wordCount(this.podcast.content)
       }
     },
     methods: {

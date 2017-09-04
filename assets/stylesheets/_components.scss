@@ -44,14 +44,20 @@
 @import 'components/accoridion/style';
 @import "components/header-cake/style";
 @import "my-sites/posts/style";
+@import "my-sites/post/type-list/style";
+@import "my-sites/post/type-list/actions-ellipsis-menu/style";
+@import "my-sites/post/type-list/type-post-author/style";
 @import "my-sites/post/post-image/style";
+@import "my-sites/pages/style";
 @import 'my-sites/sidebar-navigation/style';
 @import 'my-sites/current-site/style';
 @import 'my-sites/sidebar/style';
 @import 'my-sites/sites/style';
 @import 'my-sites/media-library/style';
 @import "my-sites/people/invite-people/style";
-@import "me/connected-application-item/style.scss";
+@import "me/connected-application-item/style";
+@import "me/connected-applications/style";
+@import "me/connected-application-icon/style";
 @import "my-sites/plugins/plugin-icon/style";
 
 @import "post-editor/style";

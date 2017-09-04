@@ -89,7 +89,8 @@ module.exports = {
   plugins: [
     // '~plugins/axios.js',
     '~plugins/vue-awesome.js',
-    '~plugins/vee-validate.js'
+    '~plugins/vee-validate.js',
+    '~plugins/vue-dnd.js'
   ],
   css: [
     {src: '~assets/stylesheets/style.scss', lang: 'scss'}
