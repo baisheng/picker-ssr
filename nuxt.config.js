@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const nodeExternals = require('webpack-node-externals')
 // const apiConfig = require('./api.config')
 module.exports = {
@@ -45,7 +46,7 @@ module.exports = {
       if (ctx.isServer) {
         config.externals = [
           nodeExternals({
-            whitelist: [/\.(?!(?:js|json)$).{1,5}$/i, /^vue-awesome/]
+            whitelist: [/\.(?!(?:js|json)$).{1,5}$/i, /^vue-awesome/, /^vue-upload-component/]
           })
         ]
       }
@@ -90,7 +91,8 @@ module.exports = {
     // '~plugins/axios.js',
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js',
-    '~plugins/vue-dnd.js'
+    '~plugins/vue-dnd.js',
+    { src: '~plugins/a-player.js' }
   ],
   css: [
     {src: '~assets/stylesheets/style.scss', lang: 'scss'}

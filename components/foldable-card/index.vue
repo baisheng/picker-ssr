@@ -25,26 +25,51 @@
 
       </span>
     </div>
-    <div class="foldable-card__content" v-if="isExpanded">
+    <div class="foldable-card__content" v-show="isExpanded">
       <slot></slot>
     </div>
   </card>
 
 </template>
 <script>
+  /* eslint-disable indent,spaced-comment,no-unused-vars */
+
   import {Card, CompactCard} from '../card'
 
   export default {
     name: 'FoldableCard',
     data () {
       return {
-        isExpanded: false
+        dataStatus: '',
+        isExpanded: false,
+        originalData: null
       }
     },
+    created () {
+      this.originalData = Object.assign({}, this.watchData)
+    },
     mounted () {
+      const that = this
       this.isExpanded = this.expanded
+      const oldData = this.watchData
+      this.$watch('watchData', {
+        deep: true,
+        handler: (val, oldVal) => {
+          if (val.title !== this.originalData.title) {
+            that.dataStatus = 'editing'
+          } else {
+            this.dataStatus = ''
+          }
+        }
+      })
+//      this.$watch(this.watchData, () => {
+//        this.dataStatus = 'editing'
+//      }, {deep: true})
     },
     props: {
+      watchData: {
+        type: Object
+      },
       disabled: {
         type: Boolean,
         default: false
@@ -80,7 +105,8 @@
             'is-compact': !!this.compact,
             'is-disabled': !!this.disabled,
             'is-expanded': !!this.isExpanded,
-            'has-expanded-summary': !!this.$slots.expandedSummary
+            'has-expanded-summary': !!this.$slots.expandedSummary,
+            'is-warning': this.dataStatus === 'editing'
           }
         ]
       }
@@ -92,6 +118,16 @@
       handleClick () {
         this.isExpanded = !this.isExpanded
       }
-    }
+    }/*,
+    watch: {
+      watchData: {
+        handler: (val, oldVal) => {
+          if (val) {
+            this.dataStatus = true
+          }
+        },
+        deep: true
+      }
+    }*/
   }
 </script>

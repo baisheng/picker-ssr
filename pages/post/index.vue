@@ -186,7 +186,6 @@
             class="color-item"
             v-for="color in colors" v-dragging="{ item: color, list: colors, group: 'color' }"
             :key="color.text">
-
             {{color.text}}
           </div>
         </div>
