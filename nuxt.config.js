@@ -92,7 +92,7 @@ module.exports = {
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js',
     '~plugins/vue-dnd.js',
-    { src: '~plugins/a-player.js' }
+    { src: '~plugins/a-player.js', ssr: true }
   ],
   css: [
     {src: '~assets/stylesheets/style.scss', lang: 'scss'}

@@ -6,6 +6,9 @@
 
 export const state = () => {
   return {
+    item: {
+      saving: false
+    },
     hot: {
       fetching: false,
       data: { data: [] }
@@ -29,6 +32,14 @@ export const state = () => {
 
 export const mutations = {
 
+  UPDATE_ITEM (state) {
+    console.log('saving.. item')
+    state.item.saving = true
+  },
+  UPDATE_ITEM_SUCCESS (state) {
+    console.log('saving.. success')
+    state.item.saving = false
+  },
   // List
   CLEAR_LIST (state) {
     state.list.data = {
@@ -39,6 +50,8 @@ export const mutations = {
         data: []
       }
     }
+  },
+  UPLOAD_FEATURED_IMAGE (state) {
   },
   REQUEST_LIST (state) {
     console.log('request article list')

@@ -53,7 +53,9 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
 .aplayer {
   font-family: Arial, Helvetica, sans-serif;
   margin: 5px;
-  //box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  /* placeholder: */
+  //background: #FFFFFF;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.10);
   border-radius: 2px;
   overflow: hidden;
   user-select: none;
@@ -92,6 +94,11 @@ $aplayer-height-lrc: $aplayer-height + $lrc-height - 6;
     height: $aplayer-height;
     width: $aplayer-height;
     //background-image: url(./default.jpg);
+    //background: #fafafa;
+    /* Rectangle: */
+    /* Rectangle: */
+    background-image: linear-gradient(-180deg, #EEEEEE 0%, #FAFAFA 100%);
+    /* Rectangle: */
     background-size: 100%;
     transition: all 0.3s ease;
 

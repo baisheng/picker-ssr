@@ -6,6 +6,7 @@
 
 export const state = () => {
   return {
+    saving: false,
     hot: {
       fetching: false,
       data: { data: [] }

@@ -18,7 +18,8 @@
       </div>
       <div><p class="current-section__site-title">bluepx</p>
         <h1 class="current-section__section-title">站点页面</h1></div>
-    </a></header>
+    </a>
+    </header>
     <div class="section-nav has-pinned-items">
       <div class="section-nav__mobile-header"><span class="section-nav__mobile-header-text">开播中</span></div>
       <div class="section-nav__panel">

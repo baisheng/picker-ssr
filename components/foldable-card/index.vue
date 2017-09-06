@@ -89,6 +89,9 @@
       CompactCard
     },
     computed: {
+      saving () {
+        return this.$store.state.posts.item.saving
+      },
       headerClasses () {
         return [
           'foldable-card__header',
@@ -106,7 +109,8 @@
             'is-disabled': !!this.disabled,
             'is-expanded': !!this.isExpanded,
             'has-expanded-summary': !!this.$slots.expandedSummary,
-            'is-warning': this.dataStatus === 'editing'
+            'is-warning': !!this.saving
+//            'is-warning': this.dataStatus === 'editing'
           }
         ]
       }

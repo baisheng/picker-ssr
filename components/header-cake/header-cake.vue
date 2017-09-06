@@ -23,7 +23,7 @@
   export default {
     name: 'HeaderCake',
     props: {
-      isCompact: {
+      compact: {
         type: Boolean,
         default: false
       },
@@ -39,7 +39,7 @@
         return [
           'header-cake',
           {
-            'is-compact': this.isCompact
+            'is-compact': this.compact
           }
         ]
       }
