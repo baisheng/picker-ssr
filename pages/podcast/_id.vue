@@ -9,7 +9,7 @@
     <podcast-header :podcast="podcast" @featured_image_upload="update"></podcast-header>
     <!-- Content-from -->
     <podcast-content-form :podcast="podcast" @content_update="update"></podcast-content-form>
-    <playlist :podcasts="podcast.children" @podcast_item_update="update"></playlist>
+    <playlist :podcast="podcast" @podcast_item_update="update"></playlist>
   </main>
 </template>
 

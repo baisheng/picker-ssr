@@ -3,11 +3,24 @@
 * 文章数据状态
 *
 */
-
 export const state = () => {
   return {
+    creating: false,
+    saving: false,
+    post: {
+      status: '',
+      del: '',
+      creating: false,
+      saving: false,
+      deleting: false,
+      data: {
+        id: 0
+      }
+    },
     item: {
-      saving: false
+      creating: false,
+      saving: false,
+      data: {}
     },
     hot: {
       fetching: false,
@@ -31,10 +44,36 @@ export const state = () => {
 }
 
 export const mutations = {
-
+  SET_POST (state, post) {
+    state.post = post
+  },
+  DELETE (state) {
+    state.post.del = 'start'
+  },
+  DELETE_SUCCESS (state) {
+    state.post.del = 'success'
+  },
+  DELETE_FAILURE (state) {
+    state.post.del = 'error'
+  },
+  CREATE (state) {
+    state.post.creating = true
+  },
+  CREATE_SUCCESS (state, action) {
+    // state.post.creating = true
+    console.log(action.data)
+    state.post.data.id = action.data
+    // Object.assign(state.user, user);
+  },
+  CREATE_FAILURE (state) {
+    state.post.creating = false
+  },
+  CREATE_CANCEL (state) {
+    state.post.creating = false
+  },
   UPDATE_ITEM (state) {
     console.log('saving.. item')
-    state.item.saving = true
+    state.saving = true
   },
   UPDATE_ITEM_SUCCESS (state) {
     console.log('saving.. success')

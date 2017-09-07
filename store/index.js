@@ -81,7 +81,6 @@ export const actions = {
   // console.log('全局服务初始化')
   // return Promise.all(initAppData)
   // },
-
   async loadOrgInfo ({commit}, {axios}) {
     commit('org/REQUEST_ORG_INFO')
     console.log('load org')
@@ -175,6 +174,27 @@ export const actions = {
     // await Service.post('/api/logout')
     unsetToken()
     commit('SET_USER', null)
+  },
+  // POSTS
+  async postsCreate ({commit}, {data, axios}) {
+    commit('posts/CREATE')
+    await axios.post(baseUrl + '/posts', data)
+      .then(response => {
+        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
+        if (success) commit('posts/CREATE_SUCCESS', response.data)
+        if (!success) commit('posts/CREATE_FAILURE')
+      }, err => {
+        commit('posts/CREATE_FAILURE', err)
+      })
+  },
+  async postsDelete ({commit}, {id, axios}) {
+    commit('posts/DELETE')
+    await axios.delete(baseUrl + '/posts/' + id)
+      .then(response => {
+        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
+        if (success) commit('posts/DELETE_SUCCESS')
+        if (!success) commit('posts/DELETE_FAILURE')
+      })
   }
 
 }
