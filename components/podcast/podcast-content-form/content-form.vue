@@ -97,7 +97,9 @@
     },
     computed: {
       wordCount () {
-        return this._wordCount(this.podcast.content)
+        if (this.podcast.content !== null) {
+          return this._wordCount(this.podcast.content)
+        }
       }
     },
     watch: {

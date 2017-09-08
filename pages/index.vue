@@ -1,32 +1,24 @@
-<style>
-  .section-nav-tab .count {
-    margin-left: 8px;
-  }
-  .count {
-    display: inline-block;
-    padding: 1px 6px;
-    border: solid 1px #87a6bc;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    line-height: 14px;
-    color: #537994;
-    text-align: center;
-  }
-</style>
 <template>
   <main class="posts is-multisite main">
-    <header class="current-section">
-      <a class="all-sites">
-        <svg class="gridicon gridicons-chevron-left" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+    <header class="current-section"><a>
+      <svg class="gridicon gridicons-chevron-left" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 24 24">
+        <g>
+          <path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"></path>
+        </g>
+      </svg>
+      <div class="site-icon is-blank" style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
+        <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 24 24">
           <g>
-            <path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"></path>
+            <path
+              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
           </g>
         </svg>
-        <div><p class="current-section__site-title">所有站点</p>
-          <h1 class="current-section__section-title">博客文章</h1></div>
-      </a>
+      </div>
+      <div><p class="current-section__site-title">bluepx</p>
+        <h1 class="current-section__section-title">站点页面</h1></div>
+    </a>
     </header>
     <div class="posts__primary">
       <div class="section-nav has-pinned-items">
@@ -81,7 +73,7 @@
           </div>
           <div class="section-nav-group section-nav__segmented has-siblings">
             <h6 class="section-nav-group__label">
-            作者</h6>
+              作者</h6>
             <ul class="segmented-control" role="radiogroup">
               <li class="segmented-control__item">
                 <a href="/posts/my" class="segmented-control__link" role="radio"
@@ -144,452 +136,80 @@
             </div>
             <div class="search__input-fade">
               <input type="search" id="search-component-11" class="search__input"
-                                                   placeholder="Search 已发布..." role="search" value=""
-                                                   aria-label="搜索" aria-hidden="true" autocapitalize="none"></div>
+                     placeholder="Search 已发布..." role="search" value=""
+                     aria-label="搜索" aria-hidden="true" autocapitalize="none"></div>
           </div>
         </div>
       </div>
-      <div>
-        <div>
-          <div class="posts__list">
-            <div class="infinite-list__spacer" style="height: 0px;"></div>
-            <article class="card post" v-for="post in article.data">
-              <div class="post__body">
-                <div class="post__header has-author">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <icon name="user-circle" class="gridicon need-offset" style="width: 25px; height: 25px;"></icon>
-                  </div>
-                  <h4 class="post__site-title">
-                    <a href="/posts/bluepx.wordpress.com">bluepx</a>
-                  </h4>
-                  <span class="post__author">@deadline</span>
-                </div>
-
-                <div class="post__content"><a href="/post/bluepx.wordpress.com/14"
-                                              class="post__title-link post__content-link">
-                  <!-- react-empty: 258469 --><h4 class="post__title">{{post.title}}</h4></a><a
-                  href="/post/bluepx.wordpress.com/14" class="post__excerpt post__content-link">
-                  <div class="emojify">
-                    <div class="post-excerpt" v-html="post.excerpt">
-                    </div>
-                  </div>
-                </a></div>
-                <ul class="post-actions">
-                  <li class="post-actions__item post-actions__relative-time">
-                    <p class="post-relative-time-status" title="2017-02-11T13:28:18+00:00"><a
-                      href="https://bluepx.wordpress.com/2017/02/11/%e6%88%91%e6%9d%a5%e5%86%99%e4%b8%80%e7%af%87%e6%96%87%e7%ab%a0/"
-                      target="_blank" rel="noopener noreferrer"><span>
-
-                      <span
-                        class="post-relative-time-status__time"><svg class="gridicon gridicons-time needs-offset"
-                                                                     height="18" width="18"
-                                                                     xmlns="http://www.w3.org/2000/svg"
-                                                                     viewBox="0 0 24 24"><g><path
-                        d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266 1.6-1.2z"></path></g></svg><time
-                        class="post-relative-time-status__time-text"
-                        datetime="2017-02-11T13:28:18+00:00">7 个月前</time></span>
-                    </span></a></p>
-                  </li>
-                  <li class="post-actions__item">
-                    <div class="comment-button">
-                      <svg class="gridicon gridicons-comment comment-button__icon" height="24" width="24"
-                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g>
-                          <path
-                            d="M3 6v9c0 1.105.895 2 2 2h9v5l5.325-3.804c1.05-.75 1.675-1.963 1.675-3.254V6c0-1.105-.895-2-2-2H5c-1.105 0-2 .895-2 2z"></path>
-                        </g>
-                      </svg>
-                      <span class="comment-button__label"></span></div>
-                  </li>
-                  <li class="post-actions__item"><a href="/stats/post/14/bluepx.wordpress.com"
-                                                    class="like-button ignore-click is-animated"><span
-                    class="like-button__like-icons"><svg class="gridicon gridicons-star" height="24" width="24"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                    d="M12 2l2.582 6.953L22 9.257l-5.822 4.602L18.18 21 12 16.89 5.82 21l2.002-7.14L2 9.256l7.418-.304"></path></g></svg><svg
-                    class="gridicon gridicons-star-outline" height="24" width="24"
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                    d="M12 6.308l1.176 3.167.347.936.997.042 3.374.14-2.647 2.09-.784.62.27.963.91 3.25-2.813-1.872-.83-.553-.83.552-2.814 1.87.91-3.248.27-.962-.783-.62-2.648-2.092 3.374-.14.996-.04.347-.936L12 6.308M12 2L9.418 8.953 2 9.257l5.822 4.602L5.82 21 12 16.89 18.18 21l-2.002-7.14L22 9.256l-7.418-.305L12 2z"></path></g></svg></span><span
-                    class="like-button__label"><span class="like-button__label-count"></span></span></a></li>
-                  <li class="post-actions__item post-actions__total-views"><a
-                    href="/stats/post/14/bluepx.wordpress.com" class="post__total-views is-empty" title="总阅读次数">
-                    <!-- react-empty: 258503 -->
-                    <svg class="gridicon gridicons-visible" height="24" width="24"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 6C5.188 6 1 12 1 12s4.188 6 11 6 11-6 11-6-4.188-6-11-6zm0 10c-3.943 0-6.926-2.484-8.38-4 1.04-1.085 2.863-2.657 5.255-3.47C8.335 9.214 8 10.064 8 11c0 2.21 1.79 4 4 4s4-1.79 4-4c0-.937-.335-1.787-.875-2.47 2.393.813 4.216 2.386 5.254 3.47-1.456 1.518-4.438 4-8.38 4z"></path>
-                      </g>
-                    </svg>
-                    <span class="stat-update-indicator"></span></a></li>
-                </ul>
-              </div>
-              <div class="post-controls">
-                <ul class="posts__post-controls post-controls__pane post-controls__more-options">
-                  <li class=""><a class="post-controls__trash">
-                    <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-                      </g>
-                    </svg>
-                    <span>回收站</span></a></li>
-                  <li class=""><a class="post-controls__copy" href="/post/bluepx.wordpress.com?copy=14">
-                    <svg class="gridicon gridicons-clipboard" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M16 18H8v-2h8v2zm0-6H8v2h8v-2zm2-9h-2v2h2v15H6V5h2V3H6c-1.105 0-2 .895-2 2v15c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2V5c0-1.105-.895-2-2-2zm-4 2V4c0-1.105-.895-2-2-2s-2 .895-2 2v1c-1.105 0-2 .895-2 2v1h8V7c0-1.105-.895-2-2-2z"></path>
-                      </g>
-                    </svg>
-                    <span>复制</span></a></li>
-                  <li class=""><a class="post-controls__back">
-                    <svg class="gridicon gridicons-chevron-left" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"></path>
-                      </g>
-                    </svg>
-                    <span>返回</span></a></li>
-                </ul>
-                <ul class="posts__post-controls post-controls__pane post-controls__main-options">
-                  <li class=""><a class="post-controls__edit" href="/post/bluepx.wordpress.com/14">
-                    <icon name="pencil" class="gridicon"></icon>
-                    <span>编辑</span></a></li>
-                  <li class=""><a class="post-controls__trash">
-                    <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-                      </g>
-                    </svg>
-                    <span>回收站</span></a></li>
-
-                  <li class=""><a class="post-controls__more">
-                    <svg class="gridicon gridicons-ellipsis" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
-                      </g>
-                    </svg>
-                    <span>更多</span></a></li>
-                </ul>
-              </div>
-              <span></span></article>
-
-
-
-
-            <article class="card post">
-              <div class="post__body">
-                <div class="post__header has-author">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <icon name="user-circle" class="gridicon need-offset" style="width: 25px; height: 25px;"></icon>
-                  </div>
-                  <h4 class="post__site-title">
-                    <a href="/posts/bluepx.wordpress.com">bluepx</a>
-                  </h4>
-                  <span class="post__author">@deadline</span>
-                </div>
-
-                <div class="post__content"><a href="/post/bluepx.wordpress.com/14"
-                                              class="post__title-link post__content-link">
-                  <!-- react-empty: 258469 --><h4 class="post__title">我来写一篇文章</h4></a><a
-                  href="/post/bluepx.wordpress.com/14" class="post__excerpt post__content-link">
-                  <div class="emojify">
-                    <div class="post-excerpt">我现在来写一篇文章吧
-                    </div>
-                  </div>
-                </a></div>
-                <ul class="post-actions">
-                  <li class="post-actions__item post-actions__relative-time">
-                    <p class="post-relative-time-status" title="2017-02-11T13:28:18+00:00"><a
-                      href="https://bluepx.wordpress.com/2017/02/11/%e6%88%91%e6%9d%a5%e5%86%99%e4%b8%80%e7%af%87%e6%96%87%e7%ab%a0/"
-                      target="_blank" rel="noopener noreferrer"><span>
-
-                      <span
-                      class="post-relative-time-status__time"><svg class="gridicon gridicons-time needs-offset"
-                                                                   height="18" width="18"
-                                                                   xmlns="http://www.w3.org/2000/svg"
-                                                                   viewBox="0 0 24 24"><g><path
-                      d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266 1.6-1.2z"></path></g></svg><time
-                      class="post-relative-time-status__time-text"
-                      datetime="2017-02-11T13:28:18+00:00">7 个月前</time></span>
-                    </span></a></p>
-                  </li>
-                  <li class="post-actions__item">
-                    <div class="comment-button">
-                      <svg class="gridicon gridicons-comment comment-button__icon" height="24" width="24"
-                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g>
-                          <path
-                            d="M3 6v9c0 1.105.895 2 2 2h9v5l5.325-3.804c1.05-.75 1.675-1.963 1.675-3.254V6c0-1.105-.895-2-2-2H5c-1.105 0-2 .895-2 2z"></path>
-                        </g>
-                      </svg>
-                      <span class="comment-button__label"></span></div>
-                  </li>
-                  <li class="post-actions__item"><a href="/stats/post/14/bluepx.wordpress.com"
-                                                    class="like-button ignore-click is-animated"><span
-                    class="like-button__like-icons"><svg class="gridicon gridicons-star" height="24" width="24"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                    d="M12 2l2.582 6.953L22 9.257l-5.822 4.602L18.18 21 12 16.89 5.82 21l2.002-7.14L2 9.256l7.418-.304"></path></g></svg><svg
-                    class="gridicon gridicons-star-outline" height="24" width="24"
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                    d="M12 6.308l1.176 3.167.347.936.997.042 3.374.14-2.647 2.09-.784.62.27.963.91 3.25-2.813-1.872-.83-.553-.83.552-2.814 1.87.91-3.248.27-.962-.783-.62-2.648-2.092 3.374-.14.996-.04.347-.936L12 6.308M12 2L9.418 8.953 2 9.257l5.822 4.602L5.82 21 12 16.89 18.18 21l-2.002-7.14L22 9.256l-7.418-.305L12 2z"></path></g></svg></span><span
-                    class="like-button__label"><span class="like-button__label-count"></span></span></a></li>
-                  <li class="post-actions__item post-actions__total-views"><a
-                    href="/stats/post/14/bluepx.wordpress.com" class="post__total-views is-empty" title="总阅读次数">
-                    <!-- react-empty: 258503 -->
-                    <svg class="gridicon gridicons-visible" height="24" width="24"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 6C5.188 6 1 12 1 12s4.188 6 11 6 11-6 11-6-4.188-6-11-6zm0 10c-3.943 0-6.926-2.484-8.38-4 1.04-1.085 2.863-2.657 5.255-3.47C8.335 9.214 8 10.064 8 11c0 2.21 1.79 4 4 4s4-1.79 4-4c0-.937-.335-1.787-.875-2.47 2.393.813 4.216 2.386 5.254 3.47-1.456 1.518-4.438 4-8.38 4z"></path>
-                      </g>
-                    </svg>
-                    <span class="stat-update-indicator"></span></a></li>
-                </ul>
-              </div>
-              <div class="post-controls">
-                <ul class="posts__post-controls post-controls__pane post-controls__more-options">
-                  <li class=""><a class="post-controls__trash">
-                    <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-                      </g>
-                    </svg>
-                    <span>回收站</span></a></li>
-                  <li class=""><a class="post-controls__copy" href="/post/bluepx.wordpress.com?copy=14">
-                    <svg class="gridicon gridicons-clipboard" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M16 18H8v-2h8v2zm0-6H8v2h8v-2zm2-9h-2v2h2v15H6V5h2V3H6c-1.105 0-2 .895-2 2v15c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2V5c0-1.105-.895-2-2-2zm-4 2V4c0-1.105-.895-2-2-2s-2 .895-2 2v1c-1.105 0-2 .895-2 2v1h8V7c0-1.105-.895-2-2-2z"></path>
-                      </g>
-                    </svg>
-                    <span>复制</span></a></li>
-                  <li class=""><a class="post-controls__back">
-                    <svg class="gridicon gridicons-chevron-left" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"></path>
-                      </g>
-                    </svg>
-                    <span>返回</span></a></li>
-                </ul>
-                <ul class="posts__post-controls post-controls__pane post-controls__main-options">
-                  <li class=""><a class="post-controls__edit" href="/post/bluepx.wordpress.com/14">
-                    <icon name="pencil" class="gridicon"></icon>
-                    <span>编辑</span></a></li>
-                  <li class=""><a class="post-controls__trash">
-                    <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-                      </g>
-                    </svg>
-                    <span>回收站</span></a></li>
-
-                  <li class=""><a class="post-controls__more">
-                    <svg class="gridicon gridicons-ellipsis" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
-                      </g>
-                    </svg>
-                    <span>更多</span></a></li>
-                </ul>
-              </div>
-              <span></span></article>
-
-            <article class="card post">
-              <div class="post__body">
-                <div class="post__header">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <svg class="gridicon gridicons-globe" height="25" width="25"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <h4 class="post__site-title"><a href="/posts/baishengblog.wordpress.com">站点标题</a></h4></div>
-
-
-                <div @click="handleClick" :class="classes"
-                     :style="collapsed ? 'background-image: url(http://covteam.u.qiniudn.com/test14.jpg?imageView2/2/format/webp);' : ''">
-                  <img src="http://covteam.u.qiniudn.com/test14.jpg?imageView2/2/format/webp" class="post-image__image" v-if="!collapsed"/>
-                </div>
-
-
-                <div class="post__content">
-                  <a href="/post/baishengblog.wordpress.com/4"
-                                              class="post__title-link post__content-link">
-                  <!-- react-empty: 258572 --><h4 class="post__title">第一篇博文</h4></a><a
-                  href="/post/baishengblog.wordpress.com/4" class="post__excerpt post__content-link">
-                  <div class="emojify">
-                    <div class="post-excerpt">这是您的第一篇文章的摘录。
-                    </div>
-                  </div>
-                </a></div>
-                <ul class="post-actions">
-                  <li class="post-actions__item post-actions__relative-time">
-                    <p class="post-relative-time-status" title="2017-02-08T22:51:04+08:00"><a
-                      href="https://baishengblog.wordpress.com/2017/02/08/%e7%ac%ac%e4%b8%80%e7%af%87%e5%8d%9a%e6%96%87/"
-                      target="_blank" rel="noopener noreferrer">
-
-                      <span>
-                        <span class="post-relative-time-status__time">
-                          <svg class="gridicon gridicons-time needs-offset"
-                                                                   height="18" width="18"
-                                                                   xmlns="http://www.w3.org/2000/svg"
-                                                                   viewBox="0 0 24 24"><g><path
-                      d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266 1.6-1.2z"></path></g></svg><time
-                      class="post-relative-time-status__time-text"
-                      datetime="2017-02-08T22:51:04+08:00">7 个月前</time></span><span
-                      class="post-relative-time-status__status is-sticky"><svg
-                      class="gridicon gridicons-bookmark-outline needs-offset" height="18" width="18"
-                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                      d="M17 5v12.554l-5-2.857-5 2.857V5h10m0-2H7c-1.105 0-2 .896-2 2v16l7-4 7 4V5c0-1.104-.896-2-2-2z"></path></g></svg><span
-                      class="post-relative-time-status__status-text">置顶</span>
-                      </span>
-                      </span>
-                    </a></p>
-                  </li>
-                  <li class="post-actions__item">
-                    <div class="comment-button">
-                      <svg class="gridicon gridicons-comment comment-button__icon" height="24" width="24"
-                           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g>
-                          <path
-                            d="M3 6v9c0 1.105.895 2 2 2h9v5l5.325-3.804c1.05-.75 1.675-1.963 1.675-3.254V6c0-1.105-.895-2-2-2H5c-1.105 0-2 .895-2 2z"></path>
-                        </g>
-                      </svg>
-                      <span class="comment-button__label"></span></div>
-                  </li>
-                  <li class="post-actions__item"><a href="/stats/post/4/baishengblog.wordpress.com"
-                                                    class="like-button ignore-click is-animated"><span
-                    class="like-button__like-icons"><svg class="gridicon gridicons-star" height="24" width="24"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                    d="M12 2l2.582 6.953L22 9.257l-5.822 4.602L18.18 21 12 16.89 5.82 21l2.002-7.14L2 9.256l7.418-.304"></path></g></svg><svg
-                    class="gridicon gridicons-star-outline" height="24" width="24"
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
-                    d="M12 6.308l1.176 3.167.347.936.997.042 3.374.14-2.647 2.09-.784.62.27.963.91 3.25-2.813-1.872-.83-.553-.83.552-2.814 1.87.91-3.248.27-.962-.783-.62-2.648-2.092 3.374-.14.996-.04.347-.936L12 6.308M12 2L9.418 8.953 2 9.257l5.822 4.602L5.82 21 12 16.89 18.18 21l-2.002-7.14L22 9.256l-7.418-.305L12 2z"></path></g></svg></span><span
-                    class="like-button__label"><span class="like-button__label-count"></span></span></a></li>
-                  <li class="post-actions__item post-actions__total-views"><a
-                    href="/stats/post/4/baishengblog.wordpress.com" class="post__total-views is-empty"
-                    title="总阅读次数"><!-- react-empty: 258611 -->
-                    <svg class="gridicon gridicons-visible" height="24" width="24"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 6C5.188 6 1 12 1 12s4.188 6 11 6 11-6 11-6-4.188-6-11-6zm0 10c-3.943 0-6.926-2.484-8.38-4 1.04-1.085 2.863-2.657 5.255-3.47C8.335 9.214 8 10.064 8 11c0 2.21 1.79 4 4 4s4-1.79 4-4c0-.937-.335-1.787-.875-2.47 2.393.813 4.216 2.386 5.254 3.47-1.456 1.518-4.438 4-8.38 4z"></path>
-                      </g>
-                    </svg>
-                    <span class="stat-update-indicator"></span></a></li>
-                </ul>
-              </div>
-              <div class="post-controls">
-                <ul class="posts__post-controls post-controls__pane post-controls__more-options">
-                  <li class=""><a class="post-controls__trash">
-                    <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-                      </g>
-                    </svg>
-                    <span>回收站</span></a></li>
-                  <li class=""><a class="post-controls__copy" href="/post/baishengblog.wordpress.com?copy=4">
-                    <svg class="gridicon gridicons-clipboard" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M16 18H8v-2h8v2zm0-6H8v2h8v-2zm2-9h-2v2h2v15H6V5h2V3H6c-1.105 0-2 .895-2 2v15c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2V5c0-1.105-.895-2-2-2zm-4 2V4c0-1.105-.895-2-2-2s-2 .895-2 2v1c-1.105 0-2 .895-2 2v1h8V7c0-1.105-.895-2-2-2z"></path>
-                      </g>
-                    </svg>
-                    <span>复制</span></a></li>
-                  <li class=""><a class="post-controls__back">
-                    <svg class="gridicon gridicons-chevron-left" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path d="M14 20l-8-8 8-8 1.414 1.414L8.828 12l6.586 6.586"></path>
-                      </g>
-                    </svg>
-                    <span>返回</span></a></li>
-                </ul>
-                <ul class="posts__post-controls post-controls__pane post-controls__main-options">
-                  <li class=""><a class="post-controls__edit" href="/post/baishengblog.wordpress.com/4">
-                    <svg class="gridicon gridicons-pencil" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M13 6l5 5-9.507 9.507c-.686-.686-.69-1.794-.012-2.485l-.002-.003c-.69.676-1.8.673-2.485-.013-.677-.677-.686-1.762-.036-2.455l-.008-.008c-.694.65-1.78.64-2.456-.036L13 6zm7.586-.414l-2.172-2.172c-.78-.78-2.047-.78-2.828 0L14 5l5 5 1.586-1.586c.78-.78.78-2.047 0-2.828zM3 18v3h3c0-1.657-1.343-3-3-3z"></path>
-                      </g>
-                    </svg>
-                    <span>编辑</span></a></li>
-                  <li class=""><a class="post-controls__view"
-                                  href="https://baishengblog.wordpress.com/2017/02/08/%e7%ac%ac%e4%b8%80%e7%af%87%e5%8d%9a%e6%96%87/">
-                    <svg class="gridicon gridicons-visible" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 6C5.188 6 1 12 1 12s4.188 6 11 6 11-6 11-6-4.188-6-11-6zm0 10c-3.943 0-6.926-2.484-8.38-4 1.04-1.085 2.863-2.657 5.255-3.47C8.335 9.214 8 10.064 8 11c0 2.21 1.79 4 4 4s4-1.79 4-4c0-.937-.335-1.787-.875-2.47 2.393.813 4.216 2.386 5.254 3.47-1.456 1.518-4.438 4-8.38 4z"></path>
-                      </g>
-                    </svg>
-                    <span>查看</span></a></li>
-                  <li class=""><a class="post-controls__stats" href="/stats/post/4/baishengblog.wordpress.com">
-                    <svg class="gridicon gridicons-stats-alt needs-offset-y" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path d="M21 21H3v-2h18v2zM8 10H4v7h4v-7zm6-7h-4v14h4V3zm6 3h-4v11h4V6z"></path>
-                      </g>
-                    </svg>
-                    <span>统计</span></a></li>
-                  <li class=""><a class="post-controls__share">
-                    <svg class="gridicon gridicons-share" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M18 16c-.788 0-1.5.31-2.034.807L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.048 4.118c-.053.223-.088.453-.088.692 0 1.657 1.343 3 3 3s3-1.343 3-3-1.343-3-3-3z"></path>
-                      </g>
-                    </svg>
-                    <span>分享</span></a></li>
-                  <li class=""><a class="post-controls__more">
-                    <svg class="gridicon gridicons-ellipsis" height="18" width="18"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
-                      </g>
-                    </svg>
-                    <span>更多</span></a></li>
-                </ul>
-              </div>
-              <span></span></article>
-            <div class="infinite-list__spacer"></div>
+      <div><!-- react-empty: 49 -->
+        <div id="pages" class="pages__page-list"><a href="https://bluepx.wordpress.com" target="_blank"
+                                                    rel="noopener noreferrer" class="card blog-posts-page is-card-link">
+          <svg class="gridicon gridicons-external card__link-indicator" height="24" width="24"
+               xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g>
+              <path
+                d="M19 13v6c0 1.105-.895 2-2 2H5c-1.105 0-2-.895-2-2V7c0-1.105.895-2 2-2h6v2H5v12h12v-6h2zM13 3v2h4.586l-7.793 7.793 1.414 1.414L19 6.414V11h2V3h-8z"></path>
+            </g>
+          </svg>
+          <div class="blog-posts-page__details">
+            <div class="blog-posts-page__title">博客文章</div>
+            <div class="blog-posts-page__info"><span><svg
+              class="gridicon gridicons-house blog-posts-page__front-page-icon" height="12" width="12"
+              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path
+              d="M22 9L12 1 2 9v2h2v10h5v-4c0-1.657 1.343-3 3-3s3 1.343 3 3v4h5V11h2V9z"></path></g></svg>
+              <!-- react-text: 62 -->首页显示您最近发布的文章。<!-- /react-text --></span></div>
           </div>
-          <div class="list-end"></div>
+        </a>
+          <div class="card page is-compact">
+            <div class="page__main">
+              <a class="page__title" href="/page/bluepx.wordpress.com/56" title="编辑首页">
+                <!-- react-text: 66 -->首页<!-- /react-text --></a>
+              <div class="page-card-info">
+                <div><span class="page-card-info__item"><svg class="gridicon gridicons-time page-card-info__item-icon"
+                                                             height="12" width="12" xmlns="http://www.w3.org/2000/svg"
+                                                             viewBox="0 0 24 24"><g><path
+                  d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266 1.6-1.2z"></path></g></svg><span
+                  class="page-card-info__item-text">1 分钟前</span></span></div>
+              </div>
+            </div>
+            <svg class="gridicon gridicons-ellipsis page__actions-toggle" height="24" width="24"
+                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <g>
+                <path
+                  d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
+              </g>
+            </svg><!-- react-empty: 77 --><span></span></div>
+          <div class="card page is-compact" v-for="post in posts.data">
+            <div class="page__main"><a class="page__title" :href="'/podcast/' + post.id" title="编辑About">
+              {{ post.title }}
+            </a>
+              <div class="page-card-info">
+                <div>
+                <span class="page-card-info__item">
+                <svg class="gridicon gridicons-time page-card-info__item-icon"
+                     height="12" width="12" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24"><g><path
+                  d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.8 13.4L13 11.667V7h-2v5.333l3.2 4.266 1.6-1.2z"></path></g></svg><span
+                  class="page-card-info__item-text">11 天前</span>
+              </span>
+                </div>
+              </div>
+            </div>
+            <div class="post-type-list__post-thumbnail-wrapper has-image"><img src="https://bluepx.files.wordpress.com/2017/02/cover.jpg?h=160" class="post-type-list__post-thumbnail"></div>
+            <svg class="gridicon gridicons-ellipsis page__actions-toggle" height="24" width="24"
+                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <g>
+                <path
+                  d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
+              </g>
+            </svg><!-- react-empty: 93 --><span></span></div>
         </div>
       </div>
     </div>
+
   </main>
 </template>
-
 <script>
-  import Logo from '~/components/Logo.vue'
-  import PulsingDot from '~/components/pulsing-dot'
-
   export default {
     data () {
       return {
@@ -597,16 +217,14 @@
       }
     },
     middleware: 'authenticated',
-    components: {
-      PulsingDot,
-      Logo
-    },
+    components: {},
     async fetch ({store}) {
-      await store.dispatch('loadArticles', {axios: store.$axios})
+      // Default type `podcast` page `1`
+      await store.dispatch('loadPosts', {axios: store.$axios})
     },
     computed: {
-      article () {
-        return this.$store.state.article.list
+      posts () {
+        return this.$store.state.posts.list
       },
       options () {
         return this.$store.state.options.globalOption.data
@@ -627,4 +245,3 @@
     }
   }
 </script>
-
