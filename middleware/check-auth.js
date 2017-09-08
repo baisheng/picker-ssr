@@ -3,7 +3,7 @@ import { getUserFromCookie, getUserFromLocalStorage, getTokenFromCookie, getToke
 
 export default function ({ isServer, store, req }) {
   // If nuxt generate, pass this middleware
-  if (isServer && !req) return
+  if (isServer && !req) { return }
   const loggedUser = isServer ? getUserFromCookie(req) : getUserFromLocalStorage()
   // console.log(JSON.stringify(getToken(req)))
   const token = isServer ? getTokenFromCookie(req) : getToken()

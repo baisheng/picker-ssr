@@ -146,7 +146,7 @@
           </div>
           <fieldset class="form-fieldset"><label for="role" class="form-label">
             作者
-          </label><select id="role" name="role" class="form-select">
+          </label><select id="_role" name="role" class="form-select">
             <option value="administrator">Basil(佰晟）</option>
             <option value="editor">叶青</option>
             <option value="author">亚南</option>
@@ -155,22 +155,22 @@
           </select>
             <p class="form-setting-explanation">
               <a target="_blank" rel="noopener noreferrer"
-                                                   href="http://en.support.wordpress.com/user-roles/">
-              <svg version="1.1" role="presentation" width="12.571428571428571" height="16" viewBox="0 0 1408 1792"
-                   class="gridicon">
-                <path
-                  d="M1408 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
-                
-              </svg>
-              <span>
+                 href="http://en.support.wordpress.com/user-roles/">
+                <svg version="1.1" role="presentation" width="12.571428571428571" height="16" viewBox="0 0 1408 1792"
+                     class="gridicon">
+                  <path
+                    d="M1408 736v192q0 40-28 68t-68 28h-416v416q0 40-28 68t-68 28h-192q-40 0-68-28t-28-68v-416h-416q-40 0-68-28t-28-68v-192q0-40 28-68t68-28h416v-416q0-40 28-68t68-28h192q40 0 68 28t28 68v416h416q40 0 68 28t28 68z"></path>
+                  
+                </svg>
+                <span>
                 添加作者
               </span>
-            </a></p>
+              </a></p>
           </fieldset>
           <fieldset class="form-fieldset"><label for="message" class="form-label">
             内容介绍
           </label>
-            <div class="counted-textarea"><textarea name="message" id="message" maxlength="500" placeholder=""
+            <div class="counted-textarea"><textarea name="message" id="_message" maxlength="500" placeholder=""
                                                     class="counted-textarea__input form-textarea"></textarea>
               <div class="counted-textarea__count-panel">
                 0 个字
@@ -245,11 +245,13 @@
         console.log('llalalla')
       },
       _wordCount (data) {
-        let pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g
+        const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g
 
-        let m = data.match(pattern)
+        const m = data.match(pattern)
         let count = 0
-        if (m === null) return count
+        if (m === null) {
+          return count
+        }
         for (let i = 0; i < m.length; i++) {
           if (m[i].charCodeAt(0) >= 0x4E00) {
             count += m[i].length

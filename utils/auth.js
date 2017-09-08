@@ -10,17 +10,23 @@ const getQueryParams = () => {
 }
 
 export const extractInfoFromHash = () => {
-  if (process.SERVER_BUILD) return
-  const { id_token, state } = getQueryParams()
+  if (process.SERVER_BUILD) {
+    return
+  }
+  const {id_token, state} = getQueryParams()
   return {
     token: id_token,
     secret: state
   }
 }
 export const getTokenFromCookie = (req) => {
-  if (!req.headers.cookie) return
+  if (!req.headers.cookie) {
+    return
+  }
   const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
-  if (!jwtCookie) return
+  if (!jwtCookie) {
+    return
+  }
   const jwt = jwtCookie.split('=')[1]
   return jwt
   // } else {
@@ -32,14 +38,18 @@ export const getToken = () => {
   return window.localStorage.getItem('token')
 }
 export const setToken = (token) => {
-  if (process.SERVER_BUILD) return
+  if (process.SERVER_BUILD) {
+    return
+  }
   window.localStorage.setItem('token', token)
   window.localStorage.setItem('user', JSON.stringify(jwtDecode(token)))
   Cookie.set('jwt', token)
 }
 
 export const unsetToken = () => {
-  if (process.SERVER_BUILD) return
+  if (process.SERVER_BUILD) {
+    return
+  }
   window.localStorage.removeItem('token')
   window.localStorage.removeItem('user')
   window.localStorage.removeItem('secret')
@@ -48,9 +58,13 @@ export const unsetToken = () => {
 }
 
 export const getUserFromCookie = (req) => {
-  if (!req.headers.cookie) return
+  if (!req.headers.cookie) {
+    return
+  }
   const jwtCookie = req.headers.cookie.split(';').find(c => c.trim().startsWith('jwt='))
-  if (!jwtCookie) return
+  if (!jwtCookie) {
+    return
+  }
   const jwt = jwtCookie.split('=')[1]
   return jwtDecode(jwt)
 }

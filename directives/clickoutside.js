@@ -1,6 +1,7 @@
+/* eslint-disable prefer-reflect */
 export default {
   bind (el, binding, vnode) {
-    function documentHandler (e) {
+    const documentHandler = (e) => {
       if (el.contains(e.target)) {
         return false
       }

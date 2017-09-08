@@ -1,9 +1,9 @@
-/* eslint-disable one-var,no-mixed-operators,camelcase */
+/* eslint-disable one-var,no-mixed-operators,camelcase,radix,valid-jsdoc,prefer-reflect,no-warning-comments,func-style */
 // console.log('\n %c APlayer 1.6.1 %c http://aplayer.js.org \n\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
 
 require('./APlayer.scss')
 
-let instances = []
+const instances = []
 
 class APlayer {
   /**
@@ -50,7 +50,7 @@ class APlayer {
       theme: '#b7daff',
       mode: 'circulation'
     }
-    for (let defaultKey in defaultOption) {
+    for (const defaultKey in defaultOption) {
       if (defaultOption.hasOwnProperty(defaultKey) && !option.hasOwnProperty(defaultKey)) {
         option[defaultKey] = defaultOption[defaultKey]
       }
@@ -71,12 +71,12 @@ class APlayer {
         return '00:00'
       }
       const add0 = (num) => {
-        return num < 10 ? '0' + num : '' + num
+        return num < 10 ? '0' + num : String(num)
       }
       const min = parseInt(second / 60)
       const sec = parseInt(second - min * 60)
       const hours = parseInt(min / 60)
-      const minAdjust = parseInt((second / 60) - (60 * parseInt((second / 60) / 60)))
+      const minAdjust = parseInt(second / 60 - 60 * parseInt(second / 60 / 60))
       return second >= 3600 ? add0(hours) + ':' + add0(minAdjust) + ':' + add0(sec) : add0(min) + ':' + add0(sec)
     }
 
@@ -157,7 +157,7 @@ class APlayer {
 
     // fill in HTML
     let eleHTML = `
-            <div class="aplayer-pic" ${(this.music.pic ? (`style="background-image: url('${this.music.pic}');"`) : ``)}>
+            <div class="aplayer-pic" ${(this.music.pic ? `style="background-image: url('${this.music.pic}');"` : ``)}>
                 <div class="aplayer-button aplayer-play">
                     <button type="button" class="aplayer-icon aplayer-icon-play">
                         ${this.getSVG('play')}
@@ -231,7 +231,7 @@ class APlayer {
       this.element.getElementsByClassName('aplayer-time')[0].classList.add('aplayer-time-narrow')
     }
     // fix the width of aplayer bar
-    let bar = {}
+    const bar = {}
     bar.barWrap = this.element.getElementsByClassName('aplayer-bar-wrap')[0]
 
     // switch to narrow style
@@ -430,7 +430,7 @@ class APlayer {
    */
   setMusic (index) {
     // get this.music
-    if (typeof (index) !== 'undefined') {
+    if (typeof index !== 'undefined') {
       this.playIndex = index
     }
     const indexMusic = this.playIndex
@@ -598,7 +598,7 @@ class APlayer {
      */
     const parseLrc = (lrc_s) => {
       const lyric = lrc_s.split('\n')
-      let lrc = []
+      const lrc = []
       const lyricLen = lyric.length
       for (let i = 0; i < lyricLen; i++) {
         // match lrc time
@@ -611,7 +611,7 @@ class APlayer {
           const timeLen = lrcTimes.length
           for (let j = 0; j < timeLen; j++) {
             const oneTime = /\[(\d{2}):(\d{2})\.(\d{2,3})]/.exec(lrcTimes[j])
-            const lrcTime = (oneTime[1]) * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((oneTime[3] + '').length === 2 ? 100 : 1000)
+            const lrcTime = oneTime[1] * 60 + parseInt(oneTime[2]) + parseInt(oneTime[3]) / ((String(oneTime[3])).length === 2 ? 100 : 1000)
             lrc.push([lrcTime, lrcText])
           }
         }
@@ -785,7 +785,7 @@ class APlayer {
         shuffled = new Array(length)
       for (let index = 0, rand; index < length; index++) {
         rand = random(0, index)
-        if (rand !== index) shuffled[index] = shuffled[rand]
+        if (rand !== index) { shuffled[index] = shuffled[rand] }
         shuffled[rand] = arr[index]
       }
       return shuffled
@@ -803,7 +803,7 @@ class APlayer {
    */
   nextRandomNum () {
     if (this.multiple) {
-      let index = this.randomOrder.indexOf(this.playIndex)
+      const index = this.randomOrder.indexOf(this.playIndex)
       if (index === this.randomOrder.length - 1) {
         return this.randomOrder[0]
       } else {
@@ -822,7 +822,7 @@ class APlayer {
     this.pause()
     this.element.innerHTML = ''
     clearInterval(this.playedTime)
-    for (let key in this) {
+    for (const key in this) {
       if (this.hasOwnProperty(key)) {
         delete this[key]
       }

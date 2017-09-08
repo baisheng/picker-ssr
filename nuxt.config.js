@@ -54,15 +54,15 @@ module.exports = {
     vendor: ['vue-awesome', 'vee-validate']
   },
   // 为JS和Vue文件定制babel配置。https://nuxtjs.org/api/configuration-build/#analyze
-  // babel: {
-  //   presets: ['es2015', 'stage-2'],
-  //   plugins: [
-  //     'transform-async-to-generator',
-  //     'transform-runtime'
-  //   ],
-  //   comments: true
-  // },
-  // dev: (process.env.NODE_ENV !== 'production'),
+  babel: {
+    presets: ['es2015', 'stage-2'],
+    plugins: [
+      'transform-async-to-generator',
+      'transform-runtime'
+    ],
+    comments: true
+  },
+  dev: process.env.NODE_ENV !== 'production',
   // env: {
   //   baseUrl: apiConfig.baseUrl,
   //   HOST_URL: apiConfig.socketHost
@@ -82,7 +82,7 @@ module.exports = {
     },
     requestInterceptor: (config, { store }) => {
       if (store.state.token) {
-        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
+        config.headers.common.Authorization = 'Bearer ' + store.state.token
       }
       return config
     }

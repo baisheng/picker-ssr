@@ -1,4 +1,4 @@
-/* eslint-disable camelcase,no-unreachable */
+/* eslint-disable camelcase,no-unreachable,prefer-rest-params,func-style,prefer-reflect */
 class DragData {
   constructor () {
     this.data = {}
@@ -130,15 +130,15 @@ export default function (Vue, options) {
       el = getBlockEl(e.target)
     }
 
-    if (!el || !Current) return
+    if (!el || !Current) { return }
 
     const key = el.getAttribute('drag_group')
-    if (key !== Current.group || !Current.el || !Current.item || el === Current.el) return
+    if (key !== Current.group || !Current.el || !Current.item || el === Current.el) { return }
     const drag_key = el.getAttribute('drag_key')
     const DDD = dragData.new(key)
     const item = DDD.KEY_MAP[drag_key]
 
-    if (item === Current.item) return
+    if (item === Current.item) { return }
 
     const indexTo = DDD.List.indexOf(item)
     const indexFrom = DDD.List.indexOf(Current.item)
@@ -181,7 +181,7 @@ export default function (Vue, options) {
   }
 
   function getBlockEl (el) {
-    if (!el) return
+    if (!el) { return }
     while (el.parentNode) {
       if (el.getAttribute && el.getAttribute('drag_block')) {
         return el
@@ -193,7 +193,7 @@ export default function (Vue, options) {
   }
 
   function swapArrayElements (items, indexFrom, indexTo) {
-    let item = items[indexTo]
+    const item = items[indexTo]
     if (isPreVue) {
       items.$set(indexTo, items[indexFrom])
       items.$set(indexFrom, item)

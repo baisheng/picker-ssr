@@ -1,11 +1,19 @@
+.DS_Store
 # dependencies
 node_modules
 
 # logs
 npm-debug.log
+package-lock.json
 
 # Nuxt build
 .nuxt
 
 # Nuxt generate
 dist
+
+sitemap.xml
+
+barrages.json
+data/barrages.json
+/data/barrages.json

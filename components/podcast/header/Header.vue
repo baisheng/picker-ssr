@@ -12,9 +12,36 @@
       </div>
       <h3>{{ podcast.title }}</h3>
     </div>
-    <span class="button is-borderless" slot="summary">
-        已上架
-    </span>
+    <div slot="summary">
+      <span class="button is-borderless"  v-if="podcast.status == 'publish'">
+          已上架
+      </span>
+      <div v-else>
+        <button type="button" class="button is-error is-compact is-primary" style="margin-right: 8px;">发布</button>
+        <file-upload
+          class="button popover-icon is-compact"
+          name="file"
+          post-action="http://vanq.picker.la/api/file"
+          v-model="files"
+          @input-file="input"
+          @input-filter="inputFilter"
+          :accept="accept"
+          :size="size || 0"
+          :headers="requestHeader"
+          ref="upload" >
+          <!--Add upload files-->
+          <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24">
+            <g>
+              <path
+                d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
+            </g>
+          </svg>
+          设置封面
+        </file-upload>
+        <!--<button type="button" class="button is-compact" @click.prevent="changeCover()">换封面</button>-->
+      </div>
+    </div>
     <div slot="expandedSummary">
       <div>
         <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;">下架</button>
@@ -43,7 +70,8 @@
       </div>
     </div>
     <div @click="handleClick" :class="classes"
-         :style="collapsed ? `background-image: url(${podcast.featured_image});` : ''">
+         :style="collapsed ? `background-image: url(${podcast.featured_image});` : ''"
+    v-if="podcast.featured_image">
       <img :src="podcast.featured_image" class="post-image__image" v-if="!collapsed"/>
     </div>
   </foldable-card>
@@ -58,7 +86,8 @@
     props: {
       podcast: {
         type: Object,
-        required: true
+        required: true,
+        status: ''
       }
     },
     data () {
@@ -71,6 +100,7 @@
       }
     },
     computed: {
+      featuredImage () {},
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       },
@@ -143,7 +173,7 @@
           }
           // 创建 blob 字段
           newFile.blob = ''
-          var URL = window.URL || window.webkitURL
+          let URL = window.URL || window.webkitURL
           if (URL && URL.createObjectURL) {
             newFile.blob = URL.createObjectURL(newFile.file)
           }

@@ -16,7 +16,7 @@ export default {
    * @return {Object}
    */
   keyMirror (obj) {
-    let ret = {}
+    const ret = {}
     let key
 
     for (key in obj) {

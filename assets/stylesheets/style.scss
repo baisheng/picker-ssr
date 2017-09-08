@@ -14,4 +14,9 @@
 // Main
 @import "main";
 
+// Sections
+@import 'sections/updated-confirmation';       // confirmation boxes for posts/pages
+@import 'sections/notifications';              // notifications styles
+@import 'sections/domain-search';              // Domain Search styles
+
 @import "components";

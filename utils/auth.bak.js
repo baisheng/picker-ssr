@@ -41,6 +41,6 @@ export default {
    * @return {boolean}
    */
   loggedIn () {
-    return !!storage.get(USER) && !!storage.get(TOKEN)
+    return Boolean(storage.get(USER)) && Boolean(storage.get(TOKEN))
   }
 }

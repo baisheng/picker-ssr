@@ -18,13 +18,13 @@
         已发布
       </span>
       <!--<button type="submit" class="button form-button is-compact is-active" slot="summary">-->
-        <!--<span v-if="podcast.status === 'publish'">下架</span>-->
-        <!--<span v-else>发布</span>-->
-        <!--<span v-else-if="podcast.status === 'publish'">已发布</span>-->
+      <!--<span v-if="podcast.status === 'publish'">下架</span>-->
+      <!--<span v-else>发布</span>-->
+      <!--<span v-else-if="podcast.status === 'publish'">已发布</span>-->
       <!--</button>-->
       <div slot="expandedSummary">
         <div>
-        <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;">下架</button>
+          <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;">下架</button>
           <button type="button" class="button is-compact" @click.prevent="insertFile()">换封面</button>
         </div>
       </div>
@@ -159,12 +159,13 @@
         <div>
           <!--<card class="post-image is-placeholder is-compact"></card>-->
           <player mutex theme="#42b983" preload="metadata" mode="circulation"
-                  :music="item" v-if="item.url"> </player>
+                  :music="item" v-if="item.url"></player>
           <div class="empty-content" v-else>
             <h2 class="empty-content__title">没有音频内容</h2>
             <h3 class="empty-content__line">是否要上传内容？</h3>
             <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
-            <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile(item)" :class="uploadProgress  && item === curItem ? 'is-busy' : ''">
+            <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile(item)"
+                    :class="uploadProgress  && item === curItem ? 'is-busy' : ''">
               <span v-if="uploadProgress  && item === curItem">
                 {{uploadProgress}}
               </span>
@@ -180,9 +181,9 @@
 </template>
 <style>
   /*.is-placeholder {*/
-    /*background-color: #e9eff3;*/
-    /*-webkit-animation: loading-fade 1.6s ease-in-out infinite;*/
-    /*animation: loading-fade 1.6s ease-in-out infinite;*/
+  /*background-color: #e9eff3;*/
+  /*-webkit-animation: loading-fade 1.6s ease-in-out infinite;*/
+  /*animation: loading-fade 1.6s ease-in-out infinite;*/
   /*}*/
 </style>
 <script>
@@ -192,7 +193,7 @@
   import HeaderCake from '~/components/header-cake'
   import FoldableCard from '~/components/foldable-card'
   import {Card} from '~/components/card'
-//  import AudioPlayer from '~/components/aplayer'
+  //  import AudioPlayer from '~/components/aplayer'
 
   export default {
     middleware: 'authenticated',
@@ -236,7 +237,7 @@
       }
     },
     validate ({params}) {
-      return (!!params.id && !Object.is(Number(params.id), NaN))
+      return !!params.id && !Object.is(Number(params.id), NaN)
     },
     async asyncData ({app, params}) {
       const baseUrl = 'http://vanq.picker.la/api'
@@ -374,7 +375,7 @@
           }
           // 创建 blob 字段
           newFile.blob = ''
-          var URL = window.URL || window.webkitURL
+          let URL = window.URL || window.webkitURL
           if (URL && URL.createObjectURL) {
             newFile.blob = URL.createObjectURL(newFile.file)
           }
@@ -386,7 +387,9 @@
 
         let m = data.match(pattern)
         let count = 0
-        if (m === null) return count
+        if (m === null) {
+          return count
+        }
         for (let i = 0; i < m.length; i++) {
           if (m[i].charCodeAt(0) >= 0x4E00) {
             count += m[i].length

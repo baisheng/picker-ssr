@@ -1,3 +1,4 @@
+/* eslint-disable func-style,no-void */
 // Thanks to: https://github.com/airyland/vux/blob/v2/src/directives/transfer-dom/index.js
 // Thanks to: https://github.com/calebroseland/vue-dom-portal
 
@@ -18,10 +19,10 @@ function getTarget (node) {
 
 const directive = {
   inserted (el, {value}, vnode) {
-    if (el.dataset.transfer !== 'true') return false
+    if (el.dataset.transfer !== 'true') { return false }
     el.className = el.className ? el.className + ' v-transfer-dom' : 'v-transfer-dom'
     const parentNode = el.parentNode
-    if (!parentNode) return
+    if (!parentNode) { return }
     const home = document.createComment('')
     let hasMovedOut = false
 
@@ -40,10 +41,10 @@ const directive = {
     }
   },
   componentUpdated (el, {value}) {
-    if (el.dataset.transfer !== 'true') return false
+    if (el.dataset.transfer !== 'true') { return false }
     // need to make sure children are done updating (vs. `update`)
     const ref$1 = el.__transferDomData
-    if (!ref$1) return
+    if (!ref$1) { return }
     // homes.get(el)
     const parentNode = ref$1.parentNode
     const home = ref$1.home
@@ -65,10 +66,10 @@ const directive = {
     }
   },
   unbind (el) {
-    if (el.dataset.transfer !== 'true') return false
+    if (el.dataset.transfer !== 'true') { return false }
     el.className = el.className.replace('v-transfer-dom', '')
     const ref$1 = el.__transferDomData
-    if (!ref$1) return
+    if (!ref$1) { return }
     if (el.__transferDomData.hasMovedOut === true) {
       el.__transferDomData.parentNode && el.__transferDomData.parentNode.appendChild(el)
     }

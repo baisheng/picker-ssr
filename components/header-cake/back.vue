@@ -1,5 +1,5 @@
 <template>
-  <btn compact borderless :class="classes" @click="handleClick">
+  <btn compact borderless :href="href" :class="classes" @click="handleClick">
     <svg class="gridicon gridicons-arrow-left needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 24 24">
       <g>

@@ -9,7 +9,6 @@
       <div id="primary" class="layout__primary">
         <nuxt/>
       </div>
-      <div id="secondary" class="layout__secondary">
         <div id="secondary" class="layout__secondary">
           <div class="sites-navigation">
             <ul class="sidebar has-regions notouch" data-tip-target="sidebar">
@@ -38,11 +37,11 @@
                     <h2 class="sidebar__heading">管理</h2>
                     <ul>
                       <li class="selected">
-                       <a href="/podcast/detail">
+                       <a href="/podcasts">
                          <icon name="dot-circle-o" class="gridicon"></icon>
                          <span class="menu-link-text">播客</span>
                        </a>
-                        <a href="/post" class="sidebar__button">添加</a>
+                        <a href="/podcast" class="sidebar__button">添加</a>
                         <!--<a href="/page/bluepx.wordpress.com" class="sidebar__button">添加</a>-->
                       </li>
                       <li class="">
@@ -117,7 +116,6 @@
             </ul>
           </div>
         </div>
-      </div>
     </div>
 
   </div>

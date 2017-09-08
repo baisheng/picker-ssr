@@ -1,6 +1,6 @@
 import Progress from './Progress'
 
-let VueProgress = {
+const VueProgress = {
   install: function (Vue, options) {
     Vue.component('progress-bar', Progress)
   }

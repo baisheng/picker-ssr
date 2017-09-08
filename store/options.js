@@ -107,7 +107,7 @@ export const mutations = {
   // 切换弹幕状态
   UPDATE_BARRAGE_STATE (state, action) {
     if (action !== undefined) {
-      state.openBarrage = !!action
+      state.openBarrage = Boolean(action)
     } else {
       state.openBarrage = !state.openBarrage
     }

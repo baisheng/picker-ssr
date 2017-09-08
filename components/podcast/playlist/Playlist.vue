@@ -3,7 +3,7 @@
     <card class="section-header" compact>
       <div class="section-header__label">
           <span class="section-header__label-text" v-if="!creating">
-            节目列表 ({{ podcast.children.length }})
+            节目列表 ({{ episodeCount }})
           </span>
         <span v-else>
             {{ post.title }}
@@ -68,7 +68,12 @@
         </button>
         <div slot="expandedSummary" class="section-header__actions">
         <span class="button-group">
-        <button type="button" class="button is-error is-compact is-scary">删除</button>
+        <button type="button" class="button is-error is-compact is-scary">
+          <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24"><g><path
+            d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path></g></svg>
+          删除
+        </button>
         <button type="button" class="button is-error is-compact">停播</button>
         </span>
         </div>
@@ -113,7 +118,7 @@
       :key="item.id"
       compact
       v-dragging="{item: item, list: itemList}"
-      :class="getStatusClass(item.status)" class="">
+      :class="getStatusClass(item.status)">
       <div class="connected-application-item__header" slot="header">
 
         <div class="order">
@@ -129,7 +134,14 @@
                 class="button form-button is-compact is-scary"
                 :class="postState.deleting && item.id === curIndex ? 'is-busy' : ''"
                 @click="del(index, item)">
-          删除
+          <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 24 24">
+            <g>
+              <path
+                d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
+            </g>
+          </svg>
+          回收站
         </button>
       </div>
       <div slot="expandedSummary" class="section-header__actions">
@@ -244,7 +256,9 @@
       // 如果是创建了内容
 //      this.curItem = this.post
 
-      this.itemList = this.podcast.children
+      if (!Object.is(this.podcast.children, null)) {
+        this.itemList = this.podcast.children
+      }
       this.$dragging.$on('dragged', ({value, draged, to}) => {
         this.itemList = value.list
         this.curItem = draged
@@ -269,6 +283,12 @@
 //        get () {
 //        }
 //      },
+      episodeCount () {
+        if (!Object.is(this.podcast.children, undefined)) {
+          return this.podcast.children.length
+        }
+        return 0
+      },
       creating () {
         return this.$store.state.posts.post.creating
       },
@@ -310,6 +330,7 @@
     },
     methods: {
       getStatusClass (status) {
+// eslint-disable-next-line default-case
         switch (status) {
           case 'auto-draft':
             return 'is-warning'
@@ -332,7 +353,11 @@
       update () {
       },
       create () {
-        this.post = {title: '无标题', parent: this.podcast.id, sort: this.podcast.children.length + 1, status: 'draft'}
+        let _sort = 1
+        if (!Object.is(this.podcast.children, undefined)) {
+          _sort = this.podcast.children.length++
+        }
+        this.post = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
         this.$store.dispatch('postsCreate', {data: this.post, axios: this.$axios})
 //        this.$store.commit('posts/CREATE')
       },
@@ -399,7 +424,7 @@
           }
           // 创建 blob 字段
           newFile.blob = ''
-          var URL = window.URL || window.webkitURL
+          let URL = window.URL || window.webkitURL
           if (URL && URL.createObjectURL) {
             newFile.blob = URL.createObjectURL(newFile.file)
           }

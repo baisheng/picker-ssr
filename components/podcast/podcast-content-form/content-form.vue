@@ -117,7 +117,9 @@
 
         let m = data.match(pattern)
         let count = 0
-        if (m === null) return count
+        if (m === null) {
+          return count
+        }
         for (let i = 0; i < m.length; i++) {
           if (m[i].charCodeAt(0) >= 0x4E00) {
             count += m[i].length

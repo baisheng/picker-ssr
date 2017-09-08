@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // utils/AuthService.js
 export default class AuthService {
   constructor (domain) {
@@ -29,7 +30,7 @@ export default class AuthService {
   loggedIn () {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken()
-    return !!token && !isTokenExpired(token) // handwaiving here
+    return Boolean(token) && !isTokenExpired(token) // handwaiving here
   }
 
   setProfile (profile) {
@@ -64,7 +65,7 @@ export default class AuthService {
     if (response.status >= 200 && response.status < 300) {
       return response
     } else {
-      var error = new Error(response.statusText)
+      const error = new Error(response.statusText)
       error.response = response
       throw error
     }
@@ -78,7 +79,7 @@ export default class AuthService {
     }
 
     if (this.loggedIn()) {
-      headers['Authorization'] = 'Bearer ' + this.getToken()
+      headers.Authorization = 'Bearer ' + this.getToken()
     }
 
     return fetch(url, {

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-spread */
 /*
 *
 * 文章数据状态
@@ -56,6 +57,7 @@ export const mutations = {
   },
   ADD_LIST_SUCCESS (state, action) {
     state.list.fetching = false
+    /*eslint prefer-reflect: ["error", { "exceptions": ["apply"] }]*/
     state.list.data.data.push.apply(state.list.data.data, action.result.data)
     state.list.data.pagination = action.result.pagination
   },
@@ -90,7 +92,7 @@ export const mutations = {
 
   // 喜欢某篇文章
   LIKE_ARTICLE (state, action) {
-    let article = state.detail.data
+    const article = state.detail.data
     if (Object.is(article.id, action.id)) {
       state.detail.data.meta.likes++
     }

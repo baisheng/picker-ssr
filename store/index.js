@@ -20,7 +20,7 @@ export const mutations = {
 
 export const getters = {
   isAuthenticated (state) {
-    return !!state.user
+    return Boolean(state.user)
   },
   loggedUser (state) {
     return state.user
@@ -86,9 +86,13 @@ export const actions = {
     console.log('load org')
     await axios.get(baseUrl + '/org')
       .then(response => {
-        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
-        if (success) commit('org/REQUEST_ORG_INFO_SUCCESS', response.data)
-        if (!success) commit('org/REQUEST_ORG_INFO_FAILURE')
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('org/REQUEST_ORG_INFO_SUCCESS', response.data)
+        }
+        if (!success) {
+          commit('org/REQUEST_ORG_INFO_FAILURE')
+        }
       }, err => {
         console.log(err)
         commit('org/REQUEST_ORG_INFO_FAILURE', err)
@@ -100,22 +104,19 @@ export const actions = {
   // 获取分类列表
   loadCategories ({commit}) {
   },
-  /**
-   * 获取播客详情页
-   * @param commit
-   * @param axios
-   * @param params
-   * @returns {Promise.<void>}
-   */
   async loadPodcastDetail ({commit}, {axios, params}) {
     commit('podcast/REQUEST_DETAIL')
     // console.log(JSON.stringify(params) + '===')
     // console.log(params)
     await axios.get(`${baseUrl}/podcast/${params.id}`)
       .then(response => {
-        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
-        if (success) commit('podcast/GET_DETAIL_SUCCESS', response.data)
-        if (!success) commit('podcast/GET_DETAIL_FAILURE')
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('podcast/GET_DETAIL_SUCCESS', response.data)
+        }
+        if (!success) {
+          commit('podcast/GET_DETAIL_FAILURE')
+        }
         return Promise.resolve(response.data)
       }, err => {
         commit('podcast/GET_DETAIL_FAILURE', err)
@@ -128,11 +129,15 @@ export const actions = {
     commit('article/REQUEST_LIST')
     await axios.get(baseUrl + '/posts', {params})
       .then(response => {
-        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         const isFirstPage = params.page && params.page > 1
         const commitName = `article/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
-        if (success) commit(commitName, response.data)
-        if (!success) commit('article/GET_LIST_FAILURE')
+        if (success) {
+          commit(commitName, response.data)
+        }
+        if (!success) {
+          commit('article/GET_LIST_FAILURE')
+        }
       })
       .catch(err => {
         console.log(err)
@@ -144,9 +149,13 @@ export const actions = {
     commit('options/REQUEST_GLOBAL_OPTIONS')
     return $axios.get(baseUrl + '/options')
       .then(response => {
-        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
-        if (success) commit('options/REQUEST_GLOBAL_OPTIONS_SUCCESS', response.data)
-        if (!success) commit('options/REQUEST_GLOBAL_OPTIONS_FAILURE')
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('options/REQUEST_GLOBAL_OPTIONS_SUCCESS', response.data)
+        }
+        if (!success) {
+          commit('options/REQUEST_GLOBAL_OPTIONS_FAILURE')
+        }
       }, err => {
         commit('options/REQUEST_GLOBAL_OPTIONS_FAILURE', err)
       })
@@ -180,9 +189,13 @@ export const actions = {
     commit('posts/CREATE')
     await axios.post(baseUrl + '/posts', data)
       .then(response => {
-        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
-        if (success) commit('posts/CREATE_SUCCESS', response.data)
-        if (!success) commit('posts/CREATE_FAILURE')
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('posts/CREATE_SUCCESS', response.data)
+        }
+        if (!success) {
+          commit('posts/CREATE_FAILURE')
+        }
       }, err => {
         commit('posts/CREATE_FAILURE', err)
       })
@@ -191,9 +204,29 @@ export const actions = {
     commit('posts/DELETE')
     await axios.delete(baseUrl + '/posts/' + id)
       .then(response => {
-        const success = !!response.status && response.data && Object.is(response.data.errno, 0)
-        if (success) commit('posts/DELETE_SUCCESS')
-        if (!success) commit('posts/DELETE_FAILURE')
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('posts/DELETE_SUCCESS')
+        }
+        if (!success) {
+          commit('posts/DELETE_FAILURE')
+        }
+      })
+  },
+  async loadPosts ({commit}, {axios}, params = {type: 'podcast', page: 1}) {
+    commit('posts/REQUEST_LIST')
+    await axios.get(baseUrl + '/posts', {params})
+      .then(response => {
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        const isFirstPage = params.page && params.page > 1
+        const commitName = `posts/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
+        console.log(JSON.stringify(response.data))
+        if (success) {
+          commit(commitName, response.data)
+        }
+        if (!success) {
+          commit('posts/GET_LIST_FAILURE')
+        }
       })
   }
 

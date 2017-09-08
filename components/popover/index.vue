@@ -1,10 +1,10 @@
 <template>
   <transition name="fade">
     <div :class="classes" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" v-clickoutside="handleClose">
-        <div class="popover__arrow"></div>
-        <div class="popover__inner">
-          <slot></slot>
-        </div>
+      <div class="popover__arrow"></div>
+      <div class="popover__inner">
+        <slot></slot>
+      </div>
     </div>
   </transition>
 
@@ -104,7 +104,9 @@
         if (this.trigger !== 'hover') {
           return false
         }
-        if (this.enterTimer) clearTimeout(this.enterTimer)
+        if (this.enterTimer) {
+          clearTimeout(this.enterTimer)
+        }
         this.enterTimer = setTimeout(() => {
           this.visible = true
         }, 100)

@@ -1,9 +1,9 @@
-<template>
+<!--<template>-->
   <!--<a :class="classes" :href="href" v-if="href"></a>-->
-  <button :type="htmlType" :class="classes" :disabled="disabled" @click="handleClick">
-    <slot></slot>
-  </button>
-</template>
+  <!--<button :type="htmlType" :class="classes" :disabled="disabled" @click="handleClick">-->
+    <!--<slot></slot>-->
+  <!--</button>-->
+<!--</template>-->
 <script>
   import { oneOf } from '../../utils/assist'
 
@@ -54,6 +54,29 @@
     data () {
       return {
         showSlot: true
+      }
+    },
+    render (createElement) {
+      if (this.href) {
+        return createElement('a', {
+          class: this.classes,
+          attrs: {
+            href: this.href
+          },
+          props: {
+            class: this.classes
+          }
+        }, this.$slots.default)
+      } else {
+        return createElement('button', {
+          class: this.classes,
+          props: {
+            disabled: this.disabled
+          },
+          on: {
+            click: this.handleClick
+          }
+        }, this.$slots.default)
       }
     },
     computed: {

@@ -44,10 +44,10 @@
           </div>
           <fieldset class="form-fieldset">
             <!-- react-empty: 3841 --><!-- react-empty: 3842 -->
-            <label for="role" class="form-label">
+            <label for="_1role" class="form-label">
               作者
             </label>
-            <select id="role" name="role" class="form-select">
+            <select id="_2role" name="role" class="form-select">
               <option value="administrator">Basil(佰晟）</option>
               <option value="editor">叶青</option>
               <option value="author">亚南</option>
@@ -146,7 +146,7 @@
           </div>
           <fieldset class="form-fieldset"><label for="role" class="form-label">
             作者
-          </label><select id="role" name="role" class="form-select">
+          </label><select id="_role" name="role" class="form-select">
             <option value="administrator">Basil(佰晟）</option>
             <option value="editor">叶青</option>
             <option value="author">亚南</option>
@@ -231,8 +231,8 @@
         }]
       }
     },
-    validate ({ params }) {
-      return (!!params.id && !Object.is(Number(params.id), NaN))
+    validate ({params}) {
+      return !!params.id && !Object.is(Number(params.id), NaN)
     },
     async fetch ({store, params}) {
       await store.dispatch('loadPodcastDetail', {axios: store.$axios}, params)
@@ -253,11 +253,13 @@
         console.log('llalalla')
       },
       _wordCount (data) {
-        let pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g
+        const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g
 
-        let m = data.match(pattern)
+        const m = data.match(pattern)
         let count = 0
-        if (m === null) return count
+        if (m === null) {
+          return count
+        }
         for (let i = 0; i < m.length; i++) {
           if (m[i].charCodeAt(0) >= 0x4E00) {
             count += m[i].length

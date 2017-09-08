@@ -49,7 +49,7 @@
             songs = value
           }
           for (let i = 0; i < songs.length; i++) {
-            let song = songs[i]
+            const song = songs[i]
             if (!song.url || !song.title || !song.author) {
               song.title = song.title || 'Untitled'
               song.author = song.author || 'Unknown'
@@ -79,7 +79,7 @@
       }
     },
     mounted () {
-      let player = this.control = new APlayer({
+      const player = this.control = new APlayer({
         element: this.$el,
         narrow: this.narrow,
         autoplay: this.autoplay,

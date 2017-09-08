@@ -32,7 +32,7 @@ export default {
       default () {
         return {
           gpuAcceleration: false,
-          boundariesElement: 'body' // todo 暂时注释，发现在 vue 2 里方向暂时可以自动识别了，待验证(还是有问题的)
+          boundariesElement: 'body' // 暂时注释，发现在 vue 2 里方向暂时可以自动识别了，待验证(还是有问题的)
         }
       }
     }
@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     createPopper () {
-      if (isServer) return
+      if (isServer) { return }
       if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(this.position)) {
         return
       }
@@ -76,7 +76,7 @@ export default {
       const popper = this.popper || this.$refs.popper
       const reference = this.reference || this.$refs.reference
 
-      if (!popper || !reference) return
+      if (!popper || !reference) { return }
 
       if (this.popperJS && this.popperJS.hasOwnProperty('destroy')) {
         this.popperJS.destroy()
@@ -93,31 +93,31 @@ export default {
       })
     },
     updatePopper () {
-      if (isServer) return
+      if (isServer) { return }
       this.popperJS ? this.popperJS.update() : this.createPopper()
     },
     doDestroy () {
-      if (isServer) return
-      if (this.visible) return
+      if (isServer) { return }
+      if (this.visible) { return }
       this.popperJS.destroy()
       this.popperJS = null
     },
     destroyPopper () {
-      if (isServer) return
+      if (isServer) { return }
       if (this.popperJS) {
         this.resetTransformOrigin(this.popperJS)
       }
     },
     resetTransformOrigin (popper) {
-      if (isServer) return
-      let positionMap = {top: 'bottom', bottom: 'top', left: 'right', right: 'left'}
-      let position = popper._popper.getAttribute('x-position').split('-')[0]
-      let origin = positionMap[position]
+      if (isServer) { return }
+      const positionMap = {top: 'bottom', bottom: 'top', left: 'right', right: 'left'}
+      const position = popper._popper.getAttribute('x-position').split('-')[0]
+      const origin = positionMap[position]
       popper._popper.style.transformOrigin = ['top', 'bottom'].indexOf(position) > -1 ? `center ${origin}` : `${origin} center`
     }
   },
   beforeDestroy () {
-    if (isServer) return
+    if (isServer) { return }
     if (this.popperJS) {
       this.popperJS.destroy()
     }

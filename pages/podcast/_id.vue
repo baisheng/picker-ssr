@@ -2,7 +2,7 @@
   <main data-reactroot="" class="connected-applications main" role="main">
 
     <!-- Navbar -->
-    <header-cake compact>
+    <header-cake compact backHref="/podcasts">
       添加内容
     </header-cake>
     <!-- Header -->
@@ -40,7 +40,7 @@
       }
     },
     validate ({params}) {
-      return (!!params.id && !Object.is(Number(params.id), NaN))
+      return !!params.id && !Object.is(Number(params.id), NaN)
     },
     async asyncData ({app, params}) {
       const baseUrl = 'http://vanq.picker.la/api'

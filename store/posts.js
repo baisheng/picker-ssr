@@ -1,3 +1,4 @@
+/* eslint-disable prefer-reflect,prefer-spread */
 /*
 *
 * 文章数据状态
@@ -93,7 +94,7 @@ export const mutations = {
   UPLOAD_FEATURED_IMAGE (state) {
   },
   REQUEST_LIST (state) {
-    console.log('request article list')
+    console.log('request Posts list')
     state.list.fetching = true
   },
   GET_LIST_FAILURE (state) {
@@ -101,7 +102,7 @@ export const mutations = {
     state.list.fetching = false
   },
   GET_LIST_SUCCESS (state, action) {
-    console.log('get article list success ')
+    console.log('Get Posts list success ')
     state.list.fetching = false
     state.list.data = action.data
     // console.log(action.data)
@@ -142,7 +143,7 @@ export const mutations = {
 
   // 喜欢某篇文章
   LIKE_ARTICLE (state, action) {
-    let article = state.detail.data
+    const article = state.detail.data
     if (Object.is(article.id, action.id)) {
       state.detail.data.meta.likes++
     }

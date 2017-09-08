@@ -1,3 +1,4 @@
+/* eslint-disable prefer-reflect,prefer-spread */
 /*
 *
 * 文章数据状态
@@ -95,7 +96,7 @@ export const mutations = {
 
   // 喜欢某篇文章
   LIKE_ARTICLE (state, action) {
-    let article = state.detail.data
+    const article = state.detail.data
     if (Object.is(article.id, action.id)) {
       state.detail.data.meta.likes++
     }
