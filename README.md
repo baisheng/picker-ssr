@@ -2,6 +2,8 @@
 
 > Picker manager ssr version
 
+:art:
+
 ## Build Setup
 
 ``` bash

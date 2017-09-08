@@ -2,59 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35aaf7a8-0301-42cd-84af-6bbd0947be5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.eslintignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/stylesheets/my-sites/pages/page-card-info/style.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/stylesheets/sections/_domain-search.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/stylesheets/sections/_notifications.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/stylesheets/sections/_updated-confirmation.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/update-post-status/index.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/components/update-post-status/update-template.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/podcast/home.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/podcasts/index.vue" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/debounce.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/utils/scroll-to-anywhere.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintrc.js" afterPath="$PROJECT_DIR$/.eslintrc.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/stylesheets/_components.scss" afterPath="$PROJECT_DIR$/assets/stylesheets/_components.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/stylesheets/style.scss" afterPath="$PROJECT_DIR$/assets/stylesheets/style.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/aplayer/APlayer.js" afterPath="$PROJECT_DIR$/components/aplayer/APlayer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/aplayer/vue-aplayer.vue" afterPath="$PROJECT_DIR$/components/aplayer/vue-aplayer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/base/popper.js" afterPath="$PROJECT_DIR$/components/base/popper.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/button/button.vue" afterPath="$PROJECT_DIR$/components/button/button.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/editor/markdown-editor/codemirror/tablist.js" afterPath="$PROJECT_DIR$/components/editor/markdown-editor/codemirror/tablist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/header-cake/back.vue" afterPath="$PROJECT_DIR$/components/header-cake/back.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/podcast/header/Header.vue" afterPath="$PROJECT_DIR$/components/podcast/header/Header.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/podcast/playlist/Playlist.vue" afterPath="$PROJECT_DIR$/components/podcast/playlist/Playlist.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/podcast/podcast-content-form/content-form.vue" afterPath="$PROJECT_DIR$/components/podcast/podcast-content-form/content-form.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/popover/index.vue" afterPath="$PROJECT_DIR$/components/popover/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/progress/index.js" afterPath="$PROJECT_DIR$/components/progress/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/progress/utils.js" afterPath="$PROJECT_DIR$/components/progress/utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/directives/clickoutside.js" afterPath="$PROJECT_DIR$/directives/clickoutside.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/directives/transfer-dom.js" afterPath="$PROJECT_DIR$/directives/transfer-dom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/default.vue" afterPath="$PROJECT_DIR$/layouts/default.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/middleware/check-auth.js" afterPath="$PROJECT_DIR$/middleware/check-auth.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuxt.config.js" afterPath="$PROJECT_DIR$/nuxt.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/_id_bak.vue" afterPath="$PROJECT_DIR$/pages/_id_bak.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/login/index.vue" afterPath="$PROJECT_DIR$/pages/login/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/podcast/_id.vue" afterPath="$PROJECT_DIR$/pages/podcast/_id.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/podcast/detail.vue" afterPath="$PROJECT_DIR$/pages/podcast/detail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/podcast/index.vue" afterPath="$PROJECT_DIR$/pages/podcast/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/post/index.vue" afterPath="$PROJECT_DIR$/pages/post/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/lib/vue-dragging.js" afterPath="$PROJECT_DIR$/plugins/lib/vue-dragging.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/article.js" afterPath="$PROJECT_DIR$/store/article.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/index.js" afterPath="$PROJECT_DIR$/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/options.js" afterPath="$PROJECT_DIR$/store/options.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/podcast.js" afterPath="$PROJECT_DIR$/store/podcast.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/store/posts.js" afterPath="$PROJECT_DIR$/store/posts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/AuthService.js" afterPath="$PROJECT_DIR$/utils/AuthService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/assist.js" afterPath="$PROJECT_DIR$/utils/assist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/auth.bak.js" afterPath="$PROJECT_DIR$/utils/auth.bak.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/auth.js" afterPath="$PROJECT_DIR$/utils/auth.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/helpers/base.js" afterPath="$PROJECT_DIR$/utils/helpers/base.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -313,12 +261,12 @@
       <workItem from="1504320148897" duration="66189000" />
       <workItem from="1504435805209" duration="11321000" />
       <workItem from="1504447401316" duration="116990000" />
-      <workItem from="1504769935547" duration="52907000" />
+      <workItem from="1504769935547" duration="53229000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="376284000" />
+    <option name="totallyTimeSpent" value="376606000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="842" y="23" width="838" height="1027" extended-state="0" />
@@ -786,7 +734,7 @@
         <state relative-caret-position="467">
           <caret line="47" column="3" lean-forward="false" selection-start-line="47" selection-start-column="3" selection-end-line="47" selection-end-column="3" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
