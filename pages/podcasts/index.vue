@@ -1,5 +1,5 @@
 <template>
-  <main data-reactroot="" class="main" role="main">
+  <main class="posts is-multisite main">
     <header class="current-section"><a>
       <svg class="gridicon gridicons-chevron-left" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
@@ -20,76 +20,127 @@
         <h1 class="current-section__section-title">站点页面</h1></div>
     </a>
     </header>
-    <div class="section-nav has-pinned-items">
-      <div class="section-nav__mobile-header"><span class="section-nav__mobile-header-text">开播中</span></div>
-      <div class="section-nav__panel">
-        <div class="section-nav-group">
-          <div class="section-nav-tabs"><h6 class="section-nav-group__label">状态</h6>
-            <ul class="section-nav-tabs__list" role="menu">
-              <li class="is-selected section-nav-tab">
-                <a href="/pages/published/bluepx.wordpress.com"
-                   class="section-nav-tab__link" tabindex="0" aria-selected="true"
-                   role="menuitem"><span class="section-nav-tab__text"><!-- react-text: 3173 -->
-                  连载中
-                  <!-- /react-text --></span></a></li>
-              <li class="section-nav-tab"><a href="/pages/drafts/bluepx.wordpress.com" class="section-nav-tab__link"
-                                             tabindex="0" aria-selected="false" role="menuitem"><span
-                class="section-nav-tab__text"><!-- react-text: 3177 -->已完结<!-- /react-text --></span></a></li>
-              <li class="section-nav-tab"><a href="/pages/scheduled/bluepx.wordpress.com" class="section-nav-tab__link"
-                                             tabindex="0" aria-selected="false" role="menuitem"><span
-                class="section-nav-tab__text"><!-- react-text: 3181 -->预发布<!-- /react-text --></span></a></li>
-              <li class="section-nav-tab"><a href="/pages/trashed/bluepx.wordpress.com" class="section-nav-tab__link"
-                                             tabindex="0" aria-selected="false" role="menuitem"><span
-                class="section-nav-tab__text"><!-- react-text: 3185 -->已停播<!-- /react-text --></span></a></li>
+    <div class="posts__primary">
+      <div class="section-nav has-pinned-items">
+        <div class="section-nav__mobile-header">
+          <span class="section-nav__mobile-header-text">
+          <span>
+            <span>已发布</span>
+            <small>所有人</small>
+          </span>
+          </span>
+        </div>
+        <div class="section-nav__panel">
+          <div class="section-nav-group">
+            <div class="section-nav-tabs has-siblings">
+              <h6 class="section-nav-group__label">状态</h6>
+              <ul class="section-nav-tabs__list" role="menu">
+                <li class="is-publish is-selected section-nav-tab">
+                  <a href="/posts" class="section-nav-tab__link" tabindex="0" aria-selected="true" role="menuitem">
+                    <span class="section-nav-tab__text">已发布
+                                                                <span class="count">10</span>
+
+                    </span>
+                  </a>
+                </li>
+                <li class="is-draft section-nav-tab">
+                  <a href="/posts/drafts" class="section-nav-tab__link" tabindex="0" aria-selected="false" role="menuitem">
+                    <span class="section-nav-tab__text">
+                      草稿
+                      <span class="count">6</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="is-future section-nav-tab">
+                  <a href="/posts/scheduled" class="section-nav-tab__link" tabindex="0" aria-selected="false" role="menuitem">
+                    <span class="section-nav-tab__text">
+                      待审核
+                                            <span class="count">6</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="is-trash section-nav-tab">
+                  <a href="/posts/trashed" class="section-nav-tab__link" tabindex="0" aria-selected="false" role="menuitem">
+                    <span class="section-nav-tab__text">
+                      已放入回收站
+
+
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="section-nav-group section-nav__segmented has-siblings">
+            <h6 class="section-nav-group__label">
+              作者</h6>
+            <ul class="segmented-control" role="radiogroup">
+              <li class="segmented-control__item">
+                <a href="/posts/my" class="segmented-control__link" role="radio"
+                   tabindex="0" aria-selected="false">
+                  <span class="segmented-control__text">
+                      个人
+                    <img alt="bluepx" class="gravatar" src="https://0.gravatar.com/avatar/f0fd64a8a2dd79ec5f4f1e363585a143?s=96&amp;d=mm" width="16" height="16">
+                  </span>
+                </a>
+              </li>
+              <li class="segmented-control__item is-selected">
+                <a href="/posts" class="segmented-control__link" role="radio" tabindex="0" aria-selected="true">
+                  <span class="segmented-control__text">
+                    所有人
+                  </span>
+                </a>
+              </li>
             </ul>
           </div>
-        </div>
-        <div class="is-expanded-to-container has-open-icon search" role="search">
-          <div class="spinner" style="">
-            <svg class="spinner__image" width="20" height="20" viewBox="0 0 100 100">
-              <defs>
-                <mask id="maskBorder52">
-                  <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
-                  <circle r="46%" cx="50%" cy="50%" fill="black"></circle>
-                </mask>
-                <mask id="maskDonut52">
-                  <rect x="0" y="0" width="100%" height="100%" fill="black"></rect>
-                  <circle r="46%" cx="50%" cy="50%" fill="white"></circle>
-                  <circle r="30%" cx="50%" cy="50%" fill="black"></circle>
-                </mask>
-                <mask id="maskLeft52">
-                  <rect x="0" y="0" width="50%" height="100%" fill="white"></rect>
-                </mask>
-                <mask id="maskRight52">
-                  <rect x="50%" y="0" width="50%" height="100%" fill="white"></rect>
-                </mask>
-              </defs>
-              <circle class="spinner__border" r="50%" cx="50%" cy="50%" mask="url( #maskBorder52 )"></circle>
-              <g mask="url( #maskDonut52 )">
-                <g mask="url( #maskLeft52 )">
-                  <rect class="spinner__progress is-left" x="0" y="0" width="50%" height="100%"></rect>
+          <div class="is-expanded-to-container has-open-icon search" role="search">
+            <div class="spinner" style="">
+              <svg class="spinner__image" width="20" height="20" viewBox="0 0 100 100">
+                <defs>
+                  <mask id="maskBorder19">
+                    <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
+                    <circle r="46%" cx="50%" cy="50%" fill="black"></circle>
+                  </mask>
+                  <mask id="maskDonut19">
+                    <rect x="0" y="0" width="100%" height="100%" fill="black"></rect>
+                    <circle r="46%" cx="50%" cy="50%" fill="white"></circle>
+                    <circle r="30%" cx="50%" cy="50%" fill="black"></circle>
+                  </mask>
+                  <mask id="maskLeft19">
+                    <rect x="0" y="0" width="50%" height="100%" fill="white"></rect>
+                  </mask>
+                  <mask id="maskRight19">
+                    <rect x="50%" y="0" width="50%" height="100%" fill="white"></rect>
+                  </mask>
+                </defs>
+                <circle class="spinner__border" r="50%" cx="50%" cy="50%" mask="url( #maskBorder19 )"></circle>
+                <g mask="url( #maskDonut19 )">
+                  <g mask="url( #maskLeft19 )">
+                    <rect class="spinner__progress is-left" x="0" y="0" width="50%" height="100%"></rect>
+                  </g>
+                  <g mask="url( #maskRight19 )">
+                    <rect class="spinner__progress is-right" x="50%" y="0" width="50%" height="100%"></rect>
+                  </g>
                 </g>
-                <g mask="url( #maskRight52 )">
-                  <rect class="spinner__progress is-right" x="50%" y="0" width="50%" height="100%"></rect>
+              </svg>
+            </div>
+            <div class="search__icon-navigation" tabindex="0" aria-controls="search-component-11"
+                 aria-label="打开“搜索”">
+              <svg class="gridicon gridicons-search search__open-icon" height="24" width="24"
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g>
+                  <path
+                    d="M21 19l-5.154-5.154C16.574 12.742 17 11.42 17 10c0-3.866-3.134-7-7-7s-7 3.134-7 7 3.134 7 7 7c1.42 0 2.742-.426 3.846-1.154L19 21l2-2zM5 10c0-2.757 2.243-5 5-5s5 2.243 5 5-2.243 5-5 5-5-2.243-5-5z"></path>
                 </g>
-              </g>
-            </svg>
+              </svg>
+            </div>
+            <div class="search__input-fade">
+              <input type="search" id="search-component-11" class="search__input"
+                     placeholder="Search 已发布..." role="search" value=""
+                     aria-label="搜索" aria-hidden="true" autocapitalize="none"></div>
           </div>
-          <div class="search__icon-navigation" tabindex="0" aria-controls="search-component-27" aria-label="打开“搜索”">
-            <svg class="gridicon gridicons-search search__open-icon" height="24" width="24"
-                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <g>
-                <path
-                  d="M21 19l-5.154-5.154C16.574 12.742 17 11.42 17 10c0-3.866-3.134-7-7-7s-7 3.134-7 7 3.134 7 7 7c1.42 0 2.742-.426 3.846-1.154L19 21l2-2zM5 10c0-2.757 2.243-5 5-5s5 2.243 5 5-2.243 5-5 5-5-2.243-5-5z"></path>
-              </g>
-            </svg>
-          </div>
-          <div class="search__input-fade"><input type="search" id="search-component-27" class="search__input"
-                                                 placeholder="搜索已发布内容…" role="search" value="" aria-label="搜索"
-                                                 aria-hidden="true" autocapitalize="none"></div>
         </div>
       </div>
-    </div>
     <div><!-- react-empty: 49 -->
       <div id="pages" class="pages__page-list"><a href="https://bluepx.wordpress.com" target="_blank"
                                                   rel="noopener noreferrer" class="card blog-posts-page is-card-link">
@@ -154,6 +205,8 @@
           </svg><!-- react-empty: 93 --><span></span></div>
       </div>
     </div>
+    </div>
+
   </main>
 </template>
 <script>

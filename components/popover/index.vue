@@ -66,6 +66,7 @@
         ]
       },
       styles () {
+        // eslint-disable-next-line prefer-const
         let style = {}
         if (this.width) {
           style.width = `${this.width}px`

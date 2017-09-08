@@ -79,7 +79,8 @@
               </ul>
             </div>
           </div>
-          <div class="section-nav-group section-nav__segmented has-siblings"><h6 class="section-nav-group__label">
+          <div class="section-nav-group section-nav__segmented has-siblings">
+            <h6 class="section-nav-group__label">
             作者</h6>
             <ul class="segmented-control" role="radiogroup">
               <li class="segmented-control__item">

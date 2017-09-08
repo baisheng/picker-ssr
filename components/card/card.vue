@@ -49,6 +49,7 @@
     },
     computed: {
       classes () {
+      // eslint-disable-next-line prefer-const
         let _class = [
           'card animate-box fadeInUp animated-fast',
           this.className,

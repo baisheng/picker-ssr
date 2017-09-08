@@ -225,7 +225,7 @@ module.exports = {
     "no-floating-decimal": 2,
 
     // 禁止隐式转换，为了消除简写的类型转换
-    "no-implicit-coercion": 1,
+    // "no-implicit-coercion": 1,
 
     // 禁止在全局作用域里声明变量或函数
     "no-implicit-globals": 2,

@@ -262,6 +262,7 @@
       this.$dragging.$on('dragged', ({value, draged, to}) => {
         this.itemList = value.list
         this.curItem = draged
+        // eslint-disable-next-line prefer-const
         let _curSort = draged.sort
         this.curItem.sort = to.sort
         to.sort = _curSort
@@ -366,7 +367,7 @@
       },
 
       insertFile (cur) {
-        let input = this.$refs.upload.$el.querySelector('input')
+        const input = this.$refs.upload.$el.querySelector('input')
         input.onclick = null
         input.click()
         this.curItem = cur
@@ -390,7 +391,7 @@
           }
           if (newFile.success && !oldFile.success) {
             // this.success(newFile)
-            let data = newFile.response.data
+            const data = newFile.response.data
             this.curItem.url = data.url
             this.curItem.meta = {
               _audio_id: data.id
@@ -424,7 +425,7 @@
           }
           // 创建 blob 字段
           newFile.blob = ''
-          let URL = window.URL || window.webkitURL
+          const URL = window.URL || window.webkitURL
           if (URL && URL.createObjectURL) {
             newFile.blob = URL.createObjectURL(newFile.file)
           }

@@ -2,7 +2,7 @@
   <main data-reactroot="" class="connected-applications main" role="main">
 
     <!-- Navbar -->
-    <header-cake compact backHref="/podcasts">
+    <header-cake compact>
       添加内容
     </header-cake>
     <!-- Header -->
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  /* eslint-disable quotes,indent,no-undef,no-multi-spaces,no-implicit-coercion */
+  /* eslint-disable quotes,indent,no-undef,no-multi-spaces,handle-callback-err */
   //  import EditorSidebar from '~/components/editor/sidebar'
   import HeaderCake from '~/components/header-cake'
   //  import AudioPlayer from '~/components/aplayer'
@@ -26,28 +26,19 @@
     middleware: 'authenticated',
     data () {
       return {
+        status: '',
         curItem: null,
         headers: {
           'Authorization': 'Bearer ' + this.token
         },
         podcast: {
+          title: '',
           content: ''
         },
         post: {
           title: '无标题',
           content: ''
         }
-      }
-    },
-    validate ({params}) {
-      return !!params.id && !Object.is(Number(params.id), NaN)
-    },
-    async asyncData ({app, params}) {
-      const baseUrl = 'http://vanq.picker.la/api'
-      const data = (await app.$axios.get(`${baseUrl}/podcast/${params.id}`)).data
-//      console.log(data)
-      return {
-        podcast: data.data
       }
     },
     props: {},
@@ -57,29 +48,10 @@
       PodcastContentForm,
       Playlist
     },
-    watch: {
-//      'podcast': {
-//        handler: (val, oldVal) => {
-//          console.log(val)
-//        },
-      // 深度观察
-//        deep: true
-//      }
-    },
+
     computed: {
       token () {
         return this.$store.state.token
-//        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
-//        return
-      },
-      detailData: {
-        get () {
-// eslint-disable-next-line indent
-//          return this.$store.state.podcast.detail.data
-        },
-        set (value) {
-//          this.$store.commit('podcast/UPDATE_DETAIL', value)
-        }
       }
     },
     mounted () {

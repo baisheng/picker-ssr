@@ -120,7 +120,7 @@
     },
     methods: {
       changeCover () {
-        let input = this.$refs.upload.$el.querySelector('input')
+        const input = this.$refs.upload.$el.querySelector('input')
         input.onclick = null
         input.click()
       },
@@ -143,7 +143,7 @@
           }
           if (newFile.success && !oldFile.success) {
             // this.success(newFile)
-            let data = newFile.response.data
+            const data = newFile.response.data
             this.podcast.featured_image = data.url
             this.progress = 'success'
             this.podcast.meta = {
@@ -173,7 +173,7 @@
           }
           // 创建 blob 字段
           newFile.blob = ''
-          let URL = window.URL || window.webkitURL
+          const URL = window.URL || window.webkitURL
           if (URL && URL.createObjectURL) {
             newFile.blob = URL.createObjectURL(newFile.file)
           }
