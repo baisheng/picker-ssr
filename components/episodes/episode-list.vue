@@ -54,8 +54,7 @@
       </div>
     </card>
 
-    <transition name="">
-      <card expanded v-if="creating">
+    <card expanded v-if="creating">
         <div class="connected-application-item__header" slot="header">
 
           <div class="order">
@@ -111,13 +110,12 @@
           </div>
         </div>
       </card>
-    </transition>
     <!--<foldable-card v-for="item in .children" :key="detailData.id" compact clickableHeader   v-dragging="{item: item, list: podcast.children}">-->
     <foldable-card
-      :watchData="item" v-for="(item, index) in itemList"
+      :watchData="item" v-for="(item, index) in list"
       :key="item.id"
       compact
-      v-dragging="{item: item, list: itemList}"
+      v-dragging="{item: item, list: list}"
       :class="getStatusClass(item.status)">
       <div class="connected-application-item__header" slot="header">
 
@@ -220,11 +218,15 @@
   /* eslint-disable no-trailing-spaces,indent */
 
   import FileUpload from 'vue-upload-component/src'
-  import FoldableCard from '../../foldable-card'
-  import {Card} from '../../card'
+  import FoldableCard from '../foldable-card'
+  import {Card} from '../card'
 
   export default {
     props: {
+      list: {
+        type: Array,
+        default: []
+      },
       podcast: {
         type: Object,
         required: true
@@ -256,11 +258,11 @@
       // 如果是创建了内容
 //      this.curItem = this.post
 
-      if (!Object.is(this.podcast.children, null)) {
-        this.itemList = this.podcast.children
-      }
+//      if (!Object.is(this.podcast.children, null)) {
+//        this.itemList = this.podcast.children
+//      }
       this.$dragging.$on('dragged', ({value, draged, to}) => {
-        this.itemList = value.list
+        this.list = value.list
         this.curItem = draged
         // eslint-disable-next-line prefer-const
         let _curSort = draged.sort
@@ -285,10 +287,7 @@
 //        }
 //      },
       episodeCount () {
-        if (!Object.is(this.podcast.children, undefined)) {
-          return this.podcast.children.length
-        }
-        return 0
+        return this.list.count
       },
       creating () {
         return this.$store.state.posts.post.creating
@@ -316,7 +315,7 @@
       'postState': {
         handler (val, oldVal) {
           if (val.del === 'success') {
-            this.itemList.splice(this.curIndex, 1)
+            this.list.splice(this.curIndex, 1)
           }
         },
         deep: true
@@ -324,7 +323,7 @@
       'postId': {
         handler (val, oldVal) {
           this.post.id = val
-          this.itemList.push(this.post)
+          this.list.push(this.post)
         },
         deep: true
       }
@@ -356,9 +355,9 @@
       // 创建节目 episode
       create () {
         let _sort = 1
-        if (!Object.is(this.podcast.children, undefined)) {
-          _sort = this.podcast.children.length++
-        }
+//        if (!Object.is(this., undefined)) {
+        _sort = this.list.length++
+//        }
         this.post = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
         this.$store.dispatch('postsCreate', {data: this.post, axios: this.$axios})
 //        this.$store.commit('posts/CREATE')

@@ -69,11 +69,27 @@
         <!--<button type="button" class="button is-compact" @click.prevent="changeCover()">换封面</button>-->
       </div>
     </div>
-    <div @click="handleClick" :class="classes"
+    <div @click="handleClick"
+         :class="classes"
          :style="collapsed ? `background-image: url(${podcast.featured_image});` : ''"
     v-if="podcast.featured_image">
       <img :src="podcast.featured_image" class="post-image__image" v-if="!collapsed"/>
     </div>
+    <div class="empty-content" v-else>
+      <h2 class="empty-content__title">没有封面图</h2>
+      <h3 class="empty-content__line">是否要设置封面图？</h3>
+      <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
+      <button class="media-library__upload-button button button is-primary"
+              @click.prevent="insertFile()">
+              <span v-if="uploadProgress">
+                {{uploadProgress}}
+              </span>
+        <span v-else>
+                设置封面图
+              </span>
+      </button>
+    </div>
+
   </foldable-card>
 
 </template>
@@ -93,8 +109,9 @@
     data () {
       return {
         progress: 'success',
-        files: [],
         accept: 'image/png,image/gif,image/jpeg,image/webp,audio/mp3',
+        files: [],
+        uploadProgress: '',
         size: 1024 * 1024 * 10,
         collapsed: true
       }

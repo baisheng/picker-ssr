@@ -220,7 +220,7 @@ export const actions = {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         const isFirstPage = params.page && params.page > 1
         const commitName = `posts/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
-        console.log(JSON.stringify(response.data))
+        // console.log(JSON.stringify(response.data))
         if (success) {
           commit(commitName, response.data)
         }

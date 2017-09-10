@@ -103,16 +103,17 @@
       }
     },
     watch: {
-      'podcast': {
-        handler (val, oldVal) {
-          this.editing = true
-        },
-        deep: true
-      }
+//      'podcast': {
+//        handler (val, oldVal) {
+//          this.editing = true
+//          this.$emit('content_update', this.podcast)
+//        },
+//        deep: true
+//      }
     },
     methods: {
       handleClick () {
-        this.$emit('content_update', this.podcast)
+//        this.$emit('content_update', this.podcast)
       },
       _wordCount (data) {
         const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g

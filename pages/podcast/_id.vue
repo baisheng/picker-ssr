@@ -3,13 +3,16 @@
 
     <!-- Navbar -->
     <header-cake compact backHref="/podcasts">
-      添加内容
+      <span v-if="podcast.id">更新内容</span>
+      <span v-else>添加内容</span>
     </header-cake>
     <!-- Header -->
-    <podcast-header :podcast="podcast" @featured_image_upload="update"></podcast-header>
+    <podcast-header :podcast="podcast" @featured_image_upload="save"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="podcast" @content_update="update"></podcast-content-form>
-    <playlist :podcast="podcast" @podcast_item_update="update"></playlist>
+    <podcast-content-form :podcast="podcast" @content_update="save"></podcast-content-form>
+
+    <episode-list :list="episodes" :podcast="podcast"></episode-list>
+    <!--<playlist :episodes="episodes" @podcast_item_update="update"></playlist>-->
   </main>
 </template>
 
@@ -20,7 +23,7 @@
   //  import AudioPlayer from '~/components/aplayer'
   import PodcastHeader from '~/components/podcast/header'
   import PodcastContentForm from '~/components/podcast/podcast-content-form'
-  import Playlist from '~/components/podcast/playlist'
+  import EpisodeList from '~/components/episodes/episode-list'
 
   export default {
     middleware: 'authenticated',
@@ -31,6 +34,7 @@
           'Authorization': 'Bearer ' + this.token
         },
         podcast: {
+          title: '',
           content: ''
         },
         post: {
@@ -58,18 +62,25 @@
       HeaderCake,
       PodcastHeader,
       PodcastContentForm,
-      Playlist
+      EpisodeList
     },
     watch: {
 //      'podcast': {
 //        handler: (val, oldVal) => {
-//          console.log(val)
+//          this.save()
 //        },
-      // 深度观察
+//       深度观察
 //        deep: true
 //      }
     },
     computed: {
+      episodes () {
+        if (!Object.is(this.podcast.children, undefined)) {
+          return this.podcast.children
+        } else {
+          return []
+        }
+      },
       token () {
         return this.$store.state.token
 //        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
@@ -86,15 +97,17 @@
       }
     },
     mounted () {
-      this.$watch('podcast.title', () => {
+      this.$watch('podcast', () => {
         this.save()
+      }, {
+        deep: true
       })
     },
     methods: {
-      async save () {
+      async save (data, id) {
         this.status = 'saving'
 //        if (!this.post.id && this.post.content === null) return
-        if (Object.is(this.post.id, undefined)) {
+        if (Object.is(this.podcast.id, undefined)) {
 //        this.post.autoExcerpt = this.autoExcerpt
           const baseUrl = 'http://vanq.picker.la/api'
           await this.$axios.post(baseUrl + '/posts', this.post)
@@ -102,7 +115,8 @@
               const postId = response.data.data
 //            console.log(JSON.stringify(data))
               if (!Object.is(postId, null)) {
-                this.post.id = postId
+                this.podcast.id = postId
+//                console.log(postId + '----')
 //                if (process.browser) {
 //                  console.log(postId)
                 history.pushState({state: 1}, 'Auto Save State', '/podcast/' + postId + '')
@@ -112,9 +126,11 @@
 //            if (success) commit('posts/CREATE_SUCCESS', response.data)
 //            if (!success) commit('posts/CREATE_FAILURE')
             }, err => {
-              console.log(err)
+//              console.log(err)
 //            commit('posts/CREATE_FAILURE', err)
             })
+        } else {
+          await this.update(this.podcast, this.podcast.id)
         }
       },
       async update (data, id) {
@@ -125,7 +141,7 @@
 //        let api = 'http://vanq.picker.la/api/podcast'
         await this.$axios.put('http://vanq.picker.la/api/posts/' + podcastId, data)
           .then(r => {
-            console.log(r.status)
+//            console.log(r.status)
             // 执行 vux store 状态
 //            delete data.post_thumbnail
 //            that.$emit('update_success')
