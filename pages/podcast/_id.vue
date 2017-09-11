@@ -11,7 +11,7 @@
     <!-- Content-from -->
     <podcast-content-form :podcast="podcast" @content_update="save"></podcast-content-form>
 
-    <episode-list :list="episodes" :podcast="podcast"></episode-list>
+    <episode-list :list="episodes" :podcast="podcast" @podcast_item_update="update"></episode-list>
     <!--<playlist :episodes="episodes" @podcast_item_update="update"></playlist>-->
   </main>
 </template>
@@ -24,9 +24,16 @@
   import PodcastHeader from '~/components/podcast/header'
   import PodcastContentForm from '~/components/podcast/podcast-content-form'
   import EpisodeList from '~/components/episodes/episode-list'
+  import {debounce} from 'lodash'
 
   export default {
     middleware: 'authenticated',
+    fetch ({store}) {
+//      return Promise.all([
+//        store.dispatch('loadEpisodeList', {axios: store.$axios, params: {parent: this.podcastId}})
+//        store.dispatch('loadAnnouncements')
+//      ])
+    },
     data () {
       return {
         curItem: null,
@@ -97,14 +104,15 @@
       }
     },
     mounted () {
-      this.$watch('podcast', () => {
+      this.$watch('podcast.title', () => {
         this.save()
-      }, {
-        deep: true
+      })
+      this.$watch('podcast.content', () => {
+        this.save()
       })
     },
     methods: {
-      async save (data, id) {
+      async save(data, id) {
         this.status = 'saving'
 //        if (!this.post.id && this.post.content === null) return
         if (Object.is(this.podcast.id, undefined)) {
@@ -116,11 +124,8 @@
 //            console.log(JSON.stringify(data))
               if (!Object.is(postId, null)) {
                 this.podcast.id = postId
-//                console.log(postId + '----')
-//                if (process.browser) {
-//                  console.log(postId)
+                // 更新浏览器地址栏
                 history.pushState({state: 1}, 'Auto Save State', '/podcast/' + postId + '')
-//                }
               }
 //            const success = !!response.status && response.data && Object.is(response.data.errno, 0)
 //            if (success) commit('posts/CREATE_SUCCESS', response.data)
@@ -145,7 +150,7 @@
             // 执行 vux store 状态
 //            delete data.post_thumbnail
 //            that.$emit('update_success')
-            this.$store.commit('posts/UPDATE_ITEM_SUCCESS')
+//            this.$store.commit('podcast/UPDATE_EPISODE_SUCCESS')
           })
           .catch(e => console.log(e))
       }

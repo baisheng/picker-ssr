@@ -1,7 +1,7 @@
 <template>
   <!--{{ podcast }}-->
   <!--<header-cake @click="test" @click-title="test" isCompact>-->
-    <!--添加内容-->
+  <!--添加内容-->
   <!--</header-cake>-->
   <foldable-card class="is-compact" expanded>
     <div class="connected-application-item__header is-p" slot="header">
@@ -13,7 +13,7 @@
       <h3>{{ podcast.title }}</h3>
     </div>
     <div slot="summary">
-      <span class="button is-borderless"  v-if="podcast.status == 'publish'">
+      <span class="button is-borderless" v-if="podcast.status == 'publish'">
           已上架
       </span>
       <div v-else>
@@ -28,7 +28,7 @@
           :accept="accept"
           :size="size || 0"
           :headers="requestHeader"
-          ref="upload" >
+          ref="upload">
           <!--Add upload files-->
           <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 24 24">
@@ -55,7 +55,7 @@
           :accept="accept"
           :size="size || 0"
           :headers="requestHeader"
-          ref="upload" >
+          ref="upload">
           <!--Add upload files-->
           <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 24 24">
@@ -72,13 +72,20 @@
     <div @click="handleClick"
          :class="classes"
          :style="collapsed ? `background-image: url(${podcast.featured_image});` : ''"
-    v-if="podcast.featured_image">
+         v-if="podcast.featured_image">
+      <button class="button editor-drawer-well__remove is-compact" type="button" @click="onRemove">
+        <span class="screen-reader-text">移除</span>
+        <svg class="gridicon gridicons-cross editor-drawer-well__remove-icon" height="24" width="24"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g>
+            <path
+              d="M18.36 19.78L12 13.41l-6.36 6.37-1.42-1.42L10.59 12 4.22 5.64l1.42-1.42L12 10.59l6.36-6.36 1.41 1.41L13.41 12l6.36 6.36z"></path>
+          </g>
+        </svg>
+      </button>
       <img :src="podcast.featured_image" class="post-image__image" v-if="!collapsed"/>
     </div>
-    <div class="empty-content" v-else>
-      <h2 class="empty-content__title">没有封面图</h2>
-      <h3 class="empty-content__line">是否要设置封面图？</h3>
-      <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
+    <empty-content title="没有封面图" line="是否要设置封面图？" :illustration="illustration" v-else>
       <button class="media-library__upload-button button button is-primary"
               @click.prevent="insertFile()">
               <span v-if="uploadProgress">
@@ -88,8 +95,7 @@
                 设置封面图
               </span>
       </button>
-    </div>
-
+    </empty-content>
   </foldable-card>
 
 </template>
@@ -97,6 +103,8 @@
 <script>
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../../foldable-card'
+  import EmptyContent from '../../empty-content'
+
   export default {
     name: 'PodcastHeader',
     props: {
@@ -113,11 +121,13 @@
         files: [],
         uploadProgress: '',
         size: 1024 * 1024 * 10,
-        collapsed: true
+        collapsed: true,
+        illustration: '/images/media/illustration-media.svg'
       }
     },
     computed: {
-      featuredImage () {},
+      featuredImage () {
+      },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       },
@@ -133,9 +143,13 @@
     },
     components: {
       FileUpload,
-      FoldableCard
+      FoldableCard,
+      EmptyContent
     },
     methods: {
+      onRemove () {
+        // 删除封面图
+      },
       changeCover () {
         const input = this.$refs.upload.$el.querySelector('input')
         input.onclick = null

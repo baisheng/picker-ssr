@@ -43,6 +43,7 @@
           </svg>
           添加
         </button>
+
         <div class="button-group" v-else>
           <button class="button is-compact is-primary" @click="create">
             发布
@@ -55,17 +56,17 @@
     </card>
 
     <card expanded v-if="creating">
-        <div class="connected-application-item__header" slot="header">
+      <div class="connected-application-item__header" slot="header">
 
-          <div class="order">
-            <!--{{ index + 1 }}.-->
-          </div>
-          <h3> {{ post.title }}</h3>
+        <div class="order">
+          <!--{{ index + 1 }}.-->
         </div>
-        <button type="submit" class="button form-button is-compact is-active" slot="summary">
-          发布
-        </button>
-        <div slot="expandedSummary" class="section-header__actions">
+        <h3> {{ episode.title }}</h3>
+      </div>
+      <button type="submit" class="button form-button is-compact is-active" slot="summary">
+        发布
+      </button>
+      <div slot="expandedSummary" class="section-header__actions">
         <span class="button-group">
         <button type="button" class="button is-error is-compact is-scary">
           <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
@@ -75,82 +76,6 @@
         </button>
         <button type="button" class="button is-error is-compact">停播</button>
         </span>
-        </div>
-        <form>
-          <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
-            标题
-          </label>
-            <div tabindex="-1" class="token-field">
-              <div tabindex="-1" class="token-field__input-container">
-                <input type="text" autocapitalize="none"
-                       autocomplete="off" value=""
-                       placeholder="请输入标题" size="1"
-                       class="token-field__input" v-model="post.title">
-              </div>
-            </div>
-          </div>
-        </form>
-        <div>
-          <!--<card class="post-image is-placeholder is-compact"></card>-->
-          <player mutex theme="#42b983" preload="metadata" mode="circulation"
-                  :music="newItem" v-if="newItem.url"></player>
-          <div class="empty-content" v-else>
-            <h2 class="empty-content__title">没有音频内容</h2>
-            <h3 class="empty-content__line">是否要上传内容？</h3>
-            <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
-            <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile(newItem)"
-                    :class="uploadProgress && newItem === curItem ? 'is-busy' : ''">
-              <span v-if="uploadProgress && newItem === curItem">
-                {{uploadProgress}}
-              </span>
-              <span v-else>
-                上传音频
-              </span>
-            </button>
-          </div>
-        </div>
-      </card>
-    <!--<foldable-card v-for="item in .children" :key="detailData.id" compact clickableHeader   v-dragging="{item: item, list: podcast.children}">-->
-    <foldable-card
-      :watchData="item" v-for="(item, index) in list"
-      :key="item.id"
-      compact
-      v-dragging="{item: item, list: list}"
-      :class="getStatusClass(item.status)">
-      <div class="connected-application-item__header" slot="header">
-
-        <div class="order">
-          {{ index + 1 }}.
-        </div>
-        <h3>{{ item.title }}</h3>
-      </div>
-      <div slot="summary">
-        <button type="submit" class="button form-button is-compact is-active">
-          发布
-        </button>
-        <button type="submit"
-                class="button form-button is-compact is-scary"
-                :class="postState.deleting && item.id === curIndex ? 'is-busy' : ''"
-                @click="del(index, item)">
-          <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
-            <g>
-              <path
-                d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-            </g>
-          </svg>
-          回收站
-        </button>
-      </div>
-      <div slot="expandedSummary" class="section-header__actions">
-        <button type="button" class="button is-error is-compact is-scary" @click="del(index, item)">停播</button>
-        <button type="button" class="button is-error is-compact"
-                :class="uploadProgress  && item === curItem ? 'is-busy' : ''" @click.prevent="insertFile(item)">
-          替换音频
-        </button>
-        <button type="button" class="button is-error is-compact" @click="handleClick(item)"
-                :class="saving ? 'is-busy': ''">更新内容
-        </button>
       </div>
       <form>
         <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
@@ -161,23 +86,22 @@
               <input type="text" autocapitalize="none"
                      autocomplete="off" value=""
                      placeholder="请输入标题" size="1"
-                     class="token-field__input" v-model="item.title">
+                     class="token-field__input" v-model="episode.title">
             </div>
-            <ul tabindex="-1" class="token-field__suggestions-list"></ul>
           </div>
         </div>
       </form>
       <div>
         <!--<card class="post-image is-placeholder is-compact"></card>-->
         <player mutex theme="#42b983" preload="metadata" mode="circulation"
-                :music="item" v-if="item.url"></player>
+                :music="newItem" v-if="newItem.url"></player>
         <div class="empty-content" v-else>
           <h2 class="empty-content__title">没有音频内容</h2>
           <h3 class="empty-content__line">是否要上传内容？</h3>
           <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
-          <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile(item)"
-                  :class="uploadProgress  && item === curItem ? 'is-busy' : ''">
-              <span v-if="uploadProgress  && item === curItem">
+          <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile(newItem)"
+                  :class="uploadProgress && newItem === curItem ? 'is-busy' : ''">
+              <span v-if="uploadProgress && newItem === curItem">
                 {{uploadProgress}}
               </span>
             <span v-else>
@@ -186,7 +110,13 @@
           </button>
         </div>
       </div>
-    </foldable-card>
+    </card>
+
+    <episode :key="index" v-for="(item, index) in list"
+             :order="index"
+             :data="item"
+             v-dragging="{item: item, list: list}"
+             @episode-del="del" @update="update"></episode>
   </div>
 </template>
 <style>
@@ -220,6 +150,7 @@
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
   import {Card} from '../card'
+  import Episode from '../episode'
 
   export default {
     props: {
@@ -232,6 +163,7 @@
         required: true
       }
     },
+
     data () {
       return {
         action: '',
@@ -248,6 +180,11 @@
           title: ''
         },
         curIndex: -1,
+        episode: {
+          title: '无标题',
+          status: 'draft',
+          content: ''
+        },
         post: {
           title: '无标题',
           status: 'draft'
@@ -279,9 +216,13 @@
     components: {
       Card,
       FileUpload,
-      FoldableCard
+      FoldableCard,
+      Episode
     },
     computed: {
+//      episodeList () {
+//        return this.$store.state.podcast.episodeList
+//      },
 //      status: {
 //        get () {
 //        }
@@ -290,17 +231,20 @@
         return this.list.count
       },
       creating () {
-        return this.$store.state.posts.post.creating
+        return this.$store.state.podcast.episode.creating
       },
-      saving () {
-        return this.$store.state.posts.item.saving
+//      saving () {
+//        return this.$store.state.posts.item.saving
+//      },
+      episodeState () {
+        return this.$store.state.podcast.episode
       },
-      postState () {
-        return this.$store.state.posts.post
+      episodeId () {
+        return this.$store.state.podcast.episode.id
       },
-      postId () {
-        return this.$store.state.posts.post.data.id
-      },
+//      postId () {
+//        return this.$store.state.posts.post.data.id
+//      },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       }
@@ -312,18 +256,20 @@
         },
         deep: true
       },
-      'postState': {
+      'episodeState': {
         handler (val, oldVal) {
           if (val.del === 'success') {
+            console.log('lalal')
             this.list.splice(this.curIndex, 1)
           }
         },
         deep: true
       },
-      'postId': {
+      'episodeId': {
         handler (val, oldVal) {
-          this.post.id = val
-          this.list.push(this.post)
+          console.log('lalala')
+          this.episode.id = val
+          this.list.push(this.episode)
         },
         deep: true
       }
@@ -345,25 +291,24 @@
       save () {
 
       },
-      del (index, item) {
+      del (item, index) {
+//        console.log('del action...')
+//        console.log(JSON.stringify(item))
         this.curIndex = index
-        this.$store.dispatch('postsDelete', {id: item.id, axios: this.$axios})
+        this.$store.dispatch('episodeDelete', {id: item.id, axios: this.$axios})
 //        console.log(this.postState)
       },
-      update () {
+      update (episode, id) {
+        this.$emit('podcast_item_update', episode, id)
       },
       // 创建节目 episode
       create () {
-        let _sort = 1
-//        if (!Object.is(this., undefined)) {
-        _sort = this.list.length++
-//        }
-        this.post = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
-        this.$store.dispatch('postsCreate', {data: this.post, axios: this.$axios})
-//        this.$store.commit('posts/CREATE')
+        const _sort = this.list.length + 1
+        this.episode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
+        this.$store.dispatch('episodeCreate', {data: this.episode, axios: this.$axios})
       },
       cancel () {
-        this.$store.commit('posts/CREATE_CANCEL')
+        this.$store.commit('podcast/CREATE_EPISODE_CANCEL')
       },
 
       insertFile (cur) {
@@ -430,11 +375,8 @@
             newFile.blob = URL.createObjectURL(newFile.file)
           }
         }
-      },
-      handleClick (item) {
-        this.$store.commit('posts/UPDATE_ITEM')
-        this.$emit('podcast_item_update', item, item.id)
       }
+
     }
   }
 </script>

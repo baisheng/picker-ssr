@@ -184,6 +184,58 @@ export const actions = {
     unsetToken()
     commit('SET_USER', null)
   },
+  async loadEpisodeList ({commit}, {axios, params}) {
+    console.log('load episode')
+    commit('podcast/REQUEST_EPISODE_LIST')
+    await axios.get(baseUrl + '/posts', {params})
+      .then(response => {
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        const isFirstPage = params.page && params.page > 1
+        const commitName = `podcast/${isFirstPage ? 'ADD' : 'GET'}_EPISODE_LIST_SUCCESS`
+        if (success) {
+          commit(commitName, response.data)
+        }
+        if (!success) {
+          commit('podcast/GET_EPISODE_LIST_FAILURE')
+        }
+      })
+      .catch(err => {
+        console.log(err)
+        commit('podcast/GET_EPISODE_LIST_FAILURE', err)
+      })
+  },
+  // 节目创建
+  async episodeCreate ({commit}, {data, axios}) {
+    commit('podcast/CREATE_EPISODE')
+    await axios.post(baseUrl + '/posts', data)
+      .then(response => {
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('podcast/CREATE_EPISODE_SUCCESS', response.data)
+        }
+        if (!success) {
+          commit('podcast/CREATE_EPISODE_FAILURE')
+        }
+      }, err => {
+        commit('podcast/CREATE_EPISODE_FAILURE', err)
+      })
+  },
+  async episodeDelete ({commit}, {id, axios}) {
+    commit('podcast/DELETE_EPISODE')
+    await axios.delete(baseUrl + '/posts/' + id)
+      .then(response => {
+        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        if (success) {
+          commit('podcast/DELETE_EPISODE_SUCCESS')
+        }
+        if (!success) {
+          commit('posts/DELETE_EPISODE_FAILURE')
+        }
+      })
+  },
+  async saveEpisode ({commit}, {data, axios}) {
+    // commit('podcast/U')
+  },
   // POSTS
   async postsCreate ({commit}, {data, axios}) {
     commit('posts/CREATE')

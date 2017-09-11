@@ -8,6 +8,21 @@
 export const state = () => {
   return {
     saving: false,
+    episode: {
+      status: '',
+      del: '',
+      creating: false,
+      saving: false,
+      deleting: false,
+      id: 0,
+      data: {
+        id: 0
+      }
+    },
+    episodeList: {
+      fetching: false,
+      data: {}
+    },
     hot: {
       fetching: false,
       data: { data: [] }
@@ -30,7 +45,63 @@ export const state = () => {
 }
 
 export const mutations = {
+  DELETE_EPISODE (state) {
+    state.episode.del = 'start'
+  },
+  DELETE_EPISODE_SUCCESS (state) {
+    state.episode.del = 'success'
+  },
+  DELETE_EPISODE_FAILURE (state) {
+    state.episode.del = 'error'
+  },
+  CREATE_EPISODE (state) {
+    state.episode.creating = true
+  },
+  CREATE_EPISODE_SUCCESS (state, action) {
+    state.episode.creating = true
+    // console.log(action.data)
+    state.episode.id = action.data
+    // console.log(state.episode.id + '-----')
+    // Object.assign(state.user, user);
+  },
+  CREATE_EPISODE_FAILURE (state) {
+    state.episode.creating = false
+  },
+  CREATE_EPISODE_CANCEL (state) {
+    state.episode.creating = false
+  },
 
+  REQUEST_EPISODE_LIST (state) {
+    console.log('request episode list')
+    state.episodeList.fetching = true
+  },
+  GET_EPISODELIST_FAILURE (state) {
+    console.log('get episode list failure ')
+    state.episodeList.fetching = false
+  },
+  GET_EPISODE_LIST_SUCCESS (state, action) {
+    console.log('get episode list success ')
+    state.episodeList.fetching = false
+    state.episodeList.data = action.data
+    // console.log(action.data)
+  },
+  UPDATE_EPISODE (state) {
+    // state.detail.data = Object.assign({}, action.data)
+    // state.detail.data = action.data
+    state.episode.saving = true
+  },
+  UPDATE_EPISODE_SUCCESS (state, action) {
+    state.episode.saving = false
+    state.episode = Object.assign({}, action.data)
+  },
+  // UPDATE_ITEM (state) {
+    // console.log('saving.. item')
+    // state.saving = true
+  // },
+  // UPDATE_ITEM_SUCCESS (state) {
+  //   console.log('saving.. success')
+  //   state.item.saving = false
+  // },
   // List
   CLEAR_LIST (state) {
     state.list.data = {
