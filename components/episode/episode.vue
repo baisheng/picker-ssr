@@ -11,25 +11,12 @@
       <button type="submit" class="button form-button is-compact is-active">
         发布
       </button>
-      <button type="submit"
-              class="button form-button is-compact is-scary"
-              @click="onDel()">
-
-        <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
-             viewBox="0 0 24 24">
-          <g>
-            <path
-              d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-          </g>
-        </svg>
-        回收站
-      </button>
     </div>
     <div slot="expandedSummary" class="section-header__actions">
       <button type="button" class="button is-error is-compact is-scary" @click="del(order, episode)">停播</button>
       <!--<button type="button" class="button is-error is-compact"-->
-              <!--:class="uploadProgress ? 'is-busy' : ''"-->
-        <!--替换音频-->
+      <!--:class="uploadProgress ? 'is-busy' : ''"-->
+      <!--替换音频-->
       <!--</button>-->
       <file-upload
         :class="uploadProgress ? 'is-busy' : ''"
@@ -52,9 +39,21 @@
                 替换音频
               </span>
       </file-upload>
+      <button type="submit"
+              class="button form-button is-compact is-scary"
+              @click="onDel()">
 
-      <button type="button" class="button is-error is-compact" @click="handleClick">更新内容
+        <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24">
+          <g>
+            <path
+              d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
+          </g>
+        </svg>
+        回收站
       </button>
+
+      <button type="button" class="button is-error is-compact" @click="update">更新内容</button>
     </div>
     <form>
       <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
@@ -116,6 +115,9 @@
         -->
       </empty-content>
     </div>
+
+    <!-- 状态提示 -->
+    <update-template :status="status" v-show="status"></update-template>
   </foldable-card>
 </template>
 
@@ -123,6 +125,8 @@
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
   import EmptyContent from '../empty-content'
+  import UpdateTemplate from '../update-post-status/update-template.vue'
+
   export default {
     props: {
       data: {
@@ -137,6 +141,7 @@
     },
     data () {
       return {
+        status: '',
         episode: {
           title: '',
           url: ''
@@ -157,20 +162,31 @@
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       }
     },
+    watch: {
+      'episode': {
+        handler(val, oldVal) {
+//          this.update(val)
+        },
+        deep: true
+      }
+    },
     mounted () {
       this.episode = this.data
     },
     components: {
       FoldableCard,
       FileUpload,
-      EmptyContent
+      EmptyContent,
+      UpdateTemplate
     },
     methods: {
       onDel () {
+        this.status = 'deleting'
         this.$emit('episode-del', this.episode, this.order)
 //        this.$emit('podcast_item_update', item, item.id)
       },
-      handleClick (item) {
+      update (item) {
+        this.status = 'updating'
 //        this.$store.dispatch('saveEpisode', this.episode)
         this.$emit('update', this.episode, this.episode.id)
       },

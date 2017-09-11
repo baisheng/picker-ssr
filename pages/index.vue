@@ -195,7 +195,9 @@
                 </div>
               </div>
             </div>
-            <div class="post-type-list__post-thumbnail-wrapper has-image"><img src="https://bluepx.files.wordpress.com/2017/02/cover.jpg?h=160" class="post-type-list__post-thumbnail"></div>
+            <div class="post-type-list__post-thumbnail-wrapper has-image">
+              <img :src="post.featured_image" class="post-type-list__post-thumbnail">
+            </div>
             <svg class="gridicon gridicons-ellipsis page__actions-toggle" height="24" width="24"
                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <g>

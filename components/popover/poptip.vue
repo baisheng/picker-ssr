@@ -16,7 +16,7 @@
   import {oneOf} from '../../utils/assist'
 
   export default {
-    name: 'Popover',
+    name: 'Poptip',
     mixins: [Popper],
     directives: {clickoutside, TransferDom},
     props: {

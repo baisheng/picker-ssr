@@ -20,7 +20,7 @@
           :accept="accept"
           :size="size || 0"
           :headers="requestHeader"
-          ref="upload" v-if="!creating">
+          ref="upload" v-show="!creating">
           <!--Add upload files-->
           <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 24 24">

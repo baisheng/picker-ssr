@@ -51,7 +51,7 @@ module.exports = {
         ]
       }
     },
-    vendor: ['vue-awesome', 'vee-validate']
+    vendor: ['moment','vue-awesome', 'vee-validate']
   },
   // 为JS和Vue文件定制babel配置。https://nuxtjs.org/api/configuration-build/#analyze
   babel: {
@@ -88,6 +88,7 @@ module.exports = {
     }
   },
   plugins: [
+    { src: '~/plugins/moment.js' },
     // '~plugins/axios.js',
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js',

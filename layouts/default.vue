@@ -45,7 +45,7 @@
                         <!--<a href="/page/bluepx.wordpress.com" class="sidebar__button">添加</a>-->
                       </li>
                       <li class="">
-                        <a href="/posts/my/bluepx.wordpress.com">
+                        <a href="/posts/my">
                           <svg class="gridicon gridicons-posts" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 24 24">
                           <g>
@@ -68,7 +68,7 @@
                         </form>
                       </li>
                       <li class="">
-                        <a href="/comments/bluepx.wordpress.com">
+                        <a href="/comments">
                           <icon name="comments" class="gridicon"></icon>
                         <span class="menu-link-text">评论</span></a>
                       </li>
@@ -83,7 +83,7 @@
                   </li>
                   <li class="sidebar__menu"><h2 class="sidebar__heading">配置</h2>
                     <ul>
-                      <li class="users"><a href="/people/team/bluepx.wordpress.com">
+                      <li class="users"><a href="/people/team">
                         <svg class="gridicon gridicons-user" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 24 24">
                           <g>
@@ -92,10 +92,10 @@
                           </g>
                         </svg>
                         <span class="menu-link-text">人员</span></a>
-                        <a href="/people/new/bluepx.wordpress.com" class="sidebar__button">添加</a></li>
+                        <a href="/people/new" class="sidebar__button">添加</a></li>
 
                       <li class="settings" data-tip-target="settings">
-                        <a href="/settings/general/bluepx.wordpress.com">
+                        <a href="/settings/general">
                         <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 24 24">
                           <g>
