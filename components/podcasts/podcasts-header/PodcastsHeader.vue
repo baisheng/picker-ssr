@@ -21,7 +21,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://vanq.picker.la/api/file"
+          post-action="http://api.picker.la/rest/orgs/1/file"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -48,7 +48,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://vanq.picker.la/api/file"
+          post-action="http://api.picker.la/rest/orgs/1/api/file"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"

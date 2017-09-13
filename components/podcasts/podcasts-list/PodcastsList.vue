@@ -21,26 +21,20 @@
         <div class="post-type-list__post-thumbnail-wrapper has-image">
           <img :src="podcast.featured_image" class="post-type-list__post-thumbnail" v-if="podcast.featured_image">
         </div>
-        <svg class="gridicon gridicons-ellipsis page__actions-toggle"
+        <svg class="gridicon gridicons-ellipsis ellipsis-menu__toggle-icon page__actions-toggle"
              :class="podcast.id === curId && active ? 'is-active' : ''" height="24" width="24"
-             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" @click="computePosition(event)" slot="face">
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" @click="computePosition($event, podcast)" slot="face">
           <g>
             <path
               d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
           </g>
         </svg>
-        <div slot="content">
-          <ul>
-            <li><a href="https://www.npmjs.com/~jfusco" target="_blank">npmjs.com</a></li>
-            <li><a href="https://github.com/JFusco" target="_blank">github.com</a></li>
-          </ul>
-        </div>
         <span></span>
       </div>
     </div>
 
-    <div data-reactroot="">
-      <div class="popover is-bottom-left" style="left: 1111px; top: 355px;">
+    <div v-show="active">
+      <div ref="popover" class="popover" :class="repostion.positionClass" :style="getStylePosition">
         <div class="popover__arrow"></div>
         <div class="popover__inner">
           <div role="menu" class="popover__menu" tabindex="-1">
@@ -96,20 +90,18 @@
 <script>
   //  import getBoundingClientRect from 'bounding-client-rect';
   //  import Popover from '~/components/popover'
-//  import Vue from 'vue'
-//  const isServer = Vue.prototype.$isServer
-//  const Popper = isServer ? function () {
-  if (process.BROWSER_BUILD) {
-    const isotope = require('vueisotope');
+  //  import Vue from 'vue'
+  //  const isServer = Vue.prototype.$isServer
+  //  const Popper = isServer ? function () {
+
+  //  if (process.browser) {
+  //    require('~/plugins/popover')
+  //  }
+  let poputil = {}
+  if (process.browser) {
+    poputil = require('~/components/popover/util')
   }
-  import {
-    bindWindowListeners,
-    unbindWindowListeners,
-    suggested as suggestPosition,
-    constrainLeft,
-    isElement as isDOMElement,
-    offset
-  } from '../../popover/util'
+  //  import poputil from '~/plugins/popover'
 
   export default {
     props: {
@@ -121,7 +113,12 @@
     data () {
       return {
         curId: 0,
-        active: false
+        active: false,
+        position: 'bottom left',
+        repostion: {
+          left: -99999,
+          right: -99999
+        }
       }
     },
     components: {
@@ -134,6 +131,11 @@
             'is-active': this.active
           }
         ]
+      },
+      getStylePosition() {
+        const { left, top } = this.repostion
+        console.log(this.repostion)
+        return `left: ${left}px; top: ${top}px;`
       }
     },
     methods: {
@@ -141,9 +143,28 @@
         this.curId = podcast.id
         this.active = !this.active
       },
-      computePosition (event) {
-        let poistion = suggestPosition('bottom left', this.$el, event.target)
-        console.log(poistion + '-----')
+      computePosition (event, podcast) {
+        this.curId = podcast.id
+        this.active = !this.active
+
+        let suggestedPosition = this.position
+//        console.log(suggestedPosition)
+        let domContainer = this.$refs.popover
+        console.log(domContainer)
+        suggestedPosition = poputil.suggested(suggestedPosition, domContainer, event.target)
+        const repostion = Object.assign({}, poputil.constrainLeft(poputil.offset(suggestedPosition, domContainer, event.target), domContainer), {
+          positionClass: this.getPositionClass(suggestedPosition)
+        })
+        console.log(repostion)
+        this.repostion = repostion
+
+//        return repostion
+      },
+      setPosition () {
+
+      },
+      getPositionClass (position = this.position) {
+        return `is-${position.replace(/\s+/g, '-')}`;
       }
     }
   }

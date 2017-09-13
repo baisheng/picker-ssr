@@ -22,7 +22,7 @@
         :class="uploadProgress ? 'is-busy' : ''"
         class="button is-error is-compact"
         name="file"
-        post-action="http://vanq.picker.la/api/file"
+        post-action="http://api.picker.la/rest/orgs/1/file"
         v-model="files"
         @input-file="input"
         @input-filter="inputFilter"

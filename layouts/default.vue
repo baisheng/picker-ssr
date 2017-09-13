@@ -1,5 +1,5 @@
 <template>
-  <div class="layout focus-sidebar">
+  <div class="layout focus-sidebar" ref="layout">
     <logged-in v-if="!isLogged"/>
     <div class="layout__loader is-active">
       <pulsing-dot :active="true"></pulsing-dot>

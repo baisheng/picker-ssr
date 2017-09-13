@@ -75,7 +75,6 @@ const suggested = (pos, el, target) => {
   const targetPosition = getBoundingClientRect(target);
   const h = el.clientHeight;
   const w = el.clientWidth;
-  // console.log(w + '----')
 
   // see where we have spare room
   const room = {
@@ -84,7 +83,6 @@ const suggested = (pos, el, target) => {
     left: targetPosition.left - w,
     right: viewport.width - targetPosition.right - w
   };
-
 
   const arrayPositions = pos.split(/\s+/);
   const [pos0] = arrayPositions;

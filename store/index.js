@@ -2,6 +2,7 @@
 // import Service from 'axios'
 // import Service from 'axios'
 import {setToken, unsetToken} from '~/utils/auth'
+import Cookie from 'js-cookie'
 
 export const state = () => ({
   user: null,
@@ -26,10 +27,26 @@ export const getters = {
     return state.user
   }
 }
-
-const baseUrl = 'http://vanq.picker.la/api'
+let __id = ''
+let baseUrl = 'http://api.picker.la/rest/orgs/1'
 export const actions = {
   async nuxtServerInit (store, {app, params, route, isServer, req}) {
+    console.log('server init')
+    // if (req.headers.cookie) {
+    //
+    //   const orgId = req.headers.cookie.split(';').find(c => c.trim().startsWith('_org_id'))
+    //   if (!orgId) {
+    //     return
+    //   }
+    //   if (__id === '') {
+    //     __id = orgId.split('=')[1]
+    //     baseUrl += __id
+    //   }
+      // console.log(_id)
+      // baseUrl += _id
+      // baseUrl = _id
+      // console.log(baseUrl)
+    // }
     store.strict = false
     // const ip = await app.$axios.$get('http://icanhazip.com')
     // commit('SET_IP', ip)
@@ -83,8 +100,9 @@ export const actions = {
   // },
   async loadOrgInfo ({commit}, {axios}) {
     commit('org/REQUEST_ORG_INFO')
-    console.log('load org')
-    await axios.get(baseUrl + '/org')
+    // const orgUrl = 'http://api.picker.la/rest/orgs/1'
+    // console.log('load org')
+    await axios.get(baseUrl + '/info')
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {

@@ -56,9 +56,9 @@
 //    },
     async asyncData ({app, params}) {
       if (!Object.is(params.id, undefined)) {
-        const baseUrl = 'http://vanq.picker.la/api'
+        const baseUrl = 'http://api.picker.la/rest/orgs/1'
         const data = (await app.$axios.get(`${baseUrl}/podcast/${params.id}`)).data
-//      console.log(data)
+      console.log(data)
         return {
           podcast: data.data
         }
@@ -117,7 +117,7 @@
 //        if (!this.post.id && this.post.content === null) return
         if (Object.is(this.podcast.id, undefined)) {
 //        this.post.autoExcerpt = this.autoExcerpt
-          const baseUrl = 'http://vanq.picker.la/api'
+          const baseUrl = 'http://api.picker.la/rest/orgs/1'
           await this.$axios.post(baseUrl + '/posts', this.post)
             .then(response => {
               const postId = response.data.data
@@ -144,7 +144,7 @@
           podcastId = id
         }
 //        let api = 'http://vanq.picker.la/api/podcast'
-        await this.$axios.put('http://vanq.picker.la/api/posts/' + podcastId, data)
+        await this.$axios.put('http://api.picker.la/rest/orgs/1/posts/' + podcastId, data)
           .then(r => {
 //            console.log(r.status)
             // 执行 vux store 状态
