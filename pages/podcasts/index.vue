@@ -150,7 +150,7 @@
     },
     async fetch ({store}) {
       // Default type `podcast` page `1`
-      await store.dispatch('loadPosts', {axios: store.$axios})
+      await store.dispatch('loadPosts')
     },
     computed: {
       publishCount () {

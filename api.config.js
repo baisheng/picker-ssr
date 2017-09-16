@@ -1,5 +1,5 @@
-// const isProdMode = Object.is(process.env.NODE_ENV, 'production')
-// export default {
-//   baseUrl: isProdMode ? '/api/' : 'http://picker.la',
-//   socketHost: isProdMode ? 'https://surmon.me' : 'http://localhost:5000'
-// }
+const isProdMode = Object.is(process.env.NODE_ENV, 'production')
+module.exports = {
+  baseURL: isProdMode ? 'https://api.picker.cc/orgs' : 'http://api.picker.la/orgs',
+  socketHost: isProdMode ? 'https://picker.cc' : 'http://localhost:5000'
+}

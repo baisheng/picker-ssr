@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 const nodeExternals = require('webpack-node-externals')
-// const apiConfig = require('./api.config')
+const apiConfig = require('./api.config')
 module.exports = {
   cache: {
     max: 20,
@@ -64,24 +64,39 @@ module.exports = {
     comments: true
   },
   dev: process.env.NODE_ENV !== 'production',
-  // env: {
-  //   baseUrl: apiConfig.baseUrl,
-  //   HOST_URL: apiConfig.socketHost
-  // },
+  env: {
+    // API_URL_BROWSER: apiConfig.baseURL,
+    // browserBaseURL: apiConfig.baseURL,
+    baseURL: apiConfig.baseURL,
+    'socket': apiConfig.socketHost
+  },
   modules: [
     // Simple usage
     '@nuxtjs/axios',
     // With options
-    ['@nuxtjs/axios', { credentials: false }]
+    // ['@nuxtjs/axios', { credentials: false }],
+    '@nuxtjs/proxy'
   ],
-
+  proxy: [
+    ['/api',
+      {
+        target: apiConfig.baseURL
+        // pathRewrite: { '^/api': '/rest/orgs/' }
+      }]
+  ],
   // You can optionally use global options instead of inline form
   axios: {
+    baseURL: apiConfig.baseURL,
+    // options: {
+    //   baseURL: apiConfig.baseURL,
+    //   API_URL_BROWSER: apiConfig.baseURL,
+    //   browserBaseURL: apiConfig.baseURL,
+    // },
     credentials: false,
     redirectError: {
       401: '/login'
     },
-    requestInterceptor: (config, { store }) => {
+    requestInterceptor: (config, {store}) => {
       if (store.state.token) {
         config.headers.common.Authorization = 'Bearer ' + store.state.token
       }
@@ -89,13 +104,13 @@ module.exports = {
     }
   },
   plugins: [
-    { src: '~/plugins/moment.js' },
+    {src: '~/plugins/moment.js'},
     // '~plugins/axios.js',
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js',
     '~plugins/vue-dnd.js',
-    { src: '~plugins/a-player.js', ssr: true },
-    { src: '~plugins/popover.js', ssr: false }
+    {src: '~plugins/a-player.js', ssr: true},
+    {src: '~plugins/popover.js', ssr: false}
   ],
   css: [
     {src: '~assets/stylesheets/style.scss', lang: 'scss'}

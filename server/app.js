@@ -16,14 +16,14 @@ const chalk = require('chalk')
 const proxy = require('koa-proxies')
 const debugMudule = require('debug')
 
-const consts = require('./server/utils/consts')
+const consts = require('./utils/consts')
 // const io = require('socket.io')(server)
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 // no-deprecation 静默输出
 process.noDeprecation = true
 
-const config = require('./nuxt.config')
+const config = require('../nuxt.config')
 config.dev = !(process.env.NODE_ENV === 'production')
 
 // Start nuxt.js
@@ -67,55 +67,34 @@ const start = async () => {
   // rights for public/protected elements, and also for different functionality between api & web
   // pages (content negotiation, error handling, handlebars templating, etc).
   app.use(async function subApp (ctx, next) {
-    ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
-    // let cookieId = await ctx.cookies.get('__org_id')
-
-    if (!Object.is(ctx.session.orgId, undefined)) {
-      // console.log(ctx.host)
+    // let hostname = ctx.host
+    // if (hostname === 'picker.la') {
+    //
+    // }
+    // if (hostname === 'homepage')
+    let orgId = await redis.get(ctx.host)
+    if (orgId) {
+      let cookieId = ctx.cookies.get('__org_id')
+      if (cookieId === undefined || cookieId !== orgId.toString()) {
+        ctx.cookies.set('__org_id', orgId.toString())
+      }
+      // orgs = JSON.parse(orgs)
+      // console.log(orgId + '----')
       await next()
     } else {
-      let orgId = await redis.get(ctx.host)
-      if (orgId) {
-        //   await next()
-        ctx.session.orgId = orgId
-        // let cookieId = ctx.cookies.get('__org_id')
-        // console.log(orgId + ' cookie -----')
-        // if (cookieId === undefined || cookieId !== orgId.toString()) {
-          // console.log(orgId + ' cookie set -----')
-          // ctx.cookies.set('__org_id', orgId.toString())
-
-          // ctx.cookies.set(, orgId.toString())
-          await next()
-        // } else {
-        //   return await next()
-        // }
-        // orgs = JSON.parse(orgs)
-        // console.log(orgId + '----')
-      } else {
-        console.log('404')
-        return
-        // return ctx.redirect('')
-      }
+      console.log('no domain')
+      this.body = 'Hello World';
+      await next()
+      // ctx.redirect('http://baidu.com')
     }
-    // if (ctx.state.subapp === 'api') {
-    //   return
-    // }
-    console.log(ctx.host)
-    let orgId = await redis.get(ctx.host)
-    ctx.session.orgId = orgId
-    console.log(ctx.session.orgId + '----xxxx')
-
-    // console.log(ctx.host)
-    // const cookies = ctx.cookie;
-    // use subdomain to determine which app to serve: www. as default, or admin. or api
     // ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
     // console.log(ctx.state.subapp + '----')
     // note: could use root part of path instead of sub-domains e.g. ctx.request.url.split('/')[1]
     // await next()
   })
 
-  const nuxt = new Nuxt(config)
 
+  const nuxt = new Nuxt(config)
   nuxt.showOpen = () => {
     const _host = host === '0.0.0.0' ? 'localhost' : host
     // eslint-disable-next-line no-console
@@ -138,11 +117,11 @@ const start = async () => {
   const nuxtRender = koaConnect(nuxt.render)
   app.use(async (ctx, next) => {
     await next()
-    // if (ctx.state.subapp !== consts.API) {
+    if (ctx.state.subapp !== consts.API) {
       ctx.status = 200 // koa defaults to 404 when it sees that status is unset
       ctx.req.session = ctx.session
       await nuxtRender(ctx)
-    // }
+    }
   })
   // return response time in X-Response-Time header
   app.use(async function responseTime (ctx, next) {

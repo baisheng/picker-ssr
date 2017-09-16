@@ -10,6 +10,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  SET_ORG_ID (state, id) {
+    state.orgId = id
+  },
   SET_USER (state, user) {
     // state.token = user[''] || null
     state.user = user || null
@@ -20,6 +23,9 @@ export const mutations = {
 }
 
 export const getters = {
+  orgId (state) {
+    return state.org.id
+  },
   isAuthenticated (state) {
     return Boolean(state.user)
   },
@@ -27,30 +33,40 @@ export const getters = {
     return state.user
   }
 }
-let __id = ''
-let baseUrl = 'http://api.picker.la/rest/orgs/1'
+// const __id = ''
+let baseURL = ''
+let orgAPI = ''
+let count = 1
 export const actions = {
-  async nuxtServerInit (store, {app, params, route, isServer, req}) {
-    console.log('server init')
+  async nuxtServerInit (store, {app, env, params, route, isServer, req}) {
+    count++
+    console.log(count)
+    // console.log('server init')
+    // console.log(req.session)
+    const orgId = req.session.orgId
+    if (!orgId) {
+      return
+    }
+    store.strict = false
+    baseURL = env.baseURL
+    // store.commit('SET_ORG_ID', {id: })
+    store.commit('org/CONFIG', {id: orgId, baseURL: baseURL})
+    // store.commit('org/CONFIG', {id: orgId.split('=')[1], baseURL: baseURL})
+    orgAPI = store.state.org.api
     // if (req.headers.cookie) {
     //
-    //   const orgId = req.headers.cookie.split(';').find(c => c.trim().startsWith('_org_id'))
+    //   const orgId = req.headers.cookie.split(';').find(c => c.trim().startsWith('__org_id'))
     //   if (!orgId) {
     //     return
     //   }
-    //   if (__id === '') {
-    //     __id = orgId.split('=')[1]
-    //     baseUrl += __id
-    //   }
-      // console.log(_id)
-      // baseUrl += _id
-      // baseUrl = _id
-      // console.log(baseUrl)
+    //   store.strict = false
+    //   baseURL = env.baseURL
+    //   store.commit('org/CONFIG', {id: orgId.split('=')[1], baseURL: baseURL})
+    //   orgAPI = store.state.org.api
+      // const ip = await app.$axios.$get('http://icanhazip.com')
+      // commit('SET_IP', ip)
     // }
-    store.strict = false
-    // const ip = await app.$axios.$get('http://icanhazip.com')
-    // commit('SET_IP', ip)
-    store.dispatch('loadOrgInfo', {axios: app.$axios})
+    // store.dispatch('loadOrgInfo', {axios: app.$axios})
   },
   // nuxtServerInit is called by Nuxt.js before server-rendering every page
   // async nuxtServerInit (store, { commit }) {
@@ -98,14 +114,19 @@ export const actions = {
   // console.log('全局服务初始化')
   // return Promise.all(initAppData)
   // },
-  async loadOrgInfo ({commit}, {axios}) {
+  // async
+  async loadOrgInfo ({commit}) {
+    // console.log('load org info ...')
     commit('org/REQUEST_ORG_INFO')
     // const orgUrl = 'http://api.picker.la/rest/orgs/1'
     // console.log('load org')
-    await axios.get(baseUrl + '/info')
+    // $store.state.option.mobileLayout
+    await this.$axios.get(this.getters.orgId + '/info')
       .then(response => {
+        // console.log(JSON.stringify(response.data))
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
+          // console.log(JSON.stringify(response.data))
           commit('org/REQUEST_ORG_INFO_SUCCESS', response.data)
         }
         if (!success) {
@@ -126,7 +147,7 @@ export const actions = {
     commit('podcast/REQUEST_DETAIL')
     // console.log(JSON.stringify(params) + '===')
     // console.log(params)
-    await axios.get(`${baseUrl}/podcast/${params.id}`)
+    await axios.get(`${orgAPI}/podcast/${params.id}`)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -145,7 +166,7 @@ export const actions = {
   // 获取文章列表
   async loadArticles ({commit}, {axios}, params = {page: 1}) {
     commit('article/REQUEST_LIST')
-    await axios.get(baseUrl + '/posts', {params})
+    await axios.get(orgAPI + '/posts', {params})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         const isFirstPage = params.page && params.page > 1
@@ -165,7 +186,7 @@ export const actions = {
   // 获取全局配置
   loadGlobalOption ({commit}) {
     commit('options/REQUEST_GLOBAL_OPTIONS')
-    return $axios.get(baseUrl + '/options')
+    return $axios.get(orgAPI + '/options')
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -178,9 +199,11 @@ export const actions = {
         commit('options/REQUEST_GLOBAL_OPTIONS_FAILURE', err)
       })
   },
-  async login ({commit}, {form, axios}) {
+  async login ({commit}, {form}) {
+    // console.log(this.getters.orgId + 'xxx---')
+    // console.log(orgId + '-----')
     try {
-      const {data} = await axios.post(baseUrl + '/signin', form)
+      const {data} = await this.$axios.post(this.getters.orgId + '/signin', form)
       if (data.errno > 0) {
         // 发送出错误状态
         console.error(data.errmsg)
@@ -205,7 +228,7 @@ export const actions = {
   async loadEpisodeList ({commit}, {axios, params}) {
     console.log('load episode')
     commit('podcast/REQUEST_EPISODE_LIST')
-    await axios.get(baseUrl + '/posts', {params})
+    await axios.get(orgAPI + '/posts', {params})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         const isFirstPage = params.page && params.page > 1
@@ -225,7 +248,7 @@ export const actions = {
   // 节目创建
   async episodeCreate ({commit}, {data, axios}) {
     commit('podcast/CREATE_EPISODE')
-    await axios.post(baseUrl + '/posts', data)
+    await axios.post(orgAPI + '/posts', data)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -240,7 +263,7 @@ export const actions = {
   },
   async episodeDelete ({commit}, {id, axios}) {
     commit('podcast/DELETE_EPISODE')
-    await axios.delete(baseUrl + '/posts/' + id)
+    await axios.delete(orgAPI + '/posts/' + id)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -255,9 +278,9 @@ export const actions = {
     // commit('podcast/U')
   },
   // POSTS
-  async postsCreate ({commit}, {data, axios}) {
+  async postsCreate ({commit}, {data}) {
     commit('posts/CREATE')
-    await axios.post(baseUrl + '/posts', data)
+    await this.$axios.post(orgAPI + '/posts', data)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -270,11 +293,11 @@ export const actions = {
         commit('posts/CREATE_FAILURE', err)
       })
   },
-  async postsDelete ({commit}, {id, axios}) {
+  async postsDelete ({commit}, {id}) {
     commit('posts/DELETE')
-    await axios.delete(baseUrl + '/posts/' + id)
+    await this.$axios.delete(orgAPI + '/posts/' + id)
       .then(response => {
-        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
+        const success = Boolean(response.status) && response.data && !Object.is(response.data.errno, 0)
         if (success) {
           commit('posts/DELETE_SUCCESS')
         }
@@ -283,21 +306,17 @@ export const actions = {
         }
       })
   },
-  async loadPosts ({commit}, {axios}, params = {type: 'podcast', page: 1}) {
+  async loadPosts ({commit}, params = {type: 'podcast', page: 1}) {
     commit('posts/REQUEST_LIST')
-    await axios.get(baseUrl + '/posts', {params})
-      .then(response => {
-        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
-        const isFirstPage = params.page && params.page > 1
-        const commitName = `posts/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
-        // console.log(JSON.stringify(response.data))
-        if (success) {
-          commit(commitName, response.data)
-        }
-        if (!success) {
-          commit('posts/GET_LIST_FAILURE')
-        }
-      })
+    let data = (await this.$axios.get(this.getters.orgId + '/posts', {params})).data
+    if (data && data.errno === 0) {
+      const isFirstPage = params.page && params.page > 1
+      const commitName = `posts/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
+      commit(commitName, data)
+
+    } else {
+      commit('posts/GET_LIST_FAILURE')
+    }
   }
 
 }

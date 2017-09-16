@@ -74,9 +74,12 @@
       }
     },
     fetch ({store}) {
-      return store.dispatch('loadOrgInfo', {axios: store.$axios})
+      return store.dispatch('loadOrgInfo')
     },
     computed: {
+      orgId () {
+        return this.$store.state.org.id
+      },
       org () {
         return this.$store.state.org.orgInfo
       },
@@ -90,7 +93,7 @@
         that.isLogin = true
         await this.$validator.validateAll().then(async (result) => {
           if (result) {
-            await this.$store.dispatch('login', {form: this.form, axios: this.$axios})
+            await this.$store.dispatch('login', {form: this.form})
             that.isLogin = false
             this.$router.replace('/')
             return

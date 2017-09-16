@@ -221,10 +221,15 @@
     middleware: 'authenticated',
     components: {},
     async fetch ({store}) {
+//      console.log('lalal')
+//      console.log(store.state.org.id + '======')
       // Default type `podcast` page `1`
-      await store.dispatch('loadPosts', {axios: store.$axios})
+      await store.dispatch('loadPosts')
     },
     computed: {
+      orgId () {
+        return this.$store.state.org.id
+      },
       posts () {
         return this.$store.state.posts.list
       },
