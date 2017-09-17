@@ -7,6 +7,7 @@ module.exports = {
     maxAge: 600000
   },
   router: {
+    linkActiveClass: 'selected',
     middleware: 'check-auth'
   },
   /*

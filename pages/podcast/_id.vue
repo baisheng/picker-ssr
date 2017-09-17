@@ -58,7 +58,6 @@
       if (!Object.is(params.id, undefined)) {
         const baseUrl = 'http://api.picker.la/rest/orgs/1'
         const data = (await app.$axios.get(`${baseUrl}/podcast/${params.id}`)).data
-      console.log(data)
         return {
           podcast: data.data
         }
@@ -121,7 +120,6 @@
           await this.$axios.post(baseUrl + '/posts', this.post)
             .then(response => {
               const postId = response.data.data
-//            console.log(JSON.stringify(data))
               if (!Object.is(postId, null)) {
                 this.podcast.id = postId
                 // 更新浏览器地址栏
@@ -131,7 +129,6 @@
 //            if (success) commit('posts/CREATE_SUCCESS', response.data)
 //            if (!success) commit('posts/CREATE_FAILURE')
             }, err => {
-//              console.log(err)
 //            commit('posts/CREATE_FAILURE', err)
             })
         } else {

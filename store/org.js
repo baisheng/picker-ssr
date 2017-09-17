@@ -22,7 +22,7 @@ export const state = () => {
 export const mutations = {
   CONFIG (state, action) {
     state.id = action.id
-    state.api = action.baseURL + '/rest/orgs/' + action.id
+    // state.api = action.baseURL + '/rest/orgs/' + action.id
   },
   SET_ID (state, action) {
     state._id = action.id

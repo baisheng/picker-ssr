@@ -73,9 +73,9 @@
         }
       }
     },
-    fetch ({store}) {
-      return store.dispatch('loadOrgInfo')
-    },
+//    fetch ({store}) {
+//      return store.dispatch('loadOrgInfo')
+//    },
     computed: {
       orgId () {
         return this.$store.state.org.id

@@ -134,7 +134,6 @@
       },
       getStylePosition() {
         const { left, top } = this.repostion
-//        console.log(this.repostion)
         return `left: ${left}px; top: ${top}px;`
       }
     },
@@ -148,17 +147,13 @@
         this.active = !this.active
 
         let suggestedPosition = this.position
-//        console.log(suggestedPosition)
         const domContainer = this.$refs.popover
-//        console.log(domContainer)
         suggestedPosition = poputil.suggested(suggestedPosition, domContainer, event.target)
         const repostion = Object.assign({}, poputil.constrainLeft(poputil.offset(suggestedPosition, domContainer, event.target), domContainer), {
           positionClass: this.getPositionClass(suggestedPosition)
         })
-//        console.log(repostion)
         this.repostion = repostion
 
-//        return repostion
       },
       setPosition () {
 

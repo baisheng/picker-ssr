@@ -13,7 +13,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://api.picker.la/rest/orgs/1/file"
+          :post-action="postAction"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -253,6 +253,7 @@
       }
     },
     mounted () {
+//      this.action = baseURL +
       // 如果是创建了内容
 //      this.curItem = this.post
 
@@ -280,6 +281,11 @@
       FoldableCard
     },
     computed: {
+      postAction () {
+        const orgId = this.$store.getters.orgId
+        const baseURL = process.env.baseURL
+        return `${baseURL}/${orgId}/file`
+      },
 //      status: {
 //        get () {
 //        }
@@ -309,7 +315,7 @@
     watch: {
       'post': {
         handler (val, oldVal) {
-          console.log(val)
+//          console.log(val)
         },
         deep: true
       },
@@ -360,7 +366,7 @@
           _sort = this.podcast.children.length++
         }
         this.post = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
-        this.$store.dispatch('postsCreate', {data: this.post, axios: this.$axios})
+        this.$store.dispatch('postsCreate', {data: this.post})
 //        this.$store.commit('posts/CREATE')
       },
       cancel () {
