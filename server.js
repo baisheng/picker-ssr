@@ -78,19 +78,7 @@ const start = async () => {
       if (orgId) {
         //   await next()
         ctx.session.orgId = orgId
-        // let cookieId = ctx.cookies.get('__org_id')
-        // console.log(orgId + ' cookie -----')
-        // if (cookieId === undefined || cookieId !== orgId.toString()) {
-          // console.log(orgId + ' cookie set -----')
-          // ctx.cookies.set('__org_id', orgId.toString())
-
-          // ctx.cookies.set(, orgId.toString())
-          await next()
-        // } else {
-        //   return await next()
-        // }
-        // orgs = JSON.parse(orgs)
-        // console.log(orgId + '----')
+        await next()
       } else {
         console.log('404')
         return
@@ -100,10 +88,10 @@ const start = async () => {
     // if (ctx.state.subapp === 'api') {
     //   return
     // }
-    console.log(ctx.host)
-    let orgId = await redis.get(ctx.host)
-    ctx.session.orgId = orgId
-    console.log(ctx.session.orgId + '----xxxx')
+    // console.log(ctx.host)
+    // let orgId = await redis.get(ctx.host)
+    // ctx.session.orgId = orgId
+    // console.log(ctx.session.orgId + '----xxxx')
 
     // console.log(ctx.host)
     // const cookies = ctx.cookie;
@@ -139,9 +127,9 @@ const start = async () => {
   app.use(async (ctx, next) => {
     await next()
     // if (ctx.state.subapp !== consts.API) {
-      ctx.status = 200 // koa defaults to 404 when it sees that status is unset
-      ctx.req.session = ctx.session
-      await nuxtRender(ctx)
+    ctx.status = 200 // koa defaults to 404 when it sees that status is unset
+    ctx.req.session = ctx.session
+    await nuxtRender(ctx)
     // }
   })
   // return response time in X-Response-Time header
@@ -167,7 +155,7 @@ const start = async () => {
   app.use(body())
 
   // somtimes useful to be able to track each reques...
-  app.use(async function(ctx, next) {
+  app.use(async function (ctx, next) {
     debug(ctx.method + ' ' + ctx.url)
     await next()
   })

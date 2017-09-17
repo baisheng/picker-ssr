@@ -1,4 +1,4 @@
-/* eslint-disable no-undef,indent,spaced-comment */
+/* eslint-disable no-undef,indent,spaced-comment,radix */
 // import Service from 'axios'
 // import Service from 'axios'
 import {setToken, unsetToken} from '~/utils/auth'
@@ -24,6 +24,9 @@ export const mutations = {
 
 export const getters = {
   orgId (state) {
+    // eslint-disable-next-line radix
+    // const orgId = Number.parseInt(state.org.id)
+    // return orgId
     return state.org.id
   },
   isAuthenticated (state) {
@@ -35,7 +38,7 @@ export const getters = {
 }
 export const actions = {
   async nuxtServerInit (store, {app, env, params, route, isServer, req}) {
-    const orgId = req.session.orgId
+    let orgId = req.session.orgId
     if (!orgId) {
       return
     }
@@ -91,24 +94,13 @@ export const actions = {
   // },
   // async
   async loadOrgInfo ({commit}) {
-    console.log('load org info')
     commit('org/REQUEST_ORG_INFO')
-    // $store.state.option.mobileLayout
-    await this.$axios.get(this.getters.orgId + '/info')
-      .then(response => {
-        // console.log(JSON.stringify(response.data))
-        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
-        if (success) {
-          console.log(JSON.stringify(response.data))
-          commit('org/REQUEST_ORG_INFO_SUCCESS', response.data)
-        }
-        if (!success) {
-          commit('org/REQUEST_ORG_INFO_FAILURE')
-        }
-      }, err => {
-        console.log(err)
-        commit('org/REQUEST_ORG_INFO_FAILURE', err)
-      })
+    const data = (await this.$axios.get(`${this.getters.orgId}/info`)).data
+    if (data && data.errno === 0) {
+      commit('org/REQUEST_ORG_INFO_SUCCESS', data)
+    } else {
+      commit('org/REQUEST_ORG_INFO_FAILURE')
+    }
   },
   // 获取标签列表
   loadTagList ({commit}) {
@@ -118,6 +110,7 @@ export const actions = {
   },
   async loadPodcastDetail ({commit}, {axios, params}) {
     commit('podcast/REQUEST_DETAIL')
+
     // console.log(JSON.stringify(params) + '===')
     // console.log(params)
     await axios.get(`${this.getters.orgId}/podcast/${params.id}`)
@@ -253,7 +246,7 @@ export const actions = {
   // POSTS
   async postsCreate ({commit}, {data}) {
     commit('posts/CREATE')
-    await this.$axios.post(this.getters.orgId + '/posts', { data })
+    await this.$axios.post(this.getters.orgId + '/posts', {data})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
