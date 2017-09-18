@@ -28,7 +28,12 @@
 
   export default {
     middleware: 'authenticated',
-    fetch ({store}) {
+    async fetch ({store, params}) {
+      if (params.id && !Object.is(Number(params.id), NaN)) {
+//        console.log(params.id)
+        await store.dispatch('getPodcast', params.id)
+      }
+//      await store.dispatch('getPodcast')
 //      return Promise.all([
 //        store.dispatch('loadEpisodeList', {axios: store.$axios, params: {parent: this.podcastId}})
 //        store.dispatch('loadAnnouncements')
@@ -54,15 +59,16 @@
 //    validate ({params}) {
 //      return !!params.id && !Object.is(Number(params.id), NaN)
 //    },
-    async asyncData ({app, params}) {
-      if (!Object.is(params.id, undefined)) {
-        const baseUrl = 'http://api.picker.la/rest/orgs/1'
-        const data = (await app.$axios.get(`${baseUrl}/podcast/${params.id}`)).data
-        return {
-          podcast: data.data
-        }
-      }
-    },
+//    async asyncData ({app, params}) {
+//      if (!Object.is(params.id, undefined)) {
+//        const baseUrl = 'http://api.picker.la/rest/orgs/1'
+//        const data = (await app.$axios.get(`${this.orgId}/posts/${params.id}`)).data
+//        console.log(JSON.stringify(data))
+//        return {
+//          podcast: data.data
+//        }
+//      }
+//    },
     props: {},
     components: {
       HeaderCake,
@@ -70,6 +76,10 @@
       PodcastContentForm,
       EpisodeList
     },
+//    mounted() {
+//      this.podcast = this.detail
+//      console.log(this.detail)
+//    },
     watch: {
 //      'podcast': {
 //        handler: (val, oldVal) => {
@@ -80,6 +90,12 @@
 //      }
     },
     computed: {
+      detail () {
+        return this.$store.state.podcast.detail.data
+      },
+      orgId () {
+        return this.$store.getters.orgId
+      },
       episodes () {
         if (!Object.is(this.podcast.children, undefined)) {
           return this.podcast.children
@@ -103,6 +119,12 @@
       }
     },
     mounted () {
+//      if (this.detail) {
+      this.podcast = Object.assign({}, this.detail)
+//      this.podcast = this.detail
+//        console.log(this.detail)
+//      }
+
       this.$watch('podcast.title', () => {
         this.save()
       })

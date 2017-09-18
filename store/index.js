@@ -102,6 +102,16 @@ export const actions = {
       commit('org/REQUEST_ORG_INFO_FAILURE')
     }
   },
+  // 获取机构的应用列表
+  async loadOrgApps ({commit}) {
+    commit('org/REQUEST_ORG_APPS')
+    const data = (await this.$axios.get(`${this.getters.orgId}/apps`)).data
+    if (data && data.errno === 0) {
+      commit('org/REQUEST_ORG_APPS_SUCCESS', data)
+    } else {
+      commit('org/REQUEST_ORG_APPS_FAILURE')
+    }
+  },
   // 获取标签列表
   loadTagList ({commit}) {
   },
@@ -169,7 +179,7 @@ export const actions = {
     // console.log(this.getters.orgId + 'xxx---')
     // console.log(orgId + '-----')
     try {
-      const {data} = await this.$axios.post(this.getters.orgId + '/signin', form)
+      const {data} = await this.$axios.post(`${this.getters.orgId}/signin`, form)
       if (data.errno > 0) {
         // 发送出错误状态
         console.error(data.errmsg)
@@ -190,6 +200,17 @@ export const actions = {
     // await Service.post('/api/logout')
     unsetToken()
     commit('SET_USER', null)
+  },
+  // 播客 Store
+  async getPodcast ({commit}, id) {
+    commit('podcast/REQUEST_DETAIL')
+    const data = (await this.$axios.get(`${this.getters.orgId}/podcast/${id}`)).data
+    console.log(data)
+    if (data && data.errno === 0) {
+      commit('podcast/GET_DETAIL_SUCCESS', data)
+    } else {
+      commit('podcast/GET_DETAIL_FAILURE')
+    }
   },
   async loadEpisodeList ({commit}, {axios, params}) {
     console.log('load episode')

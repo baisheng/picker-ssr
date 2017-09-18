@@ -15,6 +15,10 @@ export const state = () => {
     orgInfo: {
       fetching: false,
       data: {}
+    },
+    apps: {
+      fetching: false,
+      data: []
     }
   }
 }
@@ -38,5 +42,17 @@ export const mutations = {
   REQUEST_ORG_INFO_FAILURE (state) {
     state.orgInfo.fetching = false
     state.orgInfo.data = {}
+  },
+  // 获取机构的应用列表
+  REQUEST_ORG_APPS (state) {
+    state.apps.fetching = true
+  },
+  REQUEST_ORG_APPS_SUCCESS (state, action) {
+    state.apps.fetching = false
+    state.apps.data = action.data
+  },
+  REQUEST_ORG_APPS_FAILURE (state) {
+    state.orgInfo.fetching = false
+    state.apps.data = []
   }
 }

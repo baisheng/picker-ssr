@@ -1,5 +1,5 @@
 <template>
-  <div class="layout focus-sidebar" ref="layout">
+  <div :class="classes" ref="layout">
     <logged-in v-if="!isLogged"/>
     <div class="layout__loader is-active">
       <pulsing-dot :active="true"></pulsing-dot>
@@ -30,8 +30,8 @@
                       </div>
                       <div class="site__info">
                         <!-- TODO: 加载每次请求中 -->
-                        <div class="site__title">{{ org.data.basic.name }}</div>
-                        <div class="site__domain">{{ org.data.subdomain }}</div>
+                        <div class="site__title">育儿柚道</div>
+                        <div class="site__domain">播客-小程序</div>
                       </div>
                     </a>
                     <div class="site-indicator__wrapper"></div>
@@ -43,27 +43,14 @@
                 <li class="sidebar__menu">
                   <h2 class="sidebar__heading">管理</h2>
                   <ul>
-                    <nuxt-link to="/podcasts" tag="li">
+                    <nuxt-link to="/podcast/home" tag="li">
                       <a>
                       <icon name="dot-circle-o" class="gridicon"></icon>
-                      <span class="menu-link-text">播客</span>
+                      <span class="menu-link-text">节目管理</span>
                       </a>
                       <a href="/podcast" class="sidebar__button">添加</a>
                     </nuxt-link>
 
-                    <li class="">
-                      <a href="/posts/my">
-                        <svg class="gridicon gridicons-posts" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                          <g>
-                            <path
-                              d="M16 19H3v-2h13v2zm5-10H3v2h18V9zM3 5v2h11V5H3zm14 0v2h4V5h-4zm-6 8v2h10v-2H11zm-8 0v2h5v-2H3z"></path>
-                          </g>
-                        </svg>
-                        <span class="menu-link-text">课程</span>
-                      </a>
-                      <a href="/post/bluepx.wordpress.com" class="sidebar__button">添加</a>
-                    </li>
                     <li class="" data-post-type="media"><a href="/media/bluepx.wordpress.com">
                       <icon name="photo" class="gridicon"></icon>
                       <span class="menu-link-text">媒体</span></a>
@@ -146,6 +133,15 @@
       LoggedOut
     },
     computed: {
+      classes () {
+        let focus = this.$store.state.options.layoutFocus
+        return [
+          'layout',
+          'is-group-sites',
+          'is-section-posts-pages',
+          focus === 'sites' ? 'focus-sites' : 'focus-sidebar'
+        ]
+      },
       org () {
         return this.$store.state.org.orgInfo
       }

@@ -162,6 +162,7 @@ export const mutations = {
   },
   GET_DETAIL_SUCCESS (state, action) {
     state.detail.fetching = false
+    console.log(action.data)
     state.detail.data = action.data
   },
 

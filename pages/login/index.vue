@@ -95,7 +95,7 @@
           if (result) {
             await this.$store.dispatch('login', {form: this.form})
             that.isLogin = false
-            this.$router.replace('/')
+            this.$router.replace('/apps')
             return
           }
           that.isLogin = false

@@ -6,7 +6,8 @@
 
 export const state = () => {
   return {
-
+    // 页面焦点
+    layoutFocus: '',
     // 页面的栏目展示类型（3栏/2栏）
     fullColumn: false,
     errorColumn: false,
@@ -48,6 +49,11 @@ export const getters = {
 
 export const mutations = {
 
+  SET_LAYOUT_FOCUS (state, action) {
+    state.layoutFocus = action
+  },
+  SET_NEXT_LAYOUT_FOCUS (state, action) {},
+  ACTIVATE_NEXT_LAYOUT_FOCUS (state, action) {},
   // 设置UA
   SET_USER_AGENT (state, action) {
     state.userAgent = action
