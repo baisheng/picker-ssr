@@ -216,3 +216,9 @@
     </div>
   </main>
 </template>
+<script>
+  export default {
+    layout: 'podcast',
+    middleware: 'authenticated'
+  }
+</script>

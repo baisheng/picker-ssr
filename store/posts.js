@@ -62,7 +62,6 @@ export const mutations = {
   },
   CREATE_SUCCESS (state, action) {
     // state.post.creating = true
-    console.log(action.data)
     state.post.data.id = action.data
     // Object.assign(state.user, user);
   },
@@ -73,11 +72,11 @@ export const mutations = {
     state.post.creating = false
   },
   UPDATE_ITEM (state) {
-    console.log('saving.. item')
+    // console.log('saving.. item')
     state.saving = true
   },
   UPDATE_ITEM_SUCCESS (state) {
-    console.log('saving.. success')
+    // console.log('saving.. success')
     state.item.saving = false
   },
   // List
@@ -94,15 +93,15 @@ export const mutations = {
   UPLOAD_FEATURED_IMAGE (state) {
   },
   REQUEST_LIST (state) {
-    console.log('request Posts list')
+    // console.log('request Posts list')
     state.list.fetching = true
   },
   GET_LIST_FAILURE (state) {
-    console.log('get article listfailure ')
+    // console.log('get article listfailure ')
     state.list.fetching = false
   },
   GET_LIST_SUCCESS (state, action) {
-    console.log('Get Posts list success ')
+    // console.log('Get Posts list success ')
     state.list.fetching = false
     state.list.data = action.data
     // console.log(action.data)

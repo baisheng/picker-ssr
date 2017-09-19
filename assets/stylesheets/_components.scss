@@ -53,6 +53,7 @@
 @import "components/emojify/style";
 @import "components/site-selector/style";
 @import "components/count/style";
+@import "components/formatted-header/style";
 
 @import "my-sites/posts/style";
 @import "my-sites/post/type-list/style";
@@ -84,3 +85,8 @@
 @import "post-editor/style";
 @import "components/me/profile/style";
 @import 'login/style';
+
+@import "signup/style";
+@import "signup/step-wrapper/style";
+@import "signup/flow-rpogress-indicator/style";
+@import "signup/steps/design-type/style";

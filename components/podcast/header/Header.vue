@@ -48,7 +48,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://api.picker.la/rest/orgs/1/file"
+          :post-action="postAction"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -127,9 +127,10 @@
     },
     computed: {
       postAction () {
-        const orgId = this.$store.getters.orgId
+//        const orgId = this.$store.getters.orgId
+        const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
-        return `${baseURL}/${orgId}/file`
+        return `${baseURL}/app/${appId}/file`
       },
       featuredImage () {
       },

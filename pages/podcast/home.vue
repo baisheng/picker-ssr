@@ -1,13 +1,6 @@
 <template>
   <main class="posts is-multisite main">
 
-    <!-- Navbar -->
-    <!--<header-cake compact backHref="/podcasts">-->
-      <!--<span v-if="podcast.id">更新内容</span>-->
-      <!--<span v-else>添加内容</span>-->
-    <!--</header-cake>-->
-    <!-- Header -->
-
     <div class="posts__primary">
       <div class="section-nav has-pinned-items">
         <div class="section-nav__mobile-header">

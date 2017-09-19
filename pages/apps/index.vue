@@ -49,8 +49,8 @@
                                                  aria-hidden="false" autocapitalize="none"></div>
         </div>
         <div class="site-selector__sites">
-          <div class="site" v-for="app in apps">
-              <nuxt-link class="site__content" :to="`${app.type}/home`">
+          <div class="site" v-for="app in org.apps">
+              <a class="site__content" @click="selectApp($event, app)">
               <div class="site-icon is-blank" style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
                 <img :src="app.meta.basic.logo_url" v-if="app.meta.basic.logo_url">
                 <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@
                   {{ app.meta.basic.description }}
                 </div>
               </div>
-              </nuxt-link>
+              </a>
           </div>
         </div>
       </div>
@@ -80,12 +80,19 @@
 <script>
   export default {
     layout: 'apps',
-    async fetch ({store}) {
-      await store.dispatch('loadOrgApps')
-    },
+//    async fetch ({store}) {
+//      await store.dispatch('loadOrgApps')
+//    },
     computed: {
-      apps () {
-        return this.$store.state.org.apps.data
+      org () {
+        return this.$store.state.org.detail.data
+      }
+    },
+    methods: {
+      handleClick () {},
+      selectApp (event, app) {
+        this.$store.commit('org/SET_CURRENT_APP', app)
+        this.$router.push(`/${app.type}/home`)
       }
     }
   }

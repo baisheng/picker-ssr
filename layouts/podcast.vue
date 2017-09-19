@@ -1,110 +1,40 @@
 <template>
   <div :class="classes" ref="layout">
     <logged-in v-if="!isLogged"/>
-    <div class="layout__loader is-active">
-      <pulsing-dot :active="true"></pulsing-dot>
-      <!--<div class="pulsing-dot"></div>-->
-    </div>
     <div id="content" class="layout__content">
       <div id="primary" class="layout__primary">
         <nuxt/>
       </div>
       <div id="secondary" class="layout__secondary">
         <div class="sites-navigation">
-          <div><!-- react-empty: 79 -->
+          <div v-vue-esc="closePicker" v-click-outside="closePicker">
             <div class="site-selector sites-list is-hover-enabled">
-              <div class="is-open has-open-icon search" role="search">
-                <div class="spinner" style="">
-                  <svg class="spinner__image" width="20" height="20" viewBox="0 0 100 100">
-                    <defs>
-                      <mask id="maskBorder2">
-                        <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
-                        <circle r="46%" cx="50%" cy="50%" fill="black"></circle>
-                      </mask>
-                      <mask id="maskDonut2">
-                        <rect x="0" y="0" width="100%" height="100%" fill="black"></rect>
-                        <circle r="46%" cx="50%" cy="50%" fill="white"></circle>
-                        <circle r="30%" cx="50%" cy="50%" fill="black"></circle>
-                      </mask>
-                      <mask id="maskLeft2">
-                        <rect x="0" y="0" width="50%" height="100%" fill="white"></rect>
-                      </mask>
-                      <mask id="maskRight2">
-                        <rect x="50%" y="0" width="50%" height="100%" fill="white"></rect>
-                      </mask>
-                    </defs>
-                    <circle class="spinner__border" r="50%" cx="50%" cy="50%" mask="url( #maskBorder2 )"></circle>
-                    <g mask="url( #maskDonut2 )">
-                      <g mask="url( #maskLeft2 )">
-                        <rect class="spinner__progress is-left" x="0" y="0" width="50%" height="100%"></rect>
-                      </g>
-                      <g mask="url( #maskRight2 )">
-                        <rect class="spinner__progress is-right" x="50%" y="0" width="50%" height="100%"></rect>
-                      </g>
-                    </g>
-                  </svg>
-                </div>
-                <div class="search__icon-navigation" aria-controls="search-component-2" aria-label="打开“搜索”">
-                  <svg class="gridicon gridicons-search search__open-icon" height="24" width="24"
-                       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <g>
-                      <path
-                        d="M21 19l-5.154-5.154C16.574 12.742 17 11.42 17 10c0-3.866-3.134-7-7-7s-7 3.134-7 7 3.134 7 7 7c1.42 0 2.742-.426 3.846-1.154L19 21l2-2zM5 10c0-2.757 2.243-5 5-5s5 2.243 5 5-2.243 5-5 5-5-2.243-5-5z"></path>
-                    </g>
-                  </svg>
-                </div>
-                <div class="search__input-fade"><input type="search" id="search-component-2" class="search__input"
-                                                       placeholder="搜索…" role="search" value="" aria-label="搜索"
-                                                       aria-hidden="false" autocapitalize="none"></div>
-              </div>
               <div class="site-selector__sites">
-                <div class="all-sites"><a class="site__content"><span class="count">4</span>
-                  <div class="site__info"><span class="site__title">所有应用</span><!-- react-text: 97 -->
-                    <!-- /react-text -->
-                    <div class="all-sites-icon has-4-icons">
-                      <div class="site-icon is-blank"
-                           style="height: 14px; width: 14px; line-height: 14px; font-size: 14px;">
-                        <svg class="gridicon gridicons-globe" height="11" width="11" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                          <g>
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                          </g>
-                        </svg>
-                      </div>
-                      <div class="site-icon is-blank"
-                           style="height: 14px; width: 14px; line-height: 14px; font-size: 14px;">
-                        <svg class="gridicon gridicons-globe" height="11" width="11" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                          <g>
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                          </g>
-                        </svg>
-                      </div>
-                      <div class="site-icon is-blank"
-                           style="height: 14px; width: 14px; line-height: 14px; font-size: 14px;">
-                        <svg class="gridicon gridicons-globe" height="11" width="11" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                          <g>
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                          </g>
-                        </svg>
-                      </div>
-                      <div class="site-icon is-blank"
-                           style="height: 14px; width: 14px; line-height: 14px; font-size: 14px;">
-                        <svg class="gridicon gridicons-globe" height="11" width="11" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                          <g>
-                            <path
-                              d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                          </g>
-                        </svg>
+                <div class="all-sites">
+                  <a class="site__content" @click="toAppHome">
+                    <span class="count">{{ org.apps.length }}</span>
+                    <div class="site__info">
+                      <span class="site__title">
+                        所有应用
+                      </span>
+                      <div class="all-sites-icon" :class="`has-${org.apps.length}-icons`">
+                        <div class="site-icon is-blank"
+                             style="height: 14px; width: 14px; line-height: 14px; font-size: 14px;"
+                             v-for="app in org.apps">
+                          <img :src="app.meta.basic.logo_url" v-if="app.meta.basic.logo_url">
+                          <svg class="gridicon gridicons-globe" height="11" width="11"
+                               xmlns="http://www.w3.org/2000/svg"
+                               viewBox="0 0 24 24" v-else>
+                            <g>
+                              <path
+                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
+                            </g>
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </a></div>
+                  </a>
+                </div>
                 <div class="site" v-for="app in apps">
                   <a class="site__content" :href="`/${app.type}/home`">
                     <div class="site-icon is-blank"
@@ -127,83 +57,6 @@
                       </div>
                     </div>
                   </a>
-                </div>
-
-                <div class="site"><a class="site__content" title="选择站点 bluepx.wordpress.com"
-                                     aria-label="选择站点 bluepx.wordpress.com">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="site__info">
-                    <div class="site__title"><!-- react-text: 123 -->bluepx<!-- /react-text --></div>
-                    <div class="site__domain">bluepx.wordpress.com</div>
-                  </div>
-                </a>
-                  <div class="site-indicator__wrapper"></div>
-                </div>
-                <div class="site"><a class="site__content" title="选择站点 caixieblog.wordpress.com"
-                                     aria-label="选择站点 caixieblog.wordpress.com">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="site__info">
-                    <div class="site__title"><!-- react-text: 134 -->caixieblog<!-- /react-text --></div>
-                    <div class="site__domain">caixieblog.wordpress.com</div>
-                  </div>
-                </a>
-                  <div class="site-indicator__wrapper"></div>
-                </div>
-                <div class="site"><a class="site__content" title="选择站点 pickerweb.wordpress.com"
-                                     aria-label="选择站点 pickerweb.wordpress.com">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="site__info">
-                    <div class="site__title"><!-- react-text: 145 -->Site Title<!-- /react-text --></div>
-                    <div class="site__domain">pickerweb.wordpress.com</div>
-                  </div>
-                </a>
-                  <div class="site-indicator__wrapper"></div>
-                </div>
-                <div class="site"><a class="site__content" title="选择站点 baishengblog.wordpress.com"
-                                     aria-label="选择站点 baishengblog.wordpress.com">
-                  <div class="site-icon is-blank"
-                       style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                    <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
-                         viewBox="0 0 24 24">
-                      <g>
-                        <path
-                          d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
-                      </g>
-                    </svg>
-                  </div>
-                  <div class="site__info">
-                    <div class="site__title"><!-- react-text: 156 -->站点标题<!-- /react-text --></div>
-                    <div class="site__domain">baishengblog.wordpress.com</div>
-                  </div>
-                </a>
-                  <div class="site-indicator__wrapper"></div>
                 </div>
               </div>
               <span class="site-selector__add-new-site"><a href="/start?ref=calypso-selector"
@@ -233,12 +86,13 @@
                        aria-label="选择站点 bluepx.wordpress.com">
                       <div class="site-icon is-blank"
                            style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                        <icon name="globe" class="gridicon" style="width: 24px; height: 24px;"></icon>
+                        <img :src="curApp.meta.basic.logo_url" v-if="curApp.meta.basic.logo_url">
+                        <icon name="globe" class="gridicon" style="width: 24px; height: 24px;" v-else></icon>
                       </div>
                       <div class="site__info">
                         <!-- TODO: 加载每次请求中 -->
-                        <div class="site__title">育儿柚道</div>
-                        <div class="site__domain">播客-小程序</div>
+                        <div class="site__title">{{ curApp.meta.basic.name }}</div>
+                        <div class="site__domain">{{ curApp.type }}</div>
                       </div>
                     </a>
                     <div class="site-indicator__wrapper"></div>
@@ -328,6 +182,8 @@
 <script>
   import LoggedIn from './masterbar/logged-in'
   import LoggedOut from './masterbar/logged-out'
+  import ClickOutside from '~/directives/click-outside'
+  import vueEsc from '~/directives/vue-esc'
 
   export default {
     data () {
@@ -340,17 +196,20 @@
       LoggedOut
     },
     computed: {
+      curApp () {
+        return this.$store.state.org.currentApp
+      },
       apps () {
         return this.$store.state.org.apps.data
       },
       org () {
-        return this.$store.state.org.orgInfo
+        return this.$store.state.org.detail.data
       },
       currentLayoutFocus () {
         return this.$store.state.options.layoutFocus
       },
       classes () {
-        let focus = this.$store.state.options.layoutFocus
+        const focus = this.$store.state.options.layoutFocus
         return [
           'notouch',
           'layout',
@@ -361,6 +220,12 @@
       }
     },
     methods: {
+      toAppHome (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.$router.push('/apps')
+        this.closePicker()
+      },
       switchApps (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -377,10 +242,6 @@
           this.$store.commit('options/SET_LAYOUT_FOCUS', 'sidebar')
           this.scrollToTop()
         }
-//        if (this.props.currentLayoutFocus === 'sites') {
-//          this.props.setLayoutFocus('sidebar');
-//          this.scrollToTop();
-//        }
       },
       handleClickOutside: function () {
         this.closePicker();
@@ -391,12 +252,15 @@
         } else {
           // We use setNext here, because on mobile we want to show sidebar
           // instead of Stats page after picking a site
-//          this.props.setNextLayoutFocus('sidebar');
           this.$store.commit('options/SET_NEXT_LAYOUT_FOCUS', 'sidebar')
           this.scrollToTop();
         }
 //        this.onClose(event);
-      },
+      }
+    },
+    directives: {
+      ClickOutside,
+      vueEsc
     }
   }
 </script>

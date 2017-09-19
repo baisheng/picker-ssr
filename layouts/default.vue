@@ -121,6 +121,7 @@
 <script>
   import LoggedIn from './masterbar/logged-in'
   import LoggedOut from './masterbar/logged-out'
+  import PulsingDot from '~/components/pulsing-dot'
 
   export default {
     data () {
@@ -129,12 +130,13 @@
       }
     },
     components: {
+      PulsingDot,
       LoggedIn,
       LoggedOut
     },
     computed: {
       classes () {
-        let focus = this.$store.state.options.layoutFocus
+        const focus = this.$store.state.options.layoutFocus
         return [
           'layout',
           'is-group-sites',

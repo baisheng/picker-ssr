@@ -2,7 +2,7 @@
   <main data-reactroot="" class="connected-applications main" role="main">
 
     <!-- Navbar -->
-    <header-cake compact backHref="/podcasts">
+    <header-cake compact backHref="/podcast/home">
       <span v-if="podcast.id">更新内容</span>
       <span v-else>添加内容</span>
     </header-cake>
@@ -28,6 +28,7 @@
 
   export default {
     middleware: 'authenticated',
+    layout: 'podcast',
     async fetch ({store, params}) {
       if (params.id && !Object.is(Number(params.id), NaN)) {
 //        console.log(params.id)
@@ -93,6 +94,9 @@
       detail () {
         return this.$store.state.podcast.detail.data
       },
+      appId () {
+        return this.$store.getters.appId
+      },
       orgId () {
         return this.$store.getters.orgId
       },
@@ -119,11 +123,9 @@
       }
     },
     mounted () {
-//      if (this.detail) {
-      this.podcast = Object.assign({}, this.detail)
-//      this.podcast = this.detail
-//        console.log(this.detail)
-//      }
+      if (JSON.stringify(this.detail) !== '{}') {
+        this.podcast = Object.assign({}, this.detail)
+      }
 
       this.$watch('podcast.title', () => {
         this.save()
@@ -133,13 +135,13 @@
       })
     },
     methods: {
-      async save(data, id) {
+      async save (data, id) {
         this.status = 'saving'
 //        if (!this.post.id && this.post.content === null) return
         if (Object.is(this.podcast.id, undefined)) {
 //        this.post.autoExcerpt = this.autoExcerpt
-          const baseUrl = 'http://api.picker.la/rest/orgs/1'
-          await this.$axios.post(baseUrl + '/posts', this.post)
+//          const baseUrl = 'http://api.picker.la/rest/orgs/1'
+          await this.$axios.post(`/app/${this.appId}/posts`, this.post)
             .then(response => {
               const postId = response.data.data
               if (!Object.is(postId, null)) {
@@ -163,7 +165,7 @@
           podcastId = id
         }
 //        let api = 'http://vanq.picker.la/api/podcast'
-        await this.$axios.put('http://api.picker.la/rest/orgs/1/posts/' + podcastId, data)
+        await this.$axios.put(`/app/${this.appId}/posts/${podcastId}`, data)
           .then(r => {
 //            console.log(r.status)
             // 执行 vux store 状态

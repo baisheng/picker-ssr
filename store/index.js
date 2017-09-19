@@ -24,10 +24,10 @@ export const mutations = {
 
 export const getters = {
   orgId (state) {
-    // eslint-disable-next-line radix
-    // const orgId = Number.parseInt(state.org.id)
-    // return orgId
-    return state.org.id
+    return state.org.detail.data.id
+  },
+  appId (state) {
+    return state.org.currentApp.id
   },
   isAuthenticated (state) {
     return Boolean(state.user)
@@ -38,13 +38,18 @@ export const getters = {
 }
 export const actions = {
   async nuxtServerInit (store, {app, env, params, route, isServer, req}) {
-    let orgId = req.session.orgId
-    if (!orgId) {
+    const org = req.session.org
+    if (!org) {
       return
     }
+    // console.log('nuxt server init ...')
+
     store.strict = false
-    await store.commit('org/CONFIG', {id: orgId})
-    await store.dispatch('loadOrgInfo')
+    if (req.session.currentApp) {
+      await store.commit('org/SET_CURRENT_APP', req.session.currentApp)
+    }
+    await store.commit('org/SET_ORG_DETAIL', org)
+    // await store.commit('org/CONFIG', {id: orgId})
   },
   // nuxtServerInit is called by Nuxt.js before server-rendering every page
   // async nuxtServerInit (store, { commit }) {
@@ -95,7 +100,7 @@ export const actions = {
   // async
   async loadOrgInfo ({commit}) {
     commit('org/REQUEST_ORG_INFO')
-    const data = (await this.$axios.get(`${this.getters.orgId}/info`)).data
+    const data = (await this.$axios.get(`/org/${this.getters.orgId}/info`)).data
     if (data && data.errno === 0) {
       commit('org/REQUEST_ORG_INFO_SUCCESS', data)
     } else {
@@ -105,7 +110,7 @@ export const actions = {
   // 获取机构的应用列表
   async loadOrgApps ({commit}) {
     commit('org/REQUEST_ORG_APPS')
-    const data = (await this.$axios.get(`${this.getters.orgId}/apps`)).data
+    const data = (await this.$axios.get(`/org/${this.getters.orgId}/apps`)).data
     if (data && data.errno === 0) {
       commit('org/REQUEST_ORG_APPS_SUCCESS', data)
     } else {
@@ -121,9 +126,7 @@ export const actions = {
   async loadPodcastDetail ({commit}, {axios, params}) {
     commit('podcast/REQUEST_DETAIL')
 
-    // console.log(JSON.stringify(params) + '===')
-    // console.log(params)
-    await axios.get(`${this.getters.orgId}/podcast/${params.id}`)
+    await axios.get(`/app/${this.getters.appId}/podcast/${params.id}`)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -142,7 +145,7 @@ export const actions = {
   // 获取文章列表
   async loadArticles ({commit}, {axios}, params = {page: 1}) {
     commit('article/REQUEST_LIST')
-    await axios.get(this.getters.orgId + '/posts', {params})
+    await axios.get(`/app/${this.getters.appId}/posts`, {params})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         const isFirstPage = params.page && params.page > 1
@@ -162,7 +165,7 @@ export const actions = {
   // 获取全局配置
   loadGlobalOption ({commit}) {
     commit('options/REQUEST_GLOBAL_OPTIONS')
-    return $axios.get(this.getters.orgId + '/options')
+    return this.$axios.get(`/org/${this.getters.orgId}/options`)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -179,7 +182,7 @@ export const actions = {
     // console.log(this.getters.orgId + 'xxx---')
     // console.log(orgId + '-----')
     try {
-      const {data} = await this.$axios.post(`${this.getters.orgId}/signin`, form)
+      const {data} = await this.$axios.post(`/org/${this.getters.orgId}/signin`, form)
       if (data.errno > 0) {
         // 发送出错误状态
         console.error(data.errmsg)
@@ -201,10 +204,10 @@ export const actions = {
     unsetToken()
     commit('SET_USER', null)
   },
-  // 播客 Store
+  /// App Podcast
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
-    const data = (await this.$axios.get(`${this.getters.orgId}/podcast/${id}`)).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/podcast/${id}`)).data
     console.log(data)
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
@@ -215,7 +218,7 @@ export const actions = {
   async loadEpisodeList ({commit}, {axios, params}) {
     console.log('load episode')
     commit('podcast/REQUEST_EPISODE_LIST')
-    await axios.get(this.getters.orgId + '/posts', {params})
+    await axios.get(`/app/${this.getters.appId}/posts`, {params})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         const isFirstPage = params.page && params.page > 1
@@ -235,7 +238,7 @@ export const actions = {
   // 节目创建
   async episodeCreate ({commit}, {data, axios}) {
     commit('podcast/CREATE_EPISODE')
-    await axios.post(this.getters.orgId + '/posts', data)
+    await axios.post(`/app/${this.getters.orgId}/posts`, data)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -250,7 +253,7 @@ export const actions = {
   },
   async episodeDelete ({commit}, {id, axios}) {
     commit('podcast/DELETE_EPISODE')
-    await axios.delete(this.getters.orgId + '/posts/' + id)
+    await axios.delete(`/app/${this.getters.appId}/posts/${id}`)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -267,7 +270,7 @@ export const actions = {
   // POSTS
   async postsCreate ({commit}, {data}) {
     commit('posts/CREATE')
-    await this.$axios.post(this.getters.orgId + '/posts', {data})
+    await this.$axios.post(`/app/${this.getters.appId}/posts`, {data})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -282,7 +285,7 @@ export const actions = {
   },
   async postsDelete ({commit}, {id}) {
     commit('posts/DELETE')
-    await this.$axios.delete(this.getters.orgId + '/posts/' + id)
+    await this.$axios.delete(`/app/${this.getters.appId}/posts/${id}`)
       .then(response => {
         const success = Boolean(response.status) && response.data && !Object.is(response.data.errno, 0)
         if (success) {
@@ -295,7 +298,7 @@ export const actions = {
   },
   async loadPosts ({commit}, params = {type: 'podcast', page: 1}) {
     commit('posts/REQUEST_LIST')
-    const data = (await this.$axios.get(this.getters.orgId + '/posts', {params})).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/posts`, {params})).data
     if (data && data.errno === 0) {
       const isFirstPage = params.page && params.page > 1
       const commitName = `posts/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`

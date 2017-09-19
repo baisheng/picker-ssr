@@ -1,7 +1,7 @@
 <template>
   <masterbar>
     <item icon="pagelines" :isActive="isActive" url="/">
-      {{ org.data.basic.name }}
+      {{ org.meta.basic.name }}
     </item>
     <item icon="tint" class="masterbar__reader" url="/contents">
       内容市场
@@ -43,7 +43,7 @@
     },
     computed: {
       org () {
-        return this.$store.state.org.orgInfo
+        return this.$store.state.org.detail.data
       }
     },
     components: {

@@ -10,8 +10,8 @@ const koaConnect = require('koa-connect')
 const body = require('koa-body') // body parser
 const compose = require('koa-compose') // middle composer
 const compress = require('koa-compress') // HTT: compression
-const session = require('koa-session') // session for flash message
-const cookie = require('koa-cookie')
+const session = require('koa-session2') // session for flash message
+// const cookie = require('koa-cookie')
 const chalk = require('chalk')
 const proxy = require('koa-proxies')
 const debugMudule = require('debug')
@@ -67,39 +67,38 @@ const start = async () => {
   // rights for public/protected elements, and also for different functionality between api & web
   // pages (content negotiation, error handling, handlebars templating, etc).
   app.use(async function subApp (ctx, next) {
+    // console.log('server sub app ...')
     ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
-    // let cookieId = await ctx.cookies.get('__org_id')
-
-    if (!Object.is(ctx.session.orgId, undefined)) {
-      // console.log(ctx.host)
+    if (!Object.is(ctx.session.org, undefined)) {
       await next()
     } else {
-      let orgId = await redis.get(ctx.host)
-      if (orgId) {
-        //   await next()
-        ctx.session.orgId = orgId
+      let org = await redis.get(ctx.host)
+      if (org !== null) {
+        org = JSON.parse(org)
+        ctx.session.org = org
         await next()
       } else {
-        console.log('404')
+        console.log('NOT FOUND')
         return
-        // return ctx.redirect('')
       }
     }
-    // if (ctx.state.subapp === 'api') {
-    //   return
-    // }
-    // console.log(ctx.host)
-    // let orgId = await redis.get(ctx.host)
-    // ctx.session.orgId = orgId
-    // console.log(ctx.session.orgId + '----xxxx')
+  })
 
-    // console.log(ctx.host)
-    // const cookies = ctx.cookie;
-    // use subdomain to determine which app to serve: www. as default, or admin. or api
-    // ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
-    // console.log(ctx.state.subapp + '----')
-    // note: could use root part of path instead of sub-domains e.g. ctx.request.url.split('/')[1]
-    // await next()
+  app.use(async function (ctx, next) {
+    if (!Object.is(ctx.session.currentApp, undefined)) {
+      await next()
+    } else {
+      for (let item of ctx.session.org.apps) {
+        if (ctx.state.subapp === item.type) {
+          ctx.session.currentApp = item
+        }
+      }
+      // console.log(ctx.session.currentApp)
+      if (Object.is(ctx.session.currentApp, undefined)) {
+          ctx.session.currentApp = ctx.session.org.apps[0]
+      }
+      await next()
+    }
   })
 
   const nuxt = new Nuxt(config)

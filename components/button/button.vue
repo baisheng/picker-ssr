@@ -13,6 +13,7 @@
     name: 'Button',
     components: {},
     props: {
+      to: String,
       href: String,
       type: {
         validator (value) {
@@ -64,6 +65,14 @@
             href: this.href
           },
           props: {
+            class: this.classes
+          }
+        }, this.$slots.default)
+      } else if (this.to) {
+        return createElement('nuxt-link', {
+          class: this.classes,
+          props: {
+            to: this.to,
             class: this.classes
           }
         }, this.$slots.default)

@@ -9,6 +9,13 @@ module.exports = {
   router: {
     linkActiveClass: 'selected',
     middleware: 'check-auth'
+    // extendRoutes (routes, resolve) {
+    //   routes.push({
+    //     name: 'start',
+    //     path: '/start',
+    //     component: resolve(__dirname, 'pages/signup/')
+    //   })
+    // }
   },
   /*
   ** Headers of the page
@@ -27,7 +34,12 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: {color: '#3B8070'},
+  // loading: {
+  //   name: 'pulse',
+  //   color: '#3B8070',
+  //   background: 'white'
+  // },
+  loading: '~/components/loading',
   /*
   ** Build configuration
   */

@@ -1,16 +1,12 @@
-// const apiConfig = require('~~/api.config.js')
-// console.log(apiConfig.baseURL + '----')
-// import apiConfig from '../api.config'
-
-/*
-*
-* 全局设置数据状态
-*
-*/
 export const state = () => {
   return {
     id: '',
     api: '',
+    detail: {
+      fetching: false,
+      data: {}
+    },
+    currentApp: null,
     // 机构信息
     orgInfo: {
       fetching: false,
@@ -24,6 +20,12 @@ export const state = () => {
 }
 
 export const mutations = {
+  SET_ORG_DETAIL (state, action) {
+    state.detail.data = action
+  },
+  SET_CURRENT_APP (state, action) {
+    state.currentApp = action
+  },
   CONFIG (state, action) {
     state.id = action.id
     // state.api = action.baseURL + '/rest/orgs/' + action.id

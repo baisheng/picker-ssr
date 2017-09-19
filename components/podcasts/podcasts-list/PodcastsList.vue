@@ -3,9 +3,10 @@
 
     <div id="pages" class="pages__page-list">
       <div class="card page is-compact" v-for="podcast in list">
-        <div class="page__main"><a class="page__title" :href="'/podcast/' + podcast.id" title="编辑About">
-          {{ podcast.title }}
-        </a>
+        <div class="page__main">
+          <nuxt-link class="page__title" :to="`/podcast/${podcast.id}`" :title="podcast.title">
+            {{ podcast.title }}
+          </nuxt-link>
           <div class="page-card-info">
             <div>
                 <span class="page-card-info__item">
@@ -23,7 +24,8 @@
         </div>
         <svg class="gridicon gridicons-ellipsis ellipsis-menu__toggle-icon page__actions-toggle"
              :class="podcast.id === curId && active ? 'is-active' : ''" height="24" width="24"
-             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" @click="computePosition($event, podcast)" slot="face">
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" @click="computePosition($event, podcast)"
+             slot="face">
           <g>
             <path
               d="M7 12c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm12-2c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm-7 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"></path>
@@ -132,8 +134,8 @@
           }
         ]
       },
-      getStylePosition() {
-        const { left, top } = this.repostion
+      getStylePosition () {
+        const {left, top} = this.repostion
         return `left: ${left}px; top: ${top}px;`
       }
     },
