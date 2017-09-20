@@ -29,7 +29,7 @@ const redis = new Redis({
   port: 6379,          // Redis port
   host: config.dev ? '127.0.0.1' : '114.55.230.6',   // Redis host
   family: 4,           // 4 (IPv4) or 6 (IPv6)
-  password: config.dev ? '' : '__2017@picker-redis',
+  password: config.dev ? '__2017@picker-redis' : '__2017@picker-redis',
   db: 0
 })
 // Start nuxt.js
