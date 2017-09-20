@@ -112,9 +112,11 @@
                       <a href="/podcast" class="sidebar__button">添加</a>
                     </nuxt-link>
 
-                    <li class="" data-post-type="media"><a href="/media/bluepx.wordpress.com">
-                      <icon name="photo" class="gridicon"></icon>
-                      <span class="menu-link-text">媒体</span></a>
+                    <li class="" data-post-type="media">
+                      <!--<a href="/podcat/media/">-->
+                      <a>
+                        <icon name="photo" class="gridicon"></icon>
+                        <span class="menu-link-text">媒体</span></a>
                       <form class="media-library__upload-button button sidebar__button">
                         添加
                         <input type="file"
@@ -123,7 +125,8 @@
                       </form>
                     </li>
                     <li class="">
-                      <a href="/comments">
+                      <a>
+                      <!--<a href="podcast/comments">-->
                         <icon name="comments" class="gridicon"></icon>
                         <span class="menu-link-text">评论</span></a>
                     </li>

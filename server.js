@@ -1,7 +1,6 @@
 const Koa = require('koa')
 const {Nuxt, Builder} = require('nuxt')
 const Redis = require('ioredis')
-const redis = new Redis()
 const bunyan = require('bunyan')
 const mkdirp = require('mkdirp')
 const koaBunyan = require('koa-bunyan')
@@ -26,6 +25,13 @@ process.noDeprecation = true
 const config = require('./nuxt.config')
 config.dev = !(process.env.NODE_ENV === 'production')
 
+const redis = new Redis({
+  port: 6379,          // Redis port
+  host: config.dev ? '127.0.0.1' : '114.55.230.6',   // Redis host
+  family: 4,           // 4 (IPv4) or 6 (IPv6)
+  password: config.dev ? '' : '__2017@picker-redis',
+  db: 0
+})
 // Start nuxt.js
 const start = async () => {
   const debug = debugMudule('app')
@@ -93,7 +99,6 @@ const start = async () => {
           ctx.session.currentApp = item
         }
       }
-      // console.log(ctx.session.currentApp)
       if (Object.is(ctx.session.currentApp, undefined)) {
           ctx.session.currentApp = ctx.session.org.apps[0]
       }

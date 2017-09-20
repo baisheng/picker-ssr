@@ -17,35 +17,35 @@
               <h6 class="section-nav-group__label">状态</h6>
               <ul class="section-nav-tabs__list" role="menu">
                 <li class="is-publish is-selected section-nav-tab">
-                  <a href="/posts" class="section-nav-tab__link" tabindex="0" aria-selected="true" role="menuitem">
+                  <nuxt-link to="/posts" class="section-nav-tab__link" tabindex="0" aria-selected="true" role="menuitem">
                     <span class="section-nav-tab__text">
                       已发布
                     </span>
-                  </a>
+                  </nuxt-link>
                 </li>
                 <li class="is-draft section-nav-tab">
-                  <a href="/posts/drafts" class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                  <nuxt-link to="/posts/drafts" class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
                     <span class="section-nav-tab__text">
                       草稿
                     </span>
-                  </a>
+                  </nuxt-link>
                 </li>
                 <li class="is-future section-nav-tab">
-                  <a href="/posts/scheduled" class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                  <nuxt-link to="/posts/scheduled" class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
                     <span class="section-nav-tab__text">
                       待审核
                     </span>
-                  </a>
+                  </nuxt-link>
                 </li>
                 <li class="is-trash section-nav-tab">
-                  <a href="/posts/trashed" class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                  <nuxt-lingk to="/posts/trashed" class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
                     <span class="section-nav-tab__text">
                       已放入回收站
                     </span>
-                  </a>
+                  </nuxt-lingk>
                 </li>
               </ul>
             </div>
@@ -55,7 +55,7 @@
               作者</h6>
             <ul class="segmented-control" role="radiogroup">
               <li class="segmented-control__item">
-                <a href="/posts/my" class="segmented-control__link" role="radio"
+                <a class="segmented-control__link" role="radio"
                    tabindex="0" aria-selected="false">
                   <span class="segmented-control__text">
                       个人
@@ -66,7 +66,7 @@
                 </a>
               </li>
               <li class="segmented-control__item is-selected">
-                <a href="/posts" class="segmented-control__link" role="radio" tabindex="0" aria-selected="true">
+                <a class="segmented-control__link" role="radio" tabindex="0" aria-selected="true">
                   <span class="segmented-control__text">
                     所有人
                   </span>
@@ -131,6 +131,7 @@
 //  import ActionMenu from '../../components/podcast/podcast-action'
   import { PodcastsList } from '~/components/podcasts'
   export default {
+    name: 'podcast',
     layout: 'podcast',
     data () {
       return {
