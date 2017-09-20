@@ -79,7 +79,7 @@ const start = async () => {
       await next()
     } else {
       let org = await redis.get(ctx.host)
-      console.log(org)
+      // console.log(org)
       if (org !== null) {
         org = JSON.parse(org)
         ctx.session.org = org
@@ -95,6 +95,7 @@ const start = async () => {
     if (!Object.is(ctx.session.currentApp, undefined)) {
       await next()
     } else {
+      console.log(ctx.session.org.apps)
       for (let item of ctx.session.org.apps) {
         if (ctx.state.subapp === item.type) {
           ctx.session.currentApp = item

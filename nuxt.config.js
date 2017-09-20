@@ -6,6 +6,12 @@ module.exports = {
     max: 20,
     maxAge: 600000
   },
+  /**
+   * Using Phusion Passenger with Nginx on Plesk - That will gzip
+   */
+  performance: {
+    gzip: false
+  },
   router: {
     linkActiveClass: 'selected',
     middleware: 'check-auth'
@@ -88,7 +94,11 @@ module.exports = {
     '@nuxtjs/axios',
     // With options
     // ['@nuxtjs/axios', { credentials: false }],
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    // Simple usage
+    '@nuxtjs/component-cache'
+      // With options
+      // ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
   proxy: [
     ['/api',

@@ -11,6 +11,12 @@
     debug "^3.0.1"
     whatwg-url "^6.1.0"
 
+"@nuxtjs/component-cache@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/component-cache/-/component-cache-1.1.0.tgz#bc2ff1810aabd24a5babd25100e99ff367867132"
+  dependencies:
+    lru-cache "^4.1.1"
+
 "@nuxtjs/proxy@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@nuxtjs/proxy/-/proxy-1.1.2.tgz#2af207e61322a5e42aaae0dba4a3e7b33fc1ec73"
