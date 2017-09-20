@@ -74,6 +74,7 @@ const start = async () => {
   // pages (content negotiation, error handling, handlebars templating, etc).
   app.use(async function subApp (ctx, next) {
     console.log('server sub app ...')
+    console.log(ctx.host)
     ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
     if (!Object.is(ctx.session.org, undefined)) {
       await next()
@@ -110,6 +111,7 @@ const start = async () => {
 
   const nuxt = new Nuxt(config)
 
+  console.log(nuxt)
   nuxt.showOpen = () => {
     const _host = host
     console.log(_host)
