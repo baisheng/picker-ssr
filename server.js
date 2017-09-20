@@ -96,7 +96,6 @@ const start = async () => {
     if (!Object.is(ctx.session.currentApp, undefined)) {
       await next()
     } else {
-      console.log(ctx.session.org.apps)
       for (let item of ctx.session.org.apps) {
         if (ctx.state.subapp === item.type) {
           ctx.session.currentApp = item
@@ -111,11 +110,9 @@ const start = async () => {
 
   const nuxt = new Nuxt(config)
 
-  console.log(nuxt)
   nuxt.showOpen = () => {
-    const _host = host
-    console.log(_host)
-    // const _host = host === '0.0.0.0' ? 'localhost' : host
+    // const _host = host
+    const _host = host === '0.0.0.0' ? 'localhost' : host
     // eslint-disable-next-line no-console
     console.log('\n' + chalk.bgGreen.black(' OPEN ') + chalk.green(` http://${_host}:${port}\n`))
   }
