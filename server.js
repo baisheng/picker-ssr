@@ -73,8 +73,8 @@ const start = async () => {
   // rights for public/protected elements, and also for different functionality between api & web
   // pages (content negotiation, error handling, handlebars templating, etc).
   app.use(async function subApp (ctx, next) {
-    console.log('server sub app ...')
-    console.log(ctx.host)
+    // console.log('server sub app ...')
+    // console.log(ctx.host)
     ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
     if (!Object.is(ctx.session.org, undefined)) {
       await next()

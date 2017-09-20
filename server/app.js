@@ -1,7 +1,6 @@
 const Koa = require('koa')
 const {Nuxt, Builder} = require('nuxt')
 const Redis = require('ioredis')
-const redis = new Redis()
 const bunyan = require('bunyan')
 const mkdirp = require('mkdirp')
 const koaBunyan = require('koa-bunyan')
@@ -10,8 +9,8 @@ const koaConnect = require('koa-connect')
 const body = require('koa-body') // body parser
 const compose = require('koa-compose') // middle composer
 const compress = require('koa-compress') // HTT: compression
-const session = require('koa-session') // session for flash message
-const cookie = require('koa-cookie')
+const session = require('koa-session2') // session for flash message
+// const cookie = require('koa-cookie')
 const chalk = require('chalk')
 const proxy = require('koa-proxies')
 const debugMudule = require('debug')
@@ -26,6 +25,13 @@ process.noDeprecation = true
 const config = require('../nuxt.config')
 config.dev = !(process.env.NODE_ENV === 'production')
 
+const redis = new Redis({
+  port: 6379,          // Redis port
+  host: config.dev ? '127.0.0.1' : '114.55.230.6',   // Redis host
+  family: 4,           // 4 (IPv4) or 6 (IPv6)
+  password: config.dev ? '' : '__2017@picker-redis',
+  db: 0
+})
 // Start nuxt.js
 const start = async () => {
   const debug = debugMudule('app')
@@ -67,35 +73,45 @@ const start = async () => {
   // rights for public/protected elements, and also for different functionality between api & web
   // pages (content negotiation, error handling, handlebars templating, etc).
   app.use(async function subApp (ctx, next) {
-    // let hostname = ctx.host
-    // if (hostname === 'picker.la') {
-    //
-    // }
-    // if (hostname === 'homepage')
-    let orgId = await redis.get(ctx.host)
-    if (orgId) {
-      let cookieId = ctx.cookies.get('__org_id')
-      if (cookieId === undefined || cookieId !== orgId.toString()) {
-        ctx.cookies.set('__org_id', orgId.toString())
-      }
-      // orgs = JSON.parse(orgs)
-      // console.log(orgId + '----')
+    // console.log('server sub app ...')
+    // console.log(ctx.host)
+    ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
+    if (!Object.is(ctx.session.org, undefined)) {
       await next()
     } else {
-      console.log('no domain')
-      this.body = 'Hello World';
-      await next()
-      // ctx.redirect('http://baidu.com')
+      let org = await redis.get(ctx.host)
+      // console.log(org)
+      if (org !== null) {
+        org = JSON.parse(org)
+        ctx.session.org = org
+        await next()
+      } else {
+        console.log('NOT FOUND')
+        return
+      }
     }
-    // ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
-    // console.log(ctx.state.subapp + '----')
-    // note: could use root part of path instead of sub-domains e.g. ctx.request.url.split('/')[1]
-    // await next()
   })
 
+  app.use(async function (ctx, next) {
+    if (!Object.is(ctx.session.currentApp, undefined)) {
+      await next()
+    } else {
+      for (let item of ctx.session.org.apps) {
+        if (ctx.state.subapp === item.type) {
+          ctx.session.currentApp = item
+        }
+      }
+      if (Object.is(ctx.session.currentApp, undefined)) {
+        ctx.session.currentApp = ctx.session.org.apps[0]
+      }
+      await next()
+    }
+  })
 
   const nuxt = new Nuxt(config)
+
   nuxt.showOpen = () => {
+    // const _host = host
     const _host = host === '0.0.0.0' ? 'localhost' : host
     // eslint-disable-next-line no-console
     console.log('\n' + chalk.bgGreen.black(' OPEN ') + chalk.green(` http://${_host}:${port}\n`))
@@ -117,11 +133,11 @@ const start = async () => {
   const nuxtRender = koaConnect(nuxt.render)
   app.use(async (ctx, next) => {
     await next()
-    if (ctx.state.subapp !== consts.API) {
-      ctx.status = 200 // koa defaults to 404 when it sees that status is unset
-      ctx.req.session = ctx.session
-      await nuxtRender(ctx)
-    }
+    // if (ctx.state.subapp !== consts.API) {
+    ctx.status = 200 // koa defaults to 404 when it sees that status is unset
+    ctx.req.session = ctx.session
+    await nuxtRender(ctx)
+    // }
   })
   // return response time in X-Response-Time header
   app.use(async function responseTime (ctx, next) {
@@ -146,7 +162,7 @@ const start = async () => {
   app.use(body())
 
   // somtimes useful to be able to track each reques...
-  app.use(async function(ctx, next) {
+  app.use(async function (ctx, next) {
     debug(ctx.method + ' ' + ctx.url)
     await next()
   })
