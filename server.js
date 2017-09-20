@@ -29,7 +29,7 @@ const redis = new Redis({
   port: 6379,          // Redis port
   host: config.dev ? '127.0.0.1' : '114.55.230.6',   // Redis host
   family: 4,           // 4 (IPv4) or 6 (IPv6)
-  password: config.dev ? '__2017@picker-redis' : '__2017@picker-redis',
+  password: config.dev ? '' : '__2017@picker-redis',
   db: 0
 })
 // Start nuxt.js
@@ -73,12 +73,13 @@ const start = async () => {
   // rights for public/protected elements, and also for different functionality between api & web
   // pages (content negotiation, error handling, handlebars templating, etc).
   app.use(async function subApp (ctx, next) {
-    // console.log('server sub app ...')
+    console.log('server sub app ...')
     ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
     if (!Object.is(ctx.session.org, undefined)) {
       await next()
     } else {
       let org = await redis.get(ctx.host)
+      console.log(org)
       if (org !== null) {
         org = JSON.parse(org)
         ctx.session.org = org
