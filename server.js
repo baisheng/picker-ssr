@@ -111,7 +111,9 @@ const start = async () => {
   const nuxt = new Nuxt(config)
 
   nuxt.showOpen = () => {
-    const _host = host === '0.0.0.0' ? 'localhost' : host
+    const _host = host
+    console.log(_host)
+    // const _host = host === '0.0.0.0' ? 'localhost' : host
     // eslint-disable-next-line no-console
     console.log('\n' + chalk.bgGreen.black(' OPEN ') + chalk.green(` http://${_host}:${port}\n`))
   }
