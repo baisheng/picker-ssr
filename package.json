@@ -13,11 +13,16 @@
     "generate": "nuxt generate",
     "analyze": "cross-env NODE_ENV=production nuxt build --analyze",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "precommit": "lint-staged"
   },
   "ava": {
     "require": [
       "babel-register"
+    ]
+  },
+  "lint-staged": {
+    "{client,server,test}/**/*.{js,vue}": [
+      "eslint --ext .js,.vue --ignore-path .gitignore"
     ]
   },
   "dependencies": {
@@ -64,7 +69,7 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
     "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.3.0",
+    "eslint": "^4.7.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.1.1",
@@ -73,8 +78,13 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "html-minifier": "^3.5.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.1",
     "lodash": "^4.17.4",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6"
+  },
+  "engines": {
+    "node": ">=7.6.0"
   }
 }
