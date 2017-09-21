@@ -55,7 +55,6 @@
   import {Card} from '~/components/card'
   import {setToken, checkSecret, extractInfoFromHash} from '~/utils/auth'
   import FormInputValidation from '~/components/forms/form-input-validation'
-  //  import axios from 'axios'
 
   export default {
     layout: 'logged-out',
@@ -73,9 +72,6 @@
         }
       }
     },
-//    fetch ({store}) {
-//      return store.dispatch('loadOrgInfo')
-//    },
     computed: {
       orgId () {
         return this.$store.state.org.id
@@ -88,7 +84,7 @@
       }
     },
     methods: {
-      async handleSubmit ({app}) {
+      async handleSubmit () {
         const that = this
         that.isLogin = true
         await this.$validator.validateAll().then(async (result) => {

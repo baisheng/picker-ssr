@@ -1,0 +1,17 @@
+{
+  "presets": ["es2015"],
+  "plugins": ["transform-runtime",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "transform-async-to-generator"
+  ],
+  "comments": false,
+  "env": {
+    "development": {
+      "retainLines": true,
+      "sourceMaps": true,
+      "comments": true
+    }
+  }
+}
