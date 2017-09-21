@@ -74,6 +74,7 @@ exports.scrollTo = (element, duration = 500, options) => {
   }
 
   const diff = targetY - initialY
+// eslint-disable-next-line prefer-reflect
   const easing = BezierEasing.apply(BezierEasing, options.easing)
   let start
 

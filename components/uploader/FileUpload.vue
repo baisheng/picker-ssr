@@ -35,7 +35,7 @@
   }
 </style>
 <script>
-  /* eslint-disable comma-dangle,prefer-promise-reject-errors,no-multi-spaces,no-cond-assign,no-unused-vars,spaced-comment */
+  /* eslint-disable comma-dangle,prefer-promise-reject-errors,no-multi-spaces,no-cond-assign,no-unused-vars,spaced-comment,no-undef,no-extra-parens */
 
   import InputFile from './InputFile.vue'
 
@@ -220,7 +220,7 @@
           this.maps[file.id] = file
         }
         // add, update
-        for (let key in this.maps) {
+        for (let key of this.maps) {
           let newFile = this.maps[key]
           let oldFile = oldMaps[key]
           if (newFile !== oldFile) {
@@ -361,6 +361,7 @@
           files.splice(index, 1)
           this.files = files
           // 定位
+// eslint-disable-next-line prefer-reflect
           delete this.maps[file.id]
           // 事件
           this.emitInput()
@@ -422,6 +423,7 @@
               }).catch((e) => {
                 this.update(newFile, {active: false, success: false, error: e.code || e.error || e.message || e})
               })
+// eslint-disable-next-line radix
             }, parseInt(Math.random() * 50 + 50))
           })
         } else if ((!newFile || !newFile.active) && oldFile && oldFile.active) {
@@ -451,7 +453,7 @@
           return Promise.resolve(file)
         }
         // 后缀
-        var extensions = this.extensions
+        let extensions = this.extensions
         if (extensions && (extensions.length || typeof extensions.length === 'undefined')) {
           if (typeof extensions !== 'object' || !(extensions instanceof RegExp)) {
             if (typeof extensions === 'string') {
@@ -478,7 +480,7 @@
       uploadPut (file) {
         let querys = []
         let value
-        for (let key in file.data) {
+        for (let key of file.data) {
           value = file.data[key]
           if (value !== null && value !== undefined) {
             querys.push(encodeURIComponent(key) + '=' + encodeURIComponent(value))
@@ -492,7 +494,7 @@
       uploadHtml5 (file) {
         let form = new window.FormData()
         let value
-        for (let key in file.data) {
+        for (let key of file.data) {
           value = file.data[key]
           if (value && typeof value === 'object' && typeof value.toString !== 'function') {
             form.append(key, JSON.stringify(value))
@@ -540,6 +542,7 @@
             xhr.abort()
             xhr.timeout = 1
           } catch (e) {
+            console.log(e)
           }
         }, 100)
         return new Promise((resolve, reject) => {
@@ -596,7 +599,7 @@
                 }
             }
             if (xhr.responseText) {
-              var contentType = xhr.getResponseHeader('Content-Type')
+              let contentType = xhr.getResponseHeader('Content-Type')
               if (contentType && contentType.indexOf('/json') !== -1) {
                 data.response = JSON.parse(xhr.responseText)
               } else {
@@ -622,7 +625,7 @@
             xhr.timeout = file.timeout
           }
           // headers
-          for (let key in file.headers) {
+          for (let key of file.headers) {
             xhr.setRequestHeader(key, file.headers[key])
           }
           // 更新 xhr
@@ -632,25 +635,25 @@
         })
       },
       uploadHtml4 (file) {
-        var onKeydown = function (e) {
+        let onKeydown = function (e) {
           if (e.keyCode === 27) {
             e.preventDefault()
           }
         }
-        var iframe = document.createElement('iframe')
+        let iframe = document.createElement('iframe')
         iframe.id = 'upload-iframe-' + file.id
         iframe.name = 'upload-iframe-' + file.id
         iframe.src = 'about:blank'
         iframe.setAttribute('style', 'width:1px;height:1px;top:-999em;position:absolute; margin-top:-999em;')
-        var form = document.createElement('form')
+        let form = document.createElement('form')
         form.action = file.postAction
         form.name = 'upload-form-' + file.id
         form.setAttribute('method', 'POST')
         form.setAttribute('target', 'upload-iframe-' + file.id)
         form.setAttribute('enctype', 'multipart/form-data')
-        var value
-        var input
-        for (var key in file.data) {
+        let value
+        let input
+        for (let key of file.data) {
           value = file.data[key]
           if (value && typeof value === 'object' && typeof value.toString !== 'function') {
             value = JSON.stringify(value)
@@ -664,13 +667,14 @@
         }
         form.appendChild(file.el)
         document.body.appendChild(iframe).appendChild(form)
-        var getResponseData = function () {
+        let getResponseData = function () {
           let doc
           try {
             if (iframe.contentWindow) {
               doc = iframe.contentWindow.document
             }
           } catch (err) {
+            console.log(err)
           }
           if (!doc) {
             try {
@@ -691,7 +695,7 @@
               return reject('not_exists')
             }
             // 定时检查
-            var interval = setInterval(() => {
+            let interval = setInterval(() => {
               file = this.get(file)
               if (file && !file.success && !file.error && file.active) {
                 return
@@ -704,8 +708,8 @@
                 iframe.onabort({type: file ? 'abort' : 'not_exists'})
               }
             }, 100)
-            var complete
-            var fn = (e) => {
+            let complete
+            let fn = (e) => {
               // 已经处理过了
               if (complete) {
                 return
@@ -734,8 +738,8 @@
               if (file.success) {
                 return resolve(file)
               }
-              var response = getResponseData()
-              var data = {}
+              let response = getResponseData()
+              let data = {}
               switch (e.type) {
                 case 'abort':
                   data.error = 'abort'
@@ -763,6 +767,7 @@
                   try {
                     response = JSON.parse(response)
                   } catch (err) {
+                    console.log(err)
                   }
                 }
                 data.response = response
@@ -793,12 +798,12 @@
         })
       },
       watchActive (active) {
-        var file
-        var index = 0
+        let file
+        let index = 0
         while (file = this.files[index]) {
           index++
           if (active && !this.destroy) {
-            if (this.uploading >= this.thread || (this.uploading && !this.features.html5)) {
+            if (this.uploading >= this.thread || this.uploading && !this.features.html5) {
               break
             }
             if (!file.active && !file.error && !file.success) {
@@ -826,6 +831,7 @@
             this.dropElement.removeEventListener('dragover', this.onDragover, false)
             this.dropElement.removeEventListener('drop', this.onDrop, false)
           } catch (e) {
+            console.log(e)
           }
         }
         if (!el) {
@@ -864,17 +870,18 @@
           })
         }
         this.add(files)
-        var Component = this.$options.components.InputFile
+        let Component = this.$options.components.InputFile
         // vue 2.0.0  = Component
         // vue 2.0.x  = Component._Ctor
         // vue 2.1.x = Component._Ctor[0]
         if (!Component._Ctor) {
+          console.log('compnent._Ctor empty')
         } else if (typeof Component._Ctor === 'function') {  ///... 蠢死我 没加 typeof
           Component = Component._Ctor
         } else {
           Component = Component._Ctor[0]
         }
-        var inputFile = new Component({
+        let inputFile = new Component({
           parent: this,
           el,
         })
@@ -920,7 +927,7 @@
       },
       onDragleave (e) {
         e.preventDefault()
-        if (e.target.nodeName === 'HTML' || (e.screenX === 0 && e.screenY === 0 && e.screenY === 0 && !e.fromElement && e.offsetX < 0)) {
+        if (e.target.nodeName === 'HTML' || e.screenX === 0 && e.screenY === 0 && e.screenY === 0 && !e.fromElement && e.offsetX < 0) {
           this.dropActive = false
         }
       },

@@ -67,7 +67,7 @@
         this.$emit('on-focus', event)
       },
       handleInput (event) {
-        let value = event.target.value
+        const value = event.target.value
         this.$emit('input', value)
         this.setCurrentValue(value)
         this.$emit('on-change', event)
@@ -76,7 +76,9 @@
         this.$emit('on-input-change', event)
       },
       setCurrentValue (value) {
-        if (value === this.currentValue) return
+        if (value === this.currentValue) {
+          return
+        }
         this.currentValue = value
       },
       focus () {

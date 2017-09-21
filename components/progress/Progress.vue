@@ -5,6 +5,8 @@
 </template>
 
 <script>
+  /* eslint-disable curly,radix,no-case-declarations */
+
   import { LINE, CIRCLE, PATH } from './constants'
   import { extend } from './utils'
   import { Circle, Line, Path } from 'progressbar.js'
@@ -78,7 +80,7 @@
     },
     methods: {
       init () {
-        let _options = {
+        const _options = {
           color: this.color,
           strokeWidth: parseFloat(this.strokeWidth),
           trailColor: this.trailColor,
@@ -92,13 +94,13 @@
         if (this.from) _options.from = this.from
         if (this.to) _options.to = this.to
         if (this.step) _options.step = this.step
-        let options = extend(_options, this.options || {})
+        const options = extend(_options, this.options || {})
         switch (this.type) {
           case CIRCLE:
             this.progress = new Circle(this.$el, options)
             break
           case PATH:
-            let paths = this.$el.querySelectorAll('path')
+            const paths = this.$el.querySelectorAll('path')
             if (paths.length === 0) throw new Error('[VueProgress Error] Path not found in slot svg.')
             this.progress = new Path(paths[paths.length - 1], options)
             break

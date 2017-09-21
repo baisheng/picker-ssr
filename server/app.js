@@ -96,7 +96,7 @@ const start = async () => {
     if (!Object.is(ctx.session.currentApp, undefined)) {
       await next()
     } else {
-      for (let item of ctx.session.org.apps) {
+      for (const item of ctx.session.org.apps) {
         if (ctx.state.subapp === item.type) {
           ctx.session.currentApp = item
         }
@@ -121,7 +121,7 @@ const start = async () => {
   if (config.dev) {
     const devConfigs = config.development
     if (devConfigs && devConfigs.proxies) {
-      for (let proxyItem of devConfigs.proxies) {
+      for (const proxyItem of devConfigs.proxies) {
         console.log(
           `Active Proxy: path[${proxyItem.path}] target[${proxyItem.target}]`
         )
