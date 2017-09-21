@@ -2,503 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35aaf7a8-0301-42cd-84af-6bbd0947be5a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/static/images/.gitkeep" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/config.test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/helpers/create-nuxt.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/index.test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/login.test.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/README.md" afterPath="$PROJECT_DIR$/client/assets/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/_components.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/_components.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/_main.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/_main.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/_vendor.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/_vendor.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/author-selector/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/author-selector/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/comment-button/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/comment-button/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/comment-detail/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/comment-detail/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/comments/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/comments/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/login/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/login/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-actions/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-actions/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-edit-button/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-edit-button/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-item/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-item/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-likes/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-likes/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-relative-time/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-relative-time/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-share/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-share/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/post-status/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/post-status/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/site-icon/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/site-icon/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/blocks/site/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/blocks/site/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/accoridion/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/accoridion/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/animate/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/animate/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/async-load/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/async-load/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/banner/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/banner/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/button-group/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/button-group/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/button/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/button/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/card/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/card/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/count/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/count/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/ellipsis-menu/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/ellipsis-menu/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/emojify/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/emojify/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/empty-content/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/empty-content/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/foldable-card/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/foldable-card/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/formatted-header/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/formatted-header/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/counted-textarea/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/counted-textarea/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-button-bar/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-button-bar/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-button/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-button/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-fieldset/style.scss" afterPath="$PROJECT_DIR$/.dockerignore" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-input-validation/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-input-validation/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-label/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-label/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-password-input/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-password-input/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/forms/form-text-input/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-text-input/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/gravatar/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/gravatar/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/header-cake/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/header-cake/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/main/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/main/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/me/profile/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/me/profile/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/me/sidebar-navigation/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/me/sidebar-navigation/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/notice/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/notice/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/popover/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/popover/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/post-excerpt/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/post-excerpt/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/search-card/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/search-card/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/search-header/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/search-header/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/search-nav/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/search-nav/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/search/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/search/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/section-header/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/section-header/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/section-nav/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/section-nav/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/segmented-control/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/segmented-control/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/site-selector/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/site-selector/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/sites-dropdown/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/sites-dropdown/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/sites-popover/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/sites-popover/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/components/tooltip/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/tooltip/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/layout/masterbar/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/layout/masterbar/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/layout/sidebar/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/layout/sidebar/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/layout/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/layout/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/login/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/login/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/me/connected-application-icon/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/me/connected-application-icon/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/me/connected-application-item/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/me/connected-application-item/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/me/connected-applications/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/me/connected-applications/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/all-sites-icon/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/all-sites-icon/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/all-sites/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/all-sites/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/comments/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/comments/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/current-site/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/current-site/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/content.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/content.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/list-item-file-details.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/list-item-file-details.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/list-item-video.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/list-item-video.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/list-item.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/list-item.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/upload-button.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/upload-button.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/media-library/upload-url.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/media-library/upload-url.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/pages/page-card-info/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/pages/page-card-info/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/pages/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/pages/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/people/invite-people/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/people/invite-people/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/people/people-list-item/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/people/people-list-item/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/people/people-profile/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/people/people-profile/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/plugins/plugin-icon/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/plugins/plugin-icon/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/post/post-image/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/post/post-image/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/post/type-list/actions-ellipsis-menu/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/post/type-list/actions-ellipsis-menu/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/post/type-list/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/post/type-list/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/post/type-list/type-post-author/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/post/type-list/type-post-author/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/posts/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/posts/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/sharing/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/sharing/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/sidebar-navigation/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/sidebar-navigation/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/sidebar/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/sidebar/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/site-settings/action-panel/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/site-settings/action-panel/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/site-settings/site-icon-setting/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/site-settings/site-icon-setting/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/site-settings/site-tools/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/site-settings/site-tools/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/site-settings/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/site-settings/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/my-sites/sites/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/my-sites/sites/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/action-bar.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/action-bar.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/author.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/author.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/categories-tags.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/categories-tags.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/confirmation-sidebar.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/confirmation-sidebar.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/delete-post.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/delete-post.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/diff-viewer.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/diff-viewer.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/discussion.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/discussion.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/drawer-well.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/drawer-well.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/drawer.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/drawer.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/featured-image.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/featured-image.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/fieldset.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/fieldset.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/forbidden.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/forbidden.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/ground-control.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/ground-control.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/html-toolbar.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/html-toolbar.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/location.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/location.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/main.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/main.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/more-options.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/more-options.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/notice.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/notice.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/permalink.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/permalink.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/post-formats.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/post-formats.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/post-status.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/post-status.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/post-type.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/post-type.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/publish-date.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/publish-date.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/sharing.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/sharing.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/sidebar.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/sidebar.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/slug.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/slug.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/status-label.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/status-label.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/sticky.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/sticky.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/term-selector.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/term-selector.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/title.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/title.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/visibility.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/visibility.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/post-editor/word-count.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/post-editor/word-count.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/sections/_domain-search.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/sections/_domain-search.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/sections/_notifications.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/sections/_notifications.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/sections/_updated-confirmation.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/sections/_updated-confirmation.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_animation.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_animation.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_colors.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_colors.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_components.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_components.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_extends.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_extends.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_forms.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_forms.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_functions.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_functions.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_reset.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_reset.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/_typography.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/_typography.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/functions/_functions.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/functions/_functions.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/functions/_z-index.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/functions/_z-index.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_breakpoints.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_breakpoints.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_calc.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_calc.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_clear-fix.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_clear-fix.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_clear-text.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_clear-text.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_color.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_color.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_dropdown-menu.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_dropdown-menu.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_heading.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_heading.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_hide-content-accessibly.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_hide-content-accessibly.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_long-content-fade.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_long-content-fade.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_mixins.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_mixins.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_no-select.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_no-select.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_noticon.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_noticon.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_placeholder.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_placeholder.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/shared/mixins/_stats-fade-text.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/shared/mixins/_stats-fade-text.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/signup/flow-rpogress-indicator/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/signup/flow-rpogress-indicator/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/signup/step-wrapper/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/signup/step-wrapper/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/signup/steps/design-type/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/signup/steps/design-type/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/signup/steps/domains/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/signup/steps/domains/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/signup/steps/plans/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/signup/steps/plans/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/signup/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/signup/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/assets/stylesheets/style.scss" afterPath="$PROJECT_DIR$/client/assets/stylesheets/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/Logo.vue" afterPath="$PROJECT_DIR$/client/components/Logo.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/README.md" afterPath="$PROJECT_DIR$/client/components/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/accordion/index.vue" afterPath="$PROJECT_DIR$/client/components/accordion/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/accordion/status.vue" afterPath="$PROJECT_DIR$/client/components/accordion/status.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/aplayer/APlayer.js" afterPath="$PROJECT_DIR$/client/components/aplayer/APlayer.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/aplayer/APlayer.scss" afterPath="$PROJECT_DIR$/client/components/aplayer/APlayer.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/aplayer/index.js" afterPath="$PROJECT_DIR$/client/components/aplayer/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/aplayer/vue-aplayer.vue" afterPath="$PROJECT_DIR$/client/components/aplayer/vue-aplayer.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/base/popper.js" afterPath="$PROJECT_DIR$/client/components/base/popper.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/button/button-group.vue" afterPath="$PROJECT_DIR$/client/components/button/button-group.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/button/button.vue" afterPath="$PROJECT_DIR$/client/components/button/button.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/button/index.js" afterPath="$PROJECT_DIR$/client/components/button/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/card/card.vue" afterPath="$PROJECT_DIR$/client/components/card/card.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/card/compact.vue" afterPath="$PROJECT_DIR$/client/components/card/compact.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/card/index.js" afterPath="$PROJECT_DIR$/client/components/card/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/action-bar/action-bar.vue" afterPath="$PROJECT_DIR$/client/components/editor/action-bar/action-bar.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/confimation-sidebar/confimation-sidebar.vue" afterPath="$PROJECT_DIR$/client/assets/stylesheets/components/forms/form-fieldset/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/confimation-sidebar/header.vue" afterPath="$PROJECT_DIR$/client/components/editor/confimation-sidebar/header.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/confimation-sidebar/index.js" afterPath="$PROJECT_DIR$/client/components/editor/confimation-sidebar/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/markdown-editor/codemirror/tablist.js" afterPath="$PROJECT_DIR$/client/components/editor/markdown-editor/codemirror/tablist.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/markdown-editor/editor.vue" afterPath="$PROJECT_DIR$/client/components/editor/confimation-sidebar/confimation-sidebar.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/markdown-editor/index.js" afterPath="$PROJECT_DIR$/client/components/editor/markdown-editor/editor.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/sidebar/header.vue" afterPath="$PROJECT_DIR$/client/components/editor/sidebar/header.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/sidebar/index.js" afterPath="$PROJECT_DIR$/client/components/editor/sidebar/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/sidebar/sidebar.vue" afterPath="$PROJECT_DIR$/client/components/editor/sidebar/sidebar.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/status-label/index.js" afterPath="$PROJECT_DIR$/client/components/editor/status-label/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/status-label/placeholder.vue" afterPath="$PROJECT_DIR$/client/components/editor/status-label/placeholder.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/editor/status-label/status-label.vue" afterPath="$PROJECT_DIR$/client/components/editor/status-label/status-label.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/ellipsis-menu/index.vue" afterPath="$PROJECT_DIR$/client/components/ellipsis-menu/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/empty-content/empty-content.vue" afterPath="$PROJECT_DIR$/client/components/empty-content/empty-content.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/empty-content/index.js" afterPath="$PROJECT_DIR$/client/components/empty-content/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/episode/episode.vue" afterPath="$PROJECT_DIR$/client/components/episode/episode.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/episode/index.js" afterPath="$PROJECT_DIR$/client/components/episode/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/episodes/episode-list.vue" afterPath="$PROJECT_DIR$/client/components/episodes/episode-list.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/foldable-card/index.vue" afterPath="$PROJECT_DIR$/client/components/foldable-card/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/forms/form-input-validation/index.vue" afterPath="$PROJECT_DIR$/client/components/forms/form-input-validation/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/forms/form-password-input/index.vue" afterPath="$PROJECT_DIR$/client/components/forms/form-password-input/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/forms/form-text-input/index.vue" afterPath="$PROJECT_DIR$/client/components/forms/form-text-input/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/gravatar/gravatar.vue" afterPath="$PROJECT_DIR$/client/components/gravatar/gravatar.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/gravatar/index.js" afterPath="$PROJECT_DIR$/client/components/editor/markdown-editor/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/header-cake/back.vue" afterPath="$PROJECT_DIR$/client/components/header-cake/back.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/header-cake/header-cake.vue" afterPath="$PROJECT_DIR$/client/components/header-cake/header-cake.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/header-cake/index.js" afterPath="$PROJECT_DIR$/client/components/header-cake/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/header-cake/style.scss" afterPath="$PROJECT_DIR$/client/components/header-cake/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/input/index.js" afterPath="$PROJECT_DIR$/client/components/input/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/input/input.vue" afterPath="$PROJECT_DIR$/client/components/input/input.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/button.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/button.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/footer.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/footer.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/heading.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/heading.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/index.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/item.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/item.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/menu.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/menu.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/layout/sidebar/separator.vue" afterPath="$PROJECT_DIR$/client/components/layout/sidebar/separator.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/loading/index.vue" afterPath="$PROJECT_DIR$/client/components/loading/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/main/index.vue" afterPath="$PROJECT_DIR$/client/components/main/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/masterbar/item.vue" afterPath="$PROJECT_DIR$/client/components/masterbar/item.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/masterbar/logged-in.vue" afterPath="$PROJECT_DIR$/client/components/masterbar/logged-in.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/masterbar/logged-out.vue" afterPath="$PROJECT_DIR$/client/components/masterbar/logged-out.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/masterbar/masterbar.vue" afterPath="$PROJECT_DIR$/client/components/masterbar/masterbar.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/header/Header.vue" afterPath="$PROJECT_DIR$/client/components/podcast/header/Header.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/header/index.js" afterPath="$PROJECT_DIR$/client/components/podcast/header/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/playlist/Playlist.vue" afterPath="$PROJECT_DIR$/client/components/podcast/playlist/Playlist.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/playlist/index.js" afterPath="$PROJECT_DIR$/client/components/podcast/playlist/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/podcast-action/ActionMenu.vue" afterPath="$PROJECT_DIR$/client/components/podcast/podcast-action/ActionMenu.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/podcast-action/index.js" afterPath="$PROJECT_DIR$/client/components/podcast/podcast-action/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/podcast-content-form/content-form.vue" afterPath="$PROJECT_DIR$/client/components/podcast/podcast-content-form/content-form.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcast/podcast-content-form/index.js" afterPath="$PROJECT_DIR$/client/components/podcast/podcast-content-form/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcasts/index.js" afterPath="$PROJECT_DIR$/client/components/podcasts/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcasts/podcasts-header/PodcastsHeader.vue" afterPath="$PROJECT_DIR$/client/components/podcasts/podcasts-header/PodcastsHeader.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/podcasts/podcasts-list/PodcastsList.vue" afterPath="$PROJECT_DIR$/client/components/podcasts/podcasts-list/PodcastsList.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/popover/Popover.vue" afterPath="$PROJECT_DIR$/client/components/popover/Popover.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/popover/bus.js" afterPath="$PROJECT_DIR$/client/components/popover/bus.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/popover/index.js" afterPath="$PROJECT_DIR$/client/components/popover/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/popover/poptip.vue" afterPath="$PROJECT_DIR$/client/components/popover/poptip.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/popover/util.js" afterPath="$PROJECT_DIR$/client/components/popover/util.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/progress/Progress.vue" afterPath="$PROJECT_DIR$/client/components/progress/Progress.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/progress/constants.js" afterPath="$PROJECT_DIR$/client/components/progress/constants.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/progress/index.js" afterPath="$PROJECT_DIR$/client/components/progress/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/progress/utils.js" afterPath="$PROJECT_DIR$/client/components/progress/utils.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/pulsing-dot/index.vue" afterPath="$PROJECT_DIR$/client/components/pulsing-dot/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/root-child/index.vue" afterPath="$PROJECT_DIR$/client/components/root-child/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/search/Search.vue" afterPath="$PROJECT_DIR$/client/components/search/Search.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/search/index.js" afterPath="$PROJECT_DIR$/client/components/gravatar/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/update-post-status/index.js" afterPath="$PROJECT_DIR$/client/components/search/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/update-post-status/update-template.vue" afterPath="$PROJECT_DIR$/client/components/update-post-status/update-template.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/uploader/FileUpload.vue" afterPath="$PROJECT_DIR$/client/components/uploader/FileUpload.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/uploader/InputFile.vue" afterPath="$PROJECT_DIR$/client/components/uploader/InputFile.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/uploader/index.js" afterPath="$PROJECT_DIR$/client/components/uploader/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/components/uploader/upload-button/index.vue" afterPath="$PROJECT_DIR$/client/components/uploader/upload-button/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/directives/click-outside.js" afterPath="$PROJECT_DIR$/client/directives/click-outside.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/directives/clickoutside.js" afterPath="$PROJECT_DIR$/client/directives/clickoutside.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/directives/transfer-dom.js" afterPath="$PROJECT_DIR$/client/directives/transfer-dom.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/directives/vue-esc.js" afterPath="$PROJECT_DIR$/client/directives/vue-esc.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/README.md" afterPath="$PROJECT_DIR$/client/layouts/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/apps.vue" afterPath="$PROJECT_DIR$/client/layouts/apps.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/dashboard.vue" afterPath="$PROJECT_DIR$/client/layouts/dashboard.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/default.vue" afterPath="$PROJECT_DIR$/client/layouts/default.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/logged-out.vue" afterPath="$PROJECT_DIR$/client/layouts/logged-out.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/masterbar/item.vue" afterPath="$PROJECT_DIR$/client/layouts/masterbar/item.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/masterbar/logged-in.vue" afterPath="$PROJECT_DIR$/client/layouts/masterbar/logged-in.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/masterbar/logged-out.vue" afterPath="$PROJECT_DIR$/client/layouts/masterbar/logged-out.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/masterbar/masterbar.vue" afterPath="$PROJECT_DIR$/client/layouts/masterbar/masterbar.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/podcast.vue" afterPath="$PROJECT_DIR$/client/layouts/podcast.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/post-editor.vue" afterPath="$PROJECT_DIR$/client/layouts/post-editor.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/layouts/start.vue" afterPath="$PROJECT_DIR$/client/layouts/start.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/middleware/README.md" afterPath="$PROJECT_DIR$/client/middleware/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/middleware/anonymous.js" afterPath="$PROJECT_DIR$/client/middleware/anonymous.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/middleware/authenticated.js" afterPath="$PROJECT_DIR$/client/middleware/authenticated.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/middleware/check-auth.js" afterPath="$PROJECT_DIR$/client/middleware/check-auth.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/README.md" afterPath="$PROJECT_DIR$/client/pages/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/apps/index.vue" afterPath="$PROJECT_DIR$/client/pages/apps/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/comments/index.vue" afterPath="$PROJECT_DIR$/client/pages/comments/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/course/home.vue" afterPath="$PROJECT_DIR$/client/pages/course/home.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/home.vue" afterPath="$PROJECT_DIR$/client/pages/home.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/index.vue" afterPath="$PROJECT_DIR$/client/pages/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/login/index.vue" afterPath="$PROJECT_DIR$/client/pages/login/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/me/index.js" afterPath="$PROJECT_DIR$/client/components/update-post-status/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/me/profile/index.vue" afterPath="$PROJECT_DIR$/client/pages/me/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/me/sidebar-navigation/index.vue" afterPath="$PROJECT_DIR$/client/pages/me/sidebar-navigation/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/me/sidebar/index.vue" afterPath="$PROJECT_DIR$/client/pages/me/sidebar/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/people/new/index.vue" afterPath="$PROJECT_DIR$/client/pages/people/new/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/people/team/index.vue" afterPath="$PROJECT_DIR$/client/pages/people/team/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcast/_id.vue" afterPath="$PROJECT_DIR$/client/pages/podcast/_id.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcast/detail.vue" afterPath="$PROJECT_DIR$/client/pages/podcast/detail.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcast/home.vue" afterPath="$PROJECT_DIR$/client/pages/podcast/home.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcast/new.vue" afterPath="$PROJECT_DIR$/client/pages/podcast/new.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcast/settings/general/index.vue" afterPath="$PROJECT_DIR$/client/pages/podcast/settings/general/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcast/settings/index.vue" afterPath="$PROJECT_DIR$/client/pages/podcast/settings/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/podcasts/index.vue" afterPath="$PROJECT_DIR$/client/pages/podcasts/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/post/index.vue" afterPath="$PROJECT_DIR$/client/pages/post/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/post/index_sidebar_post.vue" afterPath="$PROJECT_DIR$/client/pages/post/index_sidebar_post.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/settings/general/index.vue" afterPath="$PROJECT_DIR$/client/pages/settings/general/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/start/_steps/design-type/index.vue" afterPath="$PROJECT_DIR$/client/pages/start/_steps/design-type/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/start/_steps/design-type/page-image.vue" afterPath="$PROJECT_DIR$/client/pages/start/_steps/design-type/page-image.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/start/_steps/index.vue" afterPath="$PROJECT_DIR$/client/pages/start/_steps/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/pages/start/index.vue" afterPath="$PROJECT_DIR$/client/pages/start/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/README.md" afterPath="$PROJECT_DIR$/client/plugins/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/a-player.js" afterPath="$PROJECT_DIR$/client/plugins/a-player.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/axios.js" afterPath="$PROJECT_DIR$/client/plugins/axios.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/lib/popover-util.js" afterPath="$PROJECT_DIR$/client/plugins/lib/popover-util.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/lib/vue-dragging.js" afterPath="$PROJECT_DIR$/client/plugins/lib/vue-dragging.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/moment.js" afterPath="$PROJECT_DIR$/client/plugins/moment.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/popover.js" afterPath="$PROJECT_DIR$/client/plugins/popover.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/vee-validate.js" afterPath="$PROJECT_DIR$/client/plugins/vee-validate.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/vue-awesome.js" afterPath="$PROJECT_DIR$/client/plugins/vue-awesome.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/plugins/vue-dnd.js" afterPath="$PROJECT_DIR$/client/plugins/vue-dnd.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/README.md" afterPath="$PROJECT_DIR$/client/static/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/favicon.ico" afterPath="$PROJECT_DIR$/client/static/favicon.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/.gitkeep" afterPath="$PROJECT_DIR$/client/pages/me/profile/index.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/advanced-seo-nudge.png" afterPath="$PROJECT_DIR$/client/static/images/advanced-seo-nudge.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/authorize/background-1.jpg" afterPath="$PROJECT_DIR$/client/static/images/authorize/background-1.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/authorize/background-2.jpg" afterPath="$PROJECT_DIR$/client/static/images/authorize/background-2.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/authorize/background-3.jpg" afterPath="$PROJECT_DIR$/client/static/images/authorize/background-3.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/authorize/background-4.jpg" afterPath="$PROJECT_DIR$/client/static/images/authorize/background-4.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/authorize/background-5.jpg" afterPath="$PROJECT_DIR$/client/static/images/authorize/background-5.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/authorize/background-6.jpg" afterPath="$PROJECT_DIR$/client/static/images/authorize/background-6.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/comments/illustration_comments.svg" afterPath="$PROJECT_DIR$/client/static/images/comments/illustration_comments.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/comments/illustration_comments_gray.svg" afterPath="$PROJECT_DIR$/client/static/images/comments/illustration_comments_gray.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/devices/iframe-back.png" afterPath="$PROJECT_DIR$/client/static/images/devices/iframe-back.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/drake/drake-all-done.svg" afterPath="$PROJECT_DIR$/client/static/images/drake/drake-all-done.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/drake/drake-browser.svg" afterPath="$PROJECT_DIR$/client/static/images/drake/drake-browser.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/paypal.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/paypal.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/stripe.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/stripe.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/woocommerce-reports.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/woocommerce-reports.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/woocommerce-sample-graph.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/woocommerce-sample-graph.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/woocommerce-setup.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/woocommerce-setup.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/woocommerce-share.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/woocommerce-share.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/extensions/woocommerce/woocommerce-store-creation.svg" afterPath="$PROJECT_DIR$/client/static/images/extensions/woocommerce/woocommerce-store-creation.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/favicons/favicon-development.ico" afterPath="$PROJECT_DIR$/client/static/images/favicons/favicon-development.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/favicons/favicon-horizon.ico" afterPath="$PROJECT_DIR$/client/static/images/favicons/favicon-horizon.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/favicons/favicon-staging.ico" afterPath="$PROJECT_DIR$/client/static/images/favicons/favicon-staging.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/favicons/favicon-wpcalypso.ico" afterPath="$PROJECT_DIR$/client/static/images/favicons/favicon-wpcalypso.ico" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/flags/.gitkeep" afterPath="$PROJECT_DIR$/client/static/images/flags/.gitkeep" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/g-suite/g-suite.svg" afterPath="$PROJECT_DIR$/client/static/images/g-suite/g-suite.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/g-suite/logo_docs_48dp.svg" afterPath="$PROJECT_DIR$/client/static/images/g-suite/logo_docs_48dp.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/g-suite/logo_drive_48dp.svg" afterPath="$PROJECT_DIR$/client/static/images/g-suite/logo_drive_48dp.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/g-suite/logo_gmail_48dp.svg" afterPath="$PROJECT_DIR$/client/static/images/g-suite/logo_gmail_48dp.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/g-suite/logo_hangouts_48dp.svg" afterPath="$PROJECT_DIR$/client/static/images/g-suite/logo_hangouts_48dp.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/google-vouchers/google-voucher.svg" afterPath="$PROJECT_DIR$/client/static/images/google-vouchers/google-voucher.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/guided-transfer/bluehost-logo.png" afterPath="$PROJECT_DIR$/client/static/images/guided-transfer/bluehost-logo.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/guided-transfer/pressable-logo.png" afterPath="$PROJECT_DIR$/client/static/images/guided-transfer/pressable-logo.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/guided-transfer/siteground-logo.png" afterPath="$PROJECT_DIR$/client/static/images/guided-transfer/siteground-logo.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/adWords.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/adWords.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/advertisingRemoved.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/advertisingRemoved.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/anti-spam.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/anti-spam.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/app-banner-editor.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/app-banner-editor.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/app-banner-notifications.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/app-banner-notifications.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/app-banner-reader.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/app-banner-reader.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/app-banner-stats.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/app-banner-stats.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/backup.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/backup.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/checkEmailsDesktop.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/checkEmailsDesktop.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/checkEmailsPhone.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/checkEmailsPhone.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/cloudBased.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/cloudBased.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/customDomain.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/customDomain.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/customizeTheme-onDark.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/customizeTheme-onDark.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/customizeTheme.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/customizeTheme.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/gauge.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/gauge.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/get-apps-banner.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/get-apps-banner.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-404.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-404.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-500.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-500.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-empty-results.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-empty-results.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-jetpack.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-jetpack.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-nosites.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-nosites.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-ok.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-ok.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/illustration-write.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/illustration-write.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/jetpack-header.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/jetpack-header.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/migrating-host-assisted.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/migrating-host-assisted.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/migrating-host-diy.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/migrating-host-diy.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/no-themes-drake.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/no-themes-drake.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-business-circle.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-business-circle.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-business.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-business.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-free-circle.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-free-circle.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-free.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-free.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-personal-circle.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-personal-circle.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-personal.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-personal.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-premium-circle.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-premium-circle.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plan-premium.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plan-premium.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plugins-big.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plugins-big.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/plugins-small.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/plugins-small.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/rebrand-cities-welcome.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/rebrand-cities-welcome.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/security.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/security.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/support.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/support.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/thankYou.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/thankYou.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/type-blog.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/type-blog.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/type-e-Commerce.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/type-e-Commerce.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/type-portfolio.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/type-portfolio.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/type-website.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/type-website.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/video-hosting-13G.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/video-hosting-13G.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/video-hosting-unlimited.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/video-hosting-unlimited.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/videoAudioPosts.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/videoAudioPosts.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/waitTime.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/waitTime.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/whoops.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/whoops.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/illustrations/wordAds.svg" afterPath="$PROJECT_DIR$/client/static/images/illustrations/wordAds.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/illustration-jetpack-monitor.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/illustration-jetpack-monitor.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/illustration-jetpack-protect.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/illustration-jetpack-protect.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/illustration-jetpack-scan.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/illustration-jetpack-scan.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/install-wp-admin.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/install-wp-admin.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/jetpack-logo.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/jetpack-logo.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/jetpack-manage.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/jetpack-manage.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/jetpack/powered-by-jetpack.svg" afterPath="$PROJECT_DIR$/client/static/images/jetpack/powered-by-jetpack.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/login/check-email.svg" afterPath="$PROJECT_DIR$/client/static/images/login/check-email.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/login/pushauth.svg" afterPath="$PROJECT_DIR$/client/static/images/login/pushauth.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/me/get-apps-app-store.png" afterPath="$PROJECT_DIR$/client/static/images/me/get-apps-app-store.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/me/get-apps-google-play.png" afterPath="$PROJECT_DIR$/client/static/images/me/get-apps-google-play.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/me/pattern-dark.png" afterPath="$PROJECT_DIR$/client/static/images/me/pattern-dark.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/media/illustration-media.svg" afterPath="$PROJECT_DIR$/client/static/images/media/illustration-media.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/pages/illustration-pages.svg" afterPath="$PROJECT_DIR$/client/static/images/pages/illustration-pages.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/pages/photolia.jpg" afterPath="$PROJECT_DIR$/client/static/images/pages/photolia.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/people/mystery-person.svg" afterPath="$PROJECT_DIR$/client/static/images/people/mystery-person.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-beginner.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-beginner.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-business-circle.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-business-circle.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-business.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-business.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-personal.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-personal.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-premium.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-premium.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-trial-business.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-trial-business.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plans/plan-trial-premium.svg" afterPath="$PROJECT_DIR$/client/static/images/plans/plan-trial-premium.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/plugins/plugins_hero.svg" afterPath="$PROJECT_DIR$/client/static/images/plugins/plugins_hero.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/posts/illustration-posts.svg" afterPath="$PROJECT_DIR$/client/static/images/posts/illustration-posts.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/private/private.svg" afterPath="$PROJECT_DIR$/client/static/images/private/private.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/play-icon.png" afterPath="$PROJECT_DIR$/client/static/images/reader/play-icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/promo-app-icon.png" afterPath="$PROJECT_DIR$/client/static/images/reader/promo-app-icon.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-background-blue.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-background-blue.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-background-light-blue.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-background-light-blue.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-background-white.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-background-white.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-background.jpg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-background.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-character-dark-blue.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-character-dark-blue.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-character-light-blue-gray.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-character-light-blue-gray.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-character-light-blue.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-character-light-blue.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/reader/reader-intro-character.svg" afterPath="$PROJECT_DIR$/client/static/images/reader/reader-intro-character.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/rebrand-cities/wp-rebrand-cities-logo.svg" afterPath="$PROJECT_DIR$/client/static/images/rebrand-cities/wp-rebrand-cities-logo.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/related-posts/cat-blog.png" afterPath="$PROJECT_DIR$/client/static/images/related-posts/cat-blog.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/related-posts/devices.jpg" afterPath="$PROJECT_DIR$/client/static/images/related-posts/devices.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/related-posts/mobile-wedding.jpg" afterPath="$PROJECT_DIR$/client/static/images/related-posts/mobile-wedding.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/seo/page-title.svg" afterPath="$PROJECT_DIR$/client/static/images/seo/page-title.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/eventbrite-list.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/eventbrite-list.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/eventbrite-widget.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/eventbrite-widget.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/facebook-profile.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/facebook-profile.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/facebook-sharing.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/facebook-sharing.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/google-photos-logo.svg" afterPath="$PROJECT_DIR$/client/static/images/sharing/google-photos-logo.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/google-photos.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/google-photos.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/google-publicize.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/google-publicize.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/google-sharing.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/google-sharing.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/instagram-widget.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/instagram-widget.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/linkedin-publicize.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/linkedin-publicize.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/linkedin-sharing.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/linkedin-sharing.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/path-publicize.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/path-publicize.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/tumblr-publicize.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/tumblr-publicize.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/tumblr-sharing.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/tumblr-sharing.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/twitter-publicize.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/twitter-publicize.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/sharing/twitter-timeline.png" afterPath="$PROJECT_DIR$/client/static/images/sharing/twitter-timeline.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/signup/confetti.svg" afterPath="$PROJECT_DIR$/client/static/images/signup/confetti.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/signup/seo-guy.svg" afterPath="$PROJECT_DIR$/client/static/images/signup/seo-guy.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/simple-payments/paypal-logo.svg" afterPath="$PROJECT_DIR$/client/static/images/simple-payments/paypal-logo.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/chart-today.png" afterPath="$PROJECT_DIR$/client/static/images/stats/chart-today.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/chart.png" afterPath="$PROJECT_DIR$/client/static/images/stats/chart.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/chart2.png" afterPath="$PROJECT_DIR$/client/static/images/stats/chart2.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/date-picker.png" afterPath="$PROJECT_DIR$/client/static/images/stats/date-picker.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/illustration-stats-intro.svg" afterPath="$PROJECT_DIR$/client/static/images/stats/illustration-stats-intro.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/illustration-stats.svg" afterPath="$PROJECT_DIR$/client/static/images/stats/illustration-stats.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/left-arrow.svg" afterPath="$PROJECT_DIR$/client/static/images/stats/left-arrow.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/map.jpg" afterPath="$PROJECT_DIR$/client/static/images/stats/map.jpg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/right-arrow.svg" afterPath="$PROJECT_DIR$/client/static/images/stats/right-arrow.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/search-engine.png" afterPath="$PROJECT_DIR$/client/static/images/stats/search-engine.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/stats/stats-geo-chart.png" afterPath="$PROJECT_DIR$/client/static/images/stats/stats-geo-chart.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-amex-disabled.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-amex-disabled.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-amex.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-amex.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-discover-disabled.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-discover-disabled.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-discover.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-discover.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-mastercard-disabled.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-mastercard-disabled.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-mastercard.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-mastercard.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-placeholder.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-placeholder.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-visa-disabled.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-visa-disabled.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/cc-visa.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/cc-visa.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/g-suite-logo.png" afterPath="$PROJECT_DIR$/client/static/images/upgrades/g-suite-logo.png" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/paypal-disabled.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/paypal-disabled.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/upgrades/paypal.svg" afterPath="$PROJECT_DIR$/client/static/images/upgrades/paypal.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/static/images/wordpress/logo-stars.svg" afterPath="$PROJECT_DIR$/client/static/images/wordpress/logo-stars.svg" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/README.md" afterPath="$PROJECT_DIR$/client/store/README.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/article.js" afterPath="$PROJECT_DIR$/client/store/article.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/index.js" afterPath="$PROJECT_DIR$/client/store/index.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/options.js" afterPath="$PROJECT_DIR$/client/store/options.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/org.js" afterPath="$PROJECT_DIR$/client/store/org.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/podcast.js" afterPath="$PROJECT_DIR$/client/store/podcast.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/store/posts.js" afterPath="$PROJECT_DIR$/client/store/posts.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tls/server.crt" afterPath="$PROJECT_DIR$/client/tls/server.crt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tls/server.key" afterPath="$PROJECT_DIR$/client/tls/server.key" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -563,7 +68,7 @@
         <entry file="file://$PROJECT_DIR$/.dockerignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="19">
-              <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -572,8 +77,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="505">
-              <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state relative-caret-position="377">
+              <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -785,6 +290,7 @@
     <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.standard" value="" />
+    <property name="add_unversioned_files" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -831,12 +337,12 @@
       <workItem from="1504769935547" duration="159956000" />
       <workItem from="1505400108633" duration="58716000" />
       <workItem from="1505653316440" duration="969000" />
-      <workItem from="1505654351094" duration="102996000" />
+      <workItem from="1505654351094" duration="103155000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="646014000" />
+    <option name="totallyTimeSpent" value="646173000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="842" y="23" width="838" height="1027" extended-state="0" />
@@ -849,8 +355,8 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42918456" sideWeight="0.48592412" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2766218" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19206008" sideWeight="0.48592412" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2766218" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.249694" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -1315,15 +821,15 @@
     <entry file="file://$PROJECT_DIR$/.dockerignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
-          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state relative-caret-position="377">
+          <caret line="38" column="6" lean-forward="false" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
           <folding />
         </state>
       </provider>

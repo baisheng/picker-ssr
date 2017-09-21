@@ -36,7 +36,7 @@ jspm_pacakges/
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # All intellij settings
-.idea
+.idea/
 
 # User-specific stuff:
 # .idea/**/workspace.xml
