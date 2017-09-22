@@ -23,34 +23,34 @@
                     </span>
                   </nuxt-link>
                 </li>
-                <li class="is-draft section-nav-tab">
-                  <nuxt-link to="/posts/drafts" class="section-nav-tab__link" tabindex="0" aria-selected="false"
-                     role="menuitem">
-                    <span class="section-nav-tab__text">
-                      草稿
-                    </span>
-                  </nuxt-link>
-                </li>
-                <li class="is-future section-nav-tab">
-                  <nuxt-link to="/posts/scheduled" class="section-nav-tab__link" tabindex="0" aria-selected="false"
-                     role="menuitem">
-                    <span class="section-nav-tab__text">
-                      待审核
-                    </span>
-                  </nuxt-link>
-                </li>
-                <li class="is-trash section-nav-tab">
-                  <nuxt-lingk to="/posts/trashed" class="section-nav-tab__link" tabindex="0" aria-selected="false"
-                     role="menuitem">
-                    <span class="section-nav-tab__text">
-                      已放入回收站
-                    </span>
-                  </nuxt-lingk>
-                </li>
+                <!--<li class="is-draft section-nav-tab">-->
+                  <!--<nuxt-link to="/posts/drafts" class="section-nav-tab__link" tabindex="0" aria-selected="false"-->
+                     <!--role="menuitem">-->
+                    <!--<span class="section-nav-tab__text">-->
+                      <!--草稿-->
+                    <!--</span>-->
+                  <!--</nuxt-link>-->
+                <!--</li>-->
+                <!--<li class="is-future section-nav-tab">-->
+                  <!--<nuxt-link to="/posts/scheduled" class="section-nav-tab__link" tabindex="0" aria-selected="false"-->
+                     <!--role="menuitem">-->
+                    <!--<span class="section-nav-tab__text">-->
+                      <!--待审核-->
+                    <!--</span>-->
+                  <!--</nuxt-link>-->
+                <!--</li>-->
+                <!--<li class="is-trash section-nav-tab">-->
+                  <!--<nuxt-lingk to="/posts/trashed" class="section-nav-tab__link" tabindex="0" aria-selected="false"-->
+                     <!--role="menuitem">-->
+                    <!--<span class="section-nav-tab__text">-->
+                      <!--已放入回收站-->
+                    <!--</span>-->
+                  <!--</nuxt-lingk>-->
+                <!--</li>-->
               </ul>
             </div>
           </div>
-          <div class="section-nav-group section-nav__segmented has-siblings">
+<!--          <div class="section-nav-group section-nav__segmented has-siblings">
             <h6 class="section-nav-group__label">
               作者</h6>
             <ul class="segmented-control" role="radiogroup">
@@ -73,8 +73,8 @@
                 </a>
               </li>
             </ul>
-          </div>
-          <div class="is-expanded-to-container has-open-icon search" role="search">
+          </div>-->
+<!--          <div class="is-expanded-to-container has-open-icon search" role="search">
             <div class="spinner" style="">
               <svg class="spinner__image" width="20" height="20" viewBox="0 0 100 100">
                 <defs>
@@ -119,7 +119,7 @@
               <input type="search" id="search-component-11" class="search__input"
                      placeholder="Search 已发布..." role="search" value=""
                      aria-label="搜索" aria-hidden="true" autocapitalize="none"></div>
-          </div>
+          </div>-->
         </div>
       </div>
       <podcasts-list :list="posts.data"></podcasts-list>

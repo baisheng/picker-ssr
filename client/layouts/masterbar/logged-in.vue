@@ -3,10 +3,13 @@
     <item icon="pagelines" :isActive="isActive" url="/">
       {{ org.meta.basic.name }}
     </item>
+    <!--
     <item icon="tint" class="masterbar__reader" url="/contents">
       内容市场
     </item>
+    -->
     <div class="masterbar__publish">
+      <!--
       <a href="/podcast" title="创建新文章"
          class="masterbar__item masterbar__item-new">
         <svg class="gridicon gridicons-create" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -20,14 +23,18 @@
           添加节目
         </span>
       </a>
+
       <div>
         <button class="button masterbar__toggle-drafts is-compact is-borderless" title="最新草稿" type="button">
           <span class="count">3</span>
         </button>
       </div>
+          -->
     </div>
+    <!--
     <item icon="user-circle" url="/me" class="masterbar__item-me">
     </item>
+    -->
   </masterbar>
 </template>
 

@@ -11,6 +11,8 @@ const compose = require('koa-compose') // middle composer
 const compress = require('koa-compress') // HTT: compression
 const session = require('koa-session2') // session for flash message
 // const cookie = require('koa-cookie')
+import api from './api'
+
 const chalk = require('chalk')
 const proxy = require('koa-proxies')
 const debugMudule = require('debug')
@@ -76,36 +78,44 @@ const start = async () => {
     // console.log('server sub app ...')
     // console.log(ctx.host)
     ctx.state.subapp = ctx.url.split('/')[1] // subdomain = part after first '/' of hostname
-    if (!Object.is(ctx.session.org, undefined)) {
-      await next()
-    } else {
-      let org = await redis.get(ctx.host)
-      // console.log(org)
-      if (org !== null) {
-        org = JSON.parse(org)
-        ctx.session.org = org
+    if (ctx.state.subapp !== 'api') {
+      if (!Object.is(ctx.session.org, undefined)) {
         await next()
       } else {
-        console.log('NOT FOUND')
-        return
+        let org = await redis.get(ctx.host)
+        // console.log(org)
+        if (org !== null) {
+          org = JSON.parse(org)
+          ctx.session.org = org
+          await next()
+        } else {
+          console.log('NOT FOUND')
+          return
+        }
       }
     }
+    await next()
+
   })
 
   app.use(async function (ctx, next) {
-    if (!Object.is(ctx.session.currentApp, undefined)) {
-      await next()
-    } else {
-      for (const item of ctx.session.org.apps) {
-        if (ctx.state.subapp === item.type) {
-          ctx.session.currentApp = item
+    if (ctx.state.subapp !== 'api') {
+      if (!Object.is(ctx.session.currentApp, undefined)) {
+        await next()
+      } else {
+        for (const item of ctx.session.org.apps) {
+          if (ctx.state.subapp === item.type) {
+            ctx.session.currentApp = item
+          }
         }
+        if (Object.is(ctx.session.currentApp, undefined)) {
+          ctx.session.currentApp = ctx.session.org.apps[0]
+        }
+        await next()
       }
-      if (Object.is(ctx.session.currentApp, undefined)) {
-        ctx.session.currentApp = ctx.session.org.apps[0]
-      }
-      await next()
     }
+    await next()
+
   })
 
   const nuxt = new Nuxt(config)
@@ -133,11 +143,11 @@ const start = async () => {
   const nuxtRender = koaConnect(nuxt.render)
   app.use(async (ctx, next) => {
     await next()
-    // if (ctx.state.subapp !== consts.API) {
-    ctx.status = 200 // koa defaults to 404 when it sees that status is unset
-    ctx.req.session = ctx.session
-    await nuxtRender(ctx)
-    // }
+    if (ctx.state.subapp !== 'api') {
+      ctx.status = 200 // koa defaults to 404 when it sees that status is unset
+      ctx.req.session = ctx.session
+      await nuxtRender(ctx)
+    }
   })
   // return response time in X-Response-Time header
   app.use(async function responseTime (ctx, next) {
@@ -168,13 +178,17 @@ const start = async () => {
   })
 
   // note to 'next' after composed subapp, this must be the last middleware
-  // app.use(async function composeSubapp (ctx, next) {
-  //   switch (ctx.state.subapp) {
-  //     case consts.API:
-  //       await compose(api.middleware)(ctx)
-  //       break
-  //   }
-  // })
+  app.use(async function composeSubapp (ctx, next) {
+    console.log(ctx.state.subapp)
+    switch (ctx.state.subapp) {
+      case 'api':
+        let org = await redis.get(ctx.host)
+        org = JSON.parse(org)
+        ctx.org = org
+        await compose(api.middleware)(ctx)
+        break
+    }
+  })
 
   app.listen(port, host)
 }

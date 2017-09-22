@@ -124,7 +124,7 @@ module.exports = {
     // ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
   proxy: [
-    ['/api',
+    ['/rest',
       {
         target: apiConfig.baseURL
         // pathRewrite: { '^/api': '/rest/orgs/' }
