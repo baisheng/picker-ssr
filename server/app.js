@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations,default-case */
 const Koa = require('koa')
 const {Nuxt, Builder} = require('nuxt')
 const Redis = require('ioredis')
@@ -185,6 +186,7 @@ const start = async () => {
         let org = await redis.get(ctx.host)
         org = JSON.parse(org)
         ctx.org = org
+        ctx.redis = redis
         await compose(api.middleware)(ctx)
         break
     }

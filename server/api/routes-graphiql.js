@@ -5,7 +5,7 @@ import koaRouter from 'koa-router'
 import consts from '../utils/consts'
 import config from '../../api.config'
 import axios from 'axios'
-
+import { graphiqlKoa } from 'apollo-server-koa';
 const router = koaRouter({
   prefix: '/api'
 }) // router middleware for koa
@@ -13,16 +13,4 @@ const router = koaRouter({
 const request = axios.create({
   baseURL: config.baseURL
 })
-router.get('/podcast/recommend', async function getActivities (ctx) {
-  for (const item of ctx.org.apps) {
-    if (item.type === 'podcast') {
-      ctx.appId = item.id
-    }
-  }
-  console.log(ctx.appId)
-  const response = await request.get(`/app/${ctx.appId}/podcast`)
-  ctx.body = Object.assign({}, response.data)
-  ctx.status = 200
-})
-
-module.exports = router.routes()
+router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));

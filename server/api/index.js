@@ -1,7 +1,9 @@
+/* eslint-disable prefer-reflect,no-case-declarations */
 import Koa from 'koa' // Koa framework
 import xmlify from 'xmlify' // JS object to XML
 import yaml from 'js-yaml' // JS object to YAML
 import demo from './routes-demo'
+import wechat from './routes-wechat'
 
 const app = new Koa() // API app
 
@@ -9,7 +11,7 @@ const app = new Koa() // API app
 app.use(async function contentNegotiation (ctx, next) {
   await next()
 
-  if (!ctx.body) return // no content to return
+  if (!ctx.body) { return } // no content to return
 
   // check Accept header for preferred response type
   const type = ctx.accepts('json', 'xml', 'yaml', 'text')
@@ -63,7 +65,7 @@ app.use(async function handleErrors (ctx, next) {
           root: 'error',
           ...e
         }
-        if (app.env !== 'production') ctx.body.stack = e.stack
+        if (app.env !== 'production') { ctx.body.stack = e.stack }
         ctx.app.emit('error', e, ctx) // github.com/koajs/koa/wiki/Error-Handling
         break
     }
@@ -75,7 +77,7 @@ app.use(async function handleErrors (ctx, next) {
 // public (unsecured) modules first
 
 app.use(demo)
-
+app.use(wechat)
 // verify token here
 
 // custom modules here
