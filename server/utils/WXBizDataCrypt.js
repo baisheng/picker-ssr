@@ -14,7 +14,7 @@ WXBizDataCrypt.prototype.decryptData = function (encryptedData, iv) {
   let decoded
   try {
     // 解密
-    let decipher = crypto.createDecipheriv('aes-128-cbc', sessionKey, iv)
+    const decipher = crypto.createDecipheriv('aes-128-cbc', sessionKey, iv)
     // 设置自动 padding 为 true，删除填充补位
     decipher.setAutoPadding(true)
     decoded = decipher.update(encryptedData, 'binary', 'utf8')

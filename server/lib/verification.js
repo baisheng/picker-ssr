@@ -163,7 +163,7 @@ class Verification {
   }
 
   async verifyWxApp(encrypted_data, iv, code) {
-    let userInfo = await this.getUserInfo(encrypted_data, iv, code)
+    const userInfo = await this.getUserInfo(encrypted_data, iv, code)
     // if (Object.is(userInfo.openid, undefined)) {
     //
     // }
