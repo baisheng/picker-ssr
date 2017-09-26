@@ -22,32 +22,65 @@ const router = koaRouter({
 const request = axios.create({
   baseURL: config.baseURL
 })
-const getWxAppUserInfo = (encrypted_data, iv, code) => {
 
+
+/**
+ * 获取应用配置
+ *
+ * @param ctx
+ * @param next
+ * @returns {Promise.<*>}
+ */
+const getOptions = async (ctx) => {
+  // console.log(data)
+  let options = await ctx.redis.get(`picker_${ctx.params.appid}_options`)
+  if (options === null) {
+    const response = await request.get(`/app/${ctx.params.appid}/options`)
+    options = response.data.data
+  }
+  options = JSON.parse(options)
+  return options
 }
 
+router.get('/app/:appid/options/:type', async (ctx) => {
+  console.log('get options')
+  if (ctx.params.type === 'wxapp') {
+    const option = await getOptions(ctx)
+// eslint-disable-next-line prefer-reflect
+//     delete option._wxapp.config
+// eslint-disable-next-line no-undef
+    Reflect.deleteProperty(option._wxapp, 'config')
+    ctx.body = option._wxapp
+    ctx.status = 200
+  }
+})
 router.post('/app/:appid/login', async (ctx) => {
   // console.log(count++)
   const data = ctx.request.body
+  let option = await getOptions(ctx)
   // console.log(data)
-  let option = await ctx.redis.get(`picker_${ctx.params.appid}_options`)
-  if (option === null) {
-    const response = await request.get(`/app/${ctx.params.appid}/options`)
-    option = response.data.data
-  }
+  // let option = await ctx.redis.get(`picker_${ctx.params.appid}_options`)
+  // if (option === null) {
+  //   const response = await request.get(`/app/${ctx.params.appid}/options`)
+  //   option = response.data.data
+  // }
+  // console.log(option._wxapp)
   if (option !== null) {
     option = JSON.parse(option)
+    console.log(option._wxapp)
     const wx = option.wechat
     const verify = new Verification(wx.appid, wx.appsecret)
 
     const userInfo = await verify.getUserInfo(data.username, data.password, data.code)
     userInfo.approach = 'wxapp'
-    let regUser = await request.post(`/app/${ctx.params.appid}/users`, userInfo)
+    const regUser = await request.post(`/app/${ctx.params.appid}/users`, userInfo)
     ctx.body = regUser.data
   }
   // ctx.body = 'lalaalal'
   ctx.status = 200
   // console.log(data)
 })
+
+
 
 module.exports = router.routes()

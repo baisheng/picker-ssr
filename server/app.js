@@ -182,6 +182,7 @@ const start = async () => {
   app.use(async function composeSubapp (ctx, next) {
     console.log(ctx.state.subapp)
     switch (ctx.state.subapp) {
+      // 如果请求的是 api 服务资源跳转到路由
       case 'api':
         let org = await redis.get(ctx.host)
         org = JSON.parse(org)
