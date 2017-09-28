@@ -138,7 +138,6 @@
                     -->
                   </ul>
                 </li>
-                <!--
                 <li class="sidebar__menu">
                   <h2 class="sidebar__heading">配置</h2>
                   <ul>
@@ -167,7 +166,7 @@
                     </nuxt-link>
                   </ul>
                 </li>
-                -->
+                <!---->
               </div>
             </div>
             <div class="sidebar__footer">

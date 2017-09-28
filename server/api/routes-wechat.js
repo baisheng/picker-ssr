@@ -50,7 +50,7 @@ router.get('/app/:appid/options/:type', async (ctx) => {
 //     delete option._wxapp.config
 // eslint-disable-next-line no-undef
     Reflect.deleteProperty(option._wxapp, 'config')
-    ctx.body = option._wxapp
+    ctx.body = {errno: 0, data: option._wxapp}
     ctx.status = 200
   }
 })
@@ -66,9 +66,13 @@ router.post('/app/:appid/login', async (ctx) => {
   // }
   // console.log(option._wxapp)
   if (option !== null) {
-    option = JSON.parse(option)
-    console.log(option._wxapp)
-    const wx = option.wechat
+    // console.log(option)
+    // option = JSON.parse(option)
+    // console.log(option._wxapp)
+    const wx = option._wxapp.config
+    // console.log(wx.appid)
+    // console.log(wx.appsecret)
+    // console.log('-----------')
     const verify = new Verification(wx.appid, wx.appsecret)
 
     const userInfo = await verify.getUserInfo(data.username, data.password, data.code)
@@ -80,7 +84,6 @@ router.post('/app/:appid/login', async (ctx) => {
   ctx.status = 200
   // console.log(data)
 })
-
 
 
 module.exports = router.routes()

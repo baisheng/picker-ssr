@@ -38,16 +38,12 @@
             <label for="role" class="form-label">
               作者
             </label>
-            <select id="role" name="role" class="form-select">
-              <option value="administrator">Basil(佰晟）</option>
-              <option value="editor">叶青</option>
-              <option value="author">亚南</option>
-              <option value="contributor">贡献者</option>
-              <option value="follower">粉丝</option>
+            <select id="role" name="role" class="form-select" v-model="podcast.author">
+              <option :value="profile.id" v-for="profile in users">{{ profile.user_nicename }}</option>
             </select>
             <p class="form-setting-explanation">
               <a target="_blank" rel="noopener noreferrer"
-                 href="http://en.support.wordpress.com/user-roles/">
+                 href="/user-roles/">
                 <icon name="plus" class="gridicon"></icon>
                 添加作者
               </a>
@@ -77,6 +73,10 @@
 
   export default {
     props: {
+      users: {
+        type: Array,
+        required: true
+      },
       podcast: {
         type: Object,
         required: true

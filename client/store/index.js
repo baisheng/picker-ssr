@@ -307,6 +307,41 @@ export const actions = {
     } else {
       commit('posts/GET_LIST_FAILURE')
     }
+  },
+  async addUser ({commit}, {form}) {
+    commit('users/CREATE')
+    try {
+      const {data} = await this.$axios.post(`/app/${this.getters.appId}/users`, form)
+      if (data.errno > 0) {
+        // 发送出错误状态
+        commit('users/CREATE_FAILURE')
+        // console.error(data.errmsg)
+        return
+      } else if (data.data.type === 'exist') {
+        commit('users/CREATE_FAILURE_EXIST')
+      } else {
+        commit('users/CREATE_SUCCESS', data)
+      }
+      // setToken(data.data.token)
+      // commit('SET_TOKEN', data.data.token)
+      // commit('SET_USER', data)
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        throw new Error('Bad credentials')
+      }
+      throw error
+    }
+  },
+  async loadUsers ({commit}, params = {page: 1}) {
+    const {data} = await this.$axios.get(`/app/${this.getters.appId}/users`, {params})
+    console.warn(data)
+    if (data && data.errno === 0) {
+      const isFirstPage = params.page && params.page > 1
+      console.log('load data .....')
+      const commitName = `users/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
+      commit(commitName, data)
+    } else {
+      commit('users/GET_LIST_FAILURE')
+    }
   }
-
 }

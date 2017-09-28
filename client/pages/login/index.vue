@@ -16,6 +16,7 @@
             <input id="usernameOrEmail" name="user_login" class="form-text-input login__form-userdata-username-input"
                    v-model="form.user_login" v-validate="'required|alpha'"
                    :class="{'input': true, 'is-danger': errors.has('user_login') }" type="text" placeholder="用户名">
+
             <form-input-validation :isError="errors.has('user_login')" v-show="errors.has('user_login')">
               {{ errors.first('user_login') }}
             </form-input-validation>

@@ -9,7 +9,7 @@
     <!-- Header -->
     <podcast-header :podcast="podcast" @featured_image_upload="save"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="podcast" @content_update="save"></podcast-content-form>
+    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save"></podcast-content-form>
 
     <episode-list :list="episodes" :podcast="podcast" @podcast_item_update="update"></episode-list>
     <!--<playlist :episodes="episodes" @podcast_item_update="update"></playlist>-->
@@ -34,6 +34,7 @@
 //        console.log(params.id)
         await store.dispatch('getPodcast', params.id)
       }
+      await store.dispatch('loadUsers')
 //      await store.dispatch('getPodcast')
 //      return Promise.all([
 //        store.dispatch('loadEpisodeList', {axios: store.$axios, params: {parent: this.podcastId}})
@@ -47,6 +48,7 @@
           'Authorization': 'Bearer ' + this.token
         },
         podcast: {
+          author: '',
           title: '',
           content: ''
         },
@@ -91,6 +93,9 @@
 //      }
     },
     computed: {
+      users () {
+        return this.$store.state.users.list.data
+      },
       detail () {
         return this.$store.state.podcast.detail.data
       },
@@ -131,6 +136,9 @@
         this.save()
       })
       this.$watch('podcast.content', () => {
+        this.save()
+      })
+      this.$watch('podcast.author', () => {
         this.save()
       })
     },

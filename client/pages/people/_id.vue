@@ -43,20 +43,23 @@
     </div>
     <div class="card">
       <div>
-        <form>
+        <form @submit.prevent="handleSubmit">
           <div role="group" class="invite-people__token-field-wrapper">
             <label class="form-label">
               用户名
             </label>
             <div class="token-field" tabindex="-1">
               <div class="token-field__input-container" tabindex="-1">
-                <input type="text" autocapitalize="none"
-                       autocomplete="off" value="" placeholder=""
-                       size="1" class="token-field__input">
+                <input id="usernameOrEmail" name="user_login" class="form-text-input"
+                       v-model="form.user_login" v-validate="'required|alpha'"
+                       :class="{'input': true, 'is-danger': errors.has('user_login') }" type="text" placeholder="用户名">
+                <form-input-validation :isError="errors.has('user_login')" v-show="errors.has('user_login')">
+                  {{ errors.first('user_login') }}
+                </form-input-validation>
               </div>
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
-            <p class="form-setting-explanation">用户名必需为英文字符</p>
+            <!--<p class="form-setting-explanation">用户名必需为英文字符</p>-->
           </div>
           <div role="group" class="invite-people__token-field-wrapper">
             <label class="form-label">
@@ -66,7 +69,7 @@
               <div class="token-field__input-container" tabindex="-1">
                 <input type="text" autocapitalize="none"
                        autocomplete="off" value="" placeholder="用户昵称"
-                       size="1" class="token-field__input">
+                       size="1" class="token-field__input" v-model="form.user_nicename">
               </div>
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
@@ -80,7 +83,7 @@
               <div class="token-field__input-container" tabindex="-1">
                 <input type="text" autocapitalize="none"
                        autocomplete="off" value="" placeholder=""
-                       size="1" class="token-field__input">
+                       size="1" class="token-field__input" v-model="form.user_email">
               </div>
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
@@ -93,7 +96,7 @@
               <div class="token-field__input-container" tabindex="-1">
                 <input type="text" autocapitalize="none"
                        autocomplete="off" value="" placeholder=""
-                       size="1" class="token-field__input">
+                       size="1" class="token-field__input" v-model="form.user_phone">
               </div>
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
@@ -102,7 +105,7 @@
             <label for="role">
               身份
             </label>
-            <select id="role" name="role" class="form-select">
+            <select id="role" name="role" class="form-select" v-model="form.role">
               <option value="author">作者</option>
               <option value="editor">编辑</option>
               <option value="administrator">管理员</option>
@@ -124,48 +127,67 @@
             </label>
             <div class="counted-textarea">
               <textarea name="summary" id="summary" maxlength="500" placeholder=""
-                        class="counted-textarea__input form-textarea"></textarea>
+                        class="counted-textarea__input form-textarea" v-model="form.summary"></textarea>
               <!--<div class="counted-textarea__count-panel"></div>-->
             </div>
             <p class="form-setting-explanation"></p>
           </fieldset>
-          <button disabled="" type="submit" class="button form-button is-primary">保存</button>
+          <button type="submit" class="button form-button is-primary" :class="isSave ? 'is-busy' : ''">登录</button>
         </form>
       </div>
     </div>
   </main>
 </template>
 <script>
+  import FormInputValidation from '~/components/forms/form-input-validation'
+
   export default {
+    components: {
+      FormInputValidation
+    },
     data () {
       return {
-        user: {}
+        isSave: false,
+        form: {
+          approach: 'pc',
+          user_login: '',
+          user_pass: '111111',
+          user_nicename: '',
+          user_email: '',
+          user_phone: '',
+          summary: '',
+          role: ''
+        }
+      }
+    },
+    computed: {
+      newUser () {
+        return this.$store.state.users.detail
       }
     },
     methods: {
-      async save (data, id) {
-        this.status = 'saving'
-//        if (!this.post.id && this.post.content === null) return
-        if (Object.is(this.podcast.id, undefined)) {
-//        this.post.autoExcerpt = this.autoExcerpt
-//          const baseUrl = 'http://api.picker.la/rest/orgs/1'
-          await this.$axios.post(`/app/${this.appId}/posts`, this.post)
-            .then(response => {
-              const postId = response.data.data
-              if (!Object.is(postId, null)) {
-                this.podcast.id = postId
-                // 更新浏览器地址栏
-                history.pushState({state: 1}, 'Auto Save State', '/podcast/' + postId + '')
-              }
-//            const success = !!response.status && response.data && Object.is(response.data.errno, 0)
-//            if (success) commit('posts/CREATE_SUCCESS', response.data)
-//            if (!success) commit('posts/CREATE_FAILURE')
-            }, err => {
-//            commit('posts/CREATE_FAILURE', err)
-            })
-        } else {
-          await this.update(this.podcast, this.podcast.id)
-        }
+      async handleSubmit () {
+        const that = this
+        that.isSave = true
+        await this.$validator.validateAll().then(async (result) => {
+          if (result) {
+            await this.$store.dispatch('addUser', {form: this.form})
+            that.isSave = false
+            if (that.newUser.creating && that.newUser.type !== 'exist') {
+              this.$router.replace('/people/team')
+            } else {
+              console.log('创建失败。。。')
+            }
+//            if (that.newUser.type !== '')
+//            await this.$store.dispatch('login', {form: this.form})
+//            that.isLogin = false
+//            this.$router.replace('/apps')
+            return
+          }
+          that.isSave = false
+//          that.isLogin = false
+          console.log('Correct them errors!')
+        })
       },
     }
   }
