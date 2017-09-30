@@ -65,11 +65,9 @@ export const mutations = {
     state.detail.creating = false
   },
   UPDATE_ITEM (state) {
-    // console.log('saving.. item')
     state.saving = true
   },
-  UPDATE_ITEM_SUCCESS (state) {
-    // console.log('saving.. success')
+  UPDATE_SUCCESS (state) {
     state.item.saving = false
   },
   // List
@@ -86,25 +84,39 @@ export const mutations = {
   UPLOAD_FEATURED_IMAGE (state) {
   },
   REQUEST_LIST (state) {
-    // console.log('request Posts list')
     state.list.fetching = true
   },
   GET_LIST_FAILURE (state) {
-    // console.log('get article listfailure ')
     state.list.fetching = false
   },
   GET_LIST_SUCCESS (state, action) {
-    // console.log('Get Posts list success ')
     state.list.fetching = false
     state.list.data = action.data
-    // console.log(action.data)
   },
   ADD_LIST_SUCCESS (state, action) {
     state.list.fetching = false
     state.list.data.data.push.apply(state.list.data.data, action.result.data)
     state.list.data.pagination = action.result.pagination
   },
-
+  // Detail
+  CLEAR_DETAIL (state) {
+    state.detail.data = {}
+  },
+  UPDATE_DETAIL (state, action) {
+    state.detail.data = Object.assign({}, action.data)
+    // state.detail.data = action.data
+  },
+  REQUEST_DETAIL (state) {
+    state.detail.fetching = true
+  },
+  GET_DETAIL_FAILURE (state) {
+    state.detail.fetching = false
+    state.detail.data = {}
+  },
+  GET_DETAIL_SUCCESS (state, action) {
+    state.detail.fetching = false
+    state.detail.data = action.data
+  },
   // Hot
   REQUEST_HOT_LIST (state) {
     state.hot.fetching = true

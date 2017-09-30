@@ -1945,6 +1945,10 @@ core-assert@^0.2.0:
     buf-compare "^1.0.0"
     is-error "^2.2.0"
 
+core-image-xhr@^1.0.3:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/core-image-xhr/download/core-image-xhr-1.0.3.tgz#9211d7b5c41219af5ab69b9384ca2a47d572b476"
+
 core-js@^2.0.0, core-js@^2.4.0, core-js@^2.5.0:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
@@ -4251,7 +4255,7 @@ koa-body@^2.3.0:
 
 koa-bunyan-logger@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/koa-bunyan-logger/-/koa-bunyan-logger-2.0.0.tgz#4ed90347e987849f4953f9155de46f97f58544cd"
+  resolved "http://registry.npm.taobao.org/koa-bunyan-logger/download/koa-bunyan-logger-2.0.0.tgz#4ed90347e987849f4953f9155de46f97f58544cd"
   dependencies:
     bunyan "~1.5.0"
     on-finished "~2.1.1"
@@ -7698,6 +7702,13 @@ vue-click-outside@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.6.tgz#bf3e0217210d7778299cc39ddcf89cc036089f22"
 
+vue-core-image-upload@^2.3.9:
+  version "2.3.9"
+  resolved "http://registry.npm.taobao.org/vue-core-image-upload/download/vue-core-image-upload-2.3.9.tgz#b51a44d5eaf41c64045537bc7820bff017d974c1"
+  dependencies:
+    core-image-xhr "^1.0.3"
+    vue "^2.0.5"
+
 vue-hot-reload-api@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"
@@ -7727,6 +7738,10 @@ vue-meta@^1.1.0:
     deepmerge "^1.5.0"
     lodash.isplainobject "^4.0.6"
     object-assign "^4.1.1"
+
+vue-progressive-image@^2.3.0:
+  version "2.3.0"
+  resolved "http://registry.npm.taobao.org/vue-progressive-image/download/vue-progressive-image-2.3.0.tgz#11d22811aa4935ffccdf6b139a86e23829eba89b"
 
 vue-router@^2.7.0:
   version "2.7.0"
@@ -7767,7 +7782,7 @@ vue-upload-component@^2.5.0-beta.4:
   version "2.5.0-beta.4"
   resolved "https://registry.yarnpkg.com/vue-upload-component/-/vue-upload-component-2.5.0-beta.4.tgz#4b20123e0c4340824e518f0895896ff579e3397a"
 
-vue@~2.4.2:
+vue@^2.0.5, vue@~2.4.2:
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.4.4.tgz#ea9550b96a71465fd2b8b17b61673b3561861789"
 

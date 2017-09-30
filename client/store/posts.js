@@ -104,7 +104,6 @@ export const mutations = {
     // console.log('Get Posts list success ')
     state.list.fetching = false
     state.list.data = action.data
-    // console.log(action.data)
   },
   ADD_LIST_SUCCESS (state, action) {
     state.list.fetching = false

@@ -83,7 +83,8 @@ module.exports = {
       'vuex-class',
       'moment',
       'vue-awesome',
-      'vee-validate'
+      'vee-validate',
+      'vue-progressive-image'
     ],
     extractCSS: true,
     filenames: {
@@ -155,6 +156,8 @@ module.exports = {
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js',
     '~plugins/vue-dnd.js',
+    // {src: '~plugins/vue-core-image-upload.js', ssr: false},
+    {src: '~plugins/progressive-img.js', ssr: false},
     {src: '~plugins/a-player.js', ssr: true},
     {src: '~plugins/popover.js', ssr: false},
     {src: '~plugins/error-handler', ssr: false}

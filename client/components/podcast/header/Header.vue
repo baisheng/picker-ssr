@@ -127,7 +127,6 @@
     },
     computed: {
       postAction () {
-//        const orgId = this.$store.getters.orgId
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
         return `${baseURL}/app/${appId}/file`

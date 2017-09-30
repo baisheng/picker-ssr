@@ -208,7 +208,6 @@ export const actions = {
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
     const data = (await this.$axios.get(`/app/${this.getters.appId}/podcast/${id}`)).data
-    console.log(data)
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
     } else {
@@ -216,7 +215,6 @@ export const actions = {
     }
   },
   async loadEpisodeList ({commit}, {axios, params}) {
-    console.log('load episode')
     commit('podcast/REQUEST_EPISODE_LIST')
     await axios.get(`/app/${this.getters.appId}/posts`, {params})
       .then(response => {
@@ -332,16 +330,35 @@ export const actions = {
       throw error
     }
   },
+  async updateUser ({commit}, {form}) {
+    // commit('users/UPDATE_DETAIL')
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, form)
+    if (data.errno > 0) {
+      console.log('update failure')
+      // commit('users/UPDATE_FAILURE')
+    } else {
+      // commit('users/UPDATE_SUCCESS')
+    }
+  },
   async loadUsers ({commit}, params = {page: 1}) {
     const {data} = await this.$axios.get(`/app/${this.getters.appId}/users`, {params})
-    console.warn(data)
+    // console.warn(data)
     if (data && data.errno === 0) {
       const isFirstPage = params.page && params.page > 1
-      console.log('load data .....')
+      // console.log('load data .....')
       const commitName = `users/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
       commit(commitName, data)
     } else {
       commit('users/GET_LIST_FAILURE')
+    }
+  },
+  async getUser ({commit}, id) {
+    commit('users/REQUEST_DETAIL')
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/users/${id}`)).data
+    if (data && data.errno === 0) {
+      commit('users/GET_DETAIL_SUCCESS', data)
+    } else {
+      commit('users/GET_DETAIL_FAILURE')
     }
   }
 }

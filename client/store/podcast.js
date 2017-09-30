@@ -59,9 +59,7 @@ export const mutations = {
   },
   CREATE_EPISODE_SUCCESS (state, action) {
     state.episode.creating = true
-    // console.log(action.data)
     state.episode.id = action.data
-    // console.log(state.episode.id + '-----')
     // Object.assign(state.user, user);
   },
   CREATE_EPISODE_FAILURE (state) {
@@ -72,18 +70,14 @@ export const mutations = {
   },
 
   REQUEST_EPISODE_LIST (state) {
-    console.log('request episode list')
     state.episodeList.fetching = true
   },
   GET_EPISODELIST_FAILURE (state) {
-    console.log('get episode list failure ')
     state.episodeList.fetching = false
   },
   GET_EPISODE_LIST_SUCCESS (state, action) {
-    console.log('get episode list success ')
     state.episodeList.fetching = false
     state.episodeList.data = action.data
-    // console.log(action.data)
   },
   UPDATE_EPISODE (state) {
     // state.detail.data = Object.assign({}, action.data)
@@ -95,11 +89,9 @@ export const mutations = {
     state.episode = Object.assign({}, action.data)
   },
   // UPDATE_ITEM (state) {
-    // console.log('saving.. item')
     // state.saving = true
   // },
   // UPDATE_ITEM_SUCCESS (state) {
-  //   console.log('saving.. success')
   //   state.item.saving = false
   // },
   // List
@@ -114,18 +106,14 @@ export const mutations = {
     }
   },
   REQUEST_LIST (state) {
-    console.log('request article list')
     state.list.fetching = true
   },
   GET_LIST_FAILURE (state) {
-    console.log('get article listfailure ')
     state.list.fetching = false
   },
   GET_LIST_SUCCESS (state, action) {
-    console.log('get article list success ')
     state.list.fetching = false
     state.list.data = action.data
-    // console.log(action.data)
   },
   ADD_LIST_SUCCESS (state, action) {
     state.list.fetching = false
@@ -162,7 +150,6 @@ export const mutations = {
   },
   GET_DETAIL_SUCCESS (state, action) {
     state.detail.fetching = false
-    console.log(action.data)
     state.detail.data = action.data
   },
 

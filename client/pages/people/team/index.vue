@@ -121,8 +121,9 @@
         <div class="card">
           <div class="people-selector__infinite-list">
             <div class="infinite-list__spacer" style="height: 0px;"></div>
-            <a type="user" class="card people-list-item is-compact is-card-link"
-               href="/people/edit/" v-for="profile in users.data">
+
+            <nuxt-link type="user" class="card people-list-item is-compact is-card-link"
+               :to="'/people/' + profile.id" v-for="profile in users.data" :key="profile.id">
               <svg class="gridicon gridicons-chevron-right card__link-indicator" height="24" width="24"
                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g>
@@ -133,7 +134,7 @@
                 <div class="people-profile">
                   <div class="people-profile__gravatar">
                     <img class="gravatar"
-                         src="https://0.gravatar.com/avatar/f0fd64a8a2dd79ec5f4f1e363585a143?s=96&amp;d=mm&amp;r=G"
+                         :src="profile.avatar"
                          width="72" height="72"></div>
                   <div class="people-profile__detail">
                     <div class="people-profile__username">{{ profile.user_nicename }}</div>
@@ -148,7 +149,7 @@
                   </div>
                 </div>
               </div>
-            </a>
+            </nuxt-link>
 
             <div class="infinite-list__spacer" style="height: 0px;"></div>
           </div>

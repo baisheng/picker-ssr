@@ -16,6 +16,8 @@
 @import "blocks/comments/style";
 @import "blocks/comment-detail/style";
 @import "blocks/comment-button/style";
+@import "blocks/edit-gravatar/style";
+
 @import "components/main/style";
 @import "components/animate/style";
 @import "components/async-load/style";
@@ -42,6 +44,7 @@
 @import "components/forms/counted-textarea/style";
 @import "components/forms/form-button-bar/style";
 @import "components/forms/form-button/style";
+@import "components/forms/form-section-heading/style";
 @import 'components/gravatar/style';
 @import 'components/popover/style';
 @import 'components/tooltip/style';
@@ -54,6 +57,8 @@
 @import "components/site-selector/style";
 @import "components/count/style";
 @import "components/formatted-header/style";
+@import "components/drop-zone/style";
+@import "components/spinner/style";
 
 @import "my-sites/posts/style";
 @import "my-sites/post/type-list/style";
@@ -71,6 +76,9 @@
 @import "me/connected-application-item/style";
 @import "me/connected-applications/style";
 @import "me/connected-application-icon/style";
+@import "me/profile/style";
+@import "me/profile-gravatar/style";
+@import "me/profile-link/style";
 @import "my-sites/plugins/plugin-icon/style";
 @import "my-sites/people/people-list-item/style";
 @import "my-sites/people/people-profile/style";

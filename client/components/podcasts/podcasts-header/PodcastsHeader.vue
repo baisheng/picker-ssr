@@ -21,7 +21,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://api.picker.la/rest/orgs/1/file"
+          :post-action="uploadAction"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -48,7 +48,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://api.picker.la/rest/orgs/1/api/file"
+          :post-action="uploadAction"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -126,6 +126,11 @@
       }
     },
     computed: {
+      uploadAction () {
+        const appId = this.$store.getters.appId
+        const baseURL = process.env.baseURL
+        return `${baseURL}/app/${appId}/file`
+      },
       featuredImage () {
       },
       requestHeader () {

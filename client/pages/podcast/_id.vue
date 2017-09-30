@@ -128,6 +128,9 @@
       }
     },
     mounted () {
+      this.$on('featured_image_upload', (data) => {
+        this.update(data)
+      })
       if (JSON.stringify(this.detail) !== '{}') {
         this.podcast = Object.assign({}, this.detail)
       }

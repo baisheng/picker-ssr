@@ -20,6 +20,12 @@
           </div>
         </div>
         <div class="post-type-list__post-thumbnail-wrapper has-image">
+          <!--<no-ssr>-->
+            <!--<progressive-img src="https://unsplash.it/1920/1080?image=10" />-->
+          <!--</no-ssr>-->
+          <!--<no-ssr>-->
+          <!--<progressive-img :src="podcast.featured_image" />-->
+          <!--</no-ssr>-->
           <img :src="podcast.featured_image" class="post-type-list__post-thumbnail" v-if="podcast.featured_image">
         </div>
         <!--
