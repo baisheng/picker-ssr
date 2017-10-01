@@ -17,7 +17,8 @@ module.exports = {
     gzip: false
   },
   router: {
-    linkActiveClass: 'selected',
+    linkActiveClass: 'selected is-active',
+    linkExactActiveClass: 'is-selected',
     middleware: 'check-auth'
     // extendRoutes (routes, resolve) {
     //   routes.push({
@@ -84,7 +85,8 @@ module.exports = {
       'moment',
       'vue-awesome',
       'vee-validate',
-      'vue-progressive-image'
+      'vue-progressive-image',
+      'vue-multiselect'
     ],
     extractCSS: true,
     filenames: {
@@ -163,6 +165,7 @@ module.exports = {
     {src: '~plugins/error-handler', ssr: false}
   ],
   css: [
+    {src: '~assets/stylesheets/vue-multiselect.css'},
     {src: '~assets/stylesheets/style.scss', lang: 'scss'}
   ]
 }

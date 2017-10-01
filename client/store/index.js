@@ -295,6 +295,10 @@ export const actions = {
       })
   },
   async loadPosts ({commit}, params = {type: 'podcast', page: 1}) {
+    params.type = 'podcast'
+    if (!params.page) {
+      params.page = 1
+    }
     commit('posts/REQUEST_LIST')
     const data = (await this.$axios.get(`/app/${this.getters.appId}/posts`, {params})).data
     if (data && data.errno === 0) {

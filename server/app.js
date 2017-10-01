@@ -84,7 +84,6 @@ const start = async () => {
         await next()
       } else {
         let org = await redis.get(ctx.host)
-        // console.log(org)
         if (org !== null) {
           org = JSON.parse(org)
           ctx.session.org = org

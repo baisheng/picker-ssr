@@ -1,50 +1,21 @@
 <template>
-  <!--{{ podcast }}-->
-  <!--<header-cake @click="test" @click-title="test" isCompact>-->
-  <!--添加内容-->
-  <!--</header-cake>-->
   <foldable-card class="is-compact" expanded>
     <div class="connected-application-item__header is-p" slot="header">
       <div class="plugin-icon connected-application-icon">
         <img
           class="plugin-icon__img"
-          src="https://0.gravatar.com/avatar/f0fd64a8a2dd79ec5f4f1e363585a143?s=400&d=mm">
+          :src="authorAvatar">
       </div>
       <h3>{{ podcast.title }}</h3>
     </div>
+
     <div slot="summary">
-      <span class="button is-borderless" v-if="podcast.status == 'publish'">
-          已上架
-      </span>
-      <div v-else>
-        <button type="button" class="button is-error is-compact is-primary" style="margin-right: 8px;">发布</button>
-        <file-upload
-          class="button popover-icon is-compact"
-          name="file"
-          :post-action="postAction"
-          v-model="files"
-          @input-file="input"
-          @input-filter="inputFilter"
-          :accept="accept"
-          :size="size || 0"
-          :headers="requestHeader"
-          ref="upload">
-          <!--Add upload files-->
-          <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
-            <g>
-              <path
-                d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
-            </g>
-          </svg>
-          设置封面
-        </file-upload>
-        <!--<button type="button" class="button is-compact" @click.prevent="changeCover()">换封面</button>-->
-      </div>
+      {{ title }}
     </div>
     <div slot="expandedSummary">
       <div>
-        <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;">下架</button>
+        <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;" @click="changeStatus('off')" v-if="podcast.status === 'publish'">下架</button>
+        <button type="button" class="button is-primary is-compact" style="margin-right: 8px;" @click="changeStatus('publish')" v-else>上架</button>
         <file-upload
           class="button popover-icon is-compact"
           name="file"
@@ -66,14 +37,13 @@
           </svg>
           设置封面
         </file-upload>
-        <!--<button type="button" class="button is-compact" @click.prevent="changeCover()">换封面</button>-->
       </div>
     </div>
     <div @click="handleClick"
          :class="classes"
          :style="collapsed ? `background-image: url(${podcast.featured_image});` : ''"
          v-if="podcast.featured_image">
-      <button class="button editor-drawer-well__remove is-compact" type="button" @click="onRemove">
+<!--      <button class="button editor-drawer-well__remove is-compact" type="button" @click="onRemove">
         <span class="screen-reader-text">移除</span>
         <svg class="gridicon gridicons-cross editor-drawer-well__remove-icon" height="24" width="24"
              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -82,12 +52,12 @@
               d="M18.36 19.78L12 13.41l-6.36 6.37-1.42-1.42L10.59 12 4.22 5.64l1.42-1.42L12 10.59l6.36-6.36 1.41 1.41L13.41 12l6.36 6.36z"></path>
           </g>
         </svg>
-      </button>
+      </button>-->
       <img :src="podcast.featured_image" class="post-image__image" v-if="!collapsed"/>
     </div>
     <empty-content title="没有封面图" line="是否要设置封面图？" :illustration="illustration" v-else>
       <button class="media-library__upload-button button button is-primary"
-              @click.prevent="insertFile()">
+              @click.prevent="changeCover">
               <span v-if="uploadProgress">
                 {{uploadProgress}}
               </span>
@@ -126,6 +96,37 @@
       }
     },
     computed: {
+      title () {
+        switch (this.podcast.status) {
+          case 'publish': {
+            return '已上架'
+          }
+          case 'off': {
+            return '已下架'
+          }
+          case 'trash': {
+            return '已删除'
+          }
+          case 'auto-draft': {
+            return '草稿'
+          }
+          default: {
+            return '草稿'
+          }
+        }
+      },
+      authorAvatar () {
+        if (this.podcast.hasOwnProperty('authorInfo')) {
+          const authorInfo = this.podcast.authorInfo
+          if (!authorInfo.hasOwnProperty('avatar')) {
+            return '/images/people/mystery-person.svg'
+          } else {
+            return authorInfo.avatar
+          }
+        } else {
+          return '/images/people/mystery-person.svg'
+        }
+      },
       postAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
@@ -152,6 +153,10 @@
       EmptyContent
     },
     methods: {
+      changeStatus (status) {
+        this.podcast.status = status
+        this.$emit('change_status', this.podcast)
+      },
       onRemove () {
         // 删除封面图
       },

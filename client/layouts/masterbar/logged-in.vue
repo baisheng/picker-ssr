@@ -3,11 +3,9 @@
     <item icon="pagelines" :isActive="isActive" url="/">
       {{ org.meta.basic.name }}
     </item>
-    <!--
     <item icon="tint" class="masterbar__reader" url="/contents">
       内容市场
     </item>
-    -->
     <div class="masterbar__publish">
       <!--
       <a href="/podcast" title="创建新文章"
@@ -31,6 +29,21 @@
       </div>
           -->
     </div>
+    <nuxt-link to="/me" title="更新您的个人资料、个人设置等" class="masterbar__item masterbar__item-me">
+      <svg class="gridicon gridicons-user-circle" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 24 24">
+        <g>
+          <path
+            d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18.5c-4.694 0-8.5-3.806-8.5-8.5S7.306 3.5 12 3.5s8.5 3.806 8.5 8.5-3.806 8.5-8.5 8.5zm0-8c-3.038 0-5.5 1.728-5.5 3.5s2.462 3.5 5.5 3.5 5.5-1.728 5.5-3.5-2.462-3.5-5.5-3.5zm0-.5c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z"></path>
+        </g>
+      </svg>
+      <span class="masterbar__item-content">
+        <img alt="Me" class="gravatar"
+             :src="user.avatar"
+             width="18" height="18">
+        <span class="masterbar__item-me-label">我</span>
+      </span>
+    </nuxt-link>
     <!--
     <item icon="user-circle" url="/me" class="masterbar__item-me">
     </item>
@@ -49,6 +62,9 @@
       }
     },
     computed: {
+      user () {
+        return this.$store.state.user
+      },
       org () {
         return this.$store.state.org.detail.data
       }

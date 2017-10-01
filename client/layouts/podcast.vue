@@ -104,7 +104,7 @@
                 <li class="sidebar__menu">
                   <h2 class="sidebar__heading">管理</h2>
                   <ul>
-                    <nuxt-link to="/podcast/home" tag="li">
+                    <nuxt-link to="/podcasts" tag="li">
                       <a>
                         <icon name="dot-circle-o" class="gridicon"></icon>
                         <span class="menu-link-text">内容</span>

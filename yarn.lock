@@ -7739,6 +7739,10 @@ vue-meta@^1.1.0:
     lodash.isplainobject "^4.0.6"
     object-assign "^4.1.1"
 
+vue-multiselect@^2.0.3:
+  version "2.0.3"
+  resolved "http://registry.npm.taobao.org/vue-multiselect/download/vue-multiselect-2.0.3.tgz#bec58f84586022f82c2a3169be1b869f6d9715fc"
+
 vue-progressive-image@^2.3.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/vue-progressive-image/download/vue-progressive-image-2.3.0.tgz#11d22811aa4935ffccdf6b139a86e23829eba89b"

@@ -2,25 +2,22 @@
   <main data-reactroot="" class="connected-applications main" role="main">
 
     <!-- Navbar -->
-    <header-cake compact backHref="/podcast/home">
+    <header-cake compact backHref="/podcasts">
       <span v-if="podcast.id">更新内容</span>
       <span v-else>添加内容</span>
     </header-cake>
     <!-- Header -->
-    <podcast-header :podcast="podcast" @featured_image_upload="save"></podcast-header>
+    <podcast-header :podcast="podcast" @featured_image_upload="save" @change_status="save"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save"></podcast-content-form>
-
+    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save" :isSaving="isSaving"></podcast-content-form>
+    <!-- Episode-list -->
     <episode-list :list="episodes" :podcast="podcast" @podcast_item_update="update"></episode-list>
-    <!--<playlist :episodes="episodes" @podcast_item_update="update"></playlist>-->
   </main>
 </template>
 
 <script>
   /* eslint-disable quotes,indent,no-undef,no-multi-spaces,no-implicit-coercion */
-  //  import EditorSidebar from '~/components/editor/sidebar'
   import HeaderCake from '~/components/header-cake'
-  //  import AudioPlayer from '~/components/aplayer'
   import PodcastHeader from '~/components/podcast/header'
   import PodcastContentForm from '~/components/podcast/podcast-content-form'
   import EpisodeList from '~/components/episodes/episode-list'
@@ -31,18 +28,13 @@
     layout: 'podcast',
     async fetch ({store, params}) {
       if (params.id && !Object.is(Number(params.id), NaN)) {
-//        console.log(params.id)
         await store.dispatch('getPodcast', params.id)
       }
       await store.dispatch('loadUsers')
-//      await store.dispatch('getPodcast')
-//      return Promise.all([
-//        store.dispatch('loadEpisodeList', {axios: store.$axios, params: {parent: this.podcastId}})
-//        store.dispatch('loadAnnouncements')
-//      ])
     },
     data () {
       return {
+        status: 'default',
         curItem: null,
         headers: {
           'Authorization': 'Bearer ' + this.token
@@ -93,6 +85,9 @@
 //      }
     },
     computed: {
+      user () {
+        return this.$store.state.user
+      },
       users () {
         return this.$store.state.users.list.data
       },
@@ -117,6 +112,9 @@
 //        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
 //        return
       },
+      isSaving () {
+        return this.status === 'saving'
+      },
       detailData: {
         get () {
 // eslint-disable-next-line indent
@@ -128,9 +126,9 @@
       }
     },
     mounted () {
-      this.$on('featured_image_upload', (data) => {
-        this.update(data)
-      })
+//      this.$on('featured_image_upload', (data) => {
+//        this.update(data)
+//      })
       if (JSON.stringify(this.detail) !== '{}') {
         this.podcast = Object.assign({}, this.detail)
       }
@@ -152,7 +150,7 @@
         if (Object.is(this.podcast.id, undefined)) {
 //        this.post.autoExcerpt = this.autoExcerpt
 //          const baseUrl = 'http://api.picker.la/rest/orgs/1'
-          await this.$axios.post(`/app/${this.appId}/posts`, this.post)
+          await this.$axios.post(`/app/${this.appId}/posts`, this.podcast)
             .then(response => {
               const postId = response.data.data
               if (!Object.is(postId, null)) {
@@ -175,9 +173,14 @@
         if (id !== undefined) {
           podcastId = id
         }
+//        const that = this
 //        let api = 'http://vanq.picker.la/api/podcast'
         await this.$axios.put(`/app/${this.appId}/posts/${podcastId}`, data)
           .then(r => {
+            this.status = 'success'
+//            console.log('----- success.....')
+//            console.log(JSON.stringify(r))
+//            this.podcast.saving = false
 //            console.log(r.status)
             // 执行 vux store 状态
 //            delete data.post_thumbnail

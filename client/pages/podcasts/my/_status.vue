@@ -1,12 +1,10 @@
+<style>
+  .empty-content__title {
+    font-size: 34px;
+  }
+</style>
 <template>
   <main class="posts is-multisite main">
-
-    <!-- Navbar -->
-    <!--<header-cake compact backHref="/podcasts">-->
-      <!--<span v-if="podcast.id">更新内容</span>-->
-      <!--<span v-else>添加内容</span>-->
-    <!--</header-cake>-->
-    <!-- Header -->
 
     <div class="posts__primary">
       <div class="section-nav has-pinned-items">
@@ -23,37 +21,42 @@
             <div class="section-nav-tabs has-siblings">
               <h6 class="section-nav-group__label">状态</h6>
               <ul class="section-nav-tabs__list" role="menu">
-                <li class="is-publish is-selected section-nav-tab">
-                  <a href="/posts" class="section-nav-tab__link" tabindex="0" aria-selected="true" role="menuitem">
+                <nuxt-link to="/podcasts/my" class="is-publish section-nav-tab" tag="li">
+                  <a class="section-nav-tab__link" tabindex="0" aria-selected="true"
+                     role="menuitem">
                     <span class="section-nav-tab__text">
                       已发布
                     </span>
                   </a>
-                </li>
-                <li class="is-draft section-nav-tab">
-                  <a href="/posts/drafts" class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                </nuxt-link>
+                <nuxt-link to="/podcasts/my/drafts" class="is-publish section-nav-tab" tag="li">
+
+                  <a class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
-                    <span class="section-nav-tab__text">
-                      草稿
-                    </span>
+                  <span class="section-nav-tab__text">
+                  待审核
+                  </span>
                   </a>
-                </li>
-                <li class="is-future section-nav-tab">
-                  <a href="/posts/scheduled" class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                </nuxt-link>
+                <nuxt-link to="/podcasts/my/off" class="is-publish section-nav-tab" tag="li">
+
+                  <a class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
-                    <span class="section-nav-tab__text">
-                      待审核
-                    </span>
+                  <span class="section-nav-tab__text">
+                  已下架
+                  </span>
                   </a>
-                </li>
-                <li class="is-trash section-nav-tab">
-                  <a href="/posts/trashed" class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                </nuxt-link>
+                <nuxt-link to="/podcasts/my/trashed" class="is-trash section-nav-tab" tag="li">
+
+                  <a class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
-                    <span class="section-nav-tab__text">
-                      已放入回收站
-                    </span>
+                  <span class="section-nav-tab__text">
+                  已放入回收站
+                  </span>
                   </a>
-                </li>
+                </nuxt-link>
+
               </ul>
             </div>
           </div>
@@ -61,24 +64,26 @@
             <h6 class="section-nav-group__label">
               作者</h6>
             <ul class="segmented-control" role="radiogroup">
-              <li class="segmented-control__item">
-                <a href="/posts/my" class="segmented-control__link" role="radio"
+              <nuxt-link to="/podcasts/my" tag="li" class="segmented-control__item">
+                <a class="segmented-control__link" role="radio"
                    tabindex="0" aria-selected="false">
-                  <span class="segmented-control__text">
-                      个人
-                    <img alt="bluepx" class="gravatar"
-                         src="https://0.gravatar.com/avatar/f0fd64a8a2dd79ec5f4f1e363585a143?s=96&amp;d=mm" width="16"
-                         height="16">
-                  </span>
+                            <span class="segmented-control__text">
+                                个人
+                              <img alt="bluepx" class="gravatar"
+                                   :src="user.avatar"
+                                   width="16"
+                                   height="16">
+                            </span>
                 </a>
-              </li>
-              <li class="segmented-control__item is-selected">
-                <a href="/posts" class="segmented-control__link" role="radio" tabindex="0" aria-selected="true">
-                  <span class="segmented-control__text">
-                    所有人
-                  </span>
+              </nuxt-link>
+
+              <nuxt-link to="/podcasts" tag="li" class="segmented-control__item">
+                <a class="segmented-control__link" role="radio" tabindex="0" aria-selected="true">
+                            <span class="segmented-control__text">
+                              所有人
+                            </span>
                 </a>
-              </li>
+              </nuxt-link>
             </ul>
           </div>
           <div class="is-expanded-to-container has-open-icon search" role="search">
@@ -129,17 +134,28 @@
           </div>
         </div>
       </div>
-      <podcasts-list :list="posts.data"></podcasts-list>
+      <podcasts-list :list="posts.data" v-if="isNotEmpty"></podcasts-list>
+      <div class="empty-content" v-else>
+        <img src="/images/posts/illustration-posts.svg" width="150" class="empty-content__illustration">
+        <h2 class="empty-content__title">{{ emptyTitle }}</h2>
+        <h3 class="empty-content__line">要发布内容吗？</h3>
+        <a class="empty-content__action button is-primary"
+           href="/podcast">开始创建节目</a></div>
+
     </div>
 
   </main>
 </template>
 <script>
-//  import ActionMenu from '../../components/podcast/podcast-action'
-  import { PodcastsList } from '~/components/podcasts'
+  //  import ActionMenu from '../../components/podcast/podcast-action'
+  import {PodcastsList} from '~/components/podcasts'
+
   export default {
+    name: 'podcast',
+    layout: 'podcast',
     data () {
       return {
+        filter: 'publish',
         collapsed: true
       }
     },
@@ -148,22 +164,47 @@
       PodcastsList
 //      ActionMenu
     },
-    async fetch ({store}) {
+    async asyncData ({store, params}) {
       // Default type `podcast` page `1`
-      await store.dispatch('loadPosts')
+      await store.dispatch('loadPosts', params)
+      return {filter: params.status}
     },
+
     computed: {
+      user () {
+        return this.$store.state.user
+      },
+      emptyTitle () {
+        switch (this.filter) {
+          case 'publish': {
+            return '没有节目内容'
+          }
+          case 'drafts': {
+            return '没有待审核的内容'
+          }
+          case 'off': {
+            return '没有下架内容'
+          }
+          case 'trashed': {
+            return '没有已放入回收站的内容'
+          }
+          default: {
+            return '还没节目内容'
+          }
+        }
+      },
       publishCount () {
 //        for (let i in this.posts) {
 //
 //        }
       },
-
+      isNotEmpty () {
+        return this.posts.data.length > 0
+      },
 //      timestamp: function () {
 //        return this.$moment(this.posts.attributes.modified).format('YYYY-MM-DD [at] hh:mm')
 //      },
       posts () {
-//        console.log(JSON.stringify(this.$store.state.posts.list))
         return this.$store.state.posts.list
       },
       options () {
@@ -179,6 +220,13 @@
       }
     },
     methods: {
+//      async filterStatus (status) {
+//        const params = {
+//          status: status
+//        }
+//        console.log(JSON.stringify(params))
+//        await this.$store.dispatch('loadPosts', params)
+//      },
       handleClick () {
         this.collapsed = !this.collapsed
       }

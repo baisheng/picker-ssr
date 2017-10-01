@@ -1,17 +1,43 @@
+<style lang="scss">
+  .option__image {
+    max-height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .option__desc {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px;
+    /*padding: rem(10px);*/
+  }
+
+  .option__title {
+    font-size: 14px;
+  }
+
+  .option__small {
+    display: block;
+  }
+  textarea {
+    height: 180px;
+  }
+
+</style>
 <template>
   <div>
     <card class="section-header" compact>
       <div class="section-header__label">
           <span class="section-header__label-text">
-            节目信息
+            {{ title }}
         </span>
-      </div>
-      <div class="section-header__actions" v-show="editing" @click="handleClick">
-        <button class="button is-compact is-primary">
-          保存
-        </button>
+        <spinner v-show="isSaving" :className="'edit-gravatar__spinner'"></spinner>
+
       </div>
     </card>
+
     <card>
       <div>
         <form>
@@ -38,16 +64,34 @@
             <label for="role" class="form-label">
               作者
             </label>
-            <select id="role" name="role" class="form-select" v-model="podcast.author">
-              <option :value="profile.id" v-for="profile in users">{{ profile.user_nicename }}</option>
-            </select>
-            <p class="form-setting-explanation">
-              <a target="_blank" rel="noopener noreferrer"
-                 href="/user-roles/">
-                <icon name="plus" class="gridicon"></icon>
-                添加作者
-              </a>
-            </p>
+            <div class="token-field">
+              <multiselect
+                id="role"
+                v-model="value"
+                :options="users"
+                track-by="user_login"
+                label="user_nicename"
+                :searchable="false"
+                :close-on-select="true"
+                :show-labels="false"
+                placeholder="选择作者"
+                @select="select">
+                <template slot="option" scope="props">
+                  <img class="option__image" :src="props.option.avatar" :alt="props.option.user_nicename">
+                  <div class="option__desc"><span class="option__title">{{ props.option.user_nicename }}</span><span
+                    class="option__small">@{{ props.option.user_login }}</span></div>
+                </template>
+              </multiselect>
+            </div>
+            <p></p>
+            <!--<p class="form-setting-explanation">-->
+            <!--<a target="_blank" rel="noopener noreferrer"-->
+            <!--href="/user-roles/">-->
+            <!--<icon name="plus" class="gridicon"></icon>-->
+            <!--添加作者-->
+            <!--</a>-->
+            <!---->
+            <!--</p>-->
           </fieldset>
           <fieldset class="form-fieldset">
             <label for="message" class="form-label">
@@ -70,9 +114,13 @@
 
 <script>
   import {Card} from '../../card'
-
+  import Multiselect from 'vue-multiselect'
+  import Spinner from '~/components/spinner'
   export default {
     props: {
+      isSaving: {
+        type: Boolean
+      },
       users: {
         type: Array,
         required: true
@@ -84,18 +132,34 @@
     },
     data () {
       return {
+        saving: false,
+        content: '',
+        value: '',
         editing: false
       }
     },
     components: {
-      Card
+      Card,
+      Multiselect,
+      Spinner
     },
     mounted () {
-      this.$on('update_success', () => {
-        this.editing = false
+      // 初始化角色列表默认值
+      this.$nextTick(() => {
+        if (this.podcast.hasOwnProperty('authorInfo')) {
+          this.value = this.podcast.authorInfo
+        }
+
       })
     },
     computed: {
+      title () {
+        if (this.isSaving) {
+          return '保存中...'
+        } else {
+          return '节目信息'
+        }
+      },
       wordCount () {
         if (this.podcast.content !== null) {
           return this._wordCount(this.podcast.content)
@@ -105,15 +169,25 @@
     watch: {
 //      'podcast': {
 //        handler (val, oldVal) {
-//          this.editing = true
+//          if (val) {
+//            this.editing = true
+//          }
 //          this.$emit('content_update', this.podcast)
 //        },
 //        deep: true
 //      }
     },
     methods: {
+      select (selectedOption, id) {
+        this.podcast.author = selectedOption.id
+        this.podcast.authorInfo = selectedOption
+      },
+//      customLabel ({ user_login, user_nicename }) {
+//        return `${user_login} – ${user_nicename}`
+//      },
       handleClick () {
-//        this.$emit('content_update', this.podcast)
+        this.podcast.saving = 'saving'
+        this.$emit('content_update', this.podcast)
       },
       _wordCount (data) {
         const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g

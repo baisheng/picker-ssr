@@ -3,7 +3,7 @@
     <card class="section-header" compact>
       <div class="section-header__label">
           <span class="section-header__label-text" v-if="!creating">
-            节目列表 ({{ episodeCount }})
+            节目列表 ({{ episodeCount  }})
           </span>
         <span v-else>
             {{ post.title }}
@@ -228,7 +228,11 @@
 //        }
 //      },
       episodeCount () {
-        return this.list.count
+        if (this.list.count) {
+          return this.list.count
+        } else {
+          return 0
+        }
       },
       creating () {
         return this.$store.state.podcast.episode.creating

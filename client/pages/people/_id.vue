@@ -217,7 +217,8 @@
       </form>
     </div>
     <div class="card delete-user__single-site">
-      <form><h3 class="form-section-heading">删除 {{ user.user_nicename }} </h3>
+      <form>
+        <h3 class="form-section-heading">删除 {{ user.user_nicename }} </h3>
         <p class="delete-user__explanation">您可以选择重新分配 {{ user.user_nicename }} 创建的所有内容，也可以将相关内容全部删除。</p>
         <fieldset class="form-fieldset">
           <label class="form-label">
