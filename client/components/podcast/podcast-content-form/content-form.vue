@@ -33,7 +33,7 @@
           <span class="section-header__label-text">
             {{ title }}
         </span>
-        <spinner v-show="isSaving" :className="'edit-gravatar__spinner'"></spinner>
+        <spinner v-show="!isSaving" :className="'edit-gravatar__spinner'"></spinner>
 
       </div>
     </card>
@@ -118,8 +118,8 @@
   import Spinner from '~/components/spinner'
   export default {
     props: {
-      isSaving: {
-        type: Boolean
+      status: {
+        type: String
       },
       users: {
         type: Array,
@@ -153,9 +153,14 @@
       })
     },
     computed: {
+      isSaving () {
+        return this.status !== 'success' || this.status !== 'init'
+      },
       title () {
-        if (this.isSaving) {
+        if (this.status === 'saving') {
           return '保存中...'
+        } else if (this.status === 'error') {
+          return '保存失败...'
         } else {
           return '节目信息'
         }
@@ -181,12 +186,12 @@
       select (selectedOption, id) {
         this.podcast.author = selectedOption.id
         this.podcast.authorInfo = selectedOption
+        this.$emit('content_update', this.podcast)
       },
 //      customLabel ({ user_login, user_nicename }) {
 //        return `${user_login} – ${user_nicename}`
 //      },
       handleClick () {
-        this.podcast.saving = 'saving'
         this.$emit('content_update', this.podcast)
       },
       _wordCount (data) {

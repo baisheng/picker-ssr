@@ -38,13 +38,23 @@ export const state = () => {
       }
     },
     detail: {
+      status: 'init',
       fetching: false,
-      data: {}
+      data: {
+      }
     }
   }
 }
 
 export const mutations = {
+  PUSH_EPISODE (state, data) {
+    if (Object.is(state.detail.data.children, undefined)) {
+      state.detail.data.children = []
+    }
+    state.detail.data.children.push(data)
+    // state.detail.data.children.push(data)
+    // state.detail.data.children.push.apply(state.detail.data.children, data)
+  },
   DELETE_EPISODE (state) {
     state.episode.del = 'start'
   },
@@ -58,9 +68,10 @@ export const mutations = {
     state.episode.creating = true
   },
   CREATE_EPISODE_SUCCESS (state, action) {
-    state.episode.creating = true
+    // state.episode.creating = true
     state.episode.id = action.data
     // Object.assign(state.user, user);
+    console.log(action.data)
   },
   CREATE_EPISODE_FAILURE (state) {
     state.episode.creating = false
@@ -86,7 +97,8 @@ export const mutations = {
   },
   UPDATE_EPISODE_SUCCESS (state, action) {
     state.episode.saving = false
-    state.episode = Object.assign({}, action.data)
+    state.episode = action.data
+    // state.episode = Object.assign({}, action.data)
   },
   // UPDATE_ITEM (state) {
     // state.saving = true
@@ -137,9 +149,19 @@ export const mutations = {
   CLEAR_DETAIL (state) {
     state.detail.data = {}
   },
-  UPDATE_DETAIL (state, action) {
-    state.detail.data = Object.assign({}, action.data)
+  UPDATE_DETAIL (state) {
+    state.detail.status = 'saving'
+    // state.detail.data = Object.assign({}, action.data)
     // state.detail.data = action.data
+  },
+  UPDATE_DETAIL_FAILURE (state, action) {
+    state.detail.status = 'error'
+    // state.detail.data = Object.assign({}, action.data)
+    // state.detail.data = action.data
+  },
+  UPDATE_DETAIL_SUCCESS (state, action) {
+    state.detail.status = 'success'
+    state.detail.data = action.data
   },
   REQUEST_DETAIL (state) {
     state.detail.fetching = true

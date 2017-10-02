@@ -3,7 +3,7 @@
     <card class="section-header" compact>
       <div class="section-header__label">
           <span class="section-header__label-text" v-if="!creating">
-            节目列表 ({{ episodeCount  }})
+            节目列表 ({{ episodeCount }})
           </span>
         <span v-else>
             {{ post.title }}
@@ -13,7 +13,7 @@
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          post-action="http://api.picker.la/rest/orgs/1/file"
+          :post-action="uploadAction"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -43,7 +43,6 @@
           </svg>
           添加
         </button>
-
         <div class="button-group" v-else>
           <button class="button is-compact is-primary" @click="create">
             发布
@@ -112,10 +111,10 @@
       </div>
     </card>
 
-    <episode :key="index" v-for="(item, index) in list"
+    <episode :key="index" v-for="(item, index) in podcast.children"
              :order="index"
              :data="item"
-             v-dragging="{item: item, list: list}"
+             v-dragging="{item: item, list: podcast.children}"
              @episode-del="del" @update="update"></episode>
   </div>
 </template>
@@ -154,10 +153,6 @@
 
   export default {
     props: {
-      list: {
-        type: Array,
-        default: []
-      },
       podcast: {
         type: Object,
         required: true
@@ -183,7 +178,8 @@
         episode: {
           title: '无标题',
           status: 'draft',
-          content: ''
+          content: '',
+          children: []
         },
         post: {
           title: '无标题',
@@ -220,6 +216,11 @@
       Episode
     },
     computed: {
+      uploadAction () {
+        const appId = this.$store.getters.appId
+        const baseURL = process.env.baseURL
+        return `${baseURL}/file`
+      },
 //      episodeList () {
 //        return this.$store.state.podcast.episodeList
 //      },
@@ -228,8 +229,8 @@
 //        }
 //      },
       episodeCount () {
-        if (this.list.count) {
-          return this.list.count
+        if (this.podcast.children.count) {
+          return this.podcast.children.count
         } else {
           return 0
         }
@@ -264,16 +265,18 @@
         handler (val, oldVal) {
           if (val.del === 'success') {
             console.log('lalal')
-            this.list.splice(this.curIndex, 1)
+            this.podcast.children.splice(this.curIndex, 1)
           }
         },
         deep: true
       },
       'episodeId': {
         handler (val, oldVal) {
-          console.log('lalala')
-          this.episode.id = val
-          this.list.push(this.episode)
+//          console.log('lalala')
+//          this.episode.id = val
+          this.podcast.children.push(this.episode)
+//          console.log(val)
+//          this.$store.commit('podcast/PUSH_EPISODE', this.episode)
         },
         deep: true
       }
@@ -300,16 +303,16 @@
 //        console.log(JSON.stringify(item))
         this.curIndex = index
         this.$store.dispatch('episodeDelete', {id: item.id, axios: this.$axios})
-//        console.log(this.postState)
       },
       update (episode, id) {
         this.$emit('podcast_item_update', episode, id)
       },
       // 创建节目 episode
       create () {
-        const _sort = this.list.length + 1
+        const _sort = this.podcast.children.length + 1
+//        console.log(this.podcast.id + '----xxxx')
         this.episode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
-        this.$store.dispatch('episodeCreate', {data: this.episode, axios: this.$axios})
+        this.$store.dispatch('episodeCreate', {data: this.episode})
       },
       cancel () {
         this.$store.commit('podcast/CREATE_EPISODE_CANCEL')

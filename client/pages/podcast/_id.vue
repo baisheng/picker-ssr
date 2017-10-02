@@ -9,9 +9,9 @@
     <!-- Header -->
     <podcast-header :podcast="podcast" @featured_image_upload="save" @change_status="save"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save" :isSaving="isSaving"></podcast-content-form>
+    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save" :status="podcastStatus"></podcast-content-form>
     <!-- Episode-list -->
-    <episode-list :list="episodes" :podcast="podcast" @podcast_item_update="update"></episode-list>
+    <episode-list :podcast="podcast" @podcast_item_update="update"></episode-list>
   </main>
 </template>
 
@@ -27,7 +27,10 @@
     middleware: 'authenticated',
     layout: 'podcast',
     async fetch ({store, params}) {
+      console.log('lalalal ...')
+      console.log(JSON.stringify(params))
       if (params.id && !Object.is(Number(params.id), NaN)) {
+        console.log(JSON.stringify(params))
         await store.dispatch('getPodcast', params.id)
       }
       await store.dispatch('loadUsers')
@@ -42,7 +45,8 @@
         podcast: {
           author: '',
           title: '',
-          content: ''
+          content: '',
+          children: []
         },
         post: {
           title: '无标题',
@@ -100,20 +104,20 @@
       orgId () {
         return this.$store.getters.orgId
       },
-      episodes () {
-        if (!Object.is(this.podcast.children, undefined)) {
-          return this.podcast.children
-        } else {
-          return []
-        }
-      },
+//      episodes () {
+//        if (!Object.is(this.podcast.children, undefined)) {
+//          return this.podcast.children
+//        } else {
+//          return []
+//        }
+//      },
       token () {
         return this.$store.state.token
 //        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
 //        return
       },
-      isSaving () {
-        return this.status === 'saving'
+      podcastStatus () {
+        return this.$store.state.podcast.detail.status
       },
       detailData: {
         get () {
@@ -129,22 +133,27 @@
 //      this.$on('featured_image_upload', (data) => {
 //        this.update(data)
 //      })
-      if (JSON.stringify(this.detail) !== '{}') {
-        this.podcast = Object.assign({}, this.detail)
-      }
+      // 初始化
+//      this.podcast = this.detail
 
+      this.$nextTick(() => {
+        if (JSON.stringify(this.detail.data) !== '{}') {
+          this.podcast = Object.assign(this.podcast, this.detail)
+        }
+      })
       this.$watch('podcast.title', () => {
         this.save()
       })
       this.$watch('podcast.content', () => {
         this.save()
       })
-      this.$watch('podcast.author', () => {
-        this.save()
-      })
+//      this.$watch('podcast.author', () => {
+//        this.save()
+//      })
     },
     methods: {
       async save (data, id) {
+        console.log(JSON.stringify(data) + '--data--')
         this.status = 'saving'
 //        if (!this.post.id && this.post.content === null) return
         if (Object.is(this.podcast.id, undefined)) {
@@ -169,15 +178,22 @@
         }
       },
       async update (data, id) {
-        let podcastId = this.podcast.id
+//        let podcastId = this.podcast.id
         if (id !== undefined) {
-          podcastId = id
+//          podcastId = id
+          data.id = id
         }
+        await this.$store.dispatch('updatePodcast', data)
+        console.log(JSON.stringify(data))
+//        console.log(this.isSaving + 'adfasdfsdaf')
+
+//        console.log(JSON.stringify(data))
 //        const that = this
-//        let api = 'http://vanq.picker.la/api/podcast'
-        await this.$axios.put(`/app/${this.appId}/posts/${podcastId}`, data)
-          .then(r => {
-            this.status = 'success'
+//        await this.$store.dispatch('updatePodcast', data)
+//        await this.$axios.put(`/app/${this.appId}/posts/${podcastId}`, data)
+//          .then(r => {
+//            that.status = 'success'
+//            console.log(this.isSaving + 'asdjflkasdjflkjds')
 //            console.log('----- success.....')
 //            console.log(JSON.stringify(r))
 //            this.podcast.saving = false
@@ -185,9 +201,9 @@
             // 执行 vux store 状态
 //            delete data.post_thumbnail
 //            that.$emit('update_success')
-//            this.$store.commit('podcast/UPDATE_EPISODE_SUCCESS')
-          })
-          .catch(e => console.log(e))
+//            this.$store.commit('podcast/UPDATE_EPISODE_SUCCESS', r)
+//          })
+//          .catch(e => console.log(e))
       }
     }
   }

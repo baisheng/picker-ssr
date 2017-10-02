@@ -208,11 +208,23 @@ export const actions = {
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
     const data = (await this.$axios.get(`/app/${this.getters.appId}/podcast/${id}`)).data
+    console.log(JSON.stringify(data))
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
     } else {
       commit('podcast/GET_DETAIL_FAILURE')
     }
+  },
+  async updatePodcast ({commit}, form) {
+    commit('podcast/UPDATE_DETAIL')
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/posts/${form.id}`, form)
+    if (data.errno > 0) {
+      // console.log('update failure')
+      commit('podcast/UPDATE_DETAIL_FAILURE')
+    } else {
+      commit('podcast/UPDATE_DETAIL_SUCCESS', form)
+    }
+    // console.log(data)
   },
   async loadEpisodeList ({commit}, {axios, params}) {
     commit('podcast/REQUEST_EPISODE_LIST')
@@ -234,9 +246,12 @@ export const actions = {
       })
   },
   // 节目创建
-  async episodeCreate ({commit}, {data, axios}) {
+  async episodeCreate ({commit}, {data}) {
     commit('podcast/CREATE_EPISODE')
-    await axios.post(`/app/${this.getters.orgId}/posts`, data)
+    console.log(' create podcast')
+    console.log(JSON.stringify(data))
+    // const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, )
+    await this.$axios.post(`/app/${this.getters.appId}/posts`, data)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
