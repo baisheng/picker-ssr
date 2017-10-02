@@ -9,7 +9,8 @@
     <!-- Header -->
     <podcast-header :podcast="podcast" @featured_image_upload="save" @change_status="save"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save" :status="podcastStatus"></podcast-content-form>
+    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save"
+                          :status="podcastStatus"></podcast-content-form>
     <!-- Episode-list -->
     <episode-list :podcast="podcast" @podcast_item_update="update"></episode-list>
   </main>
@@ -27,8 +28,6 @@
     middleware: 'authenticated',
     layout: 'podcast',
     async fetch ({store, params}) {
-      console.log('lalalal ...')
-      console.log(JSON.stringify(params))
       if (params.id && !Object.is(Number(params.id), NaN)) {
         console.log(JSON.stringify(params))
         await store.dispatch('getPodcast', params.id)
@@ -118,15 +117,6 @@
       },
       podcastStatus () {
         return this.$store.state.podcast.detail.status
-      },
-      detailData: {
-        get () {
-// eslint-disable-next-line indent
-//          return this.$store.state.podcast.detail.data
-        },
-        set (value) {
-//          this.$store.commit('podcast/UPDATE_DETAIL', value)
-        }
       }
     },
     mounted () {
@@ -134,26 +124,30 @@
 //        this.update(data)
 //      })
       // 初始化
-//      this.podcast = this.detail
 
-      this.$nextTick(() => {
-        if (JSON.stringify(this.detail.data) !== '{}') {
-          this.podcast = Object.assign(this.podcast, this.detail)
-        }
-      })
+//      this.podcast = this.detail
+      this.podcast = this.detail
+//      this.podcast = Object.assign(this.detail)
+//      if (Object.is(this.podcast.children, undefined)) {
+//        this.podcast.children = []
+//      }
+//      this.$nextTick(() => {
+//        if (JSON.stringify(this.detail.data) !== '{}') {
+//          this.podcast = Object.assign({children: []}, this.detail)
+//        }
+//      })
       this.$watch('podcast.title', () => {
         this.save()
       })
       this.$watch('podcast.content', () => {
         this.save()
       })
-//      this.$watch('podcast.author', () => {
-//        this.save()
-//      })
+      this.$watch('podcast.author', () => {
+        this.save()
+      })
     },
     methods: {
       async save (data, id) {
-        console.log(JSON.stringify(data) + '--data--')
         this.status = 'saving'
 //        if (!this.post.id && this.post.content === null) return
         if (Object.is(this.podcast.id, undefined)) {
@@ -174,7 +168,11 @@
 //            commit('posts/CREATE_FAILURE', err)
             })
         } else {
-          await this.update(this.podcast, this.podcast.id)
+          if (data) {
+            await this.update(data, data.id)
+          } else {
+            await this.update(this.podcast, this.podcast.id)
+          }
         }
       },
       async update (data, id) {
@@ -184,7 +182,7 @@
           data.id = id
         }
         await this.$store.dispatch('updatePodcast', data)
-        console.log(JSON.stringify(data))
+//        console.log(JSON.stringify(data))
 //        console.log(this.isSaving + 'adfasdfsdaf')
 
 //        console.log(JSON.stringify(data))
@@ -198,7 +196,7 @@
 //            console.log(JSON.stringify(r))
 //            this.podcast.saving = false
 //            console.log(r.status)
-            // 执行 vux store 状态
+        // 执行 vux store 状态
 //            delete data.post_thumbnail
 //            that.$emit('update_success')
 //            this.$store.commit('podcast/UPDATE_EPISODE_SUCCESS', r)

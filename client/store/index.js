@@ -204,16 +204,25 @@ export const actions = {
     unsetToken()
     commit('SET_USER', null)
   },
+  async updatePodcastAuthor ({commit}, form) {
+    // const form = {
+    //   author: author.id
+    // }
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/posts/${form.id}`, form)
+    // await actions.updatePodcast({commit}, form)
+    commit('podcast/SET_AUTHOR', form.authorInfo)
+  },
   /// App Podcast
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
     const data = (await this.$axios.get(`/app/${this.getters.appId}/podcast/${id}`)).data
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
     } else {
       commit('podcast/GET_DETAIL_FAILURE')
     }
+    return data
   },
   async updatePodcast ({commit}, form) {
     commit('podcast/UPDATE_DETAIL')
@@ -224,6 +233,7 @@ export const actions = {
     } else {
       commit('podcast/UPDATE_DETAIL_SUCCESS', form)
     }
+    return data
     // console.log(data)
   },
   async loadEpisodeList ({commit}, {axios, params}) {
@@ -248,8 +258,8 @@ export const actions = {
   // 节目创建
   async episodeCreate ({commit}, {data}) {
     commit('podcast/CREATE_EPISODE')
-    console.log(' create podcast')
-    console.log(JSON.stringify(data))
+    // console.log(' create podcast')
+    // console.log(JSON.stringify(data))
     // const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, )
     await this.$axios.post(`/app/${this.getters.appId}/posts`, data)
       .then(response => {

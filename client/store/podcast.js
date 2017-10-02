@@ -41,12 +41,17 @@ export const state = () => {
       status: 'init',
       fetching: false,
       data: {
+        children: []
       }
     }
   }
 }
 
 export const mutations = {
+  // 设置作者信息
+  SET_AUTHOR (state, data) {
+    state.detail.data.authorInfo = data
+  },
   PUSH_EPISODE (state, data) {
     if (Object.is(state.detail.data.children, undefined)) {
       state.detail.data.children = []
@@ -71,7 +76,8 @@ export const mutations = {
     // state.episode.creating = true
     state.episode.id = action.data
     // Object.assign(state.user, user);
-    console.log(action.data)
+    // console.log('-----lalala----')
+    // console.log(action.data)
   },
   CREATE_EPISODE_FAILURE (state) {
     state.episode.creating = false

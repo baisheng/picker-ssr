@@ -14,12 +14,16 @@
     </div>
     <div slot="expandedSummary">
       <div>
-        <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;" @click="changeStatus('off')" v-if="podcast.status === 'publish'">下架</button>
-        <button type="button" class="button is-primary is-compact" style="margin-right: 8px;" @click="changeStatus('publish')" v-else>上架</button>
+        <button type="button" class="button is-error is-compact is-scary" style="margin-right: 8px;"
+                @click="changeStatus('off')" v-if="podcast.status === 'publish'">下架
+        </button>
+        <button type="button" class="button is-primary is-compact" style="margin-right: 8px;"
+                @click="changeStatus('publish')" v-else>上架
+        </button>
         <file-upload
           class="button popover-icon is-compact"
           name="file"
-          :post-action="postAction"
+          :post-action="uploadAction"
           v-model="files"
           @input-file="input"
           @input-filter="inputFilter"
@@ -39,11 +43,13 @@
         </file-upload>
       </div>
     </div>
-    <div @click="handleClick"
+
+    <div
+      @click.prevent="handleClick"
          :class="classes"
-         :style="collapsed ? `background-image: url(${podcast.featured_image});` : ''"
-         v-if="podcast.featured_image">
-<!--      <button class="button editor-drawer-well__remove is-compact" type="button" @click="onRemove">
+         :style="collapsed ? `background-image: url(${featuredImage});` : ''"
+         v-if="featuredImage">
+      <button class="button editor-drawer-well__remove is-compact" type="button" @click.prevent="onRemove">
         <span class="screen-reader-text">移除</span>
         <svg class="gridicon gridicons-cross editor-drawer-well__remove-icon" height="24" width="24"
              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -52,8 +58,8 @@
               d="M18.36 19.78L12 13.41l-6.36 6.37-1.42-1.42L10.59 12 4.22 5.64l1.42-1.42L12 10.59l6.36-6.36 1.41 1.41L13.41 12l6.36 6.36z"></path>
           </g>
         </svg>
-      </button>-->
-      <img :src="podcast.featured_image" class="post-image__image" v-if="!collapsed"/>
+      </button>
+      <img :src="featuredImage" class="post-image__image" v-if="!collapsed"/>
     </div>
     <empty-content title="没有封面图" line="是否要设置封面图？" :illustration="illustration" v-else>
       <button class="media-library__upload-button button button is-primary"
@@ -74,9 +80,11 @@
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../../foldable-card'
   import EmptyContent from '../../empty-content'
+  import uploadMixin from '../../../utils/helpers/upload'
 
   export default {
     name: 'PodcastHeader',
+    mixins: [uploadMixin],
     props: {
       podcast: {
         type: Object,
@@ -92,7 +100,8 @@
         uploadProgress: '',
         size: 1024 * 1024 * 10,
         collapsed: true,
-        illustration: '/images/media/illustration-media.svg'
+        illustration: '/images/media/illustration-media.svg',
+        curFeaturedImage: ''
       }
     },
     computed: {
@@ -127,12 +136,19 @@
           return '/images/people/mystery-person.svg'
         }
       },
-      postAction () {
-        const appId = this.$store.getters.appId
-        const baseURL = process.env.baseURL
-        return `${baseURL}/app/${appId}/file`
-      },
       featuredImage () {
+        if (this.curFeaturedImage) {
+          return this.curFeaturedImage
+        } else {
+          this.curFeaturedImage = this.podcast.featured_image
+          return this.curFeaturedImage
+        }
+//        const imageSrc = this.curFeaturedImage
+//        if (imageSrc) {
+//          return imageSrc
+//        } else {
+//          return this.podcast.featured_image
+//        }
       },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
@@ -157,8 +173,20 @@
         this.podcast.status = status
         this.$emit('change_status', this.podcast)
       },
-      onRemove () {
+      async onRemove () {
+        this.progress = 'removing'
         // 删除封面图
+        const form = {
+          id: this.podcast.id,
+          meta: {
+            '_thumbnail_id': -1
+          }
+        }
+        const data = await this.$store.dispatch('updatePodcast', form)
+        if (data.errno === 0) {
+          this.curFeaturedImage = ''
+          this.progress = 'success'
+        }
       },
       changeCover () {
         const input = this.$refs.upload.$el.querySelector('input')
@@ -185,12 +213,17 @@
           if (newFile.success && !oldFile.success) {
             // this.success(newFile)
             const data = newFile.response.data
-            this.podcast.featured_image = data.url
+//            this.podcast.featured_image = data.url
+            this.curFeaturedImage = data.url
             this.progress = 'success'
-            this.podcast.meta = {
-              '_thumbnail_id': data.id
+            const form = {
+              id: this.podcast.id,
+              meta: {
+                '_thumbnail_id': data.id
+              }
             }
-            this.$emit('featured_image_upload', this.podcast)
+            this.$store.dispatch('updatePodcast', form)
+//            this.$emit('featured_image_upload', form)
           }
         }
         if (!newFile && oldFile) {
@@ -200,24 +233,6 @@
         // 自动开始
         if (newFile && !oldFile && !this.$refs.upload.active) {
           this.$refs.upload.active = true
-        }
-      },
-      inputFilter (newFile, oldFile, prevent) {
-        if (newFile && !oldFile) {
-          // 过滤系疼文件 or 隐藏文件
-          if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-            return prevent()
-          }
-          // 过滤 php html js 文件
-          if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
-            return prevent()
-          }
-          // 创建 blob 字段
-          newFile.blob = ''
-          const URL = window.URL || window.webkitURL
-          if (URL && URL.createObjectURL) {
-            newFile.blob = URL.createObjectURL(newFile.file)
-          }
         }
       },
       handleClick () {

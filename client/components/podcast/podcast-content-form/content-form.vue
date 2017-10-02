@@ -183,10 +183,15 @@
 //      }
     },
     methods: {
-      select (selectedOption, id) {
-        this.podcast.author = selectedOption.id
-        this.podcast.authorInfo = selectedOption
-        this.$emit('content_update', this.podcast)
+      select (selected, id) {
+//        this.podcast.author = selectedOption.id
+//        this.podcast.authorInfo = selectedOption
+//        this.$emit('content_update', this.podcast)
+        this.$store.dispatch('updatePodcastAuthor', {
+          id: this.podcast.id,
+          author: selected.id,
+          authorInfo: selected
+        })
       },
 //      customLabel ({ user_login, user_nicename }) {
 //        return `${user_login} – ${user_nicename}`

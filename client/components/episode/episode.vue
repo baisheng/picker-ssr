@@ -22,7 +22,7 @@
         :class="uploadProgress ? 'is-busy' : ''"
         class="button is-error is-compact"
         name="file"
-        post-action="http://api.picker.la/rest/orgs/1/file"
+        :post-action="uploadAction"
         v-model="files"
         @input-file="input"
         @input-filter="inputFilter"
@@ -158,6 +158,11 @@
       creating () {
         return this.$store.state.podcast.episode.creating
       },
+      uploadAction () {
+        const appId = this.$store.getters.appId
+        const baseURL = process.env.baseURL
+        return `${baseURL}/app/${appId}/file`
+      },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       }
@@ -171,7 +176,8 @@
       }
     },
     mounted () {
-      this.episode = this.data
+//      this.episode = this.data
+      this.episode = Object.assign({}, this.data)
     },
     components: {
       FoldableCard,
@@ -223,7 +229,7 @@
             this.uploadProgress = ''
             // 如果不是新建就更新
             if (!this.creating) {
-              this.$store.commit('podcast/UPDATE_EPISODE')
+//              this.$store.commit('podcast/UPDATE_EPISODE')
               this.$emit('update', this.episode, this.episode.id)
             }
           }

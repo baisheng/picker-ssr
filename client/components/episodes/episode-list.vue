@@ -175,6 +175,7 @@
           title: ''
         },
         curIndex: -1,
+        episodeList: [],
         episode: {
           title: '无标题',
           status: 'draft',
@@ -191,9 +192,10 @@
       // 如果是创建了内容
 //      this.curItem = this.post
 
-//      if (!Object.is(this.podcast.children, null)) {
+      if (!Object.is(this.podcast.children, null)) {
+        this.episodeList = Object.assign({}, this.podcast.children)
 //        this.itemList = this.podcast.children
-//      }
+      }
       this.$dragging.$on('dragged', ({value, draged, to}) => {
         this.list = value.list
         this.curItem = draged
@@ -219,7 +221,7 @@
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
-        return `${baseURL}/file`
+        return `${baseURL}/app/${appId}/file`
       },
 //      episodeList () {
 //        return this.$store.state.podcast.episodeList
@@ -264,8 +266,7 @@
       'episodeState': {
         handler (val, oldVal) {
           if (val.del === 'success') {
-            console.log('lalal')
-            this.podcast.children.splice(this.curIndex, 1)
+//            this.podcast.children.splice(this.curIndex, 1)
           }
         },
         deep: true
@@ -274,9 +275,9 @@
         handler (val, oldVal) {
 //          console.log('lalala')
 //          this.episode.id = val
-          this.podcast.children.push(this.episode)
+//          this.podcast.children.push(this.episode)
 //          console.log(val)
-//          this.$store.commit('podcast/PUSH_EPISODE', this.episode)
+          this.$store.commit('podcast/PUSH_EPISODE', this.episode)
         },
         deep: true
       }
