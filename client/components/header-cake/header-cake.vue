@@ -2,7 +2,8 @@
   <card :class="classes">
     <header-cake-back :text="backText" :href="backHref" @click="handleClick"></header-cake-back>
     <div class="header-cake__title" @click="handleTitleClick">
-      <slot></slot>
+      {{ title }}
+      <!--<slot></slot>-->
     </div>
     <button class="button header-cake__back is-spacer is-compact is-borderless"  disabled="" type="button">
       <svg class="gridicon gridicons-arrow-left needs-offset-y" height="18" width="18"
@@ -26,6 +27,9 @@
       compact: {
         type: Boolean,
         default: false
+      },
+      title: {
+        type: String
       },
       backText: String,
       backHref: String

@@ -41,6 +41,7 @@ export const state = () => {
       status: 'init',
       fetching: false,
       data: {
+        authorInfo: {},
         children: []
       }
     }
@@ -48,6 +49,29 @@ export const state = () => {
 }
 
 export const mutations = {
+  DELETE (state) {
+    state.detail.del = 'start'
+  },
+  DELETE_SUCCESS (state) {
+    state.detail.del = 'success'
+  },
+  DELETE_FAILURE (state) {
+    state.detail.del = 'error'
+  },
+  CREATE (state) {
+    state.detail.creating = true
+  },
+  CREATE_SUCCESS (state, action) {
+    state.detail.data.id = action.id
+    state.detail.data = action
+    // Object.assign(state.user, user);
+  },
+  CREATE_FAILURE (state) {
+    state.detail.creating = false
+  },
+  CREATE_CANCEL (state) {
+    state.detail.creating = false
+  },
   // 设置作者信息
   SET_AUTHOR (state, data) {
     state.detail.data.authorInfo = data
@@ -59,6 +83,10 @@ export const mutations = {
     state.detail.data.children.push(data)
     // state.detail.data.children.push(data)
     // state.detail.data.children.push.apply(state.detail.data.children, data)
+  },
+  SET_EPISODE_LIST (state, list) {
+    console.log(list)
+    state.detail.data.children = list
   },
   DELETE_EPISODE (state) {
     state.episode.del = 'start'
@@ -72,9 +100,10 @@ export const mutations = {
   CREATE_EPISODE (state) {
     state.episode.creating = true
   },
-  CREATE_EPISODE_SUCCESS (state, action) {
+  CREATE_EPISODE_SUCCESS (state, data) {
     // state.episode.creating = true
-    state.episode.id = action.data
+    state.episode.id = data.id
+    state.detail.data.children.push(data)
     // Object.assign(state.user, user);
     // console.log('-----lalala----')
     // console.log(action.data)
@@ -167,7 +196,8 @@ export const mutations = {
   },
   UPDATE_DETAIL_SUCCESS (state, action) {
     state.detail.status = 'success'
-    state.detail.data = action.data
+    state.detail.data = Object.assign(state.detail.data, action)
+    // state.detail.data = action.data
   },
   REQUEST_DETAIL (state) {
     state.detail.fetching = true

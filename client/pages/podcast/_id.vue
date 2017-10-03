@@ -2,17 +2,14 @@
   <main data-reactroot="" class="connected-applications main" role="main">
 
     <!-- Navbar -->
-    <header-cake compact backHref="/podcasts">
-      <span v-if="podcast.id">更新内容</span>
-      <span v-else>添加内容</span>
+    <header-cake compact backHref="/podcasts" :title="title">
     </header-cake>
     <!-- Header -->
-    <podcast-header :podcast="podcast" @featured_image_upload="save" @change_status="save"></podcast-header>
+    <podcast-header :podcast.sync="detail"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="podcast" :users="users.data" @content_update="save"
-                          :status="podcastStatus"></podcast-content-form>
+    <podcast-content-form :podcast="detail" :users="users.data" @save="save"></podcast-content-form>
     <!-- Episode-list -->
-    <episode-list :podcast="podcast" @podcast_item_update="update"></episode-list>
+    <episode-list :podcast="detail" @podcast_item_update="update" v-if="detail.id"></episode-list>
   </main>
 </template>
 
@@ -29,7 +26,6 @@
     layout: 'podcast',
     async fetch ({store, params}) {
       if (params.id && !Object.is(Number(params.id), NaN)) {
-        console.log(JSON.stringify(params))
         await store.dispatch('getPodcast', params.id)
       }
       await store.dispatch('loadUsers')
@@ -88,6 +84,9 @@
 //      }
     },
     computed: {
+      title () {
+        return this.detail.title ? `修改 - 【${this.detail.title}】` : '创建新节目'
+      },
       user () {
         return this.$store.state.user
       },
@@ -114,9 +113,6 @@
         return this.$store.state.token
 //        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
 //        return
-      },
-      podcastStatus () {
-        return this.$store.state.podcast.detail.status
       }
     },
     mounted () {
@@ -124,49 +120,56 @@
 //        this.update(data)
 //      })
       // 初始化
-
+      this.$nextTick(() => {
+//        this.podcast = Object.assign({}, this.detail)
+//        this.podcast.children = [...this.detail.children]
+      })
 //      this.podcast = this.detail
-      this.podcast = this.detail
 //      this.podcast = Object.assign(this.detail)
-//      if (Object.is(this.podcast.children, undefined)) {
-//        this.podcast.children = []
+//      if (!Object.is(this.detail.children, undefined)) {
+//        this.podcast.children = [...this.detail.children]
 //      }
 //      this.$nextTick(() => {
 //        if (JSON.stringify(this.detail.data) !== '{}') {
 //          this.podcast = Object.assign({children: []}, this.detail)
 //        }
 //      })
-      this.$watch('podcast.title', () => {
-        this.save()
-      })
-      this.$watch('podcast.content', () => {
-        this.save()
-      })
-      this.$watch('podcast.author', () => {
-        this.save()
-      })
+//      this.$watch('podcast.title', () => {
+//        this.save()
+//      })
+//      this.$watch('podcast.content', () => {
+//        this.save()
+//      })
+//      this.$watch('podcast.author', () => {
+//        this.save()
+//      })
     },
     methods: {
       async save (data, id) {
         this.status = 'saving'
 //        if (!this.post.id && this.post.content === null) return
-        if (Object.is(this.podcast.id, undefined)) {
+        if (Object.is(this.detail.id, undefined)) {
 //        this.post.autoExcerpt = this.autoExcerpt
 //          const baseUrl = 'http://api.picker.la/rest/orgs/1'
-          await this.$axios.post(`/app/${this.appId}/posts`, this.podcast)
-            .then(response => {
-              const postId = response.data.data
-              if (!Object.is(postId, null)) {
-                this.podcast.id = postId
-                // 更新浏览器地址栏
-                history.pushState({state: 1}, 'Auto Save State', '/podcast/' + postId + '')
-              }
+//          console.log(JSON.stringify(data))
+          const res = await this.$store.dispatch('createPodcast', data)
+          if (res.errno === 0) {
+            history.pushState({state: 1}, 'Auto Save State', '/podcast/' + res.data + '')
+          }
+//          await this.$axios.post(`/app/${this.appId}/posts`, this.podcast)
+//            .then(response => {
+//              const postId = response.data.data
+//              if (!Object.is(postId, null)) {
+//                this.podcast.id = postId
+//                 更新浏览器地址栏
+//                history.pushState({state: 1}, 'Auto Save State', '/podcast/' + postId + '')
+//              }
 //            const success = !!response.status && response.data && Object.is(response.data.errno, 0)
 //            if (success) commit('posts/CREATE_SUCCESS', response.data)
 //            if (!success) commit('posts/CREATE_FAILURE')
-            }, err => {
+//            }, err => {
 //            commit('posts/CREATE_FAILURE', err)
-            })
+//            })
         } else {
           if (data) {
             await this.update(data, data.id)
@@ -181,6 +184,7 @@
 //          podcastId = id
           data.id = id
         }
+//        console.log(JSON.stringify(data))
         await this.$store.dispatch('updatePodcast', data)
 //        console.log(JSON.stringify(data))
 //        console.log(this.isSaving + 'adfasdfsdaf')

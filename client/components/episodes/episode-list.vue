@@ -3,7 +3,7 @@
     <card class="section-header" compact>
       <div class="section-header__label">
           <span class="section-header__label-text" v-if="!creating">
-            节目列表 ({{ episodeCount }})
+            节目列表 ({{ podcast.children.length }})
           </span>
         <span v-else>
             {{ post.title }}
@@ -111,36 +111,36 @@
       </div>
     </card>
 
-    <episode :key="index" v-for="(item, index) in podcast.children"
+    <episode :key="item.id" v-for="(item, index) in episodeList"
              :order="index"
              :data="item"
-             v-dragging="{item: item, list: podcast.children}"
+             v-dragging="{item: item, list: episodeList}"
              @episode-del="del" @update="update"></episode>
   </div>
 </template>
-<style>
-  .msg {
-    transition: all .3s ease;
-    height: 30px;
-    padding: 10px;
-    background-color: #eee;
-    overflow: hidden;
-  }
+<style lang="scss">
+  .dragging {
+    /*animation-name: shake;*/
+    /*animation-duration: 0.07s;*/
+    /*animation-iteration-count: infinite;*/
+    /*animation-direction: alternate;*/
+    /*position: relative;*/
+    /*background-color: #fafbfc;*/
+    /*margin: 14px;*/
+    /*height: 52px;*/
+    /*width: 52px;*/
+    /*border-radius: 10px;*/
+    box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.10);
+    /*color: #777;*/
+    font-weight: 900;
 
-  .msg.v-enter, .msg.v-leave {
-    height: 0;
-    padding: 0 10px;
-    opacity: 0;
-  }
-
-  .fade-enter-active, .fade-leave-active {
-    /*transition: opacity .5s*/
-    transition: all .3s ease;
-  }
-
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
-  {
-    opacity: 0;
+    border: 1px dashed #ccc;
+    /*background: rgba(255, 255, 255, 0.8);*/
+    /*font-size: 12px;*/
+    /*line-height: 52px;*/
+    /*text-align: center;*/
+    transition: all 0.3s;
+    /*cursor: pointer;*/
   }
 </style>
 <script>
@@ -167,6 +167,7 @@
         },
         toItem: null,
         itemList: [],
+        episodeList: [],
         files: [],
         uploadProgress: '',
         accept: 'image/png,image/gif,image/jpeg,image/webp,audio/mp3',
@@ -175,7 +176,6 @@
           title: ''
         },
         curIndex: -1,
-        episodeList: [],
         episode: {
           title: '无标题',
           status: 'draft',
@@ -191,22 +191,61 @@
     mounted () {
       // 如果是创建了内容
 //      this.curItem = this.post
+      this.$nextTick(() => {
+        console.log('next tick for episode list')
+//        this.episodeList = Array.from(this.podcast.children)
+        this.episodeList = [...this.podcast.children]
+//        console.log(JSON.stringify(this.episodeList))
+//        if (!Object.is(this.podcast.children, undefined)) {
+//          this.episodeList = this.podcast.children
+//          this.episodeList = Array.from(this.podcast.children)
+//          this.episodeList = this.podcast.children.splice()
+//          console.log(JSON.stringify(this.episodeList))
+        // eslint-disable-next-line prefer-reflect
+//          this.episodeList.apply(this.podcast.children)
+//          this.episodeList.push(this.podcast.children)
+//          this.episodeList.fill(this.podcast.children)
+//          this.episodeList = [...this.podcast.children]
+//          this.episodeList = this.podcast.children.slice()
+//          this.episodeList.push.apply(this.podcast.children)
+//            = Object.assign({}, this.podcast.children)
+//          this.itemList = this.podcast.children
+//        }
+      })
 
-      if (!Object.is(this.podcast.children, null)) {
-        this.episodeList = Object.assign({}, this.podcast.children)
-//        this.itemList = this.podcast.children
-      }
       this.$dragging.$on('dragged', ({value, draged, to}) => {
-        this.list = value.list
-        this.curItem = draged
-        // eslint-disable-next-line prefer-const
-        let _curSort = draged.sort
-        this.curItem.sort = to.sort
-        to.sort = _curSort
-        this.toItem = to
+        this.episodeList = value.list
+//        this.$store.commit('podcast/SET_EPISODE_LIST', value.list)
+
+//        this.curItem = draged
+//        console.log(value.item.id)
+//        // eslint-disable-next-line prefer-const
+//        let _curSort = draged.sort
+//        console.log(draged.sort + ' - draged')
+//        console.log(to.sort + ' - to')
+//        this.curItem.sort = to.sort
+//        to.sort = _curSort
+//        this.toItem = to
+// eslint-disable-next-line no-undef
+        this.$store.dispatch('updatePodcast', {
+          id: draged.id,
+          sort: to.sort
+        })
+        this.$store.dispatch('updatePodcast', {
+          id: to.id,
+          sort: draged.sort
+        })
         // 更新排序
-        this.$emit('podcast_item_update', this.curItem, this.curItem.id)
-        this.$emit('podcast_item_update', to, to.id)
+//        this.$emit('podcast_item_update', {
+//          id: draged.id,
+//          sort: to.sort
+//        })
+//        this.$emit('podcast_item_update', {
+//          id: to.id,
+//          sort: draged.sort
+//        })
+//        this.$emit('podcast_item_update', this.curItem, this.curItem.id)
+//        this.$emit('podcast_item_update', to, to.id)
       })
       this.$dragging.$on('dragend', () => {
       })
@@ -224,8 +263,16 @@
         return `${baseURL}/app/${appId}/file`
       },
 //      episodeList () {
-//        return this.$store.state.podcast.episodeList
+//        return [...this.$store.state.podcast.detail.data.children]
 //      },
+      episode1List: {
+        get () {
+          return [...this.podcast.children]
+        },
+        set (newValue) {
+          this.$store.commit('podcast/SET_EPISODE_LIST', newValue)
+        }
+      },
 //      status: {
 //        get () {
 //        }
@@ -246,9 +293,9 @@
       episodeState () {
         return this.$store.state.podcast.episode
       },
-      episodeId () {
-        return this.$store.state.podcast.episode.id
-      },
+//      episodeId () {
+//        return this.$store.state.podcast.episode.id
+//      },
 //      postId () {
 //        return this.$store.state.posts.post.data.id
 //      },
@@ -263,6 +310,12 @@
         },
         deep: true
       },
+      'podcast.children': {
+        handler (val, oldVal) {
+//          console.log(val)
+          this.episodeList = [...this.podcast.children]
+        }
+      },
       'episodeState': {
         handler (val, oldVal) {
           if (val.del === 'success') {
@@ -270,17 +323,17 @@
           }
         },
         deep: true
-      },
-      'episodeId': {
-        handler (val, oldVal) {
+      }
+//      'episodeId': {
+//        handler (val, oldVal) {
 //          console.log('lalala')
 //          this.episode.id = val
 //          this.podcast.children.push(this.episode)
 //          console.log(val)
-          this.$store.commit('podcast/PUSH_EPISODE', this.episode)
-        },
-        deep: true
-      }
+//          this.$store.commit('podcast/PUSH_EPISODE', this.episode)
+//        },
+//        deep: true
+//      }
     },
     methods: {
       getStatusClass (status) {
@@ -311,9 +364,8 @@
       // 创建节目 episode
       create () {
         const _sort = this.podcast.children.length + 1
-//        console.log(this.podcast.id + '----xxxx')
         this.episode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
-        this.$store.dispatch('episodeCreate', {data: this.episode})
+        this.$store.dispatch('episodeCreate', this.episode)
       },
       cancel () {
         this.$store.commit('podcast/CREATE_EPISODE_CANCEL')

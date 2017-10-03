@@ -21,6 +21,7 @@
   .option__small {
     display: block;
   }
+
   textarea {
     height: 180px;
   }
@@ -33,7 +34,8 @@
           <span class="section-header__label-text">
             {{ title }}
         </span>
-        <spinner v-show="!isSaving" :className="'edit-gravatar__spinner'"></spinner>
+        <spinner v-show="!(podcastStatus === 'success' || podcastStatus === 'init')"
+                 :className="'edit-gravatar__spinner'"></spinner>
 
       </div>
     </card>
@@ -54,7 +56,8 @@
                        placeholder="请输入标题"
                        size="1"
                        class="token-field__input"
-                       v-model="podcast.title">
+                       :value="podcast.title"
+                       @change="updateTitle">
               </div>
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
@@ -98,11 +101,16 @@
               内容介绍
             </label>
             <div class="counted-textarea">
-              <textarea name="message" id="message" maxlength="500" placeholder=""
-                        class="counted-textarea__input form-textarea" v-model="podcast.content">
+              <textarea
+                name="message" id="message" maxlength="500"
+                placeholder=""
+                class="counted-textarea__input form-textarea"
+                :value="podcast.content"
+                v-model="content"
+                @change="updateContent">
               </textarea>
               <div class="counted-textarea__count-panel">
-                {{ wordCount }} 个字
+                {{ _wordCount(content) }} 个字
               </div>
             </div>
           </fieldset>
@@ -116,6 +124,7 @@
   import {Card} from '../../card'
   import Multiselect from 'vue-multiselect'
   import Spinner from '~/components/spinner'
+
   export default {
     props: {
       status: {
@@ -134,7 +143,7 @@
       return {
         saving: false,
         content: '',
-        value: '',
+        value: {},
         editing: false
       }
     },
@@ -144,60 +153,62 @@
       Spinner
     },
     mounted () {
+      this.value = this.podcast.authorInfo
       // 初始化角色列表默认值
       this.$nextTick(() => {
-        if (this.podcast.hasOwnProperty('authorInfo')) {
-          this.value = this.podcast.authorInfo
-        }
-
+        this.content = this.podcast.content
+//        if (this.podcast.hasOwnProperty('authorInfo')) {
+//          this.value = this.podcast.authorInfo
+//        }
       })
     },
     computed: {
-      isSaving () {
-        return this.status !== 'success' || this.status !== 'init'
+      podcastStatus () {
+        return this.$store.state.podcast.detail.status
       },
       title () {
-        if (this.status === 'saving') {
+        if (this.podcastStatus === 'saving') {
           return '保存中...'
-        } else if (this.status === 'error') {
+        } else if (this.podcastStatus === 'error') {
           return '保存失败...'
         } else {
           return '节目信息'
         }
-      },
-      wordCount () {
-        if (this.podcast.content !== null) {
-          return this._wordCount(this.podcast.content)
-        }
       }
     },
-    watch: {
-//      'podcast': {
-//        handler (val, oldVal) {
-//          if (val) {
-//            this.editing = true
-//          }
-//          this.$emit('content_update', this.podcast)
-//        },
-//        deep: true
-//      }
-    },
     methods: {
+      updateTitle (e) {
+        const form = {
+          id: this.podcast.id,
+          title: e.target.value
+        }
+        this.$emit('save', form)
+      },
+      updateContent (e) {
+        const form = {
+          id: this.podcast.id,
+          content: e.target.value
+        }
+        this.$emit('save', form)
+//        this.$store.dispatch('updatePodcast', form)
+      },
       select (selected, id) {
-//        this.podcast.author = selectedOption.id
-//        this.podcast.authorInfo = selectedOption
-//        this.$emit('content_update', this.podcast)
-        this.$store.dispatch('updatePodcastAuthor', {
+        let form = {
           id: this.podcast.id,
           author: selected.id,
           authorInfo: selected
-        })
+        }
+//        let form = Object.assign({
+//          author: selected.id,
+//          authorInfo: selected
+//        }, this.podcast)
+        this.$emit('save', form)
       },
 //      customLabel ({ user_login, user_nicename }) {
 //        return `${user_login} – ${user_nicename}`
 //      },
       handleClick () {
-        this.$emit('content_update', this.podcast)
+//        this.$emit('save', this.podcast)
       },
       _wordCount (data) {
         const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g

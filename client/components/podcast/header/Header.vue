@@ -1,7 +1,8 @@
 <template>
   <foldable-card class="is-compact" expanded>
     <div class="connected-application-item__header is-p" slot="header">
-      <div class="plugin-icon connected-application-icon">
+      <div class="plugin-icon connected-application-icon animate__appear">
+
         <img
           class="plugin-icon__img"
           :src="authorAvatar">
@@ -88,8 +89,7 @@
     props: {
       podcast: {
         type: Object,
-        required: true,
-        status: ''
+        required: true
       }
     },
     data () {
@@ -140,6 +140,7 @@
         if (this.curFeaturedImage) {
           return this.curFeaturedImage
         } else {
+          this.curFeaturedImage = ''
           this.curFeaturedImage = this.podcast.featured_image
           return this.curFeaturedImage
         }
@@ -169,9 +170,12 @@
       EmptyContent
     },
     methods: {
-      changeStatus (status) {
-        this.podcast.status = status
-        this.$emit('change_status', this.podcast)
+      async changeStatus (status) {
+        const form = {
+          id: this.podcast.id,
+          status: status
+        }
+        await this.$store.dispatch('updatePodcast', form)
       },
       async onRemove () {
         this.progress = 'removing'
@@ -195,7 +199,6 @@
       },
       input (newFile, oldFile) {
         if (newFile && oldFile) {
-          // console.log('update', newFile, oldFile)
           if (newFile.active && !oldFile.active) {
             // this.beforeSend(newFile)
             // min size
@@ -208,7 +211,6 @@
           }
           if (newFile.error && !oldFile.error) {
             // this.error(newFile)
-            // console.log('error', newFile.error, newFile.response)
           }
           if (newFile.success && !oldFile.success) {
             // this.success(newFile)
@@ -228,7 +230,6 @@
         }
         if (!newFile && oldFile) {
           // this.remove(oldFile)
-          // console.log('remove', oldFile)
         }
         // 自动开始
         if (newFile && !oldFile && !this.$refs.upload.active) {

@@ -64,7 +64,10 @@
             <input type="text" autocapitalize="none"
                    autocomplete="off" value=""
                    placeholder="请输入标题" size="1"
-                   class="token-field__input" v-model="episode.title">
+                   class="token-field__input"
+                   v-model="episode.title"
+                   :value="episode.title"
+            @change="update">
           </div>
           <ul tabindex="-1" class="token-field__suggestions-list"></ul>
         </div>
@@ -168,12 +171,12 @@
       }
     },
     watch: {
-      'episode': {
-        handler(val, oldVal) {
+//      'episode': {
+//        handler(val, oldVal) {
 //          this.update(val)
-        },
-        deep: true
-      }
+//        },
+//        deep: true
+//      }
     },
     mounted () {
 //      this.episode = this.data
@@ -191,8 +194,13 @@
         this.$emit('episode-del', this.episode, this.order)
 //        this.$emit('podcast_item_update', item, item.id)
       },
-      update (item) {
+      async update (item) {
         this.status = 'updating'
+        const data = await this.$store.dispatch('updatePodcast', this.episode)
+        if (data.errno === 0) {
+          this.status = ''
+        }
+
 //        this.$store.dispatch('saveEpisode', this.episode)
         this.$emit('update', this.episode, this.episode.id)
       },
