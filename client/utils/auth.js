@@ -27,10 +27,10 @@ export const clientToken = () => {
   }
   const token = JSON.parse(window.localStorage.token)
   if (token) {
-    if (new Date().getTime() >= token.exp) {
+    if (new Date().getTime() >= token.expires) {
       return unsetToken()
     }
-    return token.value
+    return token
   }
 }
 export const getTokenFromCookie = (req) => {
@@ -55,9 +55,10 @@ export const setToken = (token) => {
   if (process.SERVER_BUILD) {
     return
   }
-  window.localStorage.setItem('token', token)
-  window.localStorage.setItem('user', JSON.stringify(jwtDecode(token)))
-  Cookie.set('jwt', token)
+  window.localStorage.setItem('token', JSON.stringify(token.value))
+  window.localStorage.setItem('user', JSON.stringify(jwtDecode(token.value)))
+  // console.log(token.expires)
+  Cookie.set('jwt', token.value, { expires: token.expires })
 }
 
 export const unsetToken = () => {

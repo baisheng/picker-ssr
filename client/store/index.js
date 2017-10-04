@@ -189,8 +189,8 @@ export const actions = {
         return
       }
       setToken(data.data.token)
-      commit('SET_TOKEN', data.data.token)
-      commit('SET_USER', data)
+      commit('SET_TOKEN', data.data.token.value)
+      commit('SET_USER', data.data.user)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         throw new Error('Bad credentials')

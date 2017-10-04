@@ -54,7 +54,7 @@
   /* eslint-disable no-unused-vars */
 
   import {Card} from '~/components/card'
-  import {setToken, checkSecret, extractInfoFromHash} from '~/utils/auth'
+//  import {setToken, checkSecret, extractInfoFromHash} from '~/utils/auth'
   import FormInputValidation from '~/components/forms/form-input-validation'
 
   export default {
