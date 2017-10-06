@@ -8,7 +8,8 @@ const dictionary = {
     attributes: {
       user_login: '用户名',
       user_pass: '密码',
-      email: '邮箱'
+      email: '邮箱',
+      episode_title: '节目名称'
     }
   }
 }

@@ -270,12 +270,16 @@ export const actions = {
   async episodeCreate ({commit}, form) {
     commit('podcast/CREATE_EPISODE')
     const {data} = await this.$axios.post(`/app/${this.getters.appId}/posts`, form)
+    console.log('create')
+    console.log(JSON.stringify(data))
     if (data.errno === 0) {
       form = Object.assign({id: data.data}, form)
       commit('podcast/CREATE_EPISODE_SUCCESS', form)
     } else {
       commit('podcast/CREATE_EPISODE_FAILURE')
     }
+    // 返回添加的内容 id
+    return data.data
     // const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, )
     // await this.$axios.post(`/app/${this.getters.appId}/posts`, data)
     //   .then(response => {

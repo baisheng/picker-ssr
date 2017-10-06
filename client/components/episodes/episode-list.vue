@@ -1,124 +1,176 @@
 <template>
-  <div>
-    <card class="section-header" compact>
-      <div class="section-header__label">
-          <span class="section-header__label-text" v-if="!creating">
-            节目列表 ({{ podcast.children.length }})
-          </span>
-        <span v-else>
-            {{ post.title }}
-          </span>
-      </div>
-      <div class="section-header__actions">
-        <file-upload
-          class="button popover-icon is-compact"
-          name="file"
-          :post-action="uploadAction"
-          v-model="files"
-          @input-file="input"
-          @input-filter="inputFilter"
-          :accept="accept"
-          :size="size || 0"
-          :headers="requestHeader"
-          ref="upload" v-show="!creating">
-          <!--Add upload files-->
-          <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
-            <g>
-              <path
-                d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
-            </g>
-          </svg>
-          批量上传
-        </file-upload>
-
-        <button class="button is-compact" @click="create" v-if="!creating">
-          <svg class="gridicon gridicons-plus-small needs-offset"
-               height="18" width="18" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
-            <g>
-              <path
-                d="M18 11h-5V6h-2v5H6v2h5v5h2v-5h5"></path>
-            </g>
-          </svg>
-          添加
-        </button>
-        <div class="button-group" v-else>
-          <button class="button is-compact is-primary" @click="create">
-            发布
-          </button>
-          <button class="button is-compact" @click="cancel">
-            取消
-          </button>
-        </div>
-      </div>
-    </card>
-
-    <card expanded v-if="creating">
-      <div class="connected-application-item__header" slot="header">
-
-        <div class="order">
-          <!--{{ index + 1 }}.-->
-        </div>
-        <h3> {{ episode.title }}</h3>
-      </div>
-      <button type="submit" class="button form-button is-compact is-active" slot="summary">
-        发布
+  <div class="episode-list">
+    <div class="card header-cake is-compact" v-if="creating">
+      <button class="button header-cake__back is-compact is-borderless" type="button" @click="cancel">
+        <svg class="gridicon gridicons-arrow-left needs-offset-y" height="18" width="18"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g>
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+          </g>
+        </svg><!-- react-text: 665 -->返回<!-- /react-text -->
       </button>
-      <div slot="expandedSummary" class="section-header__actions">
-        <span class="button-group">
-        <button type="button" class="button is-error is-compact is-scary">
-          <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24"><g><path
-            d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path></g></svg>
-          删除
-        </button>
-        <button type="button" class="button is-error is-compact">停播</button>
-        </span>
-      </div>
-      <form>
-        <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
-          标题
-        </label>
-          <div tabindex="-1" class="token-field">
-            <div tabindex="-1" class="token-field__input-container">
-              <input type="text" autocapitalize="none"
-                     autocomplete="off" value=""
-                     placeholder="请输入标题" size="1"
-                     class="token-field__input" v-model="episode.title">
-            </div>
+      <div class="header-cake__title">添加节目</div>
+
+      <button class="button header-cake__back  disabled is-compact is-borderless" type="button">
+        已保存为草稿
+      </button>
+    </div>
+    <div class="section-nav episode-navigation" v-if="!creating">
+
+      <div class="section-nav__mobile-header">
+        <span class="section-nav__mobile-header-text">全部</span></div>
+      <div class="section-nav__panel ">
+        <div class="section-nav-group">
+          <div class="section-nav-tabs">
+            <ul class="section-nav-tabs__list" role="menu">
+              <li class="is-selected section-nav-tab">
+                <a href="/comments/all/bluepx.wordpress.com"
+                   class="section-nav-tab__link" tabindex="0"
+                   aria-selected="true" role="menuitem"><span
+                  class="section-nav-tab__text">
+                  全部节目 ({{ podcast.children.length }})
+                </span></a></li>
+              <li class="section-nav-tab">
+                <a href="/comments/pending/bluepx.wordpress.com"
+                   class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                   role="menuitem"><span class="section-nav-tab__text">
+                  {{ unapprove }} 条未审核
+                  <!-- /react-text --></span></a></li>
+              <li class="section-nav-tab"><a href="/comments/approved/bluepx.wordpress.com"
+                                             class="section-nav-tab__link" tabindex="0" aria-selected="false"
+                                             role="menuitem"><span class="section-nav-tab__text"><!-- react-text: 10750 -->已发布
+                <!-- /react-text --></span></a></li>
+              <li class="section-nav-tab"><a href="/comments/trash/bluepx.wordpress.com" class="section-nav-tab__link"
+                                             tabindex="0" aria-selected="false" role="menuitem"><span
+                class="section-nav-tab__text"><!-- react-text: 10758 -->回收站<!-- /react-text --></span></a></li>
+            </ul>
           </div>
         </div>
-      </form>
-      <div>
-        <!--<card class="post-image is-placeholder is-compact"></card>-->
-        <player mutex theme="#42b983" preload="metadata" mode="circulation"
-                :music="newItem" v-if="newItem.url"></player>
-        <div class="empty-content" v-else>
-          <h2 class="empty-content__title">没有音频内容</h2>
-          <h3 class="empty-content__line">是否要上传内容？</h3>
-          <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
-          <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile(newItem)"
-                  :class="uploadProgress && newItem === curItem ? 'is-busy' : ''">
-              <span v-if="uploadProgress && newItem === curItem">
-                {{uploadProgress}}
-              </span>
-            <span v-else>
-                上传音频
-              </span>
+        <div class="section-header__actions">
+          <file-upload
+            class="button popover-icon is-compact"
+            name="file"
+            :post-action="uploadAction"
+            v-model="files"
+            @input-file="input"
+            @input-filter="inputFilter"
+            :accept="accept"
+            :size="size || 0"
+            :headers="requestHeader"
+            ref="upload" v-show="!creating">
+            <!--Add upload files-->
+            <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24">
+              <g>
+                <path
+                  d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
+              </g>
+            </svg>
+            批量上传
+          </file-upload>
+
+          <button class="button is-compact" @click="create" v-if="!creating">
+            <svg class="gridicon gridicons-plus-small needs-offset"
+                 height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24">
+              <g>
+                <path
+                  d="M18 11h-5V6h-2v5H6v2h5v5h2v-5h5"></path>
+              </g>
+            </svg>
+            添加
           </button>
+          <div class="button-group" v-else>
+            <button class="button is-compact is-primary" @click="create">
+              发布
+            </button>
+            <button class="button is-compact" @click="cancel">
+              取消
+            </button>
+          </div>
+        </div>
+        <div class="episode-navigation__tab episode-navigation__actions episode-navigation__open-bulk">
+          <button type="button" class="button is-compact">批量3编辑</button>
         </div>
       </div>
-    </card>
-
-    <episode :key="item.id" v-for="(item, index) in episodeList"
-             :order="index"
-             :data="item"
-             v-dragging="{item: item, list: episodeList}"
-             @episode-del="del" @update="update"></episode>
+    </div>
+    <transition name="slide-fade" mode="out-in">
+      <episode-form v-if="creating" :parent="podcast.id" :sort="podcast.children.length + 1"></episode-form>
+    </transition>
+    <span class="episode-list__transition-wrapper" v-if="episodeList.length > 0">
+      <episode :key="item.name" v-for="(item, index) in episodeList"
+               class="episode-detail is-approved is-collapsed"
+               :order="index"
+               :data="item"
+               v-dragging="{item: item, list: episodeList}"
+               @episode-del="del" @update="update" v-show="!creating"></episode>
+    </span>
+    <empty-content title="节目列表为空，添加内容？" v-else>
+      <button class="button is-primary" style="margin-top: 10px;" @click="create" slot="action">
+        <svg class="gridicon gridicons-plus-small needs-offset"
+             height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24">
+          <g>
+            <path
+              d="M18 11h-5V6h-2v5H6v2h5v5h2v-5h5"></path>
+          </g>
+        </svg>
+        <span>添加</span>
+      </button>
+      <!--<slot name="action"></slot>-->
+    </empty-content>
   </div>
 </template>
 <style lang="scss">
+  .animate-box {
+    opacity: 0;
+  }
+
+  .fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+  }
+
+  .animated-fast {
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+      -webkit-transform: translate3d(0, 40px, 0);
+      transform: translate3d(0, 40px, 0);
+    }
+    100% {
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+
+  /* Enter and leave animations can use different */
+  /* durations and timing functions.              */
+  .slide-fade-enter-active {
+    /*transition: all .3s ease;*/
+    animation-name: fadeInUp;
+
+  }
+
+  .slide-fade-leave-active {
+  }
+
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */
+  {
+    transform: translateX(0px);
+    opacity: 0;
+  }
+
   .dragging {
     /*animation-name: shake;*/
     /*animation-duration: 0.07s;*/
@@ -150,6 +202,8 @@
   import FoldableCard from '../foldable-card'
   import {Card} from '../card'
   import Episode from '../episode'
+  import EpisodeForm from '../episodes/episode-form'
+  import EmptyContent from '~/components/empty-content'
 
   export default {
     props: {
@@ -161,6 +215,7 @@
 
     data () {
       return {
+        creating: false,
         action: '',
         newItem: {
           title: '无标题'
@@ -254,7 +309,9 @@
       Card,
       FileUpload,
       FoldableCard,
-      Episode
+      Episode,
+      EpisodeForm,
+      EmptyContent
     },
     computed: {
       uploadAction () {
@@ -273,6 +330,15 @@
           this.$store.commit('podcast/SET_EPISODE_LIST', newValue)
         }
       },
+      unapprove () {
+        let count = 0
+        this.episodeList.forEach((v) => {
+          if (v.status !== 'publish') {
+            count++
+          }
+        })
+        return count
+      },
 //      status: {
 //        get () {
 //        }
@@ -284,9 +350,9 @@
           return 0
         }
       },
-      creating () {
-        return this.$store.state.podcast.episode.creating
-      },
+//      creating () {
+//        return this.$store.state.podcast.episode.creating
+//      },
 //      saving () {
 //        return this.$store.state.posts.item.saving
 //      },
@@ -349,8 +415,9 @@
             return ''
         }
       },
-      save () {
-
+      save (e) {
+        console.log()
+//        this.$emit('podcast_item_update', this.episode, this.episode.id)
       },
       del (item, index) {
 //        console.log('del action...')
@@ -363,12 +430,17 @@
       },
       // 创建节目 episode
       create () {
-        const _sort = this.podcast.children.length + 1
-        this.episode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
-        this.$store.dispatch('episodeCreate', this.episode)
+//        this.action = 'create'
+        this.creating = true
+//        const _sort = this.podcast.children.length + 1
+//        const newEpisode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
+//        const res = this.$store.dispatch('episodeCreate', newEpisode)
+//        this.episode = Object.assign({}, newEpisode)
+//        this.episode.id = res
       },
       cancel () {
-        this.$store.commit('podcast/CREATE_EPISODE_CANCEL')
+        this.creating = false
+//        this.$store.commit('podcast/CREATE_EPISODE_CANCEL')
       },
 
       insertFile (cur) {

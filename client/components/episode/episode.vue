@@ -1,23 +1,30 @@
+<style scoped>
+  .order {
+    margin-right: 10px;
+  }
+</style>
 <template>
-  <foldable-card compact :class="statusClass">
-    <div class="connected-application-item__header" slot="header">
 
-      <div class="order">
-        {{ order + 1 }}.
-      </div>
-      <h3>{{ episode.title }}</h3>
+  <foldable-card compact tabindex="0">
+    <episode-header :isExpanded="isExpanded" @toggleExpanded="toggleExpanded"></episode-header>
+
+    <div class="episode-detail__header is-preview" slot="header">
+      <!--<div class="episode-detail__header-content">-->
+        <div class="order">
+          {{ order + 1 }}.
+        </div>
+        <h3>{{ episode.title }}</h3>
+      <!--</div>-->
     </div>
     <div slot="summary">
-      <button type="submit" class="button form-button is-compact is-active">
-        发布
-      </button>
+        {{ statusTitle }}
     </div>
     <div slot="expandedSummary" class="section-header__actions">
-      <button type="button" class="button is-error is-compact is-scary" @click="del(order, episode)">停播</button>
-      <!--<button type="button" class="button is-error is-compact"-->
-      <!--:class="uploadProgress ? 'is-busy' : ''"-->
-      <!--替换音频-->
-      <!--</button>-->
+      <button type="submit" class="button form-button is-compact is-active">
+      发布
+      </button>
+      <button type="button" class="button is-error is-compact is-scary" @click="onDel">停播</button>
+
       <file-upload
         :class="uploadProgress ? 'is-busy' : ''"
         class="button is-error is-compact"
@@ -41,7 +48,7 @@
       </file-upload>
       <button type="submit"
               class="button form-button is-compact is-scary"
-              @click="onDel()">
+              @click="onDel">
 
         <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 24 24">
@@ -53,7 +60,6 @@
         回收站
       </button>
 
-      <button type="button" class="button is-error is-compact" @click="update">更新内容</button>
     </div>
     <form>
       <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
@@ -87,49 +93,21 @@
                 上传音频
               </span>
         </button>
-        <!--
-        <file-upload
-          :class="uploadProgress ? 'is-busy' : ''"
-          class="media-library__upload-button button button is-primary"
-          name="file"
-          post-action="http://vanq.picker.la/api/file"
-          v-model="files"
-          @input-file="input"
-          @input-filter="inputFilter"
-          :accept="accept"
-          :size="size || 0"
-          :headers="requestHeader"
-          ref="episode_upload"
-          v-if="!creating">
-          <svg class="gridicon gridicons-cloud-upload" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
-            <g>
-              <path
-                d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
-            </g>
-          </svg>
-          <span v-if="uploadProgress">
-                {{uploadProgress}}
-              </span>
-          <span v-else>
-                上传音频
-              </span>
-        </file-upload>
-        -->
       </empty-content>
     </div>
-
     <!-- 状态提示 -->
     <update-template :status="status" v-show="status"></update-template>
+
   </foldable-card>
 </template>
 
 <script>
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
+  import {Card} from '../card'
   import EmptyContent from '../empty-content'
   import UpdateTemplate from '../update-post-status/update-template.vue'
-
+  import EpisodeHeader from '../episode/episode-detail-header.vue'
   export default {
     props: {
       data: {
@@ -144,6 +122,8 @@
     },
     data () {
       return {
+        episodeStatus: 'unapproved',
+        isExpanded: false,
         status: '',
         episode: {
           title: '',
@@ -158,6 +138,40 @@
       }
     },
     computed: {
+      toggleApprove () {},
+      classes () {
+        return [
+          'episode-detail',
+          'episode-detail__placeholder',
+          {
+            'is-approved': this.episodeStatus === 'approved',
+            'is-unapproved': this.episodeStatus === 'unapproved',
+            'is-expanded': this.isExpanded,
+            'is-collapsed': !this.isExpanded,
+            'is-trash': this.episodeStatus === 'trash'
+          }
+        ]
+      },
+      statusTitle () {
+        switch (this.episode.status) {
+          case 'publish': {
+            return '已上架'
+          }
+          case 'off': {
+            return '已下架'
+          }
+          case 'trash': {
+            return '已删除'
+          }
+          case 'auto-draft': {
+            return '草稿'
+          }
+          default: {
+            return '草稿'
+          }
+        }
+      },
+
       creating () {
         return this.$store.state.podcast.episode.creating
       },
@@ -170,25 +184,23 @@
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       }
     },
-    watch: {
-//      'episode': {
-//        handler(val, oldVal) {
-//          this.update(val)
-//        },
-//        deep: true
-//      }
-    },
     mounted () {
 //      this.episode = this.data
       this.episode = Object.assign({}, this.data)
     },
     components: {
+      Card,
       FoldableCard,
       FileUpload,
       EmptyContent,
-      UpdateTemplate
+      UpdateTemplate,
+      EpisodeHeader
     },
     methods: {
+      toggleExpanded () {
+        console.log('expnaded ......')
+        this.isExpanded = !this.isExpanded
+      },
       onDel () {
         this.status = 'deleting'
         this.$emit('episode-del', this.episode, this.order)

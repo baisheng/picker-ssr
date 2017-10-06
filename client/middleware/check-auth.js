@@ -7,8 +7,6 @@ export default function ({ isServer, store, req }) {
   const loggedUser = isServer ? getUserFromCookie(req) : getUserFromLocalStorage()
   // console.log(JSON.stringify(getToken(req)))
   const token = isServer ? getTokenFromCookie(req) : clientToken()
-  console.log('----token')
-  console.log('----token' + JSON.stringify(token))
   store.commit('SET_USER', loggedUser)
   store.commit('SET_TOKEN', token)
 }

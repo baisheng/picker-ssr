@@ -47,9 +47,9 @@
 
     <div
       @click.prevent="handleClick"
-         :class="classes"
-         :style="collapsed ? `background-image: url(${featuredImage});` : ''"
-         v-if="featuredImage">
+      :class="classes"
+      :style="collapsed ? `background-image: url(${featuredImage});` : ''"
+      v-if="featuredImage">
       <button class="button editor-drawer-well__remove is-compact" type="button" @click.prevent="onRemove">
         <span class="screen-reader-text">移除</span>
         <svg class="gridicon gridicons-cross editor-drawer-well__remove-icon" height="24" width="24"
@@ -175,7 +175,11 @@
           id: this.podcast.id,
           status: status
         }
-        await this.$store.dispatch('updatePodcast', form)
+        const res = await this.$store.dispatch('updatePodcast', form)
+        console.log(JSON.stringify(res))
+        if (res.errno === 0) {
+//          this.$router.replace('/podcasts')
+        }
       },
       async onRemove () {
         this.progress = 'removing'

@@ -43,6 +43,41 @@
     <card>
       <div>
         <form>
+          <fieldset class="form-fieldset">
+            <!-- react-empty: 3841 --><!-- react-empty: 3842 -->
+            <label for="role" class="form-label">
+              内容分类
+            </label>
+            <div class="token-field">
+              <multiselect
+                id="role"
+                v-model="value"
+                :options="users"
+                track-by="user_login"
+                label="user_nicename"
+                :searchable="false"
+                :close-on-select="true"
+                :show-labels="false"
+                placeholder="选择作者"
+                @select="select">
+                <template slot="option" scope="props">
+                  <img class="option__image" :src="props.option.avatar" :alt="props.option.user_nicename">
+                  <div class="option__desc"><span class="option__title">{{ props.option.user_nicename }}</span><span
+                    class="option__small">@{{ props.option.user_login }}</span></div>
+                </template>
+              </multiselect>
+            </div>
+            <p></p>
+            <!--<p class="form-setting-explanation">-->
+            <!--<a target="_blank" rel="noopener noreferrer"-->
+            <!--href="/user-roles/">-->
+            <!--<icon name="plus" class="gridicon"></icon>-->
+            <!--添加作者-->
+            <!--</a>-->
+            <!---->
+            <!--</p>-->
+          </fieldset>
+
           <div role="group" class="invite-people__token-field-wrapper">
             <label class="form-label">
               标题
@@ -62,6 +97,7 @@
               <ul class="token-field__suggestions-list" tabindex="-1"></ul>
             </div>
           </div>
+
           <fieldset class="form-fieldset">
             <!-- react-empty: 3841 --><!-- react-empty: 3842 -->
             <label for="role" class="form-label">
@@ -144,7 +180,17 @@
         saving: false,
         content: '',
         value: {},
-        editing: false
+        categoryValue: {},
+        tagValue: {},
+        editing: false,
+        category: [
+          { name: 'Vue.js', language: 'JavaScript' },
+          { name: 'Adonis', language: 'JavaScript' },
+          { name: 'Rails', language: 'Ruby' },
+          { name: 'Sinatra', language: 'Ruby' },
+          { name: 'Laravel', language: 'PHP' },
+          { name: 'Phoenix', language: 'Elixir' }
+        ]
       }
     },
     components: {

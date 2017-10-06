@@ -3,7 +3,7 @@
     <div :class="classes">
       <div class="conf-alert_con">
         <span class="conf-alert_title" v-html="updateText"></span>
-        <!--<a class="undo"><span>要撤消吗？</span></a>-->
+        <a class="undo"><span>要撤消吗？</span></a>
       </div>
     </div>
   </div>

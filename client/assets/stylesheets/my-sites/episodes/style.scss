@@ -1,0 +1,108 @@
+.episode-navigation {
+  @include breakpoint( "<480px" ) {
+    .section-nav__mobile-header:after {
+      padding-left: 8px;
+    }
+    .section-nav__mobile-header-text {
+      flex: none;
+      width: auto;
+    }
+
+    .episode-navigation__open-bulk {
+      padding-top: 9px;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
+
+.episode-navigation.is-bulk-edit {
+  padding-right: 0;
+
+  @include breakpoint( "<480px" ) {
+    .section-nav__mobile-header {
+      display: none;
+    }
+
+    .episode-navigation__bulk-count {
+      width: calc( 100% - 70px );
+    }
+
+    .episode-navigation__close-bulk {
+      position: absolute;
+      right: 0;
+      top: 3px;
+      width: 55px;
+    }
+  }
+}
+
+.episode-navigation__bulk-count {
+  display: inline-flex;
+}
+
+.episode-navigation__bulk-count .count {
+  margin-left: 8px;
+}
+
+.episode-navigation__tab {
+  padding: 16px;
+}
+
+.episode-navigation__actions {
+  padding: 11px 16px;
+
+  .button-group {
+    margin-right: 16px;
+  }
+}
+
+.episode-navigation__close-bulk {
+  margin-left: auto;
+  padding: 0;
+  a {
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 16px;
+  }
+}
+
+.episode-list .pagination {
+  margin-top: 16px;
+}
+
+.episode-list__transition-enter {
+  display: none;
+
+  &.episode-list__transition-enter-active {
+    animation: episode-list__transition-enter .15s linear;
+  }
+}
+
+.episode-list__transition-leave {
+  opacity: 1;
+
+  &.episode-list__transition-leave-active {
+    opacity: 0.01;
+    transition: opacity .15s linear;
+  }
+}
+
+@keyframes episode-list__transition-enter {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  50% {
+    display: none;
+    opacity: 0;
+  }
+  51% {
+    display: block;
+    opacity: 0.01;
+  }
+  100% {
+    opacity: 1;
+  }
+}
