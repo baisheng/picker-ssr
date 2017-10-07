@@ -29,7 +29,7 @@
 </style>
 <template>
   <div>
-    <card class="section-header" compact>
+<!--    <card class="section-header" compact>
       <div class="section-header__label">
           <span class="section-header__label-text">
             {{ title }}
@@ -38,46 +38,20 @@
                  :className="'edit-gravatar__spinner'"></spinner>
 
       </div>
-    </card>
+    </card>-->
 
-    <card>
+    <foldable-card compact>
+      <div slot="header">
+        <spinner v-show="!(podcastStatus === 'success' || podcastStatus === 'init')"
+                 :className="'edit-gravatar__spinner'"></spinner>
+        <h3>{{ podcast.title }}</h3>
+      </div>
+      <div slot="summary">
+        节目信息
+
+      </div>
       <div>
         <form>
-          <fieldset class="form-fieldset">
-            <!-- react-empty: 3841 --><!-- react-empty: 3842 -->
-            <label for="role" class="form-label">
-              内容分类
-            </label>
-            <div class="token-field">
-              <multiselect
-                id="role"
-                v-model="value"
-                :options="users"
-                track-by="user_login"
-                label="user_nicename"
-                :searchable="false"
-                :close-on-select="true"
-                :show-labels="false"
-                placeholder="选择作者"
-                @select="select">
-                <template slot="option" scope="props">
-                  <img class="option__image" :src="props.option.avatar" :alt="props.option.user_nicename">
-                  <div class="option__desc"><span class="option__title">{{ props.option.user_nicename }}</span><span
-                    class="option__small">@{{ props.option.user_login }}</span></div>
-                </template>
-              </multiselect>
-            </div>
-            <p></p>
-            <!--<p class="form-setting-explanation">-->
-            <!--<a target="_blank" rel="noopener noreferrer"-->
-            <!--href="/user-roles/">-->
-            <!--<icon name="plus" class="gridicon"></icon>-->
-            <!--添加作者-->
-            <!--</a>-->
-            <!---->
-            <!--</p>-->
-          </fieldset>
-
           <div role="group" class="invite-people__token-field-wrapper">
             <label class="form-label">
               标题
@@ -99,7 +73,6 @@
           </div>
 
           <fieldset class="form-fieldset">
-            <!-- react-empty: 3841 --><!-- react-empty: 3842 -->
             <label for="role" class="form-label">
               作者
             </label>
@@ -152,12 +125,13 @@
           </fieldset>
         </form>
       </div>
-    </card>
+    </foldable-card>
   </div>
 </template>
 
 <script>
   import {Card} from '../../card'
+  import FoldableCard from '../../foldable-card'
   import Multiselect from 'vue-multiselect'
   import Spinner from '~/components/spinner'
 
@@ -195,6 +169,7 @@
     },
     components: {
       Card,
+      FoldableCard,
       Multiselect,
       Spinner
     },
@@ -236,10 +211,9 @@
           content: e.target.value
         }
         this.$emit('save', form)
-//        this.$store.dispatch('updatePodcast', form)
       },
       select (selected, id) {
-        let form = {
+        const form = {
           id: this.podcast.id,
           author: selected.id,
           authorInfo: selected
@@ -249,12 +223,6 @@
 //          authorInfo: selected
 //        }, this.podcast)
         this.$emit('save', form)
-      },
-//      customLabel ({ user_login, user_nicename }) {
-//        return `${user_login} – ${user_nicename}`
-//      },
-      handleClick () {
-//        this.$emit('save', this.podcast)
       },
       _wordCount (data) {
         const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g

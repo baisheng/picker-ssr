@@ -104,7 +104,7 @@
     name: 'EpisodeForm',
     props: {
       parent: {
-        type: Number,
+        type: Object,
         required: true
       },
       sort: {
@@ -157,16 +157,20 @@
         const that = this
         this.$validator.validateAll().then(async (result) => {
           if (result) {
-            // 保存数据
-            const res = await that.$store.dispatch('episodeCreate', {
+            let form = {
               title: this.episode.title,
-              parent: this.parent,
+              parent: this.parent.id,
               sort: this.sort,
-              status: 'draft'
-            })
+              status: 'draft',
+              author: this.parent.author
+            }
+            // 保存数据
+            const res = await that.$store.dispatch('episodeCreate', form)
             if (res) {
               this.episode.id = res
               this.isDisabled = false
+              form = Object.assign(form, {id: res, authorInfo: this.parent.authorInfo})
+              this.$emit('addEpisode', form)
             }
           }
         })

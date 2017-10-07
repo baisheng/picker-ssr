@@ -91,6 +91,7 @@ export default function (Vue, options) {
   let Current = null
 
   function handleDragStart (e) {
+
     const el = getBlockEl(e.target)
     const key = el.getAttribute('drag_group')
     const drag_key = el.getAttribute('drag_key')
@@ -120,6 +121,7 @@ export default function (Vue, options) {
   }
 
   function handleDragEnter (e) {
+
     let el
     if (e.type === 'touchmove') {
       e.stopPropagation()
@@ -146,6 +148,7 @@ export default function (Vue, options) {
     swapArrayElements(DDD.List, indexFrom, indexTo)
     Current.index = indexTo
     isSwap = true
+
     $dragging.$emit('dragged', {
       draged: Current.item,
       to: item,

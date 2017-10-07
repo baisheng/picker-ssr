@@ -23,26 +23,16 @@
         <div class="section-nav-group">
           <div class="section-nav-tabs">
             <ul class="section-nav-tabs__list" role="menu">
-              <li class="is-selected section-nav-tab">
-                <a href="/comments/all/bluepx.wordpress.com"
-                   class="section-nav-tab__link" tabindex="0"
-                   aria-selected="true" role="menuitem"><span
-                  class="section-nav-tab__text">
-                  全部节目 ({{ podcast.children.length }})
-                </span></a></li>
-              <li class="section-nav-tab">
-                <a href="/comments/pending/bluepx.wordpress.com"
-                   class="section-nav-tab__link" tabindex="0" aria-selected="false"
-                   role="menuitem"><span class="section-nav-tab__text">
-                  {{ unapprove }} 条未审核
-                  <!-- /react-text --></span></a></li>
-              <li class="section-nav-tab"><a href="/comments/approved/bluepx.wordpress.com"
-                                             class="section-nav-tab__link" tabindex="0" aria-selected="false"
-                                             role="menuitem"><span class="section-nav-tab__text"><!-- react-text: 10750 -->已发布
-                <!-- /react-text --></span></a></li>
-              <li class="section-nav-tab"><a href="/comments/trash/bluepx.wordpress.com" class="section-nav-tab__link"
-                                             tabindex="0" aria-selected="false" role="menuitem"><span
-                class="section-nav-tab__text"><!-- react-text: 10758 -->回收站<!-- /react-text --></span></a></li>
+              <li class="section-nav-tab" :class="{'is-selected':selected === item.id}" v-for="(item, index) in navList"
+                  :key="item.id">
+                <a @click="load(item)"
+                   class="section-nav-tab__link" tabindex="0" role="menuitem">
+                  <span class="section-nav-tab__text">
+                    {{ item.title }}
+                  </span>
+                </a>
+              </li>
+
             </ul>
           </div>
         </div>
@@ -95,17 +85,18 @@
       </div>
     </div>
     <transition name="slide-fade" mode="out-in">
-      <episode-form v-if="creating" :parent="podcast.id" :sort="podcast.children.length + 1"></episode-form>
+      <episode-form v-if="creating" :parent="parent" :sort="episodeList.length + 1" @addEpisode="push"></episode-form>
     </transition>
-    <span class="episode-list__transition-wrapper" v-if="episodeList.length > 0">
-      <episode :key="item.name" v-for="(item, index) in episodeList"
-               class="episode-detail is-approved is-collapsed"
-               :order="index"
-               :data="item"
-               v-dragging="{item: item, list: episodeList}"
-               @episode-del="del" @update="update" v-show="!creating"></episode>
+    <span class="episode-list__transition-wrapper">
+      <!-- Key 如果有问题会拖拽失败 -->
+      <episode-detail :key="item.id" v-for="(item, index) in episodeList"
+                      :order="index"
+                      :episode="item"
+                      v-dragging="{item: item, list: episodeList}"
+                      @episode-del="del" @update="updateEpisode" v-show="!creating">
+      </episode-detail>
     </span>
-    <empty-content title="节目列表为空，添加内容？" v-else>
+    <empty-content title="节目列表为空，添加内容？" v-show="episodeList.length < 0">
       <button class="button is-primary" style="margin-top: 10px;" @click="create" slot="action">
         <svg class="gridicon gridicons-plus-small needs-offset"
              height="18" width="18" xmlns="http://www.w3.org/2000/svg"
@@ -122,36 +113,36 @@
   </div>
 </template>
 <style lang="scss">
-  .animate-box {
-    opacity: 0;
-  }
-
-  .fadeInUp {
-    -webkit-animation-name: fadeInUp;
-    animation-name: fadeInUp;
-  }
-
-  .animated-fast {
-    -webkit-animation-duration: .5s;
-    animation-duration: .5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
-
-  @keyframes fadeInUp {
-    0% {
+    .animate-box {
       opacity: 0;
-      visibility: hidden;
-      -webkit-transform: translate3d(0, 40px, 0);
-      transform: translate3d(0, 40px, 0);
     }
-    100% {
-      visibility: visible;
-      opacity: 1;
-      -webkit-transform: none;
-      transform: none;
+
+    .fadeInUp {
+      -webkit-animation-name: fadeInUp;
+      animation-name: fadeInUp;
     }
-  }
+
+    .animated-fast {
+      -webkit-animation-duration: .5s;
+      animation-duration: .5s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        visibility: hidden;
+        -webkit-transform: translate3d(0, 40px, 0);
+        transform: translate3d(0, 40px, 0);
+      }
+      100% {
+        visibility: visible;
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+      }
+    }
 
   /* Enter and leave animations can use different */
   /* durations and timing functions.              */
@@ -201,13 +192,20 @@
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
   import {Card} from '../card'
-  import Episode from '../episode'
+  import EpisodeDetail from '../episode-detail'
   import EpisodeForm from '../episodes/episode-form'
   import EmptyContent from '~/components/empty-content'
 
   export default {
     props: {
-      podcast: {
+      episodeList: {
+        type: Array
+      },
+//      parent: {
+//        type: Number,
+//        required: true
+//      },
+      parent: {
         type: Object,
         required: true
       }
@@ -215,6 +213,13 @@
 
     data () {
       return {
+        selected: 1,
+        navList: [
+          {id: 1, name: '', title: `全部节目( ${this.episodeList.length} )`},
+          {id: 2, name: 'approve', title: `未审核`},
+          {id: 3, name: 'approved', title: '已审核'},
+          {id: 4, name: 'trash', title: '回收站'}],
+        isBulkEdit: false,
         creating: false,
         action: '',
         newItem: {
@@ -222,7 +227,7 @@
         },
         toItem: null,
         itemList: [],
-        episodeList: [],
+//        episodeList: [],
         files: [],
         uploadProgress: '',
         accept: 'image/png,image/gif,image/jpeg,image/webp,audio/mp3',
@@ -244,44 +249,17 @@
       }
     },
     mounted () {
-      // 如果是创建了内容
-//      this.curItem = this.post
-      this.$nextTick(() => {
-        console.log('next tick for episode list')
-//        this.episodeList = Array.from(this.podcast.children)
-        this.episodeList = [...this.podcast.children]
-//        console.log(JSON.stringify(this.episodeList))
-//        if (!Object.is(this.podcast.children, undefined)) {
-//          this.episodeList = this.podcast.children
-//          this.episodeList = Array.from(this.podcast.children)
-//          this.episodeList = this.podcast.children.splice()
-//          console.log(JSON.stringify(this.episodeList))
-        // eslint-disable-next-line prefer-reflect
-//          this.episodeList.apply(this.podcast.children)
-//          this.episodeList.push(this.podcast.children)
-//          this.episodeList.fill(this.podcast.children)
-//          this.episodeList = [...this.podcast.children]
-//          this.episodeList = this.podcast.children.slice()
-//          this.episodeList.push.apply(this.podcast.children)
-//            = Object.assign({}, this.podcast.children)
-//          this.itemList = this.podcast.children
-//        }
-      })
-
       this.$dragging.$on('dragged', ({value, draged, to}) => {
         this.episodeList = value.list
-//        this.$store.commit('podcast/SET_EPISODE_LIST', value.list)
-
-//        this.curItem = draged
-//        console.log(value.item.id)
-//        // eslint-disable-next-line prefer-const
-//        let _curSort = draged.sort
-//        console.log(draged.sort + ' - draged')
-//        console.log(to.sort + ' - to')
-//        this.curItem.sort = to.sort
-//        to.sort = _curSort
-//        this.toItem = to
-// eslint-disable-next-line no-undef
+          this.updateEpisode({
+          id: draged.id,
+          sort: to.sort
+        })
+        this.updateEpisode({
+          id: to.id,
+          sort: draged.sort + to.sort
+        })
+        /*
         this.$store.dispatch('updatePodcast', {
           id: draged.id,
           sort: to.sort
@@ -290,17 +268,7 @@
           id: to.id,
           sort: draged.sort
         })
-        // 更新排序
-//        this.$emit('podcast_item_update', {
-//          id: draged.id,
-//          sort: to.sort
-//        })
-//        this.$emit('podcast_item_update', {
-//          id: to.id,
-//          sort: draged.sort
-//        })
-//        this.$emit('podcast_item_update', this.curItem, this.curItem.id)
-//        this.$emit('podcast_item_update', to, to.id)
+        */
       })
       this.$dragging.$on('dragend', () => {
       })
@@ -309,40 +277,34 @@
       Card,
       FileUpload,
       FoldableCard,
-      Episode,
+      EpisodeDetail,
       EpisodeForm,
       EmptyContent
     },
     computed: {
+//      episodeList: {
+//        get () {
+//          this.itemList = [...this.list]
+//          return this.itemList
+//        },
+//        set (value) {
+//          this.itemList = value
+//        }
+//      },
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
         return `${baseURL}/app/${appId}/file`
       },
-//      episodeList () {
-//        return [...this.$store.state.podcast.detail.data.children]
-//      },
-      episode1List: {
-        get () {
-          return [...this.podcast.children]
-        },
-        set (newValue) {
-          this.$store.commit('podcast/SET_EPISODE_LIST', newValue)
-        }
-      },
       unapprove () {
         let count = 0
         this.episodeList.forEach((v) => {
-          if (v.status !== 'publish') {
+          if (v.status !== 'approved') {
             count++
           }
         })
         return count
       },
-//      status: {
-//        get () {
-//        }
-//      },
       episodeCount () {
         if (this.podcast.children.count) {
           return this.podcast.children.count
@@ -350,58 +312,18 @@
           return 0
         }
       },
-//      creating () {
-//        return this.$store.state.podcast.episode.creating
-//      },
-//      saving () {
-//        return this.$store.state.posts.item.saving
-//      },
       episodeState () {
         return this.$store.state.podcast.episode
       },
-//      episodeId () {
-//        return this.$store.state.podcast.episode.id
-//      },
-//      postId () {
-//        return this.$store.state.posts.post.data.id
-//      },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       }
     },
-    watch: {
-      'post': {
-        handler (val, oldVal) {
-          console.log(val)
-        },
-        deep: true
-      },
-      'podcast.children': {
-        handler (val, oldVal) {
-//          console.log(val)
-          this.episodeList = [...this.podcast.children]
-        }
-      },
-      'episodeState': {
-        handler (val, oldVal) {
-          if (val.del === 'success') {
-//            this.podcast.children.splice(this.curIndex, 1)
-          }
-        },
-        deep: true
-      }
-//      'episodeId': {
-//        handler (val, oldVal) {
-//          console.log('lalala')
-//          this.episode.id = val
-//          this.podcast.children.push(this.episode)
-//          console.log(val)
-//          this.$store.commit('podcast/PUSH_EPISODE', this.episode)
-//        },
-//        deep: true
-//      }
-    },
     methods: {
+      load (item) {
+        this.selected = item.id
+        this.$emit('load', {parent: this.parent.id, status: item.name})
+      },
       getStatusClass (status) {
 // eslint-disable-next-line default-case
         switch (status) {
@@ -415,18 +337,24 @@
             return ''
         }
       },
-      save (e) {
-        console.log()
-//        this.$emit('podcast_item_update', this.episode, this.episode.id)
-      },
       del (item, index) {
-//        console.log('del action...')
-//        console.log(JSON.stringify(item))
         this.curIndex = index
         this.$store.dispatch('episodeDelete', {id: item.id, axios: this.$axios})
       },
-      update (episode, id) {
-        this.$emit('podcast_item_update', episode, id)
+      push (newEpisode) {
+//        this.$nextTick(() => {
+        this.episodeList.push(newEpisode)
+//        })
+      },
+//      async saveEpisode (episode) {
+//
+//      },
+      async updateEpisode (episode, id) {
+        if (!id) {
+          id = episode.id
+        }
+        const {data} = await this.$axios.put(`/app/${this.$store.getters.appId}/posts/${id}`, episode)
+//        this.$emit('podcast_item_update', episode, id)
       },
       // 创建节目 episode
       create () {

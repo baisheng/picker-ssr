@@ -41,8 +41,7 @@ export const state = () => {
       status: 'init',
       fetching: false,
       data: {
-        authorInfo: {},
-        children: []
+        authorInfo: {}
       }
     }
   }
@@ -103,10 +102,8 @@ export const mutations = {
   CREATE_EPISODE_SUCCESS (state, data) {
     // state.episode.creating = true
     state.episode.id = data.id
-    state.detail.data.children.push(data)
+    // state.detail.data.children.push(data)
     // Object.assign(state.user, user);
-    // console.log('-----lalala----')
-    // console.log(action.data)
   },
   CREATE_EPISODE_FAILURE (state) {
     state.episode.creating = false

@@ -241,37 +241,32 @@ export const actions = {
     if (data.errno > 0) {
       commit('podcast/CREATE_FAILURE')
     } else {
-      const podcast = Object.assign({id: data.data}, form)
+      // console.log(JSON.stringify(data.data))
+      const podcast = Object.assign(form, {id: data.data})
       // form.id = data.data
       commit('podcast/CREATE_SUCCESS', podcast)
     }
     return data
   },
-  async loadEpisodeList ({commit}, {axios, params}) {
+  async loadEpisodeList ({commit}, params) {
     commit('podcast/REQUEST_EPISODE_LIST')
-    await axios.get(`/app/${this.getters.appId}/posts`, {params})
-      .then(response => {
-        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
-        const isFirstPage = params.page && params.page > 1
-        const commitName = `podcast/${isFirstPage ? 'ADD' : 'GET'}_EPISODE_LIST_SUCCESS`
-        if (success) {
-          commit(commitName, response.data)
-        }
-        if (!success) {
-          commit('podcast/GET_EPISODE_LIST_FAILURE')
-        }
-      })
-      .catch(err => {
-        console.log(err)
-        commit('podcast/GET_EPISODE_LIST_FAILURE', err)
-      })
+    const {data} = await this.$axios.get(`/app/${this.getters.appId}/podcast`, {params})
+    if (data.errno > 0) {
+      commit('podcast/GET_EPISODE_LIST_FAILURE')
+    } else {
+      const isFirstPage = params.page && params.page > 1
+      const commitName = `podcast/${isFirstPage ? 'ADD' : 'GET'}_EPISODE_LIST_SUCCESS`
+      commit(commitName, data)
+    }
+    // console.log(JSON.stringify(data))
+    // return data
   },
   // 节目创建
   async episodeCreate ({commit}, form) {
     commit('podcast/CREATE_EPISODE')
     const {data} = await this.$axios.post(`/app/${this.getters.appId}/posts`, form)
-    console.log('create')
-    console.log(JSON.stringify(data))
+    // console.log('create')
+    // console.log(JSON.stringify(data))
     if (data.errno === 0) {
       form = Object.assign({id: data.data}, form)
       commit('podcast/CREATE_EPISODE_SUCCESS', form)

@@ -88,6 +88,9 @@
     cursor: pointer;
     padding: 12px 8px;
 
+    .episode-detail__order {
+      padding-right: 12px;
+    }
     @include breakpoint( "<960px" ) {
       .episode-detail__header-content {
         flex-wrap: wrap;
@@ -488,6 +491,19 @@ a.episode-detail__author-more-element {
   fill: $alert-red;
 }
 
+.episode-detail__audio {
+  line-height: 0;
+  position: relative;
+  padding: 16px;
+  a {
+    color: $gray-text-min;
+    cursor: pointer;
+    &:focus,
+    &:hover {
+      color: $blue-wordpress;
+    }
+  }
+}
 .episode-detail__reply {
   line-height: 0;
   position: relative;
