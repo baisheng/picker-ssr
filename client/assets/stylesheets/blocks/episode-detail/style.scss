@@ -286,6 +286,9 @@
   flex-flow: row nowrap;
   justify-content: flex-start;
   padding: 12px 16px;
+  .action {
+    float: right;
+  }
 }
 
 .episode-detail__post .site-icon {
@@ -317,7 +320,7 @@
   padding-left: 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
-
+  flex: 1;
   span {
     color: $gray-text;
     margin: 0 8px;
@@ -335,7 +338,9 @@
 
 .episode-detail__episode {
   border-bottom: 1px solid lighten( $gray, 30% );
-  padding-left: 16px;
+  padding: 16px;
+  // @basil
+  //padding-left: 16px;
 }
 
 .episode-detail__episode-content {

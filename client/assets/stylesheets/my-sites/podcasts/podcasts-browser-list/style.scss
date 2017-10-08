@@ -1,0 +1,45 @@
+.podcasts-borwser-list {
+  margin: 24px 0;
+  background: $white;
+  box-shadow: 0 1px 2px lighten( $gray, 30% );
+
+  .feature-example & {
+    margin: 0 0;
+  }
+}
+
+.podcasts-borwser-list__header {
+  background: $gray-light;
+  border-bottom: 1px solid lighten( $gray, 30% );
+  overflow: hidden; // lazy clearfix
+}
+
+.button.podcasts-borwser-list__select-all,
+.podcasts-borwser-list__title {
+  display: inline-block;
+  padding: 6px 0px 7px;
+  color: $gray;
+  font-size: 11px;
+  line-height: 1.6;
+  text-transform: uppercase;
+
+  &.is-expanded {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .gridicon {
+    float: right;
+    top: 2px;
+    margin-left: 3px;
+  }
+}
+
+.button.podcasts-borwser-list__select-all {
+  float: right;
+}
+
+.podcasts-borwser-list__elements {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}

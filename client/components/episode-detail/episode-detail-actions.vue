@@ -10,10 +10,15 @@
             d="M11 17.768l-4.884-4.884 1.768-1.768L11 14.232l8.658-8.658C17.823 3.39 15.075 2 12 2 6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10c0-1.528-.353-2.97-.966-4.266L11 17.768z"></path>
         </g>
       </svg>
-      <span>
-        {{ translate(episodeStatus)}}
+      <span v-if="isApproved">
+        已审核
+        <!--{{ translate(episodeStatus)}}-->
+      </span>
+      <span v-else>
+        批准
       </span>
     </button>
+    <!--
     <button class="button comment-detail__action-edit is-borderless" type="button">
       <svg class="gridicon gridicons-pencil" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
@@ -24,8 +29,8 @@
       </svg>
       <span>编辑</span>
     </button>
-
-    <button class="button comment-detail__action-trash is-borderless" type="button">
+    -->
+    <button class="button comment-detail__action-trash is-borderless" type="button" @click="$emit('trash')" v-if="!isTrash">
       <svg class="gridicon gridicons-trash" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
         <g>
@@ -33,7 +38,19 @@
             d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
         </g>
       </svg>
-      <span>回收站</span></button>
+      <span>回收站</span>
+    </button>
+
+    <button class="button comment-detail__action-trash is-borderless is-scary" type="button" @click="$emit('delete')" v-if="isTrash">
+      <svg class="gridicon gridicons-trash" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 24 24">
+        <g>
+          <path
+            d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
+        </g>
+      </svg>
+      <span>永久删除</span>
+    </button>
   </div>
 
 </template>

@@ -1,20 +1,5 @@
 <template>
   <div class="episode-list">
-    <div class="card header-cake is-compact" v-if="creating">
-      <button class="button header-cake__back is-compact is-borderless" type="button" @click="cancel">
-        <svg class="gridicon gridicons-arrow-left needs-offset-y" height="18" width="18"
-             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <g>
-            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
-          </g>
-        </svg><!-- react-text: 665 -->返回<!-- /react-text -->
-      </button>
-      <div class="header-cake__title">添加节目</div>
-
-      <button class="button header-cake__back  disabled is-compact is-borderless" type="button">
-        已保存为草稿
-      </button>
-    </div>
     <div class="section-nav episode-navigation" v-if="!creating">
 
       <div class="section-nav__mobile-header">
@@ -84,18 +69,21 @@
         </div>
       </div>
     </div>
-    <transition name="slide-fade" mode="out-in">
-      <episode-form v-if="creating" :parent="parent" :sort="episodeList.length + 1" @addEpisode="push"></episode-form>
-    </transition>
+    <!--<transition name="slide-fade" mode="out-in">-->
+    <episode-form v-if="creating" :parent="parent" :sort="episodeList.length + 1" @addEpisode="push"
+                  @cancel="cancel"></episode-form>
+    <!--</transition>-->
+
     <span class="episode-list__transition-wrapper">
       <!-- Key 如果有问题会拖拽失败 -->
       <episode-detail :key="item.id" v-for="(item, index) in episodeList"
                       :order="index"
                       :episode="item"
                       v-dragging="{item: item, list: episodeList}"
-                      @episode-del="del" @update="updateEpisode" v-show="!creating">
+                      @episode-del="del" @update="updateEpisode" v-if="!creating">
       </episode-detail>
     </span>
+
     <empty-content title="节目列表为空，添加内容？" v-show="episodeList.length < 0">
       <button class="button is-primary" style="margin-top: 10px;" @click="create" slot="action">
         <svg class="gridicon gridicons-plus-small needs-offset"
@@ -113,36 +101,36 @@
   </div>
 </template>
 <style lang="scss">
-    .animate-box {
+  .animate-box {
+    opacity: 0;
+  }
+
+  .fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+  }
+
+  .animated-fast {
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  @keyframes fadeInUp {
+    0% {
       opacity: 0;
+      visibility: hidden;
+      -webkit-transform: translate3d(0, 40px, 0);
+      transform: translate3d(0, 40px, 0);
     }
-
-    .fadeInUp {
-      -webkit-animation-name: fadeInUp;
-      animation-name: fadeInUp;
+    100% {
+      visibility: visible;
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
     }
-
-    .animated-fast {
-      -webkit-animation-duration: .5s;
-      animation-duration: .5s;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        visibility: hidden;
-        -webkit-transform: translate3d(0, 40px, 0);
-        transform: translate3d(0, 40px, 0);
-      }
-      100% {
-        visibility: visible;
-        opacity: 1;
-        -webkit-transform: none;
-        transform: none;
-      }
-    }
+  }
 
   /* Enter and leave animations can use different */
   /* durations and timing functions.              */
@@ -251,7 +239,7 @@
     mounted () {
       this.$dragging.$on('dragged', ({value, draged, to}) => {
         this.episodeList = value.list
-          this.updateEpisode({
+        this.updateEpisode({
           id: draged.id,
           sort: to.sort
         })
@@ -368,7 +356,6 @@
       },
       cancel () {
         this.creating = false
-//        this.$store.commit('podcast/CREATE_EPISODE_CANCEL')
       },
 
       insertFile (cur) {

@@ -4,6 +4,8 @@
     <episode-detail-header
       :isBulkEdit="isBulkEdit"
       :isExpanded="isExpanded"
+      @delete="onDel"
+      @trash="trash"
       @toggleApprove="toggleApprove"
       @toggleExpanded="toggleExpanded" :episode="episode" :order="order + 1"></episode-detail-header>
 
@@ -12,9 +14,34 @@
         <div class="episode-detail__post-info">
           <div class="emojify">{{ episode.title }}</div>
         </div>
+        <div class="action">
+          <file-upload
+            :class="uploadProgress ? 'is-busy' : ''"
+            class="button is-error is-compact"
+            name="file"
+            :post-action="uploadAction"
+            v-model="files"
+            @input-file="input"
+            @input-filter="inputFilter"
+            :accept="accept"
+            :size="size || 0"
+            :headers="requestHeader"
+            ref="upload"
+            v-if="!creating">
+
+        <span v-if="uploadProgress">
+                {{uploadProgress}}
+              </span>
+            <span v-else>
+                替换音频
+              </span>
+          </file-upload>
+        </div>
+
       </div>
 
       <div>
+        <!--
         <div class="episode-detail__episode">
           <div class="episode-detail__episode-content">
             <div class="episode-detail__author is-expanded">
@@ -29,9 +56,9 @@
                   <div class="episode-detail__author-info-element episode-detail__author-name"><strong>
                     <div class="emojify">{{ episode.authorInfo.user_login}}</div>
                   </strong>
-                    <!--<a href="http://bluepx.wordpress.com" class="external-link" rel="external">-->
-                    <!--<div class="emojify">bluepx.wordpress.com</div>-->
-                    <!--</a>-->
+                    <a href="http://bluepx.wordpress.com" class="external-link" rel="external">
+                    <div class="emojify">bluepx.wordpress.com</div>
+                    </a>
                   </div>
                   <a class="external-link episode-detail__author-info-element episode-detail__episode-date"
                      href="https://caixieblog.wordpress.com/2016/05/17/blog-post-title/episode-page-1/#episode-1"
@@ -89,12 +116,31 @@
                 </div>
               </div>
             </div>
-            <div class="emojify">
-              <div class="episode-detail__episode-body"><p>这是一条评论，是我自己写的</p>
-              </div>
-            </div>
           </div>
         </div>
+            -->
+
+        <div class="episode-detail__episode">
+          <form>
+            <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
+              标题
+            </label>
+              <div tabindex="-1" class="token-field">
+                <div tabindex="-1" class="token-field__input-container">
+                  <input type="text" autocapitalize="none"
+                         autocomplete="off" value=""
+                         placeholder="请输入标题" size="1"
+                         class="token-field__input"
+                         v-model="episode.title"
+                         :value="episode.title"
+                         @change="update">
+                </div>
+                <ul tabindex="-1" class="token-field__suggestions-list"></ul>
+              </div>
+            </div>
+          </form>
+        </div>
+
         <div class="episode-detail__audio">
           <player mutex theme="#42b983" preload="metadata" mode="circulation"
                   :music="episode" v-if="episode.url"></player>
@@ -108,97 +154,8 @@
               </span>
           </button>
         </div>
-      </div>
-
-      <div class="episode-detail__header is-preview" slot="header">
-        <!--<div class="episode-detail__header-content">-->
-        <div class="order">
-          {{ order + 1 }}.
-        </div>
-        <h3>{{ episode.title }}</h3>
-        <!--</div>-->
-      </div>
-      <div slot="summary">
-        {{ statusTitle }}
-      </div>
-      <div slot="expandedSummary" class="section-header__actions">
-        <button type="submit" class="button form-button is-compact is-active">
-          发布
-        </button>
-        <button type="button" class="button is-error is-compact is-scary" @click="onDel">停播</button>
-
-        <file-upload
-          :class="uploadProgress ? 'is-busy' : ''"
-          class="button is-error is-compact"
-          name="file"
-          :post-action="uploadAction"
-          v-model="files"
-          @input-file="input"
-          @input-filter="inputFilter"
-          :accept="accept"
-          :size="size || 0"
-          :headers="requestHeader"
-          ref="upload"
-          v-if="!creating">
-
-        <span v-if="uploadProgress">
-                {{uploadProgress}}
-              </span>
-          <span v-else>
-                替换音频
-              </span>
-        </file-upload>
-        <button type="submit"
-                class="button form-button is-compact is-scary"
-                @click="onDel">
-
-          <svg class="gridicon gridicons-trash needs-offset-y" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24">
-            <g>
-              <path
-                d="M6.187 8h11.625l-.695 11.125C17.05 20.18 16.177 21 15.12 21H8.88c-1.057 0-1.93-.82-1.997-1.875L6.187 8zM19 5v2H5V5h3V4c0-1.105.895-2 2-2h4c1.105 0 2 .895 2 2v1h3zm-9 0h4V4h-4v1z"></path>
-            </g>
-          </svg>
-          回收站
-        </button>
 
       </div>
-      <form>
-        <div role="group" class="invite-people__token-field-wrapper"><label class="form-label">
-          标题
-        </label>
-          <div tabindex="-1" class="token-field">
-            <div tabindex="-1" class="token-field__input-container">
-              <input type="text" autocapitalize="none"
-                     autocomplete="off" value=""
-                     placeholder="请输入标题" size="1"
-                     class="token-field__input"
-                     v-model="episode.title"
-                     :value="episode.title"
-                     @change="update">
-            </div>
-            <ul tabindex="-1" class="token-field__suggestions-list"></ul>
-          </div>
-        </div>
-      </form>
-      <div>
-        <!--<card class="post-image is-placeholder is-compact"></card>-->
-        <player mutex theme="#42b983" preload="metadata" mode="circulation"
-                :music="episode" v-if="episode.url"></player>
-        <empty-content title="没有音频内容" line="是否要上传内容" :illustration="illustration" v-else>
-          <button class="media-library__upload-button button button is-primary" @click.prevent="insertFile()"
-                  :class="uploadProgress ? 'is-busy' : ''">
-              <span v-if="uploadProgress">
-                {{uploadProgress}}
-              </span>
-            <span v-else>
-                上传音频
-              </span>
-          </button>
-        </empty-content>
-      </div>
-      <!-- 状态提示 -->
-      <update-template :status="status" v-show="status"></update-template>
     </div>
   </card>
 </template>
@@ -210,7 +167,6 @@
   import EmptyContent from '../empty-content'
   import UpdateTemplate from '../update-post-status/update-template.vue'
   import EpisodeDetailHeader from './episode-detail-header.vue'
-  //  import {get, isUndefined, noop} from 'lodash';
 
   export default {
     props: {
@@ -330,7 +286,10 @@
       },
       toggleExpanded () {
         this.isExpanded = !this.isExpanded
-        console.log(this.isExpanded + 'xxxx')
+      },
+      trash () {
+        this.episode.status = 'trash'
+        this.$emit('update', this.episode)
       },
       onDel () {
         this.status = 'deleting'
@@ -343,7 +302,6 @@
         const input = this.$refs.upload.$el.querySelector('input')
         input.onclick = null
         input.click()
-//        this.curItem = cur
       },
       input (newFile, oldFile) {
         if (newFile && oldFile) {

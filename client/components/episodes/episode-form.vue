@@ -1,13 +1,27 @@
 <template>
   <div>
-    <card class="section-header" compact>
+    <!-- Episode form header cake -->
+    <div class="card header-cake is-compact">
+      <button class="button header-cake__back is-compact is-borderless" type="button" @click="$emit('cancel')">
+        <svg class="gridicon gridicons-arrow-left needs-offset-y" height="18" width="18"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g>
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+          </g>
+        </svg>
+        返回
+      </button>
+      <div class="header-cake__title">添加节目</div>
+      <button class="button header-cake__back  disabled is-compact is-borderless" type="button" v-show="episode.id">
+        节目内容已保存
+      </button>
+    </div>
+    <!--- Episode form header -->
+    <card class="section-header" compact v-if="episode.id">
       <div class="section-header__label">
-      <span>
-            {{ episode.title }}
-          </span>
+      <span>{{ episode.title }}</span>
       </div>
       <div class="section-header__actions">
-
         <div class="button-group">
           <button class="button is-compact" @click="save">
             发布
@@ -18,6 +32,7 @@
         </div>
       </div>
     </card>
+
     <card>
       <div class="connected-application-item__header" slot="header">
 

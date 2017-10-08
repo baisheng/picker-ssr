@@ -5,7 +5,7 @@
 </style>
 <template>
   <div :class="classes" @click="handleFullHeaderClick">
-    <episode-detail-actions v-if="isExpanded" @toggleApprove="$emit('toggleApprove')" :episodeStatus="episode.status"></episode-detail-actions>
+    <episode-detail-actions v-if="isExpanded" @toggleApprove="$emit('toggleApprove')" @trash="$emit('trash')" @delete="$emit('delete')" :episodeStatus="episode.status"></episode-detail-actions>
     <div class="episode-detail__header-content" v-if="!isExpanded">
       <div class="episode-detail__author-preview">
         <div class="episode-detail__order">

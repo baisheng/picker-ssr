@@ -28,88 +28,103 @@
 
 </style>
 <template>
-  <div>
-<!--    <card class="section-header" compact>
-      <div class="section-header__label">
-          <span class="section-header__label-text">
-            {{ title }}
-        </span>
-        <spinner v-show="!(podcastStatus === 'success' || podcastStatus === 'init')"
-                 :className="'edit-gravatar__spinner'"></spinner>
+  <foldable-card expanded>
+    <div slot="header">
+      <spinner v-show="!(podcastStatus === 'success' || podcastStatus === 'init')"
+               :className="'edit-gravatar__spinner'"></spinner>
+      <h3>{{ podcast.title }}</h3>
+    </div>
+    <div slot="summary">
+      节目信息
 
-      </div>
-    </card>-->
-
-    <foldable-card compact>
-      <div slot="header">
-        <spinner v-show="!(podcastStatus === 'success' || podcastStatus === 'init')"
-                 :className="'edit-gravatar__spinner'"></spinner>
-        <h3>{{ podcast.title }}</h3>
-      </div>
-      <div slot="summary">
-        节目信息
-
-      </div>
-      <div>
-        <form>
-          <div role="group" class="invite-people__token-field-wrapper">
-            <label class="form-label">
-              标题
-            </label>
-            <div class="token-field" tabindex="-1">
-              <div class="token-field__input-container" tabindex="-1">
-                <input type="text"
-                       autocapitalize="none"
-                       autocomplete="off"
-                       value=""
-                       placeholder="请输入标题"
-                       size="1"
-                       class="token-field__input"
-                       :value="podcast.title"
-                       @change="updateTitle">
-              </div>
-              <ul class="token-field__suggestions-list" tabindex="-1"></ul>
+    </div>
+    <div>
+      <form>
+        <div role="group" class="invite-people__token-field-wrapper">
+          <label class="form-label">
+            标题
+          </label>
+          <div class="token-field" tabindex="-1">
+            <div class="token-field__input-container" tabindex="-1">
+              <input type="text"
+                     autocapitalize="none"
+                     autocomplete="off"
+                     value=""
+                     placeholder="请输入标题"
+                     size="1"
+                     class="token-field__input"
+                     :value="podcast.title"
+                     @change="updateTitle">
             </div>
+            <ul class="token-field__suggestions-list" tabindex="-1"></ul>
           </div>
-
-          <fieldset class="form-fieldset">
-            <label for="role" class="form-label">
-              作者
-            </label>
-            <div class="token-field">
-              <multiselect
-                id="role"
-                v-model="value"
-                :options="users"
-                track-by="user_login"
-                label="user_nicename"
-                :searchable="false"
-                :close-on-select="true"
-                :show-labels="false"
-                placeholder="选择作者"
-                @select="select">
-                <template slot="option" scope="props">
-                  <img class="option__image" :src="props.option.avatar" :alt="props.option.user_nicename">
-                  <div class="option__desc"><span class="option__title">{{ props.option.user_nicename }}</span><span
-                    class="option__small">@{{ props.option.user_login }}</span></div>
-                </template>
-              </multiselect>
-            </div>
-            <p></p>
-            <!--<p class="form-setting-explanation">-->
-            <!--<a target="_blank" rel="noopener noreferrer"-->
-            <!--href="/user-roles/">-->
-            <!--<icon name="plus" class="gridicon"></icon>-->
-            <!--添加作者-->
-            <!--</a>-->
-            <!---->
-            <!--</p>-->
-          </fieldset>
-          <fieldset class="form-fieldset">
-            <label for="message" class="form-label">
-              内容介绍
-            </label>
-            <div class="counted-textarea">
+        </div>
+        <fieldset class="form-fieldset">
+          <label for="term" class="form-label">
+            分类
+          </label>
+          <div class="token-field">
+            <multiselect
+              id="term"
+              v-model="term"
+              :options="terms"
+              track-by="name"
+              label="name"
+              :searchable="false"
+              :close-on-select="true"
+              :show-labels="false"
+              placeholder="选择分类"
+              @select="termSelect">
+            </multiselect>
+          </div>
+          <p></p>
+          <!--<p class="form-setting-explanation">-->
+          <!--<a target="_blank" rel="noopener noreferrer"-->
+          <!--href="/user-roles/">-->
+          <!--<icon name="plus" class="gridicon"></icon>-->
+          <!--添加作者-->
+          <!--</a>-->
+          <!---->
+          <!--</p>-->
+        </fieldset>
+        <fieldset class="form-fieldset">
+          <label for="role" class="form-label">
+            作者
+          </label>
+          <div class="token-field">
+            <multiselect
+              id="role"
+              v-model="value"
+              :options="users"
+              track-by="user_login"
+              label="user_nicename"
+              :searchable="false"
+              :close-on-select="true"
+              :show-labels="false"
+              placeholder="选择作者"
+              @select="authorSelect">
+              <template slot="option" scope="props">
+                <img class="option__image" :src="props.option.avatar" :alt="props.option.user_nicename">
+                <div class="option__desc"><span class="option__title">{{ props.option.user_nicename }}</span><span
+                  class="option__small">@{{ props.option.user_login }}</span></div>
+              </template>
+            </multiselect>
+          </div>
+          <p></p>
+          <!--<p class="form-setting-explanation">-->
+          <!--<a target="_blank" rel="noopener noreferrer"-->
+          <!--href="/user-roles/">-->
+          <!--<icon name="plus" class="gridicon"></icon>-->
+          <!--添加作者-->
+          <!--</a>-->
+          <!---->
+          <!--</p>-->
+        </fieldset>
+        <fieldset class="form-fieldset">
+          <label for="message" class="form-label">
+            内容介绍
+          </label>
+          <div class="counted-textarea">
               <textarea
                 name="message" id="message" maxlength="500"
                 placeholder=""
@@ -118,15 +133,14 @@
                 v-model="content"
                 @change="updateContent">
               </textarea>
-              <div class="counted-textarea__count-panel">
-                {{ _wordCount(content) }} 个字
-              </div>
+            <div class="counted-textarea__count-panel">
+              {{ _wordCount(content) }} 个字
             </div>
-          </fieldset>
-        </form>
-      </div>
-    </foldable-card>
-  </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </foldable-card>
 </template>
 
 <script>
@@ -137,6 +151,10 @@
 
   export default {
     props: {
+      terms: {
+        type: Array,
+        required: true
+      },
       status: {
         type: String
       },
@@ -154,16 +172,17 @@
         saving: false,
         content: '',
         value: {},
+        term: {},
         categoryValue: {},
         tagValue: {},
         editing: false,
         category: [
-          { name: 'Vue.js', language: 'JavaScript' },
-          { name: 'Adonis', language: 'JavaScript' },
-          { name: 'Rails', language: 'Ruby' },
-          { name: 'Sinatra', language: 'Ruby' },
-          { name: 'Laravel', language: 'PHP' },
-          { name: 'Phoenix', language: 'Elixir' }
+          {name: 'Vue.js', language: 'JavaScript'},
+          {name: 'Adonis', language: 'JavaScript'},
+          {name: 'Rails', language: 'Ruby'},
+          {name: 'Sinatra', language: 'Ruby'},
+          {name: 'Laravel', language: 'PHP'},
+          {name: 'Phoenix', language: 'Elixir'}
         ]
       }
     },
@@ -174,14 +193,17 @@
       Spinner
     },
     mounted () {
-      this.value = this.podcast.authorInfo
       // 初始化角色列表默认值
       this.$nextTick(() => {
+        this.value = this.podcast.authorInfo
+        if (this.podcast.terms) {
+          this.term = this.podcast.terms[0]
+        }
         this.content = this.podcast.content
+      })
 //        if (this.podcast.hasOwnProperty('authorInfo')) {
 //          this.value = this.podcast.authorInfo
 //        }
-      })
     },
     computed: {
       podcastStatus () {
@@ -212,7 +234,14 @@
         }
         this.$emit('save', form)
       },
-      select (selected, id) {
+      termSelect (selected) {
+        const form = {
+          id: this.podcast.id,
+          term: selected.id
+        }
+        this.$emit('save', form)
+      },
+      authorSelect (selected, id) {
         const form = {
           id: this.podcast.id,
           author: selected.id,

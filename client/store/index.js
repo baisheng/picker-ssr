@@ -404,5 +404,13 @@ export const actions = {
     } else {
       commit('users/GET_DETAIL_FAILURE')
     }
+  },
+  async getPodcastsByTerm ({commit}, termId) {
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/podcasts/`, {params: {term: termId}})).data
+    return data
+  },
+  async getTermsByTaxonomy ({commit}, params = {type: 'category'}) {
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/taxonomy/`, {params})).data
+    return data
   }
 }

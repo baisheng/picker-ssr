@@ -1,14 +1,13 @@
 <template>
   <main class="connected-applications main">
-
     <!-- Navbar -->
     <header-cake compact backHref="/podcasts" :title="title"></header-cake>
     <!-- Header -->
     <podcast-header :podcast.sync="detail"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast.sync="detail" :users="users.data" @save="save"></podcast-content-form>
+    <podcast-content-form :podcast="detail" :users="users.data" :terms="terms" @save="save"></podcast-content-form>
     <!-- Episode-list -->
-    <episode-list :parent="detail" :episodeList="episodeList"  v-if="detail.id"
+    <episode-list :parent="detail" :episodeList="episodeList" v-if="detail.id"
                   @load="loadEpisodeList"></episode-list>
   </main>
 </template>
@@ -33,6 +32,7 @@
 //    },
     async asyncData ({app, params}) {
       await app.store.dispatch('loadUsers')
+      const terms = await app.store.dispatch('getTermsByTaxonomy')
       if (params.id && !Object.is(Number(params.id), NaN)) {
         await app.store.dispatch('getPodcast', params.id)
         const query = {
@@ -41,7 +41,12 @@
         }
         const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/podcast`, {params: query})).data
         return {
+          terms: terms.data,
           episodeList: data
+        }
+      } else {
+        return {
+          terms: terms.data
         }
       }
     },
@@ -52,6 +57,7 @@
         headers: {
           'Authorization': 'Bearer ' + this.token
         },
+        terms: [{}],
         episodeList: [],
         podcast: {
           author: '',
@@ -86,28 +92,7 @@
       PodcastContentForm,
       EpisodeList
     },
-//    mounted() {
-//      this.podcast = this.detail
-//      console.log(this.detail)
-//    },
-    watch: {
-//      'podcast': {
-//        handler: (val, oldVal) => {
-//          this.save()
-//        },
-//       深度观察
-//        deep: true
-//      }
-    },
-    mounted () {
-//      this.$nextTick(async () => {
-//        await this.loadEpisodeList(this.detail.id, 1)
-//      })
-    },
     computed: {
-//      episodeList () {
-//        return this.$store.state.podcast.episodeList.data
-//      },
       title () {
         return this.detail.title ? `修改 - 【${this.detail.title}】` : '创建新节目'
       },
@@ -126,31 +111,15 @@
       orgId () {
         return this.$store.getters.orgId
       },
-//      episodes () {
-//        if (!Object.is(this.podcast.children, undefined)) {
-//          return this.podcast.children
-//        } else {
-//          return []
-//        }
-//      },
       token () {
         return this.$store.state.token
-//        config.headers.common['Authorization'] = 'Bearer ' + store.state.token
-//        return
       }
     },
     methods: {
       async loadEpisodeList (params) {
-//        if (!params.parent) {
-//          params.parent = this.detail.id
-//        }
         if (!params.page) {
           params.page = 1
         }
-//        const query = {
-//          parent: params.id,
-//          page: 1
-//        }
         const data = (await this.$axios.$get(`/app/${this.appId}/podcast`, {params})).data
         this.episodeList = data
       },

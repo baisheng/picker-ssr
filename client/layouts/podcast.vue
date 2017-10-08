@@ -109,7 +109,7 @@
                         <icon name="dot-circle-o" class="gridicon"></icon>
                         <span class="menu-link-text">内容</span>
                       </a>
-                      <a href="/podcast" class="sidebar__button">添加</a>
+                      <a href="" @click="addPodcast" class="sidebar__button">添加</a>
                     </nuxt-link>
                     <!--
                     <li class="" data-post-type="media">
@@ -222,6 +222,11 @@
       }
     },
     methods: {
+      addPodcast (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.$router.push('/podcast')
+      },
       toAppHome (event) {
         event.preventDefault();
         event.stopPropagation();
