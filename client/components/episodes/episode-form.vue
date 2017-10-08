@@ -19,7 +19,7 @@
     <!--- Episode form header -->
     <card class="section-header" compact v-if="episode.id">
       <div class="section-header__label">
-      <span>{{ episode.title }}</span>
+        <span>{{ episode.title }}</span>
       </div>
       <div class="section-header__actions">
         <div class="button-group">
@@ -95,7 +95,8 @@
 
           </file-upload>
 
-          <button :disabled="isDisabled" class="media-library__upload-button button button is-primary" @click.prevent="insertFile(episode)"
+          <button :disabled="isDisabled" class="media-library__upload-button button button is-primary"
+                  @click.prevent="insertFile(episode)"
                   :class="uploadProgress ? 'is-busy' : ''">
               <span v-if="uploadProgress">
                 {{uploadProgress}}
@@ -137,13 +138,14 @@
         isDisabled: true,
         episode: {
           title: '',
-          status: 'draft',
-          content: ''
+          status: 'approve',
+          content: '',
+          term: 2
         },
         files: [],
         uploadProgress: '',
-        accept: 'audio/mp3',
-        size: 1024 * 1024 * 10
+        accept: 'audio/mp3,audio/x-m4a, audio/m4a',
+        size: 1024 * 1024 * 30
       }
     },
     computed: {
@@ -221,11 +223,12 @@
               _audio_id: data.id
             }
             this.uploadProgress = ''
+//            console.log(JSON.stringify(this.episode))
             // 如果不是新建就更新
-            if (!this.creating) {
+//            if (!this.creating) {
 //              this.$store.commit('podcast/UPDATE_EPISODE')
-              this.$emit('update', this.episode, this.episode.id)
-            }
+            this.$emit('updateAudio', this.episode, this.episode.id)
+//            }
           }
         }
         if (!newFile && oldFile) {

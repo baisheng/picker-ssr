@@ -71,7 +71,7 @@
     </div>
     <!--<transition name="slide-fade" mode="out-in">-->
     <episode-form v-if="creating" :parent="parent" :sort="episodeList.length + 1" @addEpisode="push"
-                  @cancel="cancel"></episode-form>
+                  @cancel="cancel" @updateAudio="updateAudio"></episode-form>
     <!--</transition>-->
 
     <span class="episode-list__transition-wrapper">
@@ -183,6 +183,7 @@
   import EpisodeDetail from '../episode-detail'
   import EpisodeForm from '../episodes/episode-form'
   import EmptyContent from '~/components/empty-content'
+  import {find} from 'lodash'
 
   export default {
     props: {
@@ -337,11 +338,17 @@
 //      async saveEpisode (episode) {
 //
 //      },
+      async updateAudio (episode, id) {
+        await this.$axios.put(`/app/${this.$store.getters.appId}/posts/${episode.id}`, episode)
+        // eslint-disable-next-line prefer-const
+        let obj = find(this.episodeList, {id: episode.id})
+        obj.url = episode.url
+      },
       async updateEpisode (episode, id) {
         if (!id) {
           id = episode.id
         }
-        const {data} = await this.$axios.put(`/app/${this.$store.getters.appId}/posts/${id}`, episode)
+        await this.$axios.put(`/app/${this.$store.getters.appId}/posts/${id}`, episode)
 //        this.$emit('podcast_item_update', episode, id)
       },
       // 创建节目 episode

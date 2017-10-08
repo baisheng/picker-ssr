@@ -438,7 +438,7 @@ class APlayer {
     this.music = this.option.music[indexMusic]
 
     // set html
-    if (this.music.pic) {
+    if (!Object.is(this.music.pic, undefined)) {
       this.element.getElementsByClassName('aplayer-pic')[0].style.backgroundImage = `url('${this.music.pic}')`
     }
     this.element.getElementsByClassName('aplayer-title')[0].innerHTML = this.music.title

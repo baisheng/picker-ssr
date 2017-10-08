@@ -9,7 +9,7 @@
       @toggleApprove="toggleApprove"
       @toggleExpanded="toggleExpanded" :episode="episode" :order="order + 1"></episode-detail-header>
 
-    <div class="episode-detail__content" v-show="isExpanded">
+    <div class="episode-detail__content" v-if="isExpanded">
       <div class="episode-detail__post">
         <div class="episode-detail__post-info">
           <div class="emojify">{{ episode.title }}</div>
@@ -26,13 +26,12 @@
             :accept="accept"
             :size="size || 0"
             :headers="requestHeader"
-            ref="upload"
-            v-if="!creating">
+            ref="upload">
 
         <span v-if="uploadProgress">
                 {{uploadProgress}}
               </span>
-            <span v-else>
+            <span>
                 替换音频
               </span>
           </file-upload>
@@ -154,7 +153,6 @@
               </span>
           </button>
         </div>
-
       </div>
     </div>
   </card>
@@ -195,8 +193,8 @@
         itemList: [],
         files: [],
         uploadProgress: '',
-        accept: 'image/png,image/gif,image/jpeg,image/webp,audio/mp3',
-        size: 1024 * 1024 * 10,
+        accept: 'image/png,image/gif,image/jpeg,image/webp,audio/mp3,audio/mp4a-latm, audio/x-m4a, audio/m4a',
+        size: 1024 * 1024 * 30,
         illustration: '/images/illustrations/videoAudioPosts.svg'
       }
     },
@@ -254,9 +252,9 @@
         }
       },
 
-      creating () {
-        return this.$store.state.podcast.episode.creating
-      },
+//      creating () {
+//        return this.$store.state.podcast.episode.creating
+//      },
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
@@ -267,6 +265,7 @@
       }
     },
     mounted () {
+      this.episode.term = 2
 //      this.episode = this.data
 //      this.episode = Object.assign({}, this.data)
     },
@@ -329,10 +328,10 @@
             }
             this.uploadProgress = ''
             // 如果不是新建就更新
-            if (!this.creating) {
+//            if (!this.creating) {
 //              this.$store.commit('podcast/UPDATE_EPISODE')
-              this.$emit('update', this.episode, this.episode.id)
-            }
+            this.$emit('update', this.episode, this.episode.id)
+//            }
           }
         }
         if (!newFile && oldFile) {
