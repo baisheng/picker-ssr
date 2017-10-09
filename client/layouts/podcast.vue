@@ -36,7 +36,7 @@
                   </a>
                 </div>
                 <div class="site" v-for="app in apps">
-                  <a class="site__content" :href="`/${app.type}/home`">
+                  <a class="site__content" :href="`/${app.type}`">
                     <div class="site-icon is-blank"
                          style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
                       <img :src="app.meta.basic.logo_url" v-if="app.meta.basic.logo_url">
