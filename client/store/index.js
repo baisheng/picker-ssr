@@ -408,8 +408,9 @@ export const actions = {
     const data = (await this.$axios.get(`/app/${this.getters.appId}/podcasts/`, {params: {term: termId}})).data
     return data
   },
-  async getTermsByTaxonomy ({commit}, params = {taxonomy: 'category'}) {
+  async getTermsByTaxonomy ({commit}, params = {type: 'category'}) {
     const data = (await this.$axios.get(`/app/${this.getters.appId}/taxonomy/`, {params})).data
+    console.log(JSON.stringify(data))
     return data
   }
 }

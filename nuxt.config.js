@@ -6,10 +6,10 @@ module.exports = {
   srcDir: 'client/',
   buildDir: '.build/',
   dev: process.env.NODE_ENV !== 'production',
-  // cache: {
-  //   max: 20,
-  //   maxAge: 600000
-  // },
+  cache: {
+    max: 20,
+    maxAge: 600000
+  },
   /**
    * Using Phusion Passenger with Nginx on Plesk - That will gzip
    */
@@ -120,9 +120,9 @@ module.exports = {
     '@nuxtjs/axios',
     // With options
     // ['@nuxtjs/axios', { credentials: false }],
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
     // Simple usage
-    // '@nuxtjs/component-cache'
+    '@nuxtjs/component-cache'
     // With options
     // ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
