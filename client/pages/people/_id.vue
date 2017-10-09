@@ -269,7 +269,7 @@
       if (params.id && !Object.is(Number(params.id), NaN)) {
         await store.dispatch('getUser', params.id)
       }
-      await store.dispatch('loadUsers')
+//      await store.dispatch('loadUsers')
 //      await store.dispatch('getPodcast')
 //      return Promise.all([
 //        store.dispatch('loadEpisodeList', {axios: store.$axios, params: {parent: this.podcastId}})
@@ -318,13 +318,12 @@
     },
     mounted () {
       if (JSON.stringify(this.detail) !== '{}') {
-        this.user = Object.assign({approach: 'pc'}, this.detail)
+        this.user = Object.assign({}, this.detail)
+        this.user.approach = 'pc'
       }
       this.$on('avatar_upload', () => {
-        console.log('avatar_upload event ....')
         this.$store.dispatch('updateUser', {form: this.user})
       })
-//      this.$emit
     },
     methods: {
       imageuploaded (res) {
@@ -423,14 +422,19 @@
         console.log(JSON.stringify(this.user))
         await this.$validator.validateAll().then(async (result) => {
           if (result) {
-            await this.$store.dispatch('addUser', {form: that.user})
-            that.isSave = false
-            if (that.newUser.creating && that.newUser.type !== 'exist') {
+            if (this.user.id) {
+              await this.$store.dispatch('updateUser', {form: that.user})
+              that.isSave = false
               this.$router.replace('/people/team')
             } else {
-              console.log('创建失败。。。')
+              await this.$store.dispatch('addUser', {form: that.user})
+              that.isSave = false
+              if (that.newUser.creating && that.newUser.type !== 'exist') {
+                this.$router.replace('/people/team')
+              } else {
+                console.log('创建失败。。。')
+              }
             }
-            return
           }
           that.isSave = false
           console.log('Correct them errors!')

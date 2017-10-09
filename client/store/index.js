@@ -357,7 +357,6 @@ export const actions = {
       if (data.errno > 0) {
         // 发送出错误状态
         commit('users/CREATE_FAILURE')
-        // console.error(data.errmsg)
         return
       } else if (data.data.type === 'exist') {
         commit('users/CREATE_FAILURE_EXIST')
@@ -409,7 +408,7 @@ export const actions = {
     const data = (await this.$axios.get(`/app/${this.getters.appId}/podcasts/`, {params: {term: termId}})).data
     return data
   },
-  async getTermsByTaxonomy ({commit}, params = {type: 'category'}) {
+  async getTermsByTaxonomy ({commit}, params = {taxonomy: 'category'}) {
     const data = (await this.$axios.get(`/app/${this.getters.appId}/taxonomy/`, {params})).data
     return data
   }

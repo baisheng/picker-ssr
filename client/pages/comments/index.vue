@@ -17,8 +17,8 @@
           </g>
         </svg>
       </div>
-      <div><p class="current-section__site-title">bluepx</p>
-        <h1 class="current-section__section-title">评论</h1></div>
+      <div><p class="current-section__site-title"></p>
+        <h1 class="current-section__section-title"></h1></div>
     </a></header>
     <div class="comment-list"><!-- react-empty: 2698 -->
       <div class="section-nav comment-navigation">
