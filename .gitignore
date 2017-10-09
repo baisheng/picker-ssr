@@ -61,7 +61,7 @@ jspm_pacakges/
 
 ## File-based project format:
 *.iws
-
+.idea/*
 # IntelliJ
 /out/
 
