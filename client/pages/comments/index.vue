@@ -27,18 +27,18 @@
           <div class="section-nav-group">
             <div class="section-nav-tabs">
               <ul class="section-nav-tabs__list" role="menu">
-                <li class="is-selected section-nav-tab"><a href="/comments/pending/bluepx.wordpress.com"
+                <li class="is-selected section-nav-tab"><a href="/comments/pending/"
                                                            class="section-nav-tab__link" tabindex="0"
                                                            aria-selected="true" role="menuitem"><span
                   class="section-nav-tab__text"><!-- react-text: 2709 -->条未审核<!-- /react-text --></span></a></li>
-                <li class="section-nav-tab"><a href="/comments/approved/bluepx.wordpress.com"
+                <li class="section-nav-tab"><a href="/comments/approved/"
                                                class="section-nav-tab__link" tabindex="0" aria-selected="false"
                                                role="menuitem"><span class="section-nav-tab__text"><!-- react-text: 2713 -->已审核
                   <!-- /react-text --></span></a></li>
-                <li class="section-nav-tab"><a href="/comments/spam/bluepx.wordpress.com" class="section-nav-tab__link"
+                <li class="section-nav-tab"><a href="/comments/spam/" class="section-nav-tab__link"
                                                tabindex="0" aria-selected="false" role="menuitem"><span
                   class="section-nav-tab__text"><!-- react-text: 2717 -->垃圾评论<!-- /react-text --></span></a></li>
-                <li class="section-nav-tab"><a href="/comments/trash/bluepx.wordpress.com" class="section-nav-tab__link"
+                <li class="section-nav-tab"><a href="/comments/trash/" class="section-nav-tab__link"
                                                tabindex="0" aria-selected="false" role="menuitem"><span
                   class="section-nav-tab__text"><!-- react-text: 2721 -->回收站<!-- /react-text --></span></a></li>
               </ul>
@@ -53,7 +53,7 @@
                                                     src="https://0.gravatar.com/avatar/f0fd64a8a2dd79ec5f4f1e363585a143?s=96&amp;d=mm&amp;r=G"
                                                     width="32" height="32"><div class="comment-detail__author-info"><div
         class="comment-detail__author-info-element"><strong><div class="emojify">bluepx</div></strong><span><div
-        class="emojify">bluepx.wordpress.com</div></span></div><div class="comment-detail__author-info-element"><div
+        class="emojify"></div></span></div><div class="comment-detail__author-info-element"><div
         class="emojify">我来写一篇文章 上</div></div></div></div><div class="comment-detail__comment-preview"><div
         class="emojify">很赞！！！
 </div></div></div><button class="button comment-detail__action-collapse is-borderless" type="button"><svg
