@@ -163,6 +163,7 @@
 
 <script>
   export default {
+    layout: 'podcast',
     async fetch ({store}) {
       await store.dispatch('loadUsers')
     },

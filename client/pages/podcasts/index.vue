@@ -21,8 +21,8 @@
           </g>
         </svg>
       </div>
-      <div><p class="current-section__site-title">bluepx</p>
-        <h1 class="current-section__section-title">插件浏览器</h1></div>
+      <div><p class="current-section__site-title"></p>
+        <h1 class="current-section__section-title"></h1></div>
     </a></header>
     <podcasts-browser-main-header></podcasts-browser-main-header>
     <span>

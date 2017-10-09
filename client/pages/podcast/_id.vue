@@ -45,7 +45,9 @@
           episodeList: data
         }
       } else {
+        await app.store.commit('podcast/INIT')
         return {
+          episodeList: [],
           terms: terms.data
         }
       }

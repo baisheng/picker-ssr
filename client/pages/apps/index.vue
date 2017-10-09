@@ -92,7 +92,7 @@
       handleClick () {},
       selectApp (event, app) {
         this.$store.commit('org/SET_CURRENT_APP', app)
-        this.$router.push(`/${app.type}/home`)
+        this.$router.push(`/${app.type}`)
       }
     }
   }

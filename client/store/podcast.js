@@ -48,6 +48,15 @@ export const state = () => {
 }
 
 export const mutations = {
+  INIT (state) {
+    state.detail = {
+      status: 'init',
+      fetching: false,
+      data: {
+        authorInfo: {}
+      }
+    }
+  },
   DELETE (state) {
     state.detail.del = 'start'
   },

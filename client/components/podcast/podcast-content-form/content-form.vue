@@ -193,6 +193,11 @@
       Spinner
     },
     mounted () {
+      this.value = this.podcast.authorInfo
+      if (this.podcast.terms) {
+        this.term = this.podcast.terms[0]
+      }
+      this.content = this.podcast.content
       // 初始化角色列表默认值
       this.$nextTick(() => {
         this.value = this.podcast.authorInfo

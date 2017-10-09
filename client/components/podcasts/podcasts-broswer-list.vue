@@ -41,6 +41,10 @@
         type: Boolean,
         default: true
       },
+      slug: {
+        type: Boolean,
+        default: false
+      },
       term: {
         type: Object,
         required: true
@@ -60,7 +64,11 @@
     },
     methods: {
       async load () {
-        this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/podcasts/`, {params: {term: this.term.id}})).data.data
+        const params = {
+          term: !this.slug ? this.term.id : '',
+          slug: this.slug ? this.term.slug : ''
+        }
+        this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/podcasts/`, {params})).data.data
       }
     }
   }

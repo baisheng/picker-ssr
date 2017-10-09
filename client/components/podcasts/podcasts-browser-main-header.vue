@@ -79,16 +79,16 @@
         </div>
       </div>
     </div>
-    <div class="plugins__header-buttons"><a class="button header-button" aria-label="上传插件"
-                                            href="/plugins/upload/bluepx.wordpress.com">
-      <svg class="gridicon gridicons-cloud-upload" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
-           viewBox="0 0 24 24">
-        <g>
-          <path
-            d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
-        </g>
-      </svg>
-      <span class="header-button__text">发布节目</span></a></div>
+    <div class="plugins__header-buttons">
+      <nuxt-link to="/podcast" class="button header-button" aria-label="发布节目">
+        <svg class="gridicon gridicons-cloud-upload" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 24 24">
+          <g>
+            <path
+              d="M18 9c-.01 0-.017.002-.025.003C17.72 5.646 14.922 3 11.5 3 7.91 3 5 5.91 5 9.5c0 .524.07 1.03.186 1.52C5.123 11.015 5.064 11 5 11c-2.21 0-4 1.79-4 4 0 1.202.54 2.267 1.38 3h18.593C22.196 17.09 23 15.643 23 14c0-2.76-2.24-5-5-5zm-5 4v3h-2v-3H8l4-5 4 5h-3z"></path>
+          </g>
+        </svg>
+        <span class="header-button__text">发布节目</span></nuxt-link></div>
   </div>
 </template>
 <script>

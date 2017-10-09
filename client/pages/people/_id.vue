@@ -258,6 +258,7 @@
 
   export default {
     middleware: 'authenticated',
+    layout: 'podcast',
     components: {
       HeaderCake,
       FormInputValidation,

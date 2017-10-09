@@ -29,7 +29,7 @@
     </header>
     <podcasts-browser-main-header></podcasts-browser-main-header>
     <span>
-      <podcasts-browser-list :term="term" :expandedLink="false"></podcasts-browser-list>
+      <podcasts-browser-list :term="term" :expandedLink="false" :slug="true"></podcasts-browser-list>
     </span>
   </main>
 </template>

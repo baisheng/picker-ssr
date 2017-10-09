@@ -109,8 +109,8 @@
                         <icon name="dot-circle-o" class="gridicon"></icon>
                         <span class="menu-link-text">内容</span>
                       </a>
-                      <!--<a href="/podcast" @click="addPodcast" class="sidebar__button">添加</a>-->
-                      <a href="/podcast" class="sidebar__button">添加</a>
+                      <a href="" @click="addPodcast" class="sidebar__button">添加</a>
+                      <!--<a href="/podcast" class="sidebar__button">添加</a>-->
                     </nuxt-link>
                     <!--
                     <li class="" data-post-type="media">
@@ -154,6 +154,7 @@
                         <span class="menu-link-text">人员</span></a>
                       <a href="/people/new" class="sidebar__button">添加</a>
                     </nuxt-link>
+                    <!--
                     <nuxt-link class="settings" to="/podcast/settings/general" tag="li">
                       <a>
                         <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -165,6 +166,7 @@
                         </svg>
                         <span class="menu-link-text">设置</span></a>
                     </nuxt-link>
+                    -->
                   </ul>
                 </li>
                 <!---->
@@ -226,7 +228,7 @@
       addPodcast (event) {
         event.preventDefault();
         event.stopPropagation();
-        this.$router.push('/podcast')
+        this.$router.replace('/podcast')
       },
       toAppHome (event) {
         event.preventDefault();
