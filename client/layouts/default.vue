@@ -64,7 +64,7 @@
                 class="gridicon gridicons-add-outline" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"><g><path
                 d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5 9h-4V7h-2v4H7v2h4v4h2v-4h4v-2z"></path></g></svg>
-                <!-- react-text: 164 --> <!-- /react-text --><!-- react-text: 165 -->添加新站点
+                <!-- react-text: 164 --> <!-- /react-text --><!-- react-text: 165 -->创建新应用
                 <!-- /react-text --></a></span></div>
           </div>
 
@@ -107,14 +107,16 @@
                     <nuxt-link to="/podcasts" tag="li">
                       <a>
                         <icon name="dot-circle-o" class="gridicon"></icon>
-                        <span class="menu-link-text">节目管理</span>
+                        <span class="menu-link-text">内容</span>
                       </a>
-                      <a href="/podcast" class="sidebar__button">添加</a>
+                      <a href="" @click="addPodcast" class="sidebar__button">添加</a>
+                      <!--<a href="/podcast" class="sidebar__button">添加</a>-->
                     </nuxt-link>
-
-                    <li class="" data-post-type="media"><a href="/media/bluepx.wordpress.com">
-                      <icon name="photo" class="gridicon"></icon>
-                      <span class="menu-link-text">媒体</span></a>
+                    <!--
+                    <li class="" data-post-type="media">
+                      <a>
+                        <icon name="photo" class="gridicon"></icon>
+                        <span class="menu-link-text">媒体</span></a>
                       <form class="media-library__upload-button button sidebar__button">
                         添加
                         <input type="file"
@@ -123,7 +125,7 @@
                       </form>
                     </li>
                     <li class="">
-                      <a href="/comments">
+                      <a>
                         <icon name="comments" class="gridicon"></icon>
                         <span class="menu-link-text">评论</span></a>
                     </li>
@@ -134,9 +136,9 @@
                         <span class="menu-link-text">问答</span>
                       </a>
                     </li>
+                    -->
                   </ul>
                 </li>
-
                 <li class="sidebar__menu">
                   <h2 class="sidebar__heading">配置</h2>
                   <ul>
@@ -152,6 +154,7 @@
                         <span class="menu-link-text">人员</span></a>
                       <a href="/people/new" class="sidebar__button">添加</a>
                     </nuxt-link>
+                    <!--
                     <nuxt-link class="settings" to="/podcast/settings/general" tag="li">
                       <a>
                         <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -163,8 +166,10 @@
                         </svg>
                         <span class="menu-link-text">设置</span></a>
                     </nuxt-link>
+                    -->
                   </ul>
                 </li>
+                <!---->
               </div>
             </div>
             <div class="sidebar__footer">
@@ -220,6 +225,11 @@
       }
     },
     methods: {
+      addPodcast (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.$router.replace('/podcast')
+      },
       toAppHome (event) {
         event.preventDefault();
         event.stopPropagation();
