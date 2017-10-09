@@ -80,6 +80,7 @@
 <script>
   export default {
     layout: 'apps',
+    middleware: 'authenticated',
 //    async fetch ({store}) {
 //      await store.dispatch('loadOrgApps')
 //    },

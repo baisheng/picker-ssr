@@ -37,7 +37,6 @@
   export default {
     middleware: 'authenticated',
     name: 'podcast',
-    layout: 'podcast',
     data () {
       return {
         filter: 'publish',

@@ -142,14 +142,13 @@
 
   export default {
     name: 'podcast',
-    layout: 'podcast',
+    middleware: 'authenticated',
     data () {
       return {
         filter: 'pulish',
         collapsed: true
       }
     },
-    middleware: 'authenticated',
     components: {
       PodcastsList
 //      ActionMenu
