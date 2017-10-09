@@ -106,7 +106,7 @@
                 <li class="sidebar__menu">
                   <h2 class="sidebar__heading">管理</h2>
                   <ul>
-                    <nuxt-link to="/podcast/home" tag="li">
+                    <nuxt-link to="/podcast" tag="li">
                       <a>
                         <icon name="cubes" class="gridicon"></icon>
                         <span class="menu-link-text">应用</span>
