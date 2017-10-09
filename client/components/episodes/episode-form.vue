@@ -144,7 +144,7 @@
         },
         files: [],
         uploadProgress: '',
-        accept: 'audio/mp3,audio/x-m4a, audio/m4a',
+        accept: 'audio/mp3, audio/x-m4a, audio/m4a',
         size: 1024 * 1024 * 30
       }
     },
@@ -227,7 +227,7 @@
             // 如果不是新建就更新
 //            if (!this.creating) {
 //              this.$store.commit('podcast/UPDATE_EPISODE')
-            this.$emit('updateAudio', this.episode, this.episode.id)
+//            this.$emit('updateAudio', this.episode, this.episode.id)
 //            }
           }
         }

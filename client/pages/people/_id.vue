@@ -99,25 +99,7 @@
         </span>
         </div>
       </div>
-      <!--<form>-->
-      <!--<fieldset class="form-fieldset">-->
-      <!--<label for="first_name" class="form-label">-->
-      <!--&lt;!&ndash; react-text: 2677 &ndash;&gt;名字-->
-      <!--&lt;!&ndash; /react-text &ndash;&gt;</label><input type="text" id="first_name" name="first_name" class="form-text-input"-->
-      <!--value=""></fieldset>-->
-      <!--<fieldset class="form-fieldset"><label for="last_name" class="form-label">&lt;!&ndash; react-text: 2681 &ndash;&gt;姓氏-->
-      <!--&lt;!&ndash; /react-text &ndash;&gt;</label><input type="text" id="last_name" name="last_name" class="form-text-input"-->
-      <!--value=""></fieldset>-->
-      <!--<fieldset class="form-fieldset"><label for="display_name" class="form-label">&lt;!&ndash; react-text: 2685 &ndash;&gt;公共显示名称-->
-      <!--&lt;!&ndash; /react-text &ndash;&gt;</label><input type="text" id="display_name" name="display_name" class="form-text-input"-->
-      <!--value="bluepx"></fieldset>-->
-      <!--<fieldset class="form-fieldset"><label for="description" class="form-label">&lt;!&ndash; react-text: 2689 &ndash;&gt;关于我-->
-      <!--&lt;!&ndash; /react-text &ndash;&gt;</label><textarea id="description" name="description" class="form-textarea"></textarea>-->
-      <!--</fieldset>-->
-      <!--<p>-->
-      <!--<button disabled="" type="submit" class="button form-button is-primary">保存个人资料详细信息</button>-->
-      <!--</p>-->
-      <!--</form>-->
+
       <form @submit.prevent="handleSubmit">
         <fieldset class="form-fieldset">
 
