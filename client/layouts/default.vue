@@ -191,6 +191,7 @@
   import vueEsc from '~/directives/vue-esc'
 
   export default {
+    middleware: 'authenticated',
     data () {
       return {
         isLogged: false

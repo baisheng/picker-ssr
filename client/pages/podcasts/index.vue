@@ -35,6 +35,7 @@
   import {PodcastsList, PodcastsBrowserMainHeader, PodcastsBrowserList} from '~/components/podcasts'
 
   export default {
+    middleware: 'authenticated',
     name: 'podcast',
     layout: 'podcast',
     data () {
@@ -43,7 +44,6 @@
         collapsed: true
       }
     },
-    middleware: 'authenticated',
     components: {
       PodcastsBrowserMainHeader,
       PodcastsBrowserList,

@@ -59,7 +59,7 @@
 
   export default {
     layout: 'logged-out',
-    middleware: 'anonymous',
+//    middleware: 'anonymous',
     components: {
       Card,
       FormInputValidation
