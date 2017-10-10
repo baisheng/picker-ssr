@@ -1,4 +1,4 @@
-.podcasts-borwser-list {
+.podcasts-browser-list {
   margin: 24px 0;
   background: $white;
   box-shadow: 0 1px 2px lighten( $gray, 30% );
@@ -8,14 +8,14 @@
   }
 }
 
-.podcasts-borwser-list__header {
+.podcasts-browser-list__header {
   background: $gray-light;
   border-bottom: 1px solid lighten( $gray, 30% );
   overflow: hidden; // lazy clearfix
 }
 
-.button.podcasts-borwser-list__select-all,
-.podcasts-borwser-list__title {
+.button.podcasts-browser-list__select-all,
+.podcasts-browser-list__title {
   display: inline-block;
   padding: 6px 0px 7px;
   color: $gray;
@@ -34,11 +34,11 @@
   }
 }
 
-.button.podcasts-borwser-list__select-all {
+.button.podcasts-browser-list__select-all {
   float: right;
 }
 
-.podcasts-borwser-list__elements {
+.podcasts-browser-list__elements {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
