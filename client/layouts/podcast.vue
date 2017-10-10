@@ -117,17 +117,6 @@
                         <icon name="photo" class="gridicon"></icon>
                         <span class="menu-link-text">媒体</span></a>
                       <form class="media-library__upload-button button sidebar__button">
-                        类别管理
-                        <input type="file"
-                               accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.ppt,.odt,.pptx,.docx,.pps,.ppsx,.xls,.xlsx,.key,.ogv,.mp4,.m4v,.mov,.wmv,.avi,.mpg,.3gp,.3g2"
-                               multiple="" class="media-library__upload-button-input">
-                      </form>
-                    </li>
-                    <li class="" data-post-type="media">
-                      <a>
-                        <icon name="photo" class="gridicon"></icon>
-                        <span class="menu-link-text">媒体</span></a>
-                      <form class="media-library__upload-button button sidebar__button">
                         添加
                         <input type="file"
                                accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.ppt,.odt,.pptx,.docx,.pps,.ppsx,.xls,.xlsx,.key,.ogv,.mp4,.m4v,.mov,.wmv,.avi,.mpg,.3gp,.3g2"
