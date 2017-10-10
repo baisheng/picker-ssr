@@ -152,7 +152,7 @@
                         <span class="menu-link-text">人员</span></a>
                       <a href="/people/new" class="sidebar__button">添加</a>
                     </nuxt-link>
-                    <nuxt-link class="settings" to="/podcasts/settings/general" tag="li">
+<!--                    <nuxt-link class="settings" to="/podcasts/settings/general" tag="li">
                       <a>
                         <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 24 24">
@@ -162,7 +162,7 @@
                           </g>
                         </svg>
                         <span class="menu-link-text">设置</span></a>
-                    </nuxt-link>
+                    </nuxt-link>-->
                   </ul>
                 </li>
                 <!---->
