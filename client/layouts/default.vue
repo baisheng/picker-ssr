@@ -112,7 +112,17 @@
                       <a href="" @click="addPodcast" class="sidebar__button">添加</a>
                       <!--<a href="/podcast" class="sidebar__button">添加</a>-->
                     </nuxt-link>
-                    <!--
+                    <li class="" data-post-type="media">
+                      <a>
+                        <icon name="photo" class="gridicon"></icon>
+                        <span class="menu-link-text">内容分类</span></a>
+                      <form class="media-library__upload-button button sidebar__button">
+                        添加
+                        <input type="file"
+                               accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.ppt,.odt,.pptx,.docx,.pps,.ppsx,.xls,.xlsx,.key,.ogv,.mp4,.m4v,.mov,.wmv,.avi,.mpg,.3gp,.3g2"
+                               multiple="" class="media-library__upload-button-input">
+                      </form>
+                    </li>
                     <li class="" data-post-type="media">
                       <a>
                         <icon name="photo" class="gridicon"></icon>
@@ -127,7 +137,7 @@
                     <li class="">
                       <a>
                         <icon name="comments" class="gridicon"></icon>
-                        <span class="menu-link-text">评论</span></a>
+                        <span class="menu-link-text">互动</span></a>
                     </li>
                     <li>
                       <a>
@@ -136,7 +146,6 @@
                         <span class="menu-link-text">问答</span>
                       </a>
                     </li>
-                    -->
                   </ul>
                 </li>
                 <li class="sidebar__menu">
@@ -154,8 +163,7 @@
                         <span class="menu-link-text">人员</span></a>
                       <a href="/people/new" class="sidebar__button">添加</a>
                     </nuxt-link>
-                    <!--
-                    <nuxt-link class="settings" to="/podcast/settings/general" tag="li">
+                    <nuxt-link class="settings" to="/podcasts/settings/general" tag="li">
                       <a>
                         <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 24 24">
@@ -166,7 +174,6 @@
                         </svg>
                         <span class="menu-link-text">设置</span></a>
                     </nuxt-link>
-                    -->
                   </ul>
                 </li>
                 <!---->

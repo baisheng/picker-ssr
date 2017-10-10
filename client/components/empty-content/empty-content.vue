@@ -3,7 +3,9 @@
     <img :src="illustration" class="empty-content__illustration" :width="illustrationWidth">
     <h2 class="empty-content__title" v-if="title">{{ title }}</h2>
     <h3 class="empty-content__line" v-if="line">{{ line }}</h3>
-    <!--<a class="empty-content__action button is-primary" @click="handleClick" :href="actionURL"></a>-->
+    <a class="empty-content__action button is-primary" @click="handleClick" v-if="action" :href="action.url">
+      {{ action.title }}
+    </a>
     <slot name="action"></slot>
     <slot name="secondaryAction"></slot>
     <slot></slot>
@@ -13,6 +15,15 @@
   export default {
     name: 'EmptyContent',
     props: {
+      action: {
+        type: Object,
+        default: () => {
+          return {
+            title: '添加',
+            url: ''
+          }
+        }
+      },
       title: {
         type: String,
         default: '还没有内容'
@@ -29,6 +40,11 @@
       },
       actionURL: {
         type: String
+      }
+    },
+    methods: {
+      handleClick (event) {
+        this.$emit('on-click', event)
       }
     },
     computed: {
