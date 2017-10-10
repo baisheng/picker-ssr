@@ -81,7 +81,8 @@ export const mutations = {
       }
     }
   },
-  UPLOAD_FEATURED_IMAGE (state) {
+  UPLOAD_AVATAR_IMAGE (state, avatar) {
+    state.data.avatar = avatar
   },
   REQUEST_LIST (state) {
     state.list.fetching = true
@@ -103,7 +104,8 @@ export const mutations = {
     state.detail.data = {}
   },
   UPDATE_DETAIL (state, action) {
-    state.detail.data = Object.assign({}, action.data)
+    state.detail.data = Object.assign(state.detail.data, action)
+    // console.log(JSON.stringify(state.detail.data))
     // state.detail.data = action.data
   },
   REQUEST_DETAIL (state) {

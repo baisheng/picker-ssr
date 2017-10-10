@@ -38,7 +38,7 @@
                   </g>
                 </svg>
                 <span class="menu-link-text">我的个人资料</span></a></li>
-              <li class=""><a href="/me/account">
+              <li class=""><a href="/me/">
                 <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24">
                   <g>
@@ -47,16 +47,8 @@
                   </g>
                 </svg>
                 <span class="menu-link-text">帐户设置</span></a></li>
-              <li class=""><a href="/me/purchases">
-                <svg class="gridicon gridicons-credit-card" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                     viewBox="0 0 24 24">
-                  <g>
-                    <path
-                      d="M20 4H4c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h16c1.105 0 2-.895 2-2V6c0-1.105-.895-2-2-2zm0 2v2H4V6h16zM4 18v-6h16v6H4zm2-4h7v2H6v-2zm9 0h3v2h-3v-2z"></path>
-                  </g>
-                </svg>
-                <span class="menu-link-text">管理购买</span></a></li>
-              <li class=""><a href="/me/security">
+
+              <li class=""><a href="/me/">
                 <svg class="gridicon gridicons-lock" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24">
                   <g>
@@ -65,7 +57,7 @@
                   </g>
                 </svg>
                 <span class="menu-link-text">安全性</span></a></li>
-              <li class=""><a href="/me/notifications">
+              <li class=""><a href="/me/">
                 <svg class="gridicon gridicons-bell" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24">
                   <g>

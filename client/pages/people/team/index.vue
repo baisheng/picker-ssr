@@ -90,7 +90,8 @@
                 </g>
               </svg>
             </div>
-            <div class="search__input-fade"><input type="search" id="search-component-8" class="search__input"
+            <div class="search__input-fade">
+              <input type="search" id="search-component-8" class="search__input"
                                                    placeholder="搜索…" role="search" value="" aria-label="搜索"
                                                    aria-hidden="true" autocapitalize="none"></div>
           </div>

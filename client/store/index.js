@@ -17,6 +17,9 @@ export const mutations = {
     // state.token = user[''] || null
     state.user = user || null
   },
+  SET_USER_AVATAR (state, avatar) {
+    state.user.avatar = avatar
+  },
   SET_TOKEN (state, token) {
     state.token = token || null
   }
@@ -374,14 +377,21 @@ export const actions = {
     }
   },
   async updateUser ({commit}, {form}) {
-    // commit('users/UPDATE_DETAIL')
+    console.log(JSON.stringify(form))
+    commit('users/UPDATE_DETAIL')
     const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, form)
     if (data.errno > 0) {
-      console.log('update failure')
+      // console.log('update failure')
       // commit('users/UPDATE_FAILURE')
     } else {
+      // commit('users/UPDATE_DETAIL', form)
       // commit('users/UPDATE_SUCCESS')
     }
+    return data
+  },
+
+  async updatePassword ({commit}, {form}) {
+
   },
   async loadUsers ({commit}, params = {page: 1}) {
     const {data} = await this.$axios.get(`/app/${this.getters.appId}/users`, {params})

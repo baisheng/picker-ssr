@@ -123,25 +123,13 @@
     <div class="card me-security-settings security__settings"><p>
       要更新您的密码，请在下面输入一个新密码。密码不得少于 6 个字符。要提高密码强度，请使用大小写字母、数字和 ! " ? $ % ^ &amp; ) 等符号。</p>
       <form @submit.prevent="savePassword" class="account-password">
-
-        <fieldset class="form-fieldset">
-          <label for="password" class="form-label">
-            新密码
-          </label>
-          <div class="form-password-input">
-            <input type="password" autocapitalize="off" autocomplete="off"
-                   autocorrect="off"
-                   class="form-text-input account-password__password-field" id="password"
-                   name="password">
-            <span class="form-password-input__toggle form-password-input__toggle-visibility">
-              <svg class="gridicon gridicons-not-visible" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                   viewBox="0 0 24 24"><g><path
-                d="M1 12s4.188-6 11-6c.947 0 1.84.12 2.678.322L8.36 12.64C8.133 12.14 8 11.586 8 11c0-.937.335-1.787.875-2.47C6.483 9.344 4.66 10.917 3.62 12c.68.707 1.696 1.62 2.98 2.398L5.15 15.85C2.498 14.13 1 12 1 12zm22 0s-4.188 6-11 6c-.946 0-1.836-.124-2.676-.323L5 22l-1.5-1.5 17-17L22 5l-3.147 3.147C21.5 9.87 23 12 23 12zm-2.615.006c-.678-.708-1.697-1.624-2.987-2.403L16 11c0 2.21-1.79 4-4 4l-.947.947c.31.03.624.053.947.053 3.978 0 6.943-2.478 8.385-3.994z"></path></g></svg></span>
-          </div>
-          <p class="form-setting-explanation">
-          </p></fieldset>
+        <form-password-input label="新密码" @validate="validate" @input-change="setValue"></form-password-input>
         <div class="account-password__buttons-group form-buttons-bar">
-          <button disabled="" type="submit" class="button form-button is-primary">保存密码</button>
+          <button :disabled="passwordValidate" type="submit" class="button form-button is-primary"
+                  :class="isSaving ? 'is-busy' : ''">
+            <span v-show="!isSaving">保存密码</span>
+            <span v-show="isSaving">保存中...</span>
+          </button>
         </div>
       </form>
     </div>
@@ -152,6 +140,7 @@
   import HeaderCake from '~/components/header-cake'
   import FileUpload from 'vue-upload-component/src'
   import Spinner from '~/components/spinner'
+  import FormPasswordInput from '~/components/forms/form-password-input'
 
   export default {
     middleware: 'authenticated',
@@ -160,13 +149,18 @@
     components: {
       HeaderCake,
       FormInputValidation,
+      FormPasswordInput,
       FileUpload,
       Spinner
     },
     data () {
       return {
+        passwordValidate: true,
+        form: {
+          id: '',
+        },
         src: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png',
-        isSave: false,
+        isSaving: false,
         files: [],
         progress: 'success',
         uploadProgress: '',
@@ -194,6 +188,7 @@
       }
     },
     mounted () {
+      this.form.id = this.user.id
 //      if (JSON.stringify(this.detail) !== '{}') {
 //        this.user = Object.assign({}, this.detail)
 //        this.user.approach = 'pc'
@@ -203,10 +198,16 @@
 //      })
     },
     methods: {
+      validate (validate) {
+        this.passwordValidate = validate
+      },
       imageuploaded (res) {
         if (res.errcode === 0) {
           this.src = res.data.src;
         }
+      },
+      setValue (value) {
+        this.form.user_pass = value
       },
       async input (newFile, oldFile) {
         if (newFile && oldFile) {
@@ -228,10 +229,11 @@
           if (newFile.success && !oldFile.success) {
             // 文件上传成功后更新用户信息
             const data = newFile.response.data
-            this.user.meta = {
+            this.form.meta = {
               'avatar': data.id
             }
-            this.$emit('avatar_upload', this.user)
+//            this.$emit('avatar_upload', this.form)
+            await this.$store.dispatch('updateUser', {form: this.form})
 
             // 处理上传之后的头像异步加载显示，主要为了显示的体验更好。
             const readAndPreview = async (result) => {
@@ -258,9 +260,10 @@
               // Send XHR
               xhr.send();
             }
-
+//            const that = this
             await readAndPreview((result) => {
-              this.user.avatar = result
+//              this.user.avatar = result
+              this.$store.commit('SET_USER_AVATAR', result)
               this.progress = 'success'
             })
 
@@ -294,28 +297,15 @@
         }
       },
       async savePassword () {
-        const that = this
-        that.isSave = true
-        console.log(JSON.stringify(this.user))
-        await this.$validator.validateAll().then(async (result) => {
-          if (result) {
-            if (this.user.id) {
-              await this.$store.dispatch('updateUser', {form: that.user})
-              that.isSave = false
-              this.$router.replace('/people/team')
-            } else {
-              await this.$store.dispatch('addUser', {form: that.user})
-              that.isSave = false
-              if (that.newUser.creating && that.newUser.type !== 'exist') {
-                this.$router.replace('/people/team')
-              } else {
-                console.log('创建失败。。。')
-              }
-            }
-          }
-          that.isSave = false
-          console.log('Correct them errors!')
-        })
+        this.passwordValidate = true
+        this.isSaving = true
+        this.form.id = this.user.id
+        const res = await this.$store.dispatch('updateUser', {form: this.form})
+        if (res.errno === 0) {
+          this.passwordValidate = false
+          this.isSaving = false
+          await this.$router.replace('/me')
+        }
       },
     }
   }

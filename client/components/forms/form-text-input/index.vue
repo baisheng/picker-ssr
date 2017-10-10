@@ -3,6 +3,12 @@
     :ref=" inputRef || 'textField' "
     :class="classes"
     :type="type"
+    @keyup="handleKeyup"
+    @keydown="handleKeydown"
+    @enter="handleEnter"
+    @focus="handleFocus"
+    @input="handleInput"
+    @change="handleChange"
     @click="selectOnFocus"/>
 </template>
 <script>
@@ -73,6 +79,9 @@
         this.$emit('on-change', event)
       },
       handleChange (event) {
+//        console.log(event.target.value)
+//        const value = this.currentValue
+//        this.$emit('on-input-change-value', value)
         this.$emit('on-input-change', event)
       },
       setCurrentValue (value) {
