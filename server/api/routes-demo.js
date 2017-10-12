@@ -15,7 +15,7 @@ const request = axios.create({
 })
 router.get('/podcast/recommend', async function getActivities (ctx) {
   for (const item of ctx.org.apps) {
-    if (item.type === 'podcast') {
+    if (item.type === 'podcasts') {
       ctx.appId = item.id
     }
   }
@@ -24,5 +24,6 @@ router.get('/podcast/recommend', async function getActivities (ctx) {
   ctx.body = Object.assign({}, response.data)
   ctx.status = 200
 })
+
 
 module.exports = router.routes()

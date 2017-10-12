@@ -115,8 +115,7 @@
             </file-upload>
 
             <!--<button type="button" class="button site-icon-setting__button is-compact">更改</button>-->
-            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="featuredImage">移除
-            </button>
+            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="featuredImage">移除</button>
           </fieldset>
         </div>
       </div>

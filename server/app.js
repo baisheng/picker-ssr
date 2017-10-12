@@ -181,9 +181,9 @@ const start = async () => {
     switch (ctx.state.subapp) {
       // 如果请求的是 api 服务资源跳转到路由
       case 'api':
-        let org = await redis.get(ctx.host)
-        org = JSON.parse(org)
-        ctx.org = org
+        const org = await redis.get(ctx.host)
+        // 将内容处理成对象
+        ctx.org = JSON.parse(org)
         ctx.redis = redis
         await compose(api.middleware)(ctx)
         break
