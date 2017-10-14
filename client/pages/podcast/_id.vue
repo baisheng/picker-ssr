@@ -34,12 +34,15 @@
       await app.store.dispatch('loadUsers')
       const terms = await app.store.dispatch('getTermsByTaxonomy')
       if (params.id && !Object.is(Number(params.id), NaN)) {
+        // 获取 post 内容
         await app.store.dispatch('getPodcast', params.id)
+
         const query = {
+          type: 'podcast',
           parent: params.id,
           page: 1
         }
-        const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/podcast`, {params: query})).data
+        const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/posts`, {params: query})).data
         return {
           terms: terms.data,
           episodeList: data
@@ -120,9 +123,10 @@
     methods: {
       async loadEpisodeList (params) {
         if (!params.page) {
+          params.type = 'podcast'
           params.page = 1
         }
-        const data = (await this.$axios.$get(`/app/${this.appId}/podcast`, {params})).data
+        const data = (await this.$axios.$get(`/app/${this.appId}/posts`, {params})).data
         this.episodeList = data
       },
       async save (data, id) {

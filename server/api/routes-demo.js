@@ -20,7 +20,7 @@ router.get('/podcast/recommend', async function getActivities (ctx) {
     }
   }
   console.log(ctx.appId)
-  const response = await request.get(`/app/${ctx.appId}/podcast`)
+  const response = await request.get(`/app/${ctx.appId}/posts`)
   ctx.body = Object.assign({}, response.data)
   ctx.status = 200
 })

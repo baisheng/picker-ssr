@@ -4,7 +4,7 @@
   }
 </style>
 <template>
-  <main data-reactroot="" class="main is-wide-layout" role="main"><!-- react-empty: 695 --><!-- react-empty: 696 -->
+  <main class="main is-wide-layout" role="main"><!-- react-empty: 695 --><!-- react-empty: 696 -->
     <header class="current-section"><a>
       <svg class="gridicon gridicons-chevron-left" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">

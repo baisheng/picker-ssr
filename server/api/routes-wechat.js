@@ -58,7 +58,6 @@ router.post('/app/:appid/login', async (ctx) => {
   // console.log(count++)
   const data = ctx.request.body
   let option = await getOptions(ctx)
-  // console.log(data)
   // let option = await ctx.redis.get(`picker_${ctx.params.appid}_options`)
   // if (option === null) {
   //   const response = await request.get(`/app/${ctx.params.appid}/options`)

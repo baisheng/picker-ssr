@@ -45,6 +45,8 @@ export const actions = {
     if (!org) {
       return
     }
+
+    console.log(JSON.stringify(org))
     // console.log('nuxt server init ...')
 
     store.strict = false
@@ -103,7 +105,7 @@ export const actions = {
   // async
   async loadOrgInfo ({commit}) {
     commit('org/REQUEST_ORG_INFO')
-    const data = (await this.$axios.get(`/org/${this.getters.orgId}/info`)).data
+    const data = (await this.$axios.get(`/org/${this.getters.orgId}`)).data
     if (data && data.errno === 0) {
       commit('org/REQUEST_ORG_INFO_SUCCESS', data)
     } else {
@@ -218,7 +220,7 @@ export const actions = {
   /// App Podcast
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
-    const data = (await this.$axios.get(`/app/${this.getters.appId}/podcast/${id}`)).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/posts/${id}`)).data
     // console.log(JSON.stringify(data))
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)

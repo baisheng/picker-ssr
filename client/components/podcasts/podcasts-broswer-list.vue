@@ -233,10 +233,11 @@
     methods: {
       async load () {
         const params = {
+          type: 'podcast',
           term: !this.slug ? this.term.id : '',
           slug: this.slug ? this.term.slug : ''
         }
-        this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/podcasts/`, {params})).data.data
+        this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/`, {params})).data.data
       },
       async input (newFile, oldFile) {
         if (newFile && oldFile) {

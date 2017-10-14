@@ -112,6 +112,7 @@
                       <a href="" @click="addPodcast" class="sidebar__button">添加</a>
                       <!--<a href="/podcast" class="sidebar__button">添加</a>-->
                     </nuxt-link>
+                    <!--
                     <li class="" data-post-type="media">
                       <a>
                         <icon name="photo" class="gridicon"></icon>
@@ -135,6 +136,7 @@
                         <span class="menu-link-text">问答</span>
                       </a>
                     </li>
+                    -->
                   </ul>
                 </li>
                 <li class="sidebar__menu">
