@@ -4,9 +4,6 @@
     <list default="true" id="35aaf7a8-0301-42cd-84af-6bbd0947be5a" name="Default" comment="k">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/components/podcasts/podcasts-broswer-list.vue" afterPath="$PROJECT_DIR$/client/components/podcasts/podcasts-broswer-list.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/pages/index.vue" afterPath="$PROJECT_DIR$/client/pages/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/pages/podcasts/index.vue" afterPath="$PROJECT_DIR$/client/pages/podcasts/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/store/index.js" afterPath="$PROJECT_DIR$/client/store/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,64 +21,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/api/index.js">
+      <file leaf-file-name="podcasts-broswer-list.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/components/podcasts/podcasts-broswer-list.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-678">
-              <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes-wechat.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/api/routes-wechat.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="613">
-              <caret line="76" column="42" lean-forward="false" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="verification.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/lib/verification.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="146" column="33" lean-forward="false" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="assist.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/utils/assist.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WXBizDataCrypt.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/utils/WXBizDataCrypt.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+            <state relative-caret-position="388">
+              <caret line="242" column="99" lean-forward="false" selection-start-line="242" selection-start-column="99" selection-end-line="242" selection-end-column="99" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="n#foldable-card#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="e#7664#7717#0" expanded="true" />
+                <element signature="e#9976#12476#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="809">
-              <caret line="44" column="11" lean-forward="false" selection-start-line="44" selection-start-column="5" selection-end-line="44" selection-end-column="11" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,8 +39,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bor</find>
-      <find>borwser</find>
       <find>avatar</find>
       <find>requestHeader</find>
       <find>spinner</find>
@@ -116,10 +63,12 @@
       <find>chevron-right</find>
       <find>loadPosts</find>
       <find>me</find>
-      <find>crypto</find>
       <find>querystring</find>
       <find>AccessSessionKey</find>
       <find>oneOf</find>
+      <find>crypto</find>
+      <find>term</find>
+      <find>slug</find>
     </findStrings>
     <replaceStrings>
       <replace>picker</replace>
@@ -234,10 +183,10 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="840" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="161" />
     <option name="y" value="23" />
-    <option name="width" value="840" />
+    <option name="width" value="838" />
     <option name="height" value="1027" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -269,6 +218,39 @@
             <path>
               <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
               <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
+              <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
+              <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="podcast" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
+              <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="podcasts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
+              <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="podcasts" type="462c0819:PsiDirectoryNode" />
+              <item name="term" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
+              <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -276,12 +258,6 @@
               <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="picker-ssr" type="b2602c69:ProjectViewProjectNode" />
-              <item name="picker-ssr" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -364,12 +340,12 @@
       <workItem from="1507639706880" duration="8283000" />
       <workItem from="1507687724266" duration="5705000" />
       <workItem from="1507886764705" duration="46591000" />
-      <workItem from="1508390835467" duration="9065000" />
+      <workItem from="1508390835467" duration="10985000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1145156000" />
+    <option name="totallyTimeSpent" value="1147076000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -381,7 +357,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="840" y="23" width="840" height="1027" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -435,7 +412,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32939914" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14055794" sideWeight="0.44688645" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14055794" sideWeight="0.44688645" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34711778" sideWeight="0.4945227" order="0" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -781,26 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/pages/podcasts/term/_slug.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="637">
-          <caret line="60" column="86" lean-forward="false" selection-start-line="60" selection-start-column="86" selection-end-line="60" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/components/podcasts/podcasts-broswer-list.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1558">
-          <caret line="201" column="25" lean-forward="true" selection-start-line="201" selection-start-column="25" selection-end-line="201" selection-end-column="25" />
-          <folding>
-            <element signature="n#foldable-card#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="e#7664#7717#0" expanded="true" />
-            <element signature="e#9962#12462#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/layouts/logged-out.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -817,18 +774,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/api/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-678">
-          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/utils/consts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/utils/assist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/lib/verification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="146" column="33" lean-forward="false" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api/routes-wechat.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="613">
+          <caret line="76" column="42" lean-forward="false" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/api/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-678">
+          <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -851,27 +832,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/api/routes-wechat.js">
+    <entry file="file://$PROJECT_DIR$/client/pages/podcasts/term/_slug.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="76" column="42" lean-forward="false" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+        <state relative-caret-position="332">
+          <caret line="44" column="23" lean-forward="false" selection-start-line="44" selection-start-column="23" selection-end-line="44" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/lib/verification.js">
+    <entry file="file://$PROJECT_DIR$/client/components/podcasts/podcasts-broswer-list.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="146" column="33" lean-forward="false" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/utils/assist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="388">
+          <caret line="242" column="99" lean-forward="false" selection-start-line="242" selection-start-column="99" selection-end-line="242" selection-end-column="99" />
+          <folding>
+            <element signature="n#foldable-card#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="e#7664#7717#0" expanded="true" />
+            <element signature="e#9976#12476#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

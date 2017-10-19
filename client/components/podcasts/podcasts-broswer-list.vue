@@ -235,12 +235,12 @@
       async load () {
         const params = {
 //          type: 'podcast',
-          termId: !this.slug ? this.term.id : '',
-          termSlug: this.slug ? this.term.slug : ''
+          term_id: !this.slug ? this.term.id : '',
+          term_slug: this.slug ? this.term.slug : ''
         }
         if (this.slug) {
           // 详情
-          const data = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/`, {params})).data.data
+          const data = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/?pagesize=50`, {params})).data.data
           this.list = data.data
         } else {
           // 首页展示
