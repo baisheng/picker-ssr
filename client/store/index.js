@@ -1,6 +1,4 @@
 /* eslint-disable no-undef,indent,spaced-comment,radix */
-// import Service from 'axios'
-// import Service from 'axios'
 import {setToken, unsetToken} from '~/utils/auth'
 import Cookie from 'js-cookie'
 
@@ -339,8 +337,8 @@ export const actions = {
         }
       })
   },
-  async loadPosts ({commit}, params = {type: 'podcast', page: 1}) {
-    params.type = 'podcast'
+  async loadPosts ({commit}, params = { page: 1}) {
+    // params.type = 'podcast'
     if (!params.page) {
       params.page = 1
     }

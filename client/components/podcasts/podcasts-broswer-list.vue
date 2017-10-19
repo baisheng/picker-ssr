@@ -115,7 +115,8 @@
             </file-upload>
 
             <!--<button type="button" class="button site-icon-setting__button is-compact">更改</button>-->
-            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="featuredImage">移除</button>
+            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="featuredImage">移除
+            </button>
           </fieldset>
         </div>
       </div>
@@ -233,11 +234,19 @@
     methods: {
       async load () {
         const params = {
-          type: 'podcast',
-          term: !this.slug ? this.term.id : '',
-          slug: this.slug ? this.term.slug : ''
+//          type: 'podcast',
+          termId: !this.slug ? this.term.id : '',
+          termSlug: this.slug ? this.term.slug : ''
         }
-        this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/`, {params})).data.data
+        if (this.slug) {
+          // 详情
+          const data = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/`, {params})).data.data
+          this.list = data.data
+        } else {
+          // 首页展示
+          this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/`, {params})).data.data
+        }
+
       },
       async input (newFile, oldFile) {
         if (newFile && oldFile) {

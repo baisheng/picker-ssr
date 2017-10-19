@@ -44,9 +44,11 @@
               </g>
             </svg>
           </div>
-          <div class="search__input-fade"><input type="search" id="search-component-14" class="search__input"
-                                                 placeholder="搜索…" role="search" value="" aria-label="搜索"
-                                                 aria-hidden="false" autocapitalize="none"></div>
+          <div class="search__input-fade">
+            <input type="search" id="search-component-14" class="search__input"
+                   placeholder="搜索…" role="search" value="" aria-label="搜索"
+                   aria-hidden="false" autocapitalize="none">
+          </div>
         </div>
         <div class="site-selector__sites">
           <div class="site" v-for="app in org.apps">
@@ -90,7 +92,8 @@
       }
     },
     methods: {
-      handleClick () {},
+      handleClick () {
+      },
       selectApp (event, app) {
         this.$store.commit('org/SET_CURRENT_APP', app)
         this.$router.push(`/${app.type}`)
