@@ -162,7 +162,7 @@
       // 创建节目 episode
       create () {
         const _sort = this.podcast.children.length + 1
-        const newEpisode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
+        const newEpisode = {title: '无标题', author: this.podcast.author, parent: this.podcast.id, sort: _sort, status: 'draft'}
         const res = this.$store.dispatch('episodeCreate', newEpisode)
         this.episode = Object.assign({}, newEpisode)
         this.episode.id = res

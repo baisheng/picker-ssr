@@ -1,4 +1,4 @@
-<style>
+<style scoped>
   .gravatar {
     width: 150px;
     height: 150px;

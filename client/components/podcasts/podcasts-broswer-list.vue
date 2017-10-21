@@ -4,10 +4,10 @@
     <foldable-card class="is-compact">
       <div class="connected-application-item__header is-p" slot="header">
         <div class="plugin-icon connected-application-icon animate__appear"
-             :class="featuredImage ? '' : 'site-icon is-blank'">
+             :class="term.featured_image ? '' : 'site-icon is-blank'">
           <img
             class="plugin-icon__img"
-            :src="featuredImage" v-if="featuredImage">
+            :src="term.featured_image" v-if="term.featured_image">
           <svg class="gridicon gridicons-globe" height="74" width="74" xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 24 24" v-else>
             <g>
@@ -88,8 +88,8 @@
             <!--</button>-->
 
             <div :class="classes" style="height: 96px; width: 96px; line-height: 96px; font-size: 96px;">
-              <img class="site-icon__img image" :src="featuredImage"
-                   alt="" v-if="featuredImage">
+              <img class="site-icon__img image" :src="term.featured_image"
+                   alt="" v-if="term.featured_image">
               <svg class="gridicon gridicons-globe" height="74" width="74" xmlns="http://www.w3.org/2000/svg"
                    viewBox="0 0 24 24" v-else>
                 <g>
@@ -97,7 +97,7 @@
                     d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
                 </g>
               </svg>
-              <spinner v-show="transient"></spinner>
+              <spinner v-if="transient"></spinner>
             </div>
             <file-upload
               class="button site-icon-setting__button is-compact"
@@ -115,7 +115,7 @@
             </file-upload>
 
             <!--<button type="button" class="button site-icon-setting__button is-compact">更改</button>-->
-            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="featuredImage">移除
+            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="term.featured_image">移除
             </button>
           </fieldset>
         </div>
@@ -210,7 +210,7 @@
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
-        return `${baseURL}/file`
+        return `${baseURL}/app/${appId}/file`
       },
       classes () {
         return [
@@ -221,12 +221,12 @@
           }
         ]
       },
-      featuredImage () {
-        if (this.term.hasOwnProperty('featured_image')) {
-          return this.term.featured_image
-        }
-        return false
-      },
+//      featuredImage () {
+//        if (this.term.hasOwnProperty('featured_image')) {
+//          return this.term.featured_image
+//        }
+//        return false
+//      },
       isNotEmpty () {
         return this.list.length > 0
       }
@@ -272,10 +272,42 @@
             this.term.meta = {
               '_thumbnail_id': data.id
             }
+            await this.$store.dispatch('updateTerm', {form: this.term})
 //            this.$emit('avatar_upload', this.user)
-
             // 处理上传之后的头像异步加载显示，主要为了显示的体验更好。
             const readAndPreview = async (result) => {
+              // Create XHR and FileReader objects
+              const xhr = new XMLHttpRequest()
+              const fileReader = new FileReader();
+
+              xhr.open("GET", data.url, true);
+              // Set the responseType to blob
+              xhr.responseType = "blob";
+              xhr.addEventListener("load", () => {
+                if (xhr.status === 200) {
+                  // onload needed since Google Chrome doesn't support addEventListener for FileReader
+                  fileReader.onload = (evt) => {
+                    // Read out file contents as a Data URL
+                    // Set image src to Data URL
+                    // 回调返回数据
+                    typeof result === 'function' && result(evt.target.result)
+                  };
+                  // Load blob as Data URL
+                  fileReader.readAsDataURL(xhr.response);
+                }
+              }, false);
+              // Send XHR
+              xhr.send();
+            }
+
+            await readAndPreview((result) => {
+              this.transient = false
+              this.term.featured_image = result
+//              this.user.avatar = result
+//              this.progress = 'success'
+            })
+            // 处理上传之后的头像异步加载显示，主要为了显示的体验更好。
+/*            const readAndPreview = async (result) => {
               // Create XHR and FileReader objects
               const xhr = new XMLHttpRequest()
               const fileReader = new FileReader();
@@ -304,7 +336,7 @@
               this.transient = true
               this.term.featured_image = result
               this.progress = 'success'
-            })
+            })*/
 
           }
         }

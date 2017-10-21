@@ -30,7 +30,7 @@
           <div class="section-nav-group">
             <div class="section-nav-tabs">
               <ul class="section-nav-tabs__list" role="menu">
-                <li class="is-selected section-nav-tab">
+                <li class="section-nav-tab">
                   <a href="/people/team"
                      class="section-nav-tab__link" tabindex="0"
                      aria-selected="true" role="menuitem"><span
@@ -39,7 +39,7 @@
                   </span>
                   </a>
                 </li>
-                <li class="section-nav-tab">
+                <li class="is-selected section-nav-tab">
                   <a href="/people/wechat"
                      class="section-nav-tab__link" tabindex="0" aria-selected="false"
                      role="menuitem">
@@ -110,7 +110,7 @@
       <div>
         <div class="card people-list-section-header section-header is-compact">
           <div class="section-header__label">
-            <span class="section-header__label-text">团队</span><span
+            <span class="section-header__label-text">微信用户</span><span
             class="count">{{ users.count }}</span>
           </div>
 
@@ -180,7 +180,7 @@
     middleware: 'authenticated',
     layout: 'podcast',
     async fetch ({store}) {
-      await store.dispatch('loadUsers')
+      await store.dispatch('loadUsers', {type: 'wechat'})
     },
     methods: {
       getType (item) {

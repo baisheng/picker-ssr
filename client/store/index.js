@@ -417,13 +417,13 @@ export const actions = {
   },
   async getTermsByTaxonomy ({commit}, params = {type: 'category'}) {
     const data = (await this.$axios.get(`/app/${this.getters.appId}/taxonomy/`, {params})).data
-    console.log(JSON.stringify(data))
+    // console.log(JSON.stringify(data))
     return data
   },
   async updateTerm ({commit}, {form}) {
     // console.log(JSON.stringify(form))
     // commit('users/UPDATE_DETAIL')
-    const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, form)
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/taxonomy`, form)
     if (data.errno > 0) {
       // console.log('update failure')
       // commit('users/UPDATE_FAILURE')
