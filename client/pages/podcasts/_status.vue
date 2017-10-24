@@ -174,6 +174,7 @@
 //      ActionMenu
     },
     async asyncData ({store, params}) {
+      console.log(params)
       // Default type `podcast` page `1`
       await store.dispatch('loadPosts', params)
       return {filter: params.status}

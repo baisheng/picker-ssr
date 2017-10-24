@@ -30,24 +30,20 @@
           <div class="section-nav-group">
             <div class="section-nav-tabs">
               <ul class="section-nav-tabs__list" role="menu">
-                <li class="is-selected section-nav-tab">
-                  <a href="/people/team"
-                     class="section-nav-tab__link" tabindex="0"
-                     aria-selected="true" role="menuitem"><span
-                    class="section-nav-tab__text">
-                    团队
-                  </span>
-                  </a>
-                </li>
-                <li class="section-nav-tab">
-                  <a href="/people/wechat"
-                     class="section-nav-tab__link" tabindex="0" aria-selected="false"
-                     role="menuitem">
+                <nuxt-link to="/people/team" tag="li" class="section-nav-tab">
+                  <a class="section-nav-tab__link">
                     <span class="section-nav-tab__text">
-                    微信用户
-                  </span>
+                      团队
+                    </span>
                   </a>
-                </li>
+                </nuxt-link>
+                <nuxt-link to="/people/wechat" tag="li" class="section-nav-tab">
+                  <a class="section-nav-tab__link">
+                    <span class="section-nav-tab__text">
+                      微信用户
+                    </span>
+                  </a>
+                </nuxt-link>
                 <!--<li class="section-nav-tab">-->
                   <!--<a href="/people/email-followers"-->
                      <!--class="section-nav-tab__link" tabindex="0" aria-selected="false"-->
