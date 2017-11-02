@@ -156,7 +156,7 @@
     async fetch ({store, params}) {
       console.log(params)
       // Default type `podcast` page `1`
-      await store.dispatch('loadPosts')
+      await store.dispatch('loadCategories')
     },
 
 //    async fetch ({store, params}) {

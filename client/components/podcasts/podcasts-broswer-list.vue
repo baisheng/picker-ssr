@@ -29,7 +29,7 @@
                 d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8m0-2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5 9h-4V7h-2v4H7v2h4v4h2v-4h4v-2z"></path>
             </g>
           </svg>
-          添加
+          添加内容
         </nuxt-link>
         <nuxt-link class="button is-compact is-action" :to="'/podcasts/term/' + term.slug"
                    v-if="expandedLink && isNotEmpty">
@@ -38,7 +38,12 @@
       </div>
 
       <div slot="expandedSummary">
-        <button data-tip-target="settings-site-profile-save" type="submit" class="button is-compact is-primary">保存设置
+        <button type="submit" class="button is-compact is-scary" @click="deleteCategory(term.slug)">
+          删除分类
+        </button>
+        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">默认分类
+        </button>
+        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">保存
         </button>
       </div>
       <div class="site-settings">
@@ -115,7 +120,8 @@
             </file-upload>
 
             <!--<button type="button" class="button site-icon-setting__button is-compact">更改</button>-->
-            <button class="button site-icon-setting__button is-compact is-scary" type="button" v-if="term.featured_image">移除
+            <button class="button site-icon-setting__button is-compact is-scary" type="button"
+                    v-if="term.featured_image">移除
             </button>
           </fieldset>
         </div>
@@ -232,6 +238,35 @@
       }
     },
     methods: {
+      showButtonsDialog () {
+
+      },
+      deleteCategory (slug) {
+        this.$modal.show('dialog', {
+          title: '确定删除分类吗？',
+          text: '❗删除后不可恢复，分类中的内容会迁移至默认分类下，',
+          buttons: [
+            {
+              title: '取消'
+            },
+            {
+              title: '⭕ 确认',
+              handler: async () => {
+                const data = await this.$store.dispatch('deleteCategory', slug)
+                if (data) {
+                  this.$toast.error(data.errmsg)
+                  this.$modal.hide('dialog')
+                  return
+                } else {
+                  await this.$store.dispatch('loadCategories')
+                  this.$toast.show('删除成功！👌')
+                  this.$modal.hide('dialog')
+                }
+              }
+            }
+          ]
+        })
+      },
       async load () {
         const params = {
 //          type: 'podcast',
@@ -307,36 +342,36 @@
 //              this.progress = 'success'
             })
             // 处理上传之后的头像异步加载显示，主要为了显示的体验更好。
-/*            const readAndPreview = async (result) => {
-              // Create XHR and FileReader objects
-              const xhr = new XMLHttpRequest()
-              const fileReader = new FileReader();
+            /*            const readAndPreview = async (result) => {
+                          // Create XHR and FileReader objects
+                          const xhr = new XMLHttpRequest()
+                          const fileReader = new FileReader();
 
-              xhr.open("GET", data.url, true);
-              // Set the responseType to blob
-              xhr.responseType = "blob";
-              xhr.addEventListener("load", () => {
-                if (xhr.status === 200) {
-                  // onload needed since Google Chrome doesn't support addEventListener for FileReader
-                  fileReader.onload = (evt) => {
-                    // Read out file contents as a Data URL
-                    // Set image src to Data URL
-                    // 回调返回数据
-                    typeof result === 'function' && result(evt.target.result)
-                  };
-                  // Load blob as Data URL
-                  fileReader.readAsDataURL(xhr.response);
-                }
-              }, false);
-              // Send XHR
-              xhr.send();
-            }
+                          xhr.open("GET", data.url, true);
+                          // Set the responseType to blob
+                          xhr.responseType = "blob";
+                          xhr.addEventListener("load", () => {
+                            if (xhr.status === 200) {
+                              // onload needed since Google Chrome doesn't support addEventListener for FileReader
+                              fileReader.onload = (evt) => {
+                                // Read out file contents as a Data URL
+                                // Set image src to Data URL
+                                // 回调返回数据
+                                typeof result === 'function' && result(evt.target.result)
+                              };
+                              // Load blob as Data URL
+                              fileReader.readAsDataURL(xhr.response);
+                            }
+                          }, false);
+                          // Send XHR
+                          xhr.send();
+                        }
 
-            await readAndPreview((result) => {
-              this.transient = true
-              this.term.featured_image = result
-              this.progress = 'success'
-            })*/
+                        await readAndPreview((result) => {
+                          this.transient = true
+                          this.term.featured_image = result
+                          this.progress = 'success'
+                        })*/
 
           }
         }

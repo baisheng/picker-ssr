@@ -122,7 +122,8 @@ module.exports = {
     // ['@nuxtjs/axios', { credentials: false }],
     '@nuxtjs/proxy',
     // Simple usage
-    '@nuxtjs/component-cache'
+    '@nuxtjs/component-cache',
+    '@nuxtjs/toast'
     // With options
     // ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
@@ -162,7 +163,8 @@ module.exports = {
     {src: '~plugins/progressive-img.js', ssr: false},
     {src: '~plugins/a-player.js', ssr: true},
     {src: '~plugins/popover.js', ssr: false},
-    {src: '~plugins/error-handler', ssr: false}
+    {src: '~plugins/error-handler', ssr: false},
+    '~plugins/vue-js-modal'
   ],
   css: [
     {src: '~assets/stylesheets/vue-multiselect.css'},

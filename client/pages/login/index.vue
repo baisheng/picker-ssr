@@ -20,6 +20,10 @@
             <form-input-validation :isError="errors.has('user_login')" v-show="errors.has('user_login')">
               {{ errors.first('user_login') }}
             </form-input-validation>
+            <form-input-validation :isError="errors.has('ACCOUNT_NOT_FOUND')" v-show="errors.has('ACCOUNT_NOT_FOUND')">
+              {{ errors.first('ACCOUNT_NOT_FOUND') }}
+            </form-input-validation>
+
             <label for="password" class="login__form-userdata-username">密码</label>
             <input id="password" name="user_pass" type="password"
                    class="form-text-input form-password-input login__form-userdata-username-input"
@@ -27,6 +31,10 @@
                    :class="{'input': true, 'is-danger': errors.has('user_pass')}">
             <form-input-validation :isError="errors.has('user_pass')" v-show="errors.has('user_pass')">
               {{ errors.first('user_pass') }}
+            </form-input-validation>
+
+            <form-input-validation :isError="errors.has('ACCOUND_PASSWORD_ERROR')" v-show="errors.has('ACCOUND_PASSWORD_ERROR')">
+              {{ errors.first('ACCOUND_PASSWORD_ERROR') }}
             </form-input-validation>
           </div>
 
@@ -70,7 +78,8 @@
         form: {
           user_login: '',
           user_pass: ''
-        }
+        },
+        errmsg: ''
       }
     },
     computed: {
@@ -90,7 +99,15 @@
         that.isLogin = true
         await this.$validator.validateAll().then(async (result) => {
           if (result) {
-            await this.$store.dispatch('login', {form: this.form})
+            const message = await this.$store.dispatch('login', {form: this.form})
+            this.errmsg = message
+            if (this.errmsg === 'ACCOUNT_NOT_FOUND') {
+              this.errors.add('ACCOUNT_NOT_FOUND', '账户不存在', 'server');
+            }
+            if (this.errmsg === 'ACCOUND_PASSWORD_ERROR') {
+              this.errors.add('ACCOUND_PASSWORD_ERROR', '账户密码验证失败', 'server');
+            }
+//            this.$validator.attach('account_error', this.errmsg)
             that.isLogin = false
             this.$router.replace('/apps')
             return

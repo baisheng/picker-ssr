@@ -123,8 +123,8 @@ export const actions = {
   loadTagList ({commit}) {
   },
   // 获取分类列表
-  // loadCategories ({commit}) {
-  // },
+  loadCategories ({commit}) {
+  },
   async loadPodcastDetail ({commit}, {axios, params}) {
     commit('podcast/REQUEST_DETAIL')
 
@@ -187,9 +187,9 @@ export const actions = {
       const {data} = await this.$axios.post(`/org/${this.getters.orgId}/signin`, form)
       if (data.errno > 0) {
         // 发送出错误状态
-        // console.error(data.errmsg)
+        console.error(data.errmsg)
 
-        return data.errmsg
+        return
       }
       setToken(data.data.token)
       commit('SET_TOKEN', data.data.token.value)
@@ -211,14 +211,14 @@ export const actions = {
   // const form = {
   //   author: author.id
   // }
-  // const {data} = await this.$axios.put(`/apps/${this.getters.appId}/posts/${form.id}`, form)
+  // const {data} = await this.$axios.put(`/app/${this.getters.appId}/posts/${form.id}`, form)
   // await actions.updatePodcast({commit}, form)
   // commit('podcast/SET_AUTHOR', form.authorInfo)
   // },
   /// App Podcast
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
-    const data = (await this.$axios.get(`/apps/${this.getters.appId}/posts/${id}`)).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/posts/${id}`)).data
     // console.log(JSON.stringify(data))
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
@@ -229,7 +229,7 @@ export const actions = {
   },
   async updatePodcast ({commit}, form) {
     commit('podcast/UPDATE_DETAIL')
-    const {data} = await this.$axios.put(`/apps/${this.getters.appId}/posts/${form.id}`, form)
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/posts/${form.id}`, form)
     if (data.errno > 0) {
       commit('podcast/UPDATE_DETAIL_FAILURE')
     } else {
@@ -240,7 +240,7 @@ export const actions = {
   // POSTS
   async createPodcast ({commit}, form) {
     commit('podcast/CREATE')
-    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts`, form)
+    const {data} = await this.$axios.post(`/app/${this.getters.appId}/posts`, form)
     if (data.errno > 0) {
       commit('podcast/CREATE_FAILURE')
     } else {
@@ -253,7 +253,7 @@ export const actions = {
   },
   async loadEpisodeList ({commit}, params) {
     commit('podcast/REQUEST_EPISODE_LIST')
-    const {data} = await this.$axios.get(`/apps/${this.getters.appId}/podcast`, {params})
+    const {data} = await this.$axios.get(`/app/${this.getters.appId}/podcast`, {params})
     if (data.errno > 0) {
       commit('podcast/GET_EPISODE_LIST_FAILURE')
     } else {
@@ -267,7 +267,7 @@ export const actions = {
   // 节目创建
   async episodeCreate ({commit}, form) {
     commit('podcast/CREATE_EPISODE')
-    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts`, form)
+    const {data} = await this.$axios.post(`/app/${this.getters.appId}/posts`, form)
     // console.log('create')
     // console.log(JSON.stringify(data))
     if (data.errno === 0) {
@@ -278,8 +278,8 @@ export const actions = {
     }
     // 返回添加的内容 id
     return data.data
-    // const {data} = await this.$axios.put(`/apps/${this.getters.appId}/users`, )
-    // await this.$axios.post(`/apps/${this.getters.appId}/posts`, data)
+    // const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, )
+    // await this.$axios.post(`/app/${this.getters.appId}/posts`, data)
     //   .then(response => {
     //     const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
     //     if (success) {
@@ -294,7 +294,7 @@ export const actions = {
   },
   async episodeDelete ({commit}, {id, axios}) {
     commit('podcast/DELETE_EPISODE')
-    await axios.delete(`/apps/${this.getters.appId}/posts/${id}`)
+    await axios.delete(`/app/${this.getters.appId}/posts/${id}`)
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -311,7 +311,7 @@ export const actions = {
   // POSTS
   async postsCreate ({commit}, {data}) {
     commit('posts/CREATE')
-    await this.$axios.post(`/apps/${this.getters.appId}/posts`, {data})
+    await this.$axios.post(`/app/${this.getters.appId}/posts`, {data})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {
@@ -326,7 +326,7 @@ export const actions = {
   },
   async postsDelete ({commit}, {id}) {
     commit('posts/DELETE')
-    await this.$axios.delete(`/apps/${this.getters.appId}/posts/${id}`)
+    await this.$axios.delete(`/app/${this.getters.appId}/posts/${id}`)
       .then(response => {
         const success = Boolean(response.status) && response.data && !Object.is(response.data.errno, 0)
         if (success) {
@@ -343,7 +343,7 @@ export const actions = {
       params.page = 1
     }
     commit('posts/REQUEST_LIST')
-    const data = (await this.$axios.get(`/apps/${this.getters.appId}/posts`, {params})).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/posts`, {params})).data
     if (data && data.errno === 0) {
       const isFirstPage = params.page && params.page > 1
       const commitName = `posts/${isFirstPage ? 'ADD' : 'GET'}_LIST_SUCCESS`
@@ -356,7 +356,7 @@ export const actions = {
   async addUser ({commit}, {form}) {
     commit('users/CREATE')
     try {
-      const {data} = await this.$axios.post(`/apps/${this.getters.appId}/users`, form)
+      const {data} = await this.$axios.post(`/app/${this.getters.appId}/users`, form)
       if (data.errno > 0) {
         // 发送出错误状态
         commit('users/CREATE_FAILURE')
@@ -379,7 +379,7 @@ export const actions = {
   async updateUser ({commit}, {form}) {
     console.log(JSON.stringify(form))
     commit('users/UPDATE_DETAIL')
-    const {data} = await this.$axios.put(`/apps/${this.getters.appId}/users`, form)
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/users`, form)
     if (data.errno > 0) {
       // console.log('update failure')
       // commit('users/UPDATE_FAILURE')
@@ -391,7 +391,7 @@ export const actions = {
   },
 
   async loadUsers ({commit}, params = {page: 1}) {
-    const {data} = await this.$axios.get(`/apps/${this.getters.appId}/users`, {params})
+    const {data} = await this.$axios.get(`/app/${this.getters.appId}/users`, {params})
     // console.warn(data)
     if (data && data.errno === 0) {
       const isFirstPage = params.page && params.page > 1
@@ -404,7 +404,7 @@ export const actions = {
   },
   async getUser ({commit}, id) {
     commit('users/REQUEST_DETAIL')
-    const data = (await this.$axios.get(`/apps/${this.getters.appId}/users/${id}`)).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/users/${id}`)).data
     if (data && data.errno === 0) {
       commit('users/GET_DETAIL_SUCCESS', data)
     } else {
@@ -412,18 +412,18 @@ export const actions = {
     }
   },
   async getPodcastsByTerm ({commit}, termId) {
-    const data = (await this.$axios.get(`/apps/${this.getters.appId}/podcasts/`, {params: {term: termId}})).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/podcasts/`, {params: {term: termId}})).data
     return data
   },
   async getTermsByTaxonomy ({commit}, params = {type: 'category'}) {
-    const data = (await this.$axios.get(`/apps/${this.getters.appId}/taxonomy/`, {params})).data
+    const data = (await this.$axios.get(`/app/${this.getters.appId}/taxonomy/`, {params})).data
     // console.log(JSON.stringify(data))
     return data
   },
   async updateTerm ({commit}, {form}) {
     // console.log(JSON.stringify(form))
     // commit('users/UPDATE_DETAIL')
-    const {data} = await this.$axios.put(`/apps/${this.getters.appId}/taxonomy`, form)
+    const {data} = await this.$axios.put(`/app/${this.getters.appId}/taxonomy`, form)
     if (data.errno > 0) {
       // console.log('update failure')
       // commit('users/UPDATE_FAILURE')
@@ -433,38 +433,4 @@ export const actions = {
     }
     return data
   },
-  async loadCategories ({commit}) {
-    commit('categories/REQUEST_CATEGORIES')
-    const data = await this.$axios.$get(`/apps/${this.getters.appId}/categories`)
-    if (data && data.errno === 0) {
-      commit('categories/REQUEST_CATEGORIES_SUCCESS', data)
-    } else {
-      commit('categories/REQUEST_CATEGORIES_FAILURE')
-    }
-    // const data = (await )
-  },
-  async newCategory ({commit}, {form}) {
-    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/categories/new`, form)
-    if (data.errno > 0) {
-      return data
-    } else {
-      commit('categories/NEW_CATEGORY_SUCCESS', data.data)
-    }
-  },
-  async deleteCategory ({commit}, slug) {
-    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/categories/slug:${slug}/delete`)
-    if (data.errno > 0) {
-      return data
-    } else {
-      // commit('categories/REQUEST_CATEGORIES')
-      // const data = await this.$axios.$get(`/apps/${this.getters.appId}/categories`)
-      // if (data && data.errno === 0) {
-      //   commit('categories/REQUEST_CATEGORIES_SUCCESS', data)
-      // } else {
-      //   commit('categories/REQUEST_CATEGORIES_FAILURE')
-      // }
-      // await this.loadCategories(commit)
-      // commit('categories/NEW_CATEGORY_SUCCESS', data.data)
-    }
-  }
 }

@@ -6,6 +6,7 @@ Validator.addLocale(zh)
 const dictionary = {
   zh_CN: {
     attributes: {
+      cate_name: '分类名',
       user_login: '用户名',
       user_pass: '密码',
       email: '邮箱',
