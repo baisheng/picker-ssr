@@ -1,7 +1,7 @@
 <template>
   <masterbar>
     <item icon="pagelines" :isActive="isActive" url="/">
-      {{ org.meta.basic.name }}
+      {{ org.name }}
     </item>
     <item icon="tint" class="masterbar__reader" url="/contents">
       内容市场

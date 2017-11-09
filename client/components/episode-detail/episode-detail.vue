@@ -203,8 +203,8 @@
 //        return this.data !== 'approved' ? 'unapproved' : 'approved'
 //      },
       authorAvatar () {
-        if (this.episode.hasOwnProperty('authorInfo')) {
-          const authorInfo = this.episode.authorInfo
+        if (this.episode.hasOwnProperty('author')) {
+          const authorInfo = this.episode.author
           if (!authorInfo.hasOwnProperty('avatar')) {
             return '/images/people/mystery-person.svg'
           } else {
@@ -258,7 +258,7 @@
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
-        return `${baseURL}/app/${appId}/file`
+        return `${baseURL}/apps/${appId}/file`
       },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
@@ -295,6 +295,7 @@
         this.$emit('episode-del', this.episode, this.order)
       },
       update () {
+        console.log(JSON.stringify(this.episode))
         this.$emit('update', this.episode)
       },
       insertFile () {

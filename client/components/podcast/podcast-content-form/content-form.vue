@@ -26,6 +26,38 @@
     height: 180px;
   }
 
+  .cateselect .multiselect__tags
+  input {
+    position: relative;
+    display: inline-block;
+    min-height: 20px;
+    line-height: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    padding: 0 0 0 5px;
+    width: 100%;
+    transition: border .1s ease;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+    vertical-align: top;
+    box-shadow: none;
+
+  }
+
+  .categories__field {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    &-input {
+      flex: 1;
+    }
+    &-action {
+      margin-left: 10px;
+      width: auto;
+    }
+  }
 </style>
 <template>
   <foldable-card expanded>
@@ -60,32 +92,73 @@
           </div>
         </div>
         <fieldset class="form-fieldset">
-          <label for="term" class="form-label">
-            分类
+          <label class="form-label">内容类型
+            <span style="color: #A1a1a1; font-size: 12px; font-weight: 400;"> {{postFormat}}</span>
           </label>
-          <div class="token-field">
-            <multiselect
-              id="term"
+          <section class="accordion__section">
+            <ul class="editor-post-formats">
+              <li class="editor-post-formats__format">
+                <label>
+                  <input id="book" type="radio"  value="6" class="form-radio" v-model="format">
+                  <span
+                    class="editor-post-formats__format-label">
+                  <span class="editor-post-formats__format-icon">
+                    <svg
+                      class="gridicon gridicons-posts needs-offset" height="18" width="18"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"><g><path
+                      d="M16 19H3v-2h13v2zm5-10H3v2h18V9zM3 5v2h11V5H3zm14 0v2h4V5h-4zm-6 8v2h10v-2H11zm-8 0v2h5v-2H3z"></path></g></svg></span>
+                读书
+              </span>
+                </label>
+              </li>
+              <li class="editor-post-formats__format">
+                <label>
+                  <input id="article" type="radio" value="7" class="form-radio" v-model="format">
+                  <span
+                    class="editor-post-formats__format-label">
+                    <span class="editor-post-formats__format-icon">
+                    <svg
+                      class="gridicon gridicons-aside" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"><g><path
+                      d="M14 20l6-6V6c0-1.105-.895-2-2-2H6c-1.105 0-2 .895-2 2v12c0 1.105.895 2 2 2h8zM6 6h12v6h-4c-1.105 0-2 .895-2 2v4H6V6zm10 4H8V8h8v2z"></path></g>
+                    </svg>
+                  </span>
+                读文
+              </span>
+                </label>
+              </li>
+            </ul>
+          </section>
+        </fieldset>
+        <fieldset class="form-fieldset myinput">
+          <label for="" class="form-label">
+            当前内容分类
+            <span style="color: #A1a1a1; font-size: 12px; font-weight: 400;"> {{categoryName}}</span>
+
+          </label>
+
+          <!--<div class="token-field categories__field">-->
+<!--            <multiselect
+              class="cateselect categories__field-input"
               v-model="term"
               :options="terms"
-              track-by="name"
-              label="name"
-              :searchable="false"
-              :close-on-select="true"
-              :show-labels="false"
-              placeholder="选择分类"
-              @select="termSelect">
+              :multiple="true"
+              selectedLabel="已选中"
+              deselectLabel="按回车键删除"
+              selectLabel="按回输键选中"
+              placeholder="输入分类名称" track-by="name" label="name" @select="termSelect" @remove="termRemove">
+            <span slot="noResult">
+              分类信息未找到
+            </span>
             </multiselect>
-          </div>
-          <p></p>
-          <!--<p class="form-setting-explanation">-->
-          <!--<a target="_blank" rel="noopener noreferrer"-->
-          <!--href="/user-roles/">-->
-          <!--<icon name="plus" class="gridicon"></icon>-->
-          <!--添加作者-->
-          <!--</a>-->
-          <!---->
-          <!--</p>-->
+            <div class="categories__field-action">
+              <button class="button is-busy" @click.prevent="saveTerms">
+                更新类别
+              </button>
+            </div>-->
+          <!--</div>-->
+          <!--<p></p>-->
         </fieldset>
         <fieldset class="form-fieldset">
           <label for="role" class="form-label">
@@ -94,7 +167,7 @@
           <div class="token-field">
             <multiselect
               id="role"
-              v-model="value"
+              v-model="userValue"
               :options="users"
               track-by="user_login"
               label="user_nicename"
@@ -151,6 +224,9 @@
 
   export default {
     props: {
+      termSlug: {
+        type: String
+      },
       terms: {
         type: Array,
         required: true
@@ -171,19 +247,39 @@
       return {
         saving: false,
         content: '',
-        value: {},
-        term: {},
+        format: '6',
+        value: [
+          {name: 'Vue.js', language: 'JavaScript'}
+        ],
+        options: [
+          {
+            language: 'Javascript',
+            libs: [
+              {name: 'Vue.js', category: 'Front-end'},
+              {name: 'Adonis', category: 'Backend'}
+            ]
+          },
+          {
+            language: 'Ruby',
+            libs: [
+              {name: 'Rails', category: 'Backend'},
+              {name: 'Sinatra', category: 'Backend'}
+            ]
+          },
+          {
+            language: 'Other',
+            libs: [
+              {name: 'Laravel', category: 'Backend'},
+              {name: 'Phoenix', category: 'Backend'}
+            ]
+          }
+        ],
+        userValue: {},
+        term: [{}],
         categoryValue: {},
         tagValue: {},
         editing: false,
-        category: [
-          {name: 'Vue.js', language: 'JavaScript'},
-          {name: 'Adonis', language: 'JavaScript'},
-          {name: 'Rails', language: 'Ruby'},
-          {name: 'Sinatra', language: 'Ruby'},
-          {name: 'Laravel', language: 'PHP'},
-          {name: 'Phoenix', language: 'Elixir'}
-        ]
+        category: []
       }
     },
     components: {
@@ -193,24 +289,35 @@
       Spinner
     },
     mounted () {
-      this.value = this.podcast.authorInfo
-      if (this.podcast.terms) {
-        this.term = this.podcast.terms[0]
+      this.$nextTick()
+      this.userValue = this.podcast.authorInfo
+      if (this.podcast.categories) {
+        this.term = this.podcast.categories
       }
       this.content = this.podcast.content
-      // 初始化角色列表默认值
-      this.$nextTick(() => {
-        this.value = this.podcast.authorInfo
-        if (this.podcast.terms) {
-          this.term = this.podcast.terms[0]
-        }
-        this.content = this.podcast.content
-      })
-//        if (this.podcast.hasOwnProperty('authorInfo')) {
-//          this.value = this.podcast.authorInfo
-//        }
     },
     computed: {
+      categoryName () {
+        if (this.termSlug === 'youdao') {
+          return '柚道'
+        } else if (this.termSlug === 'youda') {
+          return '柚答'
+        }
+      },
+      categoryId() {
+        if (this.termSlug === 'youdao') {
+          return '1'
+        } else if (this.termSlug === 'youda') {
+          return '2'
+        }
+      },
+      postFormat () {
+        if (this.format === '6') {
+          return '读书'
+        } else if (this.format === '7') {
+          return '读文'
+        }
+      },
       podcastStatus () {
         return this.$store.state.podcast.detail.status
       },
@@ -228,21 +335,37 @@
       updateTitle (e) {
         const form = {
           id: this.podcast.id,
-          title: e.target.value
+          title: e.target.value,
+          format: this.format,
+          category: this.categoryId
         }
         this.$emit('save', form)
       },
       updateContent (e) {
+        console.log(JSON.stringify(this.podcast) + '------------')
         const form = {
           id: this.podcast.id,
-          content: e.target.value
+          content: e.target.value,
+          format: this.format,
+          category: this.categoryId
         }
         this.$emit('save', form)
       },
+      termRemove (removedOption, id) {
+//        console.log(id + ':' + JSON.stringify(removedOption))
+      },
       termSelect (selected) {
+//        console.log(JSON.stringify(this.term))
         const form = {
           id: this.podcast.id,
-          term: selected.id
+          categories: `${JSON.stringify(selected.term_taxonomy_id)}`
+        }
+        this.$emit('save', form)
+      },
+      saveTerms () {
+        const form = {
+          id: this.podcast.id,
+          categories: `${JSON.stringify(this.term)}`
         }
         this.$emit('save', form)
       },
@@ -250,7 +373,9 @@
         const form = {
           id: this.podcast.id,
           author: selected.id,
-          authorInfo: selected
+          authorInfo: selected,
+          format: this.format,
+          category: this.categoryId
         }
 //        let form = Object.assign({
 //          author: selected.id,

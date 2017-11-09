@@ -3,7 +3,7 @@ export default {
     uploadAction () {
       const appId = this.$store.getters.appId
       const baseURL = process.env.baseURL
-      return `${baseURL}/app/${appId}/file`
+      return `${baseURL}/apps/${appId}/file`
     }
   },
   methods: {

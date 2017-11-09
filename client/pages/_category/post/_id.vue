@@ -5,7 +5,7 @@
     <!-- Header -->
     <podcast-header :podcast.sync="detail"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="detail" :users="users.data" :terms="categories" @save="save"></podcast-content-form>
+    <podcast-content-form :podcast="detail" :users="users.data" :termSlug="category" :terms="categories" @save="save"></podcast-content-form>
     <!-- Episode-list -->
     <episode-list :parent="detail" :episodeList="episodeList" v-if="detail.id"
                   @load="loadEpisodeList"></episode-list>
@@ -18,13 +18,12 @@
   import PodcastHeader from '~/components/podcast/header'
   import PodcastContentForm from '~/components/podcast/podcast-content-form'
   import EpisodeList from '~/components/episodes/episode-list'
-//  import {debounce} from 'lodash'
+  import {debounce} from 'lodash'
 
   export default {
     middleware: 'authenticated',
     layout: 'podcast',
     async fetch ({store, params}) {
-//      console.log(params)
 //      console.log('------')
       await store.dispatch('loadCategories')
     },
@@ -36,8 +35,11 @@
 //      await store.dispatch('loadUsers')
 //    },
     async asyncData ({app, params}) {
+      //      console.log(params)
+//      console.log(params.category)
 //      const [slug, id] = params.slugid.split('-')
 //      console.log(slug + ':' + id)
+      console.log(JSON.stringify(params))
       await app.store.dispatch('loadUsers')
 //      const terms = await app.store.dispatch('getTermsByTaxonomy')
       if (params.id && !Object.is(Number(params.id), NaN)) {
@@ -45,19 +47,24 @@
         await app.store.dispatch('getPodcast', params.id)
 
         const query = {
-          type: 'podcast',
+          type: 'post_format',
           parent: params.id,
           page: 1
         }
-        const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/posts`, {params: query})).data
+        const data = (await app.$axios.$get(`/apps/${app.store.getters.appId}/posts`, {params: query})).data
+//        if (data === null) {
+//
+//        }
+//        console.log(JSON.stringify(data))
         return {
 //          terms: terms.data,
-          episodeList: data
+          episodeList: data.data
         }
       } else {
         await app.store.commit('podcast/INIT')
         return {
           episodeList: [],
+          category: params.category
 //          terms: terms.data
         }
       }
@@ -69,6 +76,7 @@
         headers: {
           'Authorization': 'Bearer ' + this.token
         },
+        category: 'youdao',
         terms: [{}],
         episodeList: [],
         podcast: {
@@ -139,7 +147,12 @@
           params.page = 1
         }
         const data = (await this.$axios.$get(`/apps/${this.appId}/posts/new`, {params})).data
-        this.episodeList = data
+        this.episodeList = data.data
+//        if (data !== null) {
+//          this.episodeList = data
+//        } else {
+//          this.episodeList = []
+//        }
       },
       async save (data, id) {
         this.status = 'saving'
@@ -147,7 +160,7 @@
 //        this.post.autoExcerpt = this.autoExcerpt
           const res = await this.$store.dispatch('createPodcast', data)
           if (res.errno === 0) {
-            history.pushState({state: 1}, 'Auto Save State', '/podcast/' + res.data.id + '')
+            history.pushState({state: 1}, 'Auto Save State', `/${this.category}/post/${res.data.id}`)
           }
         } else {
           if (data) {

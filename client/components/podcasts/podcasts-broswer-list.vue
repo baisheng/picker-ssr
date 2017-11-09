@@ -21,7 +21,7 @@
       </div>
 
       <div slot="summary">
-        <nuxt-link class="button is-compact" style="margin-right: 8px;" :to="'/podcast/' + term.slug">
+        <nuxt-link class="button is-compact" style="margin-right: 8px;" :to="`/${term.slug}/post`">
           <svg class="gridicon gridicons-add-outline" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 24 24">
             <g>
@@ -41,7 +41,8 @@
         <button type="submit" class="button is-compact is-scary" @click="deleteCategory(term.slug)">
           删除分类
         </button>
-        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">默认分类
+        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">
+          设为默认
         </button>
         <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">保存
         </button>
@@ -130,14 +131,14 @@
     <div class="podcasts-browser-list">
       <div class="card podcasts-browser-list__elements" v-if="isNotEmpty">
         <li class="podcasts-browser-item" v-for="item in list" :key="item.id">
-          <nuxt-link :to="'/podcast/' + item.id" class="podcasts-browser-item__link">
+          <nuxt-link :to="`${term.slug}/post/${item.id}`" class="podcasts-browser-item__link">
             <div class="podcasts-browser-item__info">
               <div class="plugin-icon">
                 <img class="plugin-icon__img"
                      :src="item.featured_image">
               </div>
               <div class="podcasts-browser-item__title">{{item.title}}</div>
-              <div class="podcasts-browser-item__author">{{ item.authorInfo.user_nicename }}</div>
+              <div class="podcasts-browser-item__author">{{ item.author.nicename }}</div>
               <div class="podcasts-browser-item__published" v-if="item.status === 'publish'">
                 <svg class="gridicon gridicons-checkmark" height="18" width="18" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24">
@@ -160,6 +161,8 @@
 </template>
 
 <script>
+  /* eslint-disable key-spacing,comma-spacing,no-spaced-func */
+
   import FoldableCard from '~/components/foldable-card'
   import EmptyContent from '~/components/empty-content'
   import FileUpload from 'vue-upload-component/src'
@@ -207,7 +210,11 @@
       (async () => {
         await this.load()
       })()
-
+//      this.$nextTick(() => {
+//        (async () => {
+//          await this.load()
+//        })()
+//      })
     },
     computed: {
       requestHeader () {
@@ -275,11 +282,12 @@
         }
         if (this.slug) {
           // 详情
-          const data = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/?pagesize=50`, {params})).data.data
+          const data = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts/?pagesize=50`, {params})).data.data
           this.list = data.data
         } else {
           // 首页展示
-          this.list = (await this.$axios.get(`/app/${this.$store.getters.appId}/posts/`, {params})).data.data
+          this.list = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?category=${this.term.slug}`)).data.data.data
+          console.log(JSON.stringify(this.list))
         }
 
       },

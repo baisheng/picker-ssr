@@ -3,7 +3,7 @@
     <div class="picker-login__container">
       <div class="login__form-header-wrapper">
         <div class="login__form-header">
-          {{ org.meta.basic.name }}
+          {{ org.name }}
           登录到您的帐户
         </div>
       </div>
@@ -90,7 +90,7 @@
         return this.$store.state.org.detail.data
       },
       logo_url () {
-        return this.org.basic.logo_url === undefined || null ? '../assets/img/logo.png' : this.org.basic.logo_url
+        return this.org.logo_url === undefined || null ? '../assets/img/logo.png' : this.org.logo_url
       }
     },
     methods: {

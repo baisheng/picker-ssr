@@ -21,7 +21,7 @@
                         <div class="site-icon is-blank"
                              style="height: 14px; width: 14px; line-height: 14px; font-size: 14px;"
                              v-for="app in org.apps">
-                          <img :src="app.meta.basic.logo_url" v-if="app.meta.basic.logo_url">
+                          <img :src="app.logo_url" v-if="app.logo_url">
                           <svg class="gridicon gridicons-globe" height="11" width="11"
                                xmlns="http://www.w3.org/2000/svg"
                                viewBox="0 0 24 24" v-else>
@@ -39,7 +39,7 @@
                   <a class="site__content" :href="`/${app.type}`">
                     <div class="site-icon is-blank"
                          style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                      <img :src="app.meta.basic.logo_url" v-if="app.meta.basic.logo_url">
+                      <img :src="app.logo_url" v-if="app.logo_url">
                       <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
                            viewBox="0 0 24 24" v-else>
                         <g>
@@ -50,10 +50,10 @@
                     </div>
                     <div class="site__info">
                       <div class="site__title">
-                        {{ app.meta.basic.name}} - {{ app.type }}
+                        {{ app.name}} - {{ app.type }}
                       </div>
                       <div class="site__domain">
-                        {{ app.meta.basic.description }}
+                        {{ app.description }}
                       </div>
                     </div>
                   </a>
@@ -86,12 +86,12 @@
                        aria-label="选择站点 bluepx.wordpress.com">
                       <div class="site-icon is-blank"
                            style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                        <img :src="curApp.meta.basic.logo_url" v-if="curApp.meta.basic.logo_url">
+                        <img :src="curApp.logo_url" v-if="curApp.logo_url">
                         <icon name="globe" class="gridicon" style="width: 24px; height: 24px;" v-else></icon>
                       </div>
                       <div class="site__info">
                         <!-- TODO: 加载每次请求中 -->
-                        <div class="site__title">{{ curApp.meta.basic.name }}</div>
+                        <div class="site__title">{{ curApp.name }}</div>
                         <div class="site__domain">{{ curApp.type }}</div>
                       </div>
                     </a>

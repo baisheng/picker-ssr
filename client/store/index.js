@@ -43,7 +43,7 @@ export const actions = {
     if (!org) {
       return
     }
-    console.log(JSON.stringify(org))
+    // console.log(JSON.stringify(org))
     // console.log('nuxt server init ...')
 
     store.strict = false
@@ -218,7 +218,8 @@ export const actions = {
   /// App Podcast
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
-    const data = (await this.$axios.get(`/apps/${this.getters.appId}/posts/${id}`)).data
+    const {data} = await this.$axios.get(`/apps/${this.getters.appId}/posts/${id}`)
+    // console.log('------')
     // console.log(JSON.stringify(data))
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
@@ -229,7 +230,7 @@ export const actions = {
   },
   async updatePodcast ({commit}, form) {
     commit('podcast/UPDATE_DETAIL')
-    const {data} = await this.$axios.put(`/apps/${this.getters.appId}/posts/${form.id}`, form)
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/${form.id}`, form)
     if (data.errno > 0) {
       commit('podcast/UPDATE_DETAIL_FAILURE')
     } else {
@@ -240,12 +241,12 @@ export const actions = {
   // POSTS
   async createPodcast ({commit}, form) {
     commit('podcast/CREATE')
-    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts`, form)
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/new`, form)
     if (data.errno > 0) {
       commit('podcast/CREATE_FAILURE')
     } else {
       // console.log(JSON.stringify(data.data))
-      const podcast = Object.assign(form, {id: data.data})
+      const podcast = Object.assign(form, data.data)
       // form.id = data.data
       commit('podcast/CREATE_SUCCESS', podcast)
     }
@@ -267,15 +268,18 @@ export const actions = {
   // 节目创建
   async episodeCreate ({commit}, form) {
     commit('podcast/CREATE_EPISODE')
-    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts`, form)
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/new`, form)
     // console.log('create')
     // console.log(JSON.stringify(data))
     if (data.errno === 0) {
-      form = Object.assign({id: data.data}, form)
+      form = Object.assign(data.data, form)
       commit('podcast/CREATE_EPISODE_SUCCESS', form)
     } else {
       commit('podcast/CREATE_EPISODE_FAILURE')
     }
+
+    // await store.dispatch('loadCategories')
+
     // 返回添加的内容 id
     return data.data
     // const {data} = await this.$axios.put(`/apps/${this.getters.appId}/users`, )
@@ -311,7 +315,7 @@ export const actions = {
   // POSTS
   async postsCreate ({commit}, {data}) {
     commit('posts/CREATE')
-    await this.$axios.post(`/apps/${this.getters.appId}/posts`, {data})
+    await this.$axios.post(`/apps/${this.getters.appId}/posts/new`, {data})
       .then(response => {
         const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
         if (success) {

@@ -339,7 +339,7 @@
 //
 //      },
       async updateAudio (episode, id) {
-        await this.$axios.put(`/app/${this.$store.getters.appId}/posts/${episode.id}`, episode)
+        await this.$axios.post(`/apps/${this.$store.getters.appId}/posts/${episode.id}`, episode)
         // eslint-disable-next-line prefer-const
         let obj = find(this.episodeList, {id: episode.id})
         obj.url = episode.url
@@ -348,7 +348,7 @@
         if (!id) {
           id = episode.id
         }
-        await this.$axios.put(`/app/${this.$store.getters.appId}/posts/${id}`, episode)
+        await this.$axios.post(`/apps/${this.$store.getters.appId}/posts/${id}`, episode)
 //        this.$emit('podcast_item_update', episode, id)
       },
       // 创建节目 episode

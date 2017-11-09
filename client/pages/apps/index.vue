@@ -52,7 +52,7 @@
           <div class="site" v-for="app in org.apps">
               <a class="site__content" @click="selectApp($event, app)">
               <div class="site-icon is-blank" style="height: 32px; width: 32px; line-height: 32px; font-size: 32px;">
-                <img :src="app.meta.basic.logo_url" v-if="app.meta.basic.logo_url">
+                <img :src="app.logo_url" v-if="app.logo_url">
                 <svg class="gridicon gridicons-globe" height="25" width="25" xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 24 24" v-else>
                   <g>
@@ -63,10 +63,10 @@
               </div>
               <div class="site__info">
                 <div class="site__title">
-                  {{ app.meta.basic.name}} - {{ app.type }}
+                  {{ app.name}} - {{ app.type }}
                 </div>
                 <div class="site__domain">
-                  {{ app.meta.basic.description }}
+                  {{ app.description }}
                 </div>
               </div>
               </a>
@@ -92,8 +92,9 @@
     methods: {
       handleClick () {},
       selectApp (event, app) {
+        console.log(app + '----')
         this.$store.commit('org/SET_CURRENT_APP', app)
-        this.$router.push(`/${app.type}`)
+        this.$router.replace(`/${app.type}`)
       }
     }
   }

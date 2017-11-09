@@ -125,8 +125,8 @@
         }
       },
       authorAvatar () {
-        if (this.podcast.hasOwnProperty('authorInfo')) {
-          const authorInfo = this.podcast.authorInfo
+        if (this.podcast.hasOwnProperty('author')) {
+          const authorInfo = this.podcast.author
           if (!authorInfo.hasOwnProperty('avatar')) {
             return '/images/people/mystery-person.svg'
           } else {
