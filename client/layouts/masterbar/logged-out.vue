@@ -1,7 +1,7 @@
 <template>
   <masterbar>
     <item class="masterbar__item-logo">
-      <!--<img :src="org.meta.basic.logo_url" width="270" class="masterbar__wpcom-logo gridicon">-->
+      <img :src="org.logo_url" width="270" class="masterbar__wpcom-logo gridicon">
       <!--<icon name="book" class="gridicon"></icon>-->
       <!--<svg className="masterbar__wpcom-logo" width="270" height="45" viewBox="0 0 270 45"-->
            <!--xmlns="http://www.w3.org/2000/svg">-->

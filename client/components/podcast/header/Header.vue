@@ -1,8 +1,26 @@
+<style lang="scss">
+  .podcast__avatar {
+    // !important necessary here since plugin-icon uses !important as well
+    height: 40px !important;
+    width:  40px !important;
+    margin-left: 0px;
+    margin-right: 12px;
+  }
+
+  .podcast__header {
+    display: flex;
+    h3 {
+      flex: 2;
+      display: block;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+  }
+</style>
 <template>
   <foldable-card class="is-compact" expanded>
-    <div class="connected-application-item__header is-p" slot="header">
-      <div class="plugin-icon connected-application-icon animate__appear">
-
+    <div class="podcast__header " slot="header">
+      <div class="plugin-icon podcast__avatar animate__appear">
         <img
           class="plugin-icon__img"
           :src="authorAvatar">

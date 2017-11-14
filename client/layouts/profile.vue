@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="me-sidebar__signout">
-            <button class="button me-sidebar__signout-button is-compact" title="注销 WordPress.com" type="button">登出
+            <button class="button me-sidebar__signout-button is-compact" title="注销" type="button" @click="logout">登出
             </button>
           </div>
           <li class="sidebar__menu"><h2 class="sidebar__heading">个人资料</h2>
@@ -129,6 +129,10 @@
       }
     },
     methods: {
+      logout () {
+        this.$store.dispatch('auth/logout')
+        this.$router.replace('/login')
+      },
       toAppHome (event) {
         event.preventDefault();
         event.stopPropagation();

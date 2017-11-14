@@ -1,5 +1,5 @@
 <template>
-  <main class="connected-applications main">
+  <main class="main">
     <!-- Navbar -->
     <header-cake compact backHref="/podcasts" :title="title"></header-cake>
     <!-- Header -->
@@ -24,21 +24,9 @@
     middleware: 'authenticated',
     layout: 'podcast',
     async fetch ({store, params}) {
-//      console.log('------')
       await store.dispatch('loadCategories')
     },
-//    async fetch ({store, params}) {
-//      if (params.id && !Object.is(Number(params.id), NaN)) {
-//        await store.dispatch('getPodcast', params.id)
-//        await store.dispatch('loadEpisodeList', {parent: params.id, page: 1})
-//      }
-//      await store.dispatch('loadUsers')
-//    },
     async asyncData ({app, params}) {
-      //      console.log(params)
-//      console.log(params.category)
-//      const [slug, id] = params.slugid.split('-')
-//      console.log(slug + ':' + id)
       console.log(JSON.stringify(params))
       await app.store.dispatch('loadUsers')
 //      const terms = await app.store.dispatch('getTermsByTaxonomy')
@@ -52,12 +40,7 @@
           page: 1
         }
         const data = (await app.$axios.$get(`/apps/${app.store.getters.appId}/posts`, {params: query})).data
-//        if (data === null) {
-//
-//        }
-//        console.log(JSON.stringify(data))
         return {
-//          terms: terms.data,
           episodeList: data.data
         }
       } else {
@@ -65,7 +48,6 @@
         return {
           episodeList: [],
           category: params.category
-//          terms: terms.data
         }
       }
     },

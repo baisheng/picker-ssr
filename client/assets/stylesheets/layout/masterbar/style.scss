@@ -6,7 +6,8 @@ $autobar-height: 20px;
 .masterbar {
   background: $masterbar-color;
   border-bottom: 1px solid darken( $masterbar-color, 4% );
-  color: $white;
+  //color: $primary;
+  color: rgb(68, 68, 68);
   font-size: 16px;
   display: flex;
   height: $masterbar-height;
@@ -18,9 +19,11 @@ $autobar-height: 20px;
   z-index: z-index( 'root', '.masterbar' );
   -webkit-font-smoothing: subpixel-antialiased;
   transition: transform 0.2s ease-out;
+  transform: translate3d(0px, 0px, 0px);
   /* placeholder: */
   //background: #FFFFFF;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+  //box-shadow: 0 2px 5px 0 rgba(0,0,0,0.05);
+  //box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
   .is-support-user & {
     background: $orange-jazzy;
     border-bottom: 1px solid darken( $orange-jazzy, 4% );
@@ -100,7 +103,7 @@ $autobar-height: 20px;
 
   .masterbar__wpcom-logo {
     height: 24px;
-    width: 164px;
+    width: auto;
     position: relative;
     top: 6px;
     left: -4px;

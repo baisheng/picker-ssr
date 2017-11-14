@@ -187,7 +187,7 @@ export const actions = {
       const {data} = await this.$axios.post(`/org/${this.getters.orgId}/signin`, form)
       if (data.errno > 0) {
         // 发送出错误状态
-        // console.error(data.errmsg)
+        console.error(data.errmsg)
 
         return data.errmsg
       }

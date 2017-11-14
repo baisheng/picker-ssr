@@ -10,7 +10,7 @@
         <!-- react-text: 390 -->@<!-- /react-text --><!-- react-text: 391 -->bluepx<!-- /react-text --></a></div>
     </div>
     <div class="me-sidebar__signout">
-      <button class="button me-sidebar__signout-button is-compact" title="注销 WordPress.com" type="button">登出</button>
+      <button class="button me-sidebar__signout-button is-compact" title="注销 WordPress.com" type="button" @click="logout">登出</button>
     </div>
   </sidebar>
 </template>
@@ -27,6 +27,12 @@
       SidebarFooter,
       SidebarItem,
       SidebarMenu
+    },
+    methods: {
+      logout () {
+        console.log('lgotout......')
+        this.$store.dispatch('auth/logout')
+      }
     }
   }
 </script>

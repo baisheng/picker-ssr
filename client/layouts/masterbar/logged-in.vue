@@ -6,8 +6,7 @@
     <item icon="tint" class="masterbar__reader" url="/contents">
       内容市场
     </item>
-    <div class="masterbar__publish">
-      <!--
+<!--    <div class="masterbar__publish">
       <a href="/podcast" title="创建新文章"
          class="masterbar__item masterbar__item-new">
         <svg class="gridicon gridicons-create" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -27,8 +26,7 @@
           <span class="count">3</span>
         </button>
       </div>
-          -->
-    </div>
+    </div>-->
     <nuxt-link to="/me" title="更新您的个人资料、个人设置等" class="masterbar__item masterbar__item-me">
       <svg class="gridicon gridicons-user-circle" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
@@ -38,7 +36,7 @@
         </g>
       </svg>
       <span class="masterbar__item-content">
-        <img alt="Me" class="gravatar"
+        <img class="gravatar"
              :src="user.avatar"
              width="18" height="18">
         <span class="masterbar__item-me-label">我</span>
