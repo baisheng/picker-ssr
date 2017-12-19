@@ -281,21 +281,31 @@
       async toggleApprove () {
         const status = this.episode.status
         this.episode.status = status === 'approved' ? 'approve' : 'approved'
-        this.$emit('update', this.episode)
+        // console.log(JSON.stringify(this.episode) + '----')
+        this.$emit('update', {
+          id: this.episode.id,
+          status: this.episode.status,
+          categories: [5]
+        })
       },
       toggleExpanded () {
         this.isExpanded = !this.isExpanded
       },
       trash () {
         this.episode.status = 'trash'
-        this.$emit('update', this.episode)
+        this.$emit('update', {
+          id: this.episode.id,
+          status: this.episode.status,
+          categories: [5]
+        })
       },
       onDel () {
         this.status = 'deleting'
         this.$emit('episode-del', this.episode, this.order)
       },
       update () {
-        console.log(JSON.stringify(this.episode))
+        // console.log(JSON.stringify(this.episode))
+        this.episode.categories = [5]
         this.$emit('update', this.episode)
       },
       insertFile () {

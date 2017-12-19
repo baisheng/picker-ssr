@@ -2,13 +2,12 @@
   font-size: 14px;
   margin: 0 auto;
   padding: 0;
-  transition: margin .15s linear;
+  //transition: margin .15s linear;
 
   .accessible-focus &:focus {
     box-shadow: 0 0 0 1px $blue-medium, 0 0 0 3px $blue-light;
     z-index: z-index( 'root', '.episode-detail.card.accessible-focus:focus' );
   }
-
   &.is-expanded {
     margin: 16px auto;
 
@@ -16,11 +15,28 @@
       justify-content: space-between;
     }
   }
-
+  &:before {
+    position: absolute;
+    content: '';
+  }
   &.is-collapsed {
+    &:before {
+      -webkit-transition: width 250ms ease-out 0s;
+      -o-transition: width 250ms ease-out 0s;
+      transition: width 250ms ease-out 0s;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      background-color: $gunmetal-500;
+      //border-radius: .5rem 0 0 .5rem;
+    }
     &:hover {
-      box-shadow: 0 0 0 1px $gray, 0 2px 4px lighten( $gray, 20% );
-      z-index: z-index( 'root', '.episode-detail.card.is-collapsed:hover' );
+      //box-shadow: 0 0 0 1px $gray, 0 2px 4px lighten( $gray, 20% );
+      //z-index: z-index( 'root', '.episode-detail.card.is-collapsed:hover' );
+      &:before {
+        width: 4px;
+      }
     }
   }
 
@@ -46,16 +62,17 @@
 }
 
 .episode-detail__author-info {
-  color: $gray-text-min;
+  //color: $gray-text-min;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: $gray-text;
 
-  strong {
-    color: $gray-text;
-    float: left;
-    margin-right: 8px;
-  }
+  //strong {
+  //  color: $gray-text;
+  //  float: left;
+  //  margin-right: 8px;
+  //}
 
   a {
     color: $gray-text-min;
@@ -164,7 +181,7 @@
   .episode-detail__author-preview {
     box-sizing: border-box;
     padding: 0 8px;
-    width: 40%;
+    width: 50%;
 
     @include breakpoint( "<960px" ) {
       width: 100%;
@@ -187,7 +204,7 @@
   overflow: hidden;
   padding: 0 8px;
   position: relative;
-  width: 60%;
+  width: 50%;
 
   @include breakpoint( "<960px" ) {
     width: 100%;

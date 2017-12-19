@@ -70,21 +70,21 @@
       </div>
     </div>
     <!--<transition name="slide-fade" mode="out-in">-->
-    <episode-form v-if="creating" :parent="parent" :sort="episodeList.length + 1" @addEpisode="push"
+    <episode-form v-if="creating" :parent="parent" :sort="data.data.length + 1" @addEpisode="push"
                   @cancel="cancel" @updateAudio="updateAudio"></episode-form>
     <!--</transition>-->
 
     <span class="episode-list__transition-wrapper">
       <!-- Key 如果有问题会拖拽失败 -->
-      <episode-detail :key="item.id" v-for="(item, index) in episodeList"
+      <episode-detail :key="item.id" v-for="(item, index) in data.data"
                       :order="index"
                       :episode="item"
-                      v-dragging="{item: item, list: episodeList}"
+                      v-dragging="{item: item, list: data.data}"
                       @episode-del="del" @update="updateEpisode" v-if="!creating">
       </episode-detail>
     </span>
 
-    <empty-content title="节目列表为空，添加内容？" v-show="episodeList.length < 0">
+    <empty-content title="节目列表为空，添加内容？" v-show="data.data.length < 0">
       <button class="button is-primary" style="margin-top: 10px;" @click="create" slot="action">
         <svg class="gridicon gridicons-plus-small needs-offset"
              height="18" width="18" xmlns="http://www.w3.org/2000/svg"
@@ -98,24 +98,32 @@
       </button>
       <!--<slot name="action"></slot>-->
     </empty-content>
+    <!--<div class="list-end"></div>-->
+    <div class="u-mt-small u-text-center u-justify-center">
+      <button class="button is-long" @click="$emit('loadmore')" :disabled="!canLoadMore">
+        <span v-if="canLoadMore">载入更多...</span>
+        <span v-else-if="!canLoadMore">已载入全部</span>
+        <!--<span>已载入全部内容</span>-->
+      </button>
+    </div>
   </div>
 </template>
 <style lang="scss">
-  .animate-box {
-    opacity: 0;
-  }
+  /*.animate-box {*/
+    /*opacity: 0;*/
+  /*}*/
 
   .fadeInUp {
     -webkit-animation-name: fadeInUp;
     animation-name: fadeInUp;
   }
 
-  .animated-fast {
-    -webkit-animation-duration: .5s;
-    animation-duration: .5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
+  /*.animated-fast {*/
+    /*-webkit-animation-duration: .5s;*/
+    /*animation-duration: .5s;*/
+    /*-webkit-animation-fill-mode: both;*/
+    /*animation-fill-mode: both;*/
+  /*}*/
 
   @keyframes fadeInUp {
     0% {
@@ -156,6 +164,7 @@
     /*animation-iteration-count: infinite;*/
     /*animation-direction: alternate;*/
     /*position: relative;*/
+    /*display: block;*/
     /*background-color: #fafbfc;*/
     /*margin: 14px;*/
     /*height: 52px;*/
@@ -165,17 +174,18 @@
     /*color: #777;*/
     font-weight: 900;
 
-    border: 1px dashed #ccc;
+    border: 1px dashed #1d2531;
     /*background: rgba(255, 255, 255, 0.8);*/
     /*font-size: 12px;*/
     /*line-height: 52px;*/
     /*text-align: center;*/
     transition: all 0.3s;
     /*cursor: pointer;*/
+    /*z-index: z-index( 'root', 3 );*/
   }
 </style>
 <script>
-  /* eslint-disable no-trailing-spaces,indent */
+  /* eslint-disable no-trailing-spaces,indent,no-extra-parens */
 
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
@@ -187,6 +197,10 @@
 
   export default {
     props: {
+      data: {
+        type: Object,
+        required: true
+      },
       episodeList: {
         type: Array
       },
@@ -204,7 +218,7 @@
       return {
         selected: 1,
         navList: [
-          {id: 1, name: '', title: `全部节目( ${this.episodeList.length} )`},
+          {id: 1, name: '', title: `全部( ${this.data.count} )`},
           {id: 2, name: 'approve', title: `未审核`},
           {id: 3, name: 'approved', title: '已审核'},
           {id: 4, name: 'trash', title: '回收站'}],
@@ -239,13 +253,17 @@
     },
     mounted () {
       this.$dragging.$on('dragged', ({value, draged, to}) => {
-        this.episodeList = value.list
+        this.data.data = value.list
         this.updateEpisode({
           id: draged.id,
+          status: draged.status,
+          categories: [5],
           sort: to.sort
         })
         this.updateEpisode({
           id: to.id,
+          status: draged.status,
+          categories: [5],
           sort: draged.sort + to.sort
         })
         /*
@@ -271,6 +289,11 @@
       EmptyContent
     },
     computed: {
+      canLoadMore() {
+        const {currentPage, totalPages} = this.data
+        const hasEpisodes = true
+        return hasEpisodes ? (currentPage < totalPages) : false
+      },
 //      episodeList: {
 //        get () {
 //          this.itemList = [...this.list]
@@ -345,9 +368,12 @@
         obj.url = episode.url
       },
       async updateEpisode (episode, id) {
+        console.log(JSON.stringify(episode))
         if (!id) {
           id = episode.id
         }
+        // this.episode.status = episode.status
+        // this.episode.categories = [5]
         await this.$axios.post(`/apps/${this.$store.getters.appId}/posts/${id}`, episode)
 //        this.$emit('podcast_item_update', episode, id)
       },

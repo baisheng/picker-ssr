@@ -15,10 +15,10 @@
           <input type="checkbox" class="form-checkbox" value="on">
         </label>
         <div class="episode-detail__author-info">
-          <div class="episode-detail__author-info-element">
-            <strong>
-              <div class="emojify">{{episode.title}}</div>
-            </strong>
+          <div class="episode-detail__author-info-element u-text-bold">
+            <!--<strong>-->
+                {{episode.title}}
+            <!--</strong>-->
           </div>
         </div>
       </div>

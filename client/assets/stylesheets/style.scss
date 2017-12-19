@@ -1,8 +1,29 @@
+//
+// TOOLS
+//
+@import "tools/tools.rem";
+@import "tools/tools.clearfix";
+@import "tools/tools.linear-gradient";
+@import "tools/tools.respond-to";
+
+//
+// SETTINGS
+//
+
+// Global Settings
+@import "settings/settings.global";
+//
+// BASE
+//
+@import "base/base.global";
+@import "base/base.typography";
+
+
 // External Dependencies
 @import "vendor";
 
 // Shared
-@import "shared/reset";
+//@import "shared/reset";
 @import "shared/functions";
 @import "shared/functions/functions";
 @import "shared/colors";
@@ -20,3 +41,16 @@
 @import 'sections/domain-search';              // Domain Search styles
 
 @import "components";
+
+// UTILITIES
+@import "utilities/utilities.typography";
+@import "utilities/utilities.floats";
+@import "utilities/utilities.clearfix";
+@import "utilities/utilities.spacing";
+@import "utilities/utilities.colors";
+@import "utilities/utilities.display";
+@import "utilities/utilities.borders";
+@import "utilities/utilities.flex";
+@import "utilities/utilities.responsive";
+@import "utilities/utilities.opacity";
+@import "utilities/utilities.sizes";

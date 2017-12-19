@@ -16,19 +16,19 @@
   //box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
   //top: 2px;
   //border-radius: 6px;
-  .animate-box {
-    opacity: 0;
-  }
+  //.animate-box {
+  //  opacity: 0;
+  //}
   .fadeInUp {
     -webkit-animation-name: fadeInUp;
     animation-name: fadeInUp;
   }
-  .animated-fast {
-    -webkit-animation-duration: .5s;
-    animation-duration: .5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-  }
+  //.animated-fast {
+  //  -webkit-animation-duration: .5s;
+  //  animation-duration: .5s;
+  //  -webkit-animation-fill-mode: both;
+  //  animation-fill-mode: both;
+  //}
   @include clear-fix;
 
   @include breakpoint(">480px") {

@@ -287,7 +287,7 @@
         } else {
           // 首页展示
           this.list = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?category=${this.term.slug}`)).data.data.data
-          console.log(JSON.stringify(this.list))
+          // console.log(JSON.stringify(this.list))
         }
 
       },

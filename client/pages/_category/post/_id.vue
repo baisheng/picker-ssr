@@ -5,10 +5,11 @@
     <!-- Header -->
     <podcast-header :podcast.sync="detail"></podcast-header>
     <!-- Content-from -->
-    <podcast-content-form :podcast="detail" :users="users.data" :termSlug="category" :terms="categories" @save="save"></podcast-content-form>
+    <podcast-content-form :podcast="detail" :users="users.data" :termSlug="category" :terms="categories"
+                          @save="save"></podcast-content-form>
     <!-- Episode-list -->
-    <episode-list :parent="detail" :episodeList="episodeList" v-if="detail.id"
-                  @load="loadEpisodeList"></episode-list>
+    <episode-list :parent="detail" :data="episodeData" :episodeList="episodeList" v-if="detail.id"
+                  @loadmore="loadEpisodeList"></episode-list>
   </main>
 </template>
 
@@ -27,7 +28,6 @@
       await store.dispatch('loadCategories')
     },
     async asyncData ({app, params}) {
-      console.log(JSON.stringify(params))
       await app.store.dispatch('loadUsers')
 //      const terms = await app.store.dispatch('getTermsByTaxonomy')
       if (params.id && !Object.is(Number(params.id), NaN)) {
@@ -41,6 +41,8 @@
         }
         const data = (await app.$axios.$get(`/apps/${app.store.getters.appId}/posts`, {params: query})).data
         return {
+          parent: params.id,
+          episodeData: data,
           episodeList: data.data
         }
       } else {
@@ -118,18 +120,28 @@
       },
       token () {
         return this.$store.state.token
+      },
+      nextPageParams () {
+        return Object.assign({
+          page: this.episodeData.currentPage + 1
+        })
       }
     },
     mounted () {
     },
     methods: {
-      async loadEpisodeList (params) {
-        if (!params.page) {
-          params.type = 'podcast'
-          params.page = 1
+      async loadEpisodeList () {
+        const params = {
+          parent: this.parent,
+          page: this.episodeData.currentPage + 1
         }
-        const data = (await this.$axios.$get(`/apps/${this.appId}/posts/new`, {params})).data
-        this.episodeList = data.data
+        // if (!params.page) {
+        // params.type = 'podcast'
+        // params.page = this.episodeData.currentPage + 1
+        // }
+        const data = (await this.$axios.$get(`/apps/${this.appId}/posts`, {params})).data
+        this.episodeData.currentPage = data.currentPage
+        this.episodeData.data.push(...data.data)
 //        if (data !== null) {
 //          this.episodeList = data
 //        } else {

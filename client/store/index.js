@@ -383,7 +383,7 @@ export const actions = {
   async updateUser ({commit}, {form}) {
     console.log(JSON.stringify(form))
     commit('users/UPDATE_DETAIL')
-    const {data} = await this.$axios.put(`/apps/${this.getters.appId}/users`, form)
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/users/${form.id}`, form)
     if (data.errno > 0) {
       // console.log('update failure')
       // commit('users/UPDATE_FAILURE')
@@ -410,6 +410,7 @@ export const actions = {
     commit('users/REQUEST_DETAIL')
     const data = (await this.$axios.get(`/apps/${this.getters.appId}/users/${id}`)).data
     if (data && data.errno === 0) {
+      // console.log(JSON.stringify(data))
       commit('users/GET_DETAIL_SUCCESS', data)
     } else {
       commit('users/GET_DETAIL_FAILURE')
