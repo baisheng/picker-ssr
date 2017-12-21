@@ -342,7 +342,6 @@
         this.$emit('save', form)
       },
       updateContent (e) {
-        console.log(JSON.stringify(this.podcast) + '------------')
         const form = {
           id: this.podcast.id,
           content: e.target.value,

@@ -5,7 +5,14 @@
 </style>
 <template>
   <div :class="classes" @click="handleFullHeaderClick">
-    <episode-detail-actions v-if="isExpanded" @toggleApprove="$emit('toggleApprove')" @trash="$emit('trash')" @delete="$emit('delete')" :episodeStatus="episode.status"></episode-detail-actions>
+
+    <episode-detail-actions
+      @toggleApprove="$emit('toggleApprove')"
+      @trash="$emit('trash')"
+      @delete="$emit('delete')"
+      :episodeStatus="episode.status"
+      v-if="isExpanded"></episode-detail-actions>
+
     <div class="episode-detail__header-content" v-if="!isExpanded">
       <div class="episode-detail__author-preview">
         <div class="episode-detail__order">
@@ -17,7 +24,7 @@
         <div class="episode-detail__author-info">
           <div class="episode-detail__author-info-element u-text-bold">
             <!--<strong>-->
-                {{episode.title}}
+            {{episode.title}}
             <!--</strong>-->
           </div>
         </div>

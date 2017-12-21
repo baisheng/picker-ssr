@@ -65,11 +65,11 @@
   dependencies:
     http-proxy-middleware "^0.17.4"
 
-"@nuxtjs/toast@^2.3.0":
-  version "2.3.0"
-  resolved "http://registry.npm.taobao.org/@nuxtjs/toast/download/@nuxtjs/toast-2.3.0.tgz#8c8270246e5ee1f3d7563c75ed7185f87ef68d8a"
+"@nuxtjs/toast@^2.3.3":
+  version "2.3.3"
+  resolved "http://registry.npm.taobao.org/@nuxtjs/toast/download/@nuxtjs/toast-2.3.3.tgz#b4168523dad016168f84cf0e6576da3047ebbe07"
   dependencies:
-    vue-toasted "^1.1.16"
+    vue-toasted "^1.1.24"
 
 "@nuxtjs/youch@3.0.2":
   version "3.0.2"
@@ -8003,9 +8003,9 @@ vue-template-es2015-compiler@^1.5.3:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.5.3.tgz#22787de4e37ebd9339b74223bc467d1adee30545"
 
-vue-toasted@^1.1.16:
-  version "1.1.22"
-  resolved "http://registry.npm.taobao.org/vue-toasted/download/vue-toasted-1.1.22.tgz#99967c579c9321e2eaa2fee7b2cceac86700eda9"
+vue-toasted@^1.1.24:
+  version "1.1.24"
+  resolved "http://registry.npm.taobao.org/vue-toasted/download/vue-toasted-1.1.24.tgz#715a371dfa490cc710ffedaaeae61fd8a8c4f7ad"
 
 vue-upload-component@^2.5.0-beta.4:
   version "2.6.3"

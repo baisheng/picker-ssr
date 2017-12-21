@@ -275,18 +275,22 @@
         })
       },
       async load () {
+        // console.log(JSON.stringify(this.term) + '----xxx')
         const params = {
+          term_id: this.term.term_id,
+          term_slug: this.term.slug
+          // term_id: this.term
 //          type: 'podcast',
-          term_id: !this.slug ? this.term.id : '',
-          term_slug: this.slug ? this.term.slug : ''
+//           term_id: !this.slug ? this.term.term_id : '',
+//           term_slug: this.slug ? this.term.slug : ''
         }
         if (this.slug) {
           // 详情
-          const data = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts/?pagesize=50`, {params})).data.data
+          const data = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?pagesize=50`, {params})).data.data
           this.list = data.data
         } else {
           // 首页展示
-          this.list = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?category=${this.term.slug}`)).data.data.data
+          this.list = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?category=${this.term.slug}&pagesize=6`)).data.data.data
           // console.log(JSON.stringify(this.list))
         }
 

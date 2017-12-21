@@ -1,6 +1,7 @@
-/* eslint-disable no-undef,indent,spaced-comment,radix */
+/* eslint-disable no-undef,indent,spaced-comment,radix,func-style */
 import {setToken, unsetToken} from '~/utils/auth'
 import Cookie from 'js-cookie'
+import { filter, get, orderBy } from 'lodash';
 
 export const state = () => ({
   user: null,
@@ -35,6 +36,17 @@ export const getters = {
   },
   loggedUser (state) {
     return state.user
+  },
+  getEpisodeList (state) {
+    function filterEpisodesByStatus (episodeList, status) {
+      return status === 'all'
+        ? filter(
+          episodeList,
+            episode => episode.status === 'approved' || episode.status === 'unapproved'
+        )
+        : filter(episodeList, episode => status === episode.status)
+    }
+    return filterEpisodesByStatus(state.podcast.episodeList.data.data, state.podcast.episodeList.status)
   }
 }
 export const actions = {
@@ -219,8 +231,6 @@ export const actions = {
   async getPodcast ({commit}, id) {
     commit('podcast/REQUEST_DETAIL')
     const {data} = await this.$axios.get(`/apps/${this.getters.appId}/posts/${id}`)
-    // console.log('------')
-    // console.log(JSON.stringify(data))
     if (data && data.errno === 0) {
       commit('podcast/GET_DETAIL_SUCCESS', data)
     } else {
@@ -228,13 +238,29 @@ export const actions = {
     }
     return data
   },
+  async getEpisodeList ({commit}, params) {
+    commit('podcast/REQUEST_EPISODE_LIST')
+    // const query = {
+    //   type: 'podcast',
+    //   parent: parentId,
+    //   page: 1
+    // }
+    const {data} = await this.$axios.get(`/apps/${this.getters.appId}/posts`, {params: params})
+    if (data.errno > 0) {
+      commit('podcast/GET_EPISODELIST_FAILURE')
+    } else {
+      commit('podcast/GET_EPISODE_LIST_SUCCESS', data.data)
+    }
+    // const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/posts`, {params: query})).data
+  },
   async updatePodcast ({commit}, form) {
     commit('podcast/UPDATE_DETAIL')
+    // 保证返回数据的完整性
     const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/${form.id}`, form)
     if (data.errno > 0) {
       commit('podcast/UPDATE_DETAIL_FAILURE')
     } else {
-      commit('podcast/UPDATE_DETAIL_SUCCESS', form)
+      commit('podcast/UPDATE_DETAIL_SUCCESS', data.data)
     }
     return data
   },
@@ -254,7 +280,7 @@ export const actions = {
   },
   async loadEpisodeList ({commit}, params) {
     commit('podcast/REQUEST_EPISODE_LIST')
-    const {data} = await this.$axios.get(`/apps/${this.getters.appId}/podcast`, {params})
+    const {data} = await this.$axios.get(`/apps/${this.getters.appId}/posts`, {params})
     if (data.errno > 0) {
       commit('podcast/GET_EPISODE_LIST_FAILURE')
     } else {
@@ -308,6 +334,24 @@ export const actions = {
           commit('posts/DELETE_EPISODE_FAILURE')
         }
       })
+  },
+  async changeEpisodeStatus ({commit}, {episode, status}) {
+    // if (!id) {
+    //   id = episode.id
+    // }
+    // console.log('lalala -----' + status)
+    // this.episode.status = episode.status
+    // this.episode.categories = [5]
+    // console.log('lalala-----')
+    const data = await this.$axios.post(`/apps/${this.getters.appId}/posts/${episode.id}`, {status: status})
+    // console.log(JSON.stringify(data))
+    if (data.errno > 0) {
+      // console.log('update failure')
+      // commit('users/UPDATE_FAILURE')
+    } else {
+      // commit('users/UPDATE_DETAIL', form)
+      commit('podcast/CHANGE_EPISODE_STATUS', {episode: episode, status: status})
+    }
   },
   async saveEpisode ({commit}, {data, axios}) {
     // commit('podcast/U')

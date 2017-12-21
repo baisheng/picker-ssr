@@ -7,8 +7,11 @@
     <!-- Content-from -->
     <podcast-content-form :podcast="detail" :users="users.data" :terms="categories" @save="save"></podcast-content-form>
     <!-- Episode-list -->
-    <episode-list :parent="detail" :episodeList="episodeList" v-if="detail.id"
-                  @load="loadEpisodeList"></episode-list>
+    <episode-list
+      :parent="detail"
+      :episodeList="episodeList"
+      v-if="detail.id"
+      @load="loadEpisodeList"></episode-list>
   </main>
 </template>
 
@@ -18,7 +21,7 @@
   import PodcastHeader from '~/components/podcast/header'
   import PodcastContentForm from '~/components/podcast/podcast-content-form'
   import EpisodeList from '~/components/episodes/episode-list'
-//  import {debounce} from 'lodash'
+  //  import {debounce} from 'lodash'
 
   export default {
     middleware: 'authenticated',
@@ -49,11 +52,13 @@
           parent: params.id,
           page: 1
         }
-        const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/posts`, {params: query})).data
-        return {
+        await app.store.dispatch('getEpisodeList', params.id)
+
+        // const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/posts`, {params: query})).data
+        // return {
 //          terms: terms.data,
-          episodeList: data
-        }
+//           episodeList: data
+//         }
       } else {
         await app.store.commit('podcast/INIT')
         return {
@@ -70,7 +75,7 @@
           'Authorization': 'Bearer ' + this.token
         },
         terms: [{}],
-        episodeList: [],
+        // episodeList: [],
         podcast: {
           author: '',
           title: '',
@@ -105,6 +110,13 @@
       EpisodeList
     },
     computed: {
+      episodeList () {
+        if (this.$store.state.podcast.episodeList.data.list) {
+          return this.$store.state.podcast.episodeList.data.list
+        } else {
+          return []
+        }
+      },
       categories () {
         return this.$store.state.categories.data.list
       },

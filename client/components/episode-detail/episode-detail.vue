@@ -224,7 +224,7 @@
           {
             'episode-detail__placeholder': this.isLoading,
             'is-approved': this.episode.status === 'approved',
-            'is-unapproved': this.episode.status !== 'approved',
+            'is-unapproved': this.episode.status === 'unapproved',
             'is-bulk-edit': this.isBulkEdit,
             'is-expanded': this.isExpanded,
             'is-collapsed': !this.isExpanded,
@@ -280,24 +280,32 @@
     methods: {
       async toggleApprove () {
         const status = this.episode.status
-        this.episode.status = status === 'approved' ? 'approve' : 'approved'
-        // console.log(JSON.stringify(this.episode) + '----')
-        this.$emit('update', {
-          id: this.episode.id,
-          status: this.episode.status,
-          categories: [5]
+        // this.$emit('update', {
+        //   id: this.episode.id,
+        //   status: status === 'approved' ? 'approve' : 'approved',
+        //   categories: [5]
+        // })
+        // await this.$store.dispatch('updateUser', {form: that.user})
+        await this.$store.dispatch('changeEpisodeStatus', {
+          episode: this.episode,
+          status: status === 'approved' ? 'unapproved' : 'approved'
         })
       },
       toggleExpanded () {
         this.isExpanded = !this.isExpanded
       },
-      trash () {
-        this.episode.status = 'trash'
-        this.$emit('update', {
-          id: this.episode.id,
-          status: this.episode.status,
-          categories: [5]
+      async trash () {
+        await this.$store.dispatch('changeEpisodeStatus', {
+          episode: this.episode,
+          status: 'trash'
         })
+        // this.episode.status = 'trash'
+        // 通知 list 减少一条
+        // this.$emit('update', {
+        //   id: this.episode.id,
+        //   status: this.episode.status,
+        //   categories: [5]
+        // })
       },
       onDel () {
         this.status = 'deleting'

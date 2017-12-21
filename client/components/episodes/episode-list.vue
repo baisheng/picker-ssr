@@ -70,21 +70,27 @@
       </div>
     </div>
     <!--<transition name="slide-fade" mode="out-in">-->
-    <episode-form v-if="creating" :parent="parent" :sort="data.data.length + 1" @addEpisode="push"
-                  @cancel="cancel" @updateAudio="updateAudio"></episode-form>
+    <episode-form
+      v-if="creating"
+      :parent="parent"
+      :sort="data.data.length + 1"
+      @addEpisode="push"
+      @cancel="cancel"
+      @updateAudio="updateAudio"></episode-form>
     <!--</transition>-->
 
     <span class="episode-list__transition-wrapper">
       <!-- Key 如果有问题会拖拽失败 -->
-      <episode-detail :key="item.id" v-for="(item, index) in data.data"
+      <!-- 应该改为 item -->
+      <episode-detail :key="item.id" v-for="(item, index) in episodeList"
                       :order="index"
                       :episode="item"
-                      v-dragging="{item: item, list: data.data}"
+                      v-dragging="{item: item, list: episodeList}"
                       @episode-del="del" @update="updateEpisode" v-if="!creating">
       </episode-detail>
     </span>
 
-    <empty-content title="节目列表为空，添加内容？" v-show="data.data.length < 0">
+    <empty-content title="节目列表为空，添加内容？" v-show="episodeList.length < 0">
       <button class="button is-primary" style="margin-top: 10px;" @click="create" slot="action">
         <svg class="gridicon gridicons-plus-small needs-offset"
              height="18" width="18" xmlns="http://www.w3.org/2000/svg"
@@ -185,7 +191,7 @@
   }
 </style>
 <script>
-  /* eslint-disable no-trailing-spaces,indent,no-extra-parens */
+  /* eslint-disable no-trailing-spaces,indent,no-extra-parens,no-warning-comments,no-warning-comments */
 
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
@@ -218,8 +224,8 @@
       return {
         selected: 1,
         navList: [
-          {id: 1, name: '', title: `全部( ${this.data.count} )`},
-          {id: 2, name: 'approve', title: `未审核`},
+          {id: 1, name: 'all', title: `全部( ${this.data.count} )`},
+          {id: 2, name: 'unapproved', title: `未审核`},
           {id: 3, name: 'approved', title: '已审核'},
           {id: 4, name: 'trash', title: '回收站'}],
         isBulkEdit: false,
@@ -318,11 +324,12 @@
         return count
       },
       episodeCount () {
-        if (this.podcast.children.count) {
-          return this.podcast.children.count
-        } else {
-          return 0
-        }
+        // TODO 新添加后会出现 count 找不到的 error
+        // if (this.podcast.children.count) {
+        //   return this.podcast.children.count
+        // } else {
+        //   return 0
+        // }
       },
       episodeState () {
         return this.$store.state.podcast.episode
@@ -332,9 +339,12 @@
       }
     },
     methods: {
-      load (item) {
+      async load (item) {
         this.selected = item.id
-        this.$emit('load', {parent: this.parent.id, status: item.name})
+        await this.$store.dispatch('getEpisodeList', {parent: this.parent.id, status: item.name})
+        this.$store.commit('podcast/FILTER_EPISODES', item.name)
+        // this.$emit('load', {parent: this.parent.id, status: item.name})
+        // this.$emit('load', {parent: this.parent.id, status: item.name})
       },
       getStatusClass (status) {
 // eslint-disable-next-line default-case
@@ -368,7 +378,7 @@
         obj.url = episode.url
       },
       async updateEpisode (episode, id) {
-        console.log(JSON.stringify(episode))
+        // console.log(JSON.stringify(episode))
         if (!id) {
           id = episode.id
         }

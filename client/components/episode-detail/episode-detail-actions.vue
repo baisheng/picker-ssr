@@ -1,8 +1,14 @@
 <template>
   <div class="episode-detail__actions">
-    <button class="button comment-detail__action-approve is-borderless" :class="isApproved ? 'is-approved ': ''" type="button"
+    <button class="button comment-detail__action-approve is-borderless" :class="isApproved ? 'is-approved ': ''"
+            type="button"
             @click="$emit('toggleApprove')">
-      <svg class="gridicon gridicons-checkmark" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" v-if="!isApproved"><g><path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"></path></g></svg>
+      <svg class="gridicon gridicons-checkmark" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 24 24" v-if="!isApproved">
+        <g>
+          <path d="M9 19.414l-6.707-6.707 1.414-1.414L9 16.586 20.293 5.293l1.414 1.414"></path>
+        </g>
+      </svg>
       <svg class="gridicon gridicons-checkmark-circle" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24" v-else>
         <g>
@@ -18,7 +24,6 @@
         批准
       </span>
     </button>
-    <!--
     <button class="button comment-detail__action-edit is-borderless" type="button">
       <svg class="gridicon gridicons-pencil" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
@@ -29,8 +34,8 @@
       </svg>
       <span>编辑</span>
     </button>
-    -->
-    <button class="button comment-detail__action-trash is-borderless" type="button" @click="$emit('trash')" v-if="!isTrash">
+    <button class="button comment-detail__action-trash is-borderless" type="button" @click="$emit('trash')"
+            v-if="!isTrash">
       <svg class="gridicon gridicons-trash" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
         <g>
@@ -41,7 +46,8 @@
       <span>回收站</span>
     </button>
 
-    <button class="button comment-detail__action-trash is-borderless is-scary" type="button" @click="$emit('delete')" v-if="isTrash">
+    <button class="button comment-detail__action-trash is-borderless is-scary" type="button" @click="$emit('delete')"
+            v-if="isTrash">
       <svg class="gridicon gridicons-trash" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
            viewBox="0 0 24 24">
         <g>

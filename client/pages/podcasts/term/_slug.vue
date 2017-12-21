@@ -58,7 +58,7 @@
     },
     async asyncData ({app, params}) {
       if (!Object.is(params.slug, undefined)) {
-        const term = (await app.$axios.$get(`/app/${app.store.getters.appId}/taxonomy?slug=${params.slug}`)).data
+        const term = (await app.$axios.$get(`/apps/${app.store.getters.appId}/taxonomies/category/terms/slug:${params.slug}`)).data
         return {
           term: term
         }

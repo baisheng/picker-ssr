@@ -143,13 +143,19 @@
         }
       },
       authorAvatar () {
+        // const podcast = this.podcast
+        // console.log(JSON.stringify(this.podcast) + '999')
         if (this.podcast.hasOwnProperty('author')) {
+          // console.log('have author info')
           const authorInfo = this.podcast.author
-          if (!authorInfo.hasOwnProperty('avatar')) {
-            return '/images/people/mystery-person.svg'
-          } else {
-            return authorInfo.avatar
-          }
+          // console.log(JSON.stringify(authorInfo))
+          return authorInfo.avatar
+          // if (!authorInfo.hasOwnProperty('avatar')) {
+          //   return '/images/people/mystery-person.svg'
+          // } else {
+          //   console.log('lala')
+          //   return authorInfo.avatar
+          // }
         } else {
           return '/images/people/mystery-person.svg'
         }
@@ -194,7 +200,6 @@
           status: status
         }
         const res = await this.$store.dispatch('updatePodcast', form)
-        console.log(JSON.stringify(res))
         if (res.errno === 0) {
 //          this.$router.replace('/podcasts')
         }

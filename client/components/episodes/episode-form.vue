@@ -103,7 +103,17 @@
               </span>
             <span v-else>
                 上传音频
+            </span>
+          </button>
+          <button :disabled="isDisabled" class="media-library__upload-button button button is-primary"
+                  @click.prevent="insertFile(episode)"
+                  :class="uploadProgress ? 'is-busy' : ''">
+              <span v-if="uploadProgress">
+                {{uploadProgress}}
               </span>
+            <span v-else>
+                保存更改
+            </span>
           </button>
         </div>
       </div>
@@ -162,7 +172,14 @@
       // 创建节目 episode
       create () {
         const _sort = this.podcast.children.length + 1
-        const newEpisode = {title: '无标题', author: this.podcast.author, parent: this.podcast.id, sort: _sort, status: 'draft', category: '5'}
+        const newEpisode = {
+          title: '无标题',
+          author: this.podcast.author,
+          parent: this.podcast.id,
+          sort: _sort,
+          status: 'draft',
+          category: '5'
+        }
         const res = this.$store.dispatch('episodeCreate', newEpisode)
         this.episode = Object.assign({}, newEpisode)
         this.episode.id = res

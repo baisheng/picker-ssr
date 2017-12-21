@@ -40,15 +40,17 @@
           page: 1
         }
         const data = (await app.$axios.$get(`/apps/${app.store.getters.appId}/posts`, {params: query})).data
+        await app.store.dispatch('getEpisodeList', query)
+
         return {
           parent: params.id,
-          episodeData: data,
-          episodeList: data.data
+          episodeData: data
+          // episodeList: data.data
         }
       } else {
         await app.store.commit('podcast/INIT')
         return {
-          episodeList: [],
+          // episodeList: [],
           category: params.category
         }
       }
@@ -62,7 +64,7 @@
         },
         category: 'youdao',
         terms: [{}],
-        episodeList: [],
+        // episodeList: [],
         podcast: {
           author: '',
           title: '',
@@ -75,20 +77,6 @@
         }
       }
     },
-    // 获取 ID的 问题
-//    validate ({params}) {
-//      return !!params.id && !Object.is(Number(params.id), NaN)
-//    },
-//    async asyncData ({app, params}) {
-//      if (!Object.is(params.id, undefined)) {
-//        const baseUrl = 'http://api.picker.la/rest/orgs/1'
-//        const data = (await app.$axios.get(`${this.orgId}/posts/${params.id}`)).data
-//        console.log(JSON.stringify(data))
-//        return {
-//          podcast: data.data
-//        }
-//      }
-//    },
     props: {},
     components: {
       HeaderCake,
@@ -97,6 +85,14 @@
       EpisodeList
     },
     computed: {
+      episodeList () {
+        return this.$store.getters.getEpisodeList
+        // if (this.$store.state.podcast.episodeList.data.data) {
+        //   return this.$store.state.podcast.episodeList.data.data
+        // } else {
+        //   return []
+        // }
+      },
       categories () {
         return this.$store.state.categories.data.list
       },
@@ -127,26 +123,15 @@
         })
       }
     },
-    mounted () {
-    },
     methods: {
       async loadEpisodeList () {
         const params = {
           parent: this.parent,
           page: this.episodeData.currentPage + 1
         }
-        // if (!params.page) {
-        // params.type = 'podcast'
-        // params.page = this.episodeData.currentPage + 1
-        // }
         const data = (await this.$axios.$get(`/apps/${this.appId}/posts`, {params})).data
         this.episodeData.currentPage = data.currentPage
         this.episodeData.data.push(...data.data)
-//        if (data !== null) {
-//          this.episodeList = data
-//        } else {
-//          this.episodeList = []
-//        }
       },
       async save (data, id) {
         this.status = 'saving'

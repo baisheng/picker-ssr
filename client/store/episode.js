@@ -1,11 +1,9 @@
-/* eslint-disable prefer-reflect,prefer-spread,func-style */
+/* eslint-disable prefer-reflect,prefer-spread */
 /*
 *
 * 文章数据状态
 *
 */
-
-// import {filter, find} from "lodash";
 
 export const state = () => {
   return {
@@ -23,7 +21,6 @@ export const state = () => {
     },
     episodeList: {
       fetching: false,
-      status: 'all',
       data: {}
     },
     hot: {
@@ -87,16 +84,6 @@ export const mutations = {
   SET_AUTHOR (state, data) {
     state.detail.data.authorInfo = data
   },
-  CHANGE_EPISODE_STATUS (state, {episode, status}) {
-    // console.log(JSON.stringify(episode))
-    episode.status = status
-    // for (const item of state.episodeList.data.data) {
-    //   if (item.id === episode.id) {
-    //     item.status = status
-    //   }
-    // }
-  },
-  // changeCommentStatus
   PUSH_EPISODE (state, data) {
     if (Object.is(state.detail.data.children, undefined)) {
       state.detail.data.children = []
@@ -133,9 +120,7 @@ export const mutations = {
   CREATE_EPISODE_CANCEL (state) {
     state.episode.creating = false
   },
-  FILTER_EPISODES (state, action)  {
-    state.episodeList.status = action
-  },
+
   REQUEST_EPISODE_LIST (state) {
     state.episodeList.fetching = true
   },
@@ -144,7 +129,7 @@ export const mutations = {
   },
   GET_EPISODE_LIST_SUCCESS (state, action) {
     state.episodeList.fetching = false
-    state.episodeList.data = action
+    state.episodeList.data = action.data
   },
   UPDATE_EPISODE (state) {
     // state.detail.data = Object.assign({}, action.data)

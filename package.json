@@ -32,7 +32,7 @@
     "@nuxtjs/axios": "^4.3.0",
     "@nuxtjs/component-cache": "^1.1.0",
     "@nuxtjs/proxy": "^1.1.2",
-    "@nuxtjs/toast": "^2.3.0",
+    "@nuxtjs/toast": "^2.3.3",
     "apollo-server-koa": "^1.1.2",
     "awe-dnd": "^0.3.0",
     "axios": "^0.16.2",
