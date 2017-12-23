@@ -46,7 +46,7 @@ export const getters = {
         )
         : filter(episodeList, episode => status === episode.status)
     }
-    return filterEpisodesByStatus(state.podcast.episodeList.data.data, state.podcast.episodeList.status)
+    return filterEpisodesByStatus(state.podcast.detail.data.items, state.podcast.episodeList.status)
   }
 }
 export const actions = {
@@ -253,6 +253,17 @@ export const actions = {
     }
     // const data = (await app.$axios.$get(`/app/${app.store.getters.appId}/posts`, {params: query})).data
   },
+  async updatePodcastItems ({commit}, form) {
+    // console.log(JSON.stringify(form))
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/${form.id}`, form)
+    if (data.errno > 0) {
+      // commit('podcast/UPDATE_PODCAST_ITEMS')
+      this.$toast.error('操作失败')
+    } else {
+      commit('podcast/UPDATE_PODCAST_ITEMS', data.data.items)
+      this.$toast.success('操作成功')
+    }
+  },
   async updatePodcast ({commit}, form) {
     commit('podcast/UPDATE_DETAIL')
     // 保证返回数据的完整性
@@ -322,35 +333,29 @@ export const actions = {
     //     commit('podcast/CREATE_EPISODE_FAILURE', err)
     //   })
   },
-  async episodeDelete ({commit}, {id, axios}) {
+  async episodeDelete ({commit}, {pid, episode, status}) {
+    // this.$toast.success('删除成功')
     commit('podcast/DELETE_EPISODE')
-    await axios.delete(`/apps/${this.getters.appId}/posts/${id}`)
-      .then(response => {
-        const success = Boolean(response.status) && response.data && Object.is(response.data.errno, 0)
-        if (success) {
-          commit('podcast/DELETE_EPISODE_SUCCESS')
-        }
-        if (!success) {
-          commit('posts/DELETE_EPISODE_FAILURE')
-        }
-      })
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/${pid}`, {item_id: episode.id, item_status: status})
+    if (data.errno > 0) {
+      this.$toast.error('操作失败')
+      commit('posts/DELETE_EPISODE_FAILURE')
+    } else {
+      console.log(JSON.stringify(data))
+      commit('podcast/DELETE_EPISODE_SUCCESS', data.data)
+      this.$toast.success('操作成功')
+    }
   },
-  async changeEpisodeStatus ({commit}, {episode, status}) {
-    // if (!id) {
-    //   id = episode.id
-    // }
-    // console.log('lalala -----' + status)
-    // this.episode.status = episode.status
-    // this.episode.categories = [5]
-    // console.log('lalala-----')
-    const data = await this.$axios.post(`/apps/${this.getters.appId}/posts/${episode.id}`, {status: status})
-    // console.log(JSON.stringify(data))
+  async changeEpisodeStatus ({commit}, {pid, episode, status}) {
+    const data = await this.$axios.post(`/apps/${this.getters.appId}/posts/${pid}`, {item_id: episode.id, item_status: status})
     if (data.errno > 0) {
       // console.log('update failure')
+      this.$toast.error('操作失败')
       // commit('users/UPDATE_FAILURE')
     } else {
       // commit('users/UPDATE_DETAIL', form)
       commit('podcast/CHANGE_EPISODE_STATUS', {episode: episode, status: status})
+      this.$toast.success('操作成功')
     }
   },
   async saveEpisode ({commit}, {data, axios}) {

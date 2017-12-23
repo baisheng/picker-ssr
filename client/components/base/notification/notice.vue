@@ -29,7 +29,10 @@
   </transition>
 </template>
 <script>
+  /* eslint-disable no-extra-parens */
+
   import RenderCell from '../render';
+
   export default {
     components: {
       RenderCell
@@ -56,7 +59,7 @@
       },
       styles: {
         type: Object,
-        default: function() {
+        default: function () {
           return {
             right: '50%'
           };
@@ -90,7 +93,8 @@
         return `${this.prefixCls}-notice`;
       },
       renderFunc () {
-        return this.render || function () {};
+        return this.render || function () {
+        };
       },
       classes () {
         return [

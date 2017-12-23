@@ -5,8 +5,8 @@
   padding: 16px;
   box-sizing: border-box;
   background: $white;
-  box-shadow: 0 0 0 1px transparentize( lighten( $gray, 20% ), .5 ),
-  0 1px 2px lighten( $gray, 30% );
+  box-shadow: 0 0 0 1px transparentize(lighten($gray, 20%), .5),
+  0 1px 2px lighten($gray, 30%);
 
   //box-shadow: 0 0 0 1px transparentize( lighten( $gray, 20% ), .5 ),
   //-webkit-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
@@ -23,12 +23,12 @@
     -webkit-animation-name: fadeInUp;
     animation-name: fadeInUp;
   }
-  //.animated-fast {
-  //  -webkit-animation-duration: .5s;
-  //  animation-duration: .5s;
-  //  -webkit-animation-fill-mode: both;
-  //  animation-fill-mode: both;
-  //}
+  .animated-fast {
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
   @include clear-fix;
 
   @include breakpoint(">480px") {
@@ -67,6 +67,13 @@
   }
 }
 
+.is-placeholder {
+  color: transparent;
+  background-color: lighten($gray, 30%);
+  animation: loading-fade 1.6s ease-in-out infinite;
+  opacity: 0.3;
+}
+
 // Clickable Card
 .card__link-indicator {
   color: lighten($gray, 20%);
@@ -90,6 +97,7 @@ a.card:focus {
     color: $link-highlight;
   }
 }
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;

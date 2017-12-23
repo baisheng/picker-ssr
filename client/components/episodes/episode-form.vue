@@ -11,23 +11,20 @@
         </svg>
         返回
       </button>
-      <div class="header-cake__title">添加节目</div>
-      <button class="button header-cake__back  disabled is-compact is-borderless" type="button" v-show="episode.id">
-        节目内容已保存
+      <div class="header-cake__title">添加内容</div>
+      <button class="button header-cake__back is-compact is-borderless is-primary u-text-success " type="button" @click="save" v-show="episode.id">
+        保存
       </button>
     </div>
     <!--- Episode form header -->
-    <card class="section-header" compact v-if="episode.id">
+    <card class="section-header" compact>
       <div class="section-header__label">
         <span>{{ episode.title }}</span>
       </div>
       <div class="section-header__actions">
         <div class="button-group">
-          <button class="button is-compact" @click="save">
-            发布
-          </button>
-          <button class="button is-compact" @click="cancel">
-            待审
+          <button class="button is-primary is-compact" @click="save" :disabled="!episode.id">
+            立即发布...
           </button>
         </div>
       </div>
@@ -59,13 +56,13 @@
         <div role="group" class="invite-people__token-field-wrapper">
 
           <label for="episode_title"
-                 class="form-label">节目名称</label>
+                 class="form-label">标题</label>
           <input id="episode_title" name="episode_title" class="form-text-input"
                  v-model="episode.title"
                  v-validate="'required'"
                  :class="{'input': true, 'is-danger': errors.has('episode_title') }"
                  type="text"
-                 placeholder="请输入节目名称" @change="save">
+                 placeholder="请输入内容标题" @change="save">
 
           <form-input-validation :isError="errors.has('episode_title')" v-show="errors.has('episode_title')">
             {{ errors.first('episode_title') }}
@@ -77,10 +74,11 @@
         <player mutex theme="#42b983" preload="metadata" mode="circulation"
                 :music="episode" v-if="episode.url"></player>
         <div class="empty-content" v-else>
-          <h2 class="empty-content__title">没有音频内容</h2>
-          <h3 class="empty-content__line">是否要上传内容？</h3>
+          <h2 class="empty-content__title">还没有音频内容?</h2>
+          <h3 class="empty-content__line">请上传内容 👇</h3>
           <!--<button @click.prevent="addDirectory">Add upload directory</button>-->
           <file-upload
+            :drop="true"
             :disabled="isDisabled"
             name="file"
             :post-action="uploadAction"
@@ -105,16 +103,7 @@
                 上传音频
             </span>
           </button>
-          <button :disabled="isDisabled" class="media-library__upload-button button button is-primary"
-                  @click.prevent="insertFile(episode)"
-                  :class="uploadProgress ? 'is-busy' : ''">
-              <span v-if="uploadProgress">
-                {{uploadProgress}}
-              </span>
-            <span v-else>
-                保存更改
-            </span>
-          </button>
+
         </div>
       </div>
     </card>

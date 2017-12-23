@@ -39,7 +39,11 @@
       }
     }
   }
-
+  &.is-pending {
+    background: mix($alert-yellow, $white, 8.5%);
+    box-shadow: inset 4px 0 0 0 $alert-yellow, 0 0 0 1px transparentize(lighten($gray, 20%), 0.5),
+    0 1px 2px lighten($gray, 30%);
+  }
   // If the episode is unapproved and collapsed, color it yellow.
   &.is-unapproved.is-collapsed {
     .episode-detail__header {
@@ -588,9 +592,8 @@ a.episode-detail__author-more-element {
     }
   }
 }
-
 .episode-detail__placeholder {
-  @include placeholder();
+  //@include placeholder();
 
   .gravatar,
   .episode-detail__episode-preview {

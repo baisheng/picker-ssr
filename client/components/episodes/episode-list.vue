@@ -22,9 +22,14 @@
           </div>
         </div>
         <div class="section-header__actions">
+
           <file-upload
             class="button popover-icon is-compact"
             name="file"
+            :multiple="true"
+            :drop="true"
+            :drop-directory="true"
+
             :post-action="uploadAction"
             v-model="files"
             @input-file="input"
@@ -69,7 +74,6 @@
         </div>
       </div>
     </div>
-    <!--<transition name="slide-fade" mode="out-in">-->
     <episode-form
       v-if="creating"
       :parent="parent"
@@ -77,17 +81,42 @@
       @addEpisode="push"
       @cancel="cancel"
       @updateAudio="updateAudio"></episode-form>
-    <!--</transition>-->
 
     <span class="episode-list__transition-wrapper">
+
+      <ul v-if="files.length">
+            <li v-for="(file, index) in files" :key="file.id">
+              <span>{{file.name}}</span> -
+              <span>{{file.size | formatSize}}</span> -
+              <span v-if="file.error">{{file.error}}</span>
+              <span v-else-if="file.success">success</span>
+              <span v-else-if="file.active">active</span>
+              <span v-else-if="file.active">active</span>
+              <span v-else></span>
+            </li>
+      </ul>
+      <draggable v-model="myList">
+        <episode-item :key="item.id" v-for="(item, index) in myList"
+                      :order="myList.length - index-1"
+                      :item="item"
+                      :parent="parent"
+                      @episode-del="del"
+                      @update="updateEpisode" v-if="!creating"></episode-item>
+        <!--<div class="card u-bg-behance" v-for="(item, index) in parent.items" :key="item">{{item}}</div>-->
+      </draggable>
       <!-- Key 如果有问题会拖拽失败 -->
       <!-- 应该改为 item -->
-      <episode-detail :key="item.id" v-for="(item, index) in episodeList"
-                      :order="index"
-                      :episode="item"
-                      v-dragging="{item: item, list: episodeList}"
-                      @episode-del="del" @update="updateEpisode" v-if="!creating">
+      <!--
+      <draggable v-model="myList" @end="onEnd" :move="onMove">
+              <episode-detail :key="item.id" v-for="(item, index) in myList"
+                              :order="index"
+                              :id="item.id"
+                              :episode="item"
+                              @episode-del="del"
+                              @update="updateEpisode" v-if="!creating">
       </episode-detail>
+      </draggable>
+      -->
     </span>
 
     <empty-content title="节目列表为空，添加内容？" v-show="episodeList.length < 0">
@@ -104,20 +133,20 @@
       </button>
       <!--<slot name="action"></slot>-->
     </empty-content>
-    <!--<div class="list-end"></div>-->
-    <div class="u-mt-small u-text-center u-justify-center">
-      <button class="button is-long" @click="$emit('loadmore')" :disabled="!canLoadMore">
-        <span v-if="canLoadMore">载入更多...</span>
-        <span v-else-if="!canLoadMore">已载入全部</span>
-        <!--<span>已载入全部内容</span>-->
-      </button>
-    </div>
+    <!--    <div class="u-mt-large u-text-center u-justify-center">
+          <button class="button is-link is-long" @click="$emit('loadmore')" :disabled="!canLoadMore">
+            <span v-if="canLoadMore">载入更多...</span>
+            <span v-else-if="!canLoadMore">已载入全部</span>
+          </button>
+        </div>-->
   </div>
 </template>
 <style lang="scss">
-  /*.animate-box {*/
-    /*opacity: 0;*/
-  /*}*/
+/*
+  .animate-box {
+    opacity: 0;
+  }
+*/
 
   .fadeInUp {
     -webkit-animation-name: fadeInUp;
@@ -149,7 +178,7 @@
   /* Enter and leave animations can use different */
   /* durations and timing functions.              */
   .slide-fade-enter-active {
-    /*transition: all .3s ease;*/
+    transition: all .3s ease;
     animation-name: fadeInUp;
 
   }
@@ -165,19 +194,7 @@
   }
 
   .dragging {
-    /*animation-name: shake;*/
-    /*animation-duration: 0.07s;*/
-    /*animation-iteration-count: infinite;*/
-    /*animation-direction: alternate;*/
-    /*position: relative;*/
-    /*display: block;*/
-    /*background-color: #fafbfc;*/
-    /*margin: 14px;*/
-    /*height: 52px;*/
-    /*width: 52px;*/
-    /*border-radius: 10px;*/
     box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.10);
-    /*color: #777;*/
     font-weight: 900;
 
     border: 1px dashed #1d2531;
@@ -192,14 +209,16 @@
 </style>
 <script>
   /* eslint-disable no-trailing-spaces,indent,no-extra-parens,no-warning-comments,no-warning-comments */
-
+  import draggable from 'vuedraggable'
   import FileUpload from 'vue-upload-component/src'
   import FoldableCard from '../foldable-card'
   import {Card} from '../card'
   import EpisodeDetail from '../episode-detail'
+  import EpisodeItem from '../episode-detail/episode-item'
   import EpisodeForm from '../episodes/episode-form'
   import EmptyContent from '~/components/empty-content'
   import {find} from 'lodash'
+  import _ from 'lodash'
 
   export default {
     props: {
@@ -210,10 +229,6 @@
       episodeList: {
         type: Array
       },
-//      parent: {
-//        type: Number,
-//        required: true
-//      },
       parent: {
         type: Object,
         required: true
@@ -239,7 +254,7 @@
 //        episodeList: [],
         files: [],
         uploadProgress: '',
-        accept: 'image/png,image/gif,image/jpeg,image/webp,audio/mp3',
+        accept: 'audio/mp3, audio/x-m4a, audio/m4a',
         size: 1024 * 1024 * 10,
         curItem: {
           title: ''
@@ -255,23 +270,30 @@
           title: '无标题',
           status: 'draft'
         }
+        // myList: _.cloneDeep(this.$store.getters.getEpisodeList)
       }
     },
     mounted () {
       this.$dragging.$on('dragged', ({value, draged, to}) => {
-        this.data.data = value.list
+        // console.log(JSON.stringify(draged))
+        this.myList = value.list
+        // const myList = value.list.splice()
+        // console.log(JSON.stringify(myList))
         this.updateEpisode({
           id: draged.id,
-          status: draged.status,
+          // status: draged.status,
           categories: [5],
           sort: to.sort
         })
         this.updateEpisode({
           id: to.id,
-          status: draged.status,
+          // status: draged.status,
           categories: [5],
           sort: draged.sort + to.sort
         })
+
+        // commit('podcast/GET_EPISODE_LIST_SUCCESS', data.data)
+
         /*
         this.$store.dispatch('updatePodcast', {
           id: draged.id,
@@ -287,32 +309,33 @@
       })
     },
     components: {
+      draggable,
       Card,
       FileUpload,
       FoldableCard,
       EpisodeDetail,
+      EpisodeItem,
       EpisodeForm,
       EmptyContent
     },
     computed: {
-      canLoadMore() {
+      canLoadMore () {
         const {currentPage, totalPages} = this.data
         const hasEpisodes = true
         return hasEpisodes ? (currentPage < totalPages) : false
       },
-//      episodeList: {
-//        get () {
-//          this.itemList = [...this.list]
-//          return this.itemList
-//        },
-//        set (value) {
-//          this.itemList = value
-//        }
-//      },
+      myList: {
+        get () {
+          return this.$store.getters.getEpisodeList
+        },
+        set (value) {
+          this.$store.dispatch('updatePodcastItems', {id: this.parent.id, items: value})
+        }
+      },
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
-        return `${baseURL}/app/${appId}/file`
+        return `${baseURL}/apps/${appId}/file`
       },
       unapprove () {
         let count = 0
@@ -331,17 +354,44 @@
         //   return 0
         // }
       },
-      episodeState () {
-        return this.$store.state.podcast.episode
-      },
       requestHeader () {
         return {'Authorization': 'Bearer ' + this.$store.state.token}
       }
     },
     methods: {
+      onUpdate (e) {
+        this.list.splice(e.newIndex, 0, this.list.splice(e.oldIndex, 1)[0]);
+        // this.$emit('reorder', {
+        //   oldIndex: e.oldIndex,
+        //   newIndex: e.newIndex,
+        // })
+      },
+      onMove ({relatedContext, draggedContext}) {
+        const relatedElement = relatedContext.element;
+        const draggedElement = draggedContext.element;
+        // console.log(relatedElement)
+        // console.log(draggedElement)
+        return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
+      },
+      onEnd (evt) {
+        // this.updateEpisode({
+        //   id: draged.id,
+        //   status: draged.status,
+        // categories: [5],
+        // sort: to.sort
+        // })
+        // this.updateEpisode({
+        //   id: evt.item.id,
+        // status: draged.status,
+        // categories: [5],
+        // sort: evt.newIndex
+        // })
+        // console.log(evt.item.id)
+        // console.log(evt, evt.to, evt.from, evt.oldIndex, evt.newIndex);
+      },
       async load (item) {
         this.selected = item.id
-        await this.$store.dispatch('getEpisodeList', {parent: this.parent.id, status: item.name})
+        // await this.$store.dispatch('getEpisodeList', {parent: this.parent.id, status: item.name})
         this.$store.commit('podcast/FILTER_EPISODES', item.name)
         // this.$emit('load', {parent: this.parent.id, status: item.name})
         // this.$emit('load', {parent: this.parent.id, status: item.name})
@@ -364,9 +414,7 @@
         this.$store.dispatch('episodeDelete', {id: item.id, axios: this.$axios})
       },
       push (newEpisode) {
-//        this.$nextTick(() => {
         this.episodeList.push(newEpisode)
-//        })
       },
 //      async saveEpisode (episode) {
 //
@@ -378,24 +426,19 @@
         obj.url = episode.url
       },
       async updateEpisode (episode, id) {
-        // console.log(JSON.stringify(episode))
         if (!id) {
           id = episode.id
         }
-        // this.episode.status = episode.status
-        // this.episode.categories = [5]
-        await this.$axios.post(`/apps/${this.$store.getters.appId}/posts/${id}`, episode)
-//        this.$emit('podcast_item_update', episode, id)
+        const data = await this.$axios.post(`/apps/${this.$store.getters.appId}/posts/${id}`, episode)
+        if (data.errno > 0) {
+          this.$toast.error('操作失败')
+        } else {
+          this.$toast.success('内容已更新')
+        }
       },
       // 创建节目 episode
       create () {
-//        this.action = 'create'
         this.creating = true
-//        const _sort = this.podcast.children.length + 1
-//        const newEpisode = {title: '无标题', parent: this.podcast.id, sort: _sort, status: 'draft'}
-//        const res = this.$store.dispatch('episodeCreate', newEpisode)
-//        this.episode = Object.assign({}, newEpisode)
-//        this.episode.id = res
       },
       cancel () {
         this.creating = false
@@ -427,26 +470,57 @@
           if (newFile.success && !oldFile.success) {
             // this.success(newFile)
             const data = newFile.response.data
-            this.curItem.url = data.url
-            this.curItem.meta = {
-              _audio_id: data.id
-            }
+            // this.curItem.url = data.url
+            // this.curItem.meta = {
+            //   _audio_id: data.id
+            // }
             this.uploadProgress = ''
+              const newEpisode = {
+                title: newFile.name,
+                author: this.parent.author.id,
+                parent: this.parent.id,
+                relateStatus: 'unapproved',
+                category: '5',
+                relateTo: this.parent.id,
+                meta: {
+                  _audio_id: data.id
+                }
+              }
+              const res = this.$store.dispatch('episodeCreate', newEpisode)
+            this.$toast.success('lalal : ' + JSON.stringify(res))
+            // this.episode = Object.assign({}, newEpisode)
+            // this.episode.id = res
             // 如果不是新建就更新
-            if (!this.creating) {
-              this.$store.commit('posts/UPDATE_ITEM')
-              this.$emit('podcast_item_update', this.curItem, this.curItem.id)
-            }
+            // if (!this.creating) {
+            //   this.$store.commit('posts/UPDATE_ITEM')
+            //   this.$emit('podcast_item_update', this.curItem, this.curItem.id)
+            // }
           }
         }
         if (!newFile && oldFile) {
           // this.remove(oldFile)
           // console.log('remove', oldFile)
         }
-        // 自动开始
-        if (newFile && !oldFile && !this.$refs.upload.active) {
-          this.$refs.upload.active = true
+        // 自动上传
+        if (Boolean(newFile) !== Boolean(oldFile) || oldFile.error !== newFile.error) {
+          if (!this.$refs.upload.active) {
+            this.$refs.upload.active = true
+          }
         }
+        // 自动开始
+        // if (newFile && !oldFile && !this.$refs.upload.active) {
+        //   const newEpisode = {
+        //     title: newFile.name,
+        //     author: this.parent.author,
+        //     parent: this.parent.id,
+        //     status: 'unapproved',
+        //     category: '5'
+        //   }
+        //   const res = this.$store.dispatch('episodeCreate', newEpisode)
+          // this.episode = Object.assign({}, newEpisode)
+          // this.episode.id = res
+          // this.$refs.upload.active = true
+        // }
       },
       inputFilter (newFile, oldFile, prevent) {
         if (newFile && !oldFile) {

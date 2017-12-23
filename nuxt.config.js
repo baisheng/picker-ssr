@@ -127,6 +127,12 @@ module.exports = {
     // With options
     // ['@nuxtjs/component-cache', { maxAge: 1000 * 60 * 60 }],
   ],
+  toast: {
+    position: 'top-right'
+  },
+  // toast: {
+  //   position: 'center'
+  // },
   proxy: [
     ['/rest',
       {
@@ -155,6 +161,7 @@ module.exports = {
   },
   plugins: [
     {src: '~/plugins/moment.js'},
+    {src: '~plugins/filters.js'},
     // '~plugins/axios.js',
     '~plugins/vue-awesome.js',
     '~plugins/vee-validate.js',

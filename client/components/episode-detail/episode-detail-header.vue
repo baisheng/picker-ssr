@@ -10,7 +10,7 @@
       @toggleApprove="$emit('toggleApprove')"
       @trash="$emit('trash')"
       @delete="$emit('delete')"
-      :episodeStatus="episode.status"
+      :episodeStatus="status"
       v-if="isExpanded"></episode-detail-actions>
 
     <div class="episode-detail__header-content" v-if="!isExpanded">
@@ -55,6 +55,10 @@
       EpisodeDetailActions
     },
     props: {
+      status: {
+        type: String,
+        require: true
+      },
       episode: {
         type: Object,
         required: true

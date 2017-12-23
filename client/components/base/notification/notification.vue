@@ -18,12 +18,14 @@
   </div>
 </template>
 <script>
+  /* eslint-disable func-style */
+
   import Notice from './notice.vue';
   const prefixCls = 'ivu-notification';
   let seed = 0;
   const now = Date.now();
   function getUuid () {
-    return 'ivuNotification_' + now + '_' + (seed++);
+    return 'ivuNotification_' + now + '_' + seed++;
   }
   export default {
     components: { Notice },

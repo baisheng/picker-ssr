@@ -87,14 +87,13 @@ export const mutations = {
   SET_AUTHOR (state, data) {
     state.detail.data.authorInfo = data
   },
+  // 更新 podcast 关联的 item 的状态
   CHANGE_EPISODE_STATUS (state, {episode, status}) {
-    // console.log(JSON.stringify(episode))
-    episode.status = status
-    // for (const item of state.episodeList.data.data) {
-    //   if (item.id === episode.id) {
-    //     item.status = status
-    //   }
-    // }
+    for (const item of state.detail.data.items) {
+      if (item.id === episode.id.toString()) {
+        item.status = status
+      }
+    }
   },
   // changeCommentStatus
   PUSH_EPISODE (state, data) {
@@ -106,13 +105,13 @@ export const mutations = {
     // state.detail.data.children.push.apply(state.detail.data.children, data)
   },
   SET_EPISODE_LIST (state, list) {
-    console.log(list)
     state.detail.data.children = list
   },
   DELETE_EPISODE (state) {
     state.episode.del = 'start'
   },
-  DELETE_EPISODE_SUCCESS (state) {
+  DELETE_EPISODE_SUCCESS (state, data) {
+    state.detail.data.items = data
     state.episode.del = 'success'
   },
   DELETE_EPISODE_FAILURE (state) {
@@ -120,6 +119,9 @@ export const mutations = {
   },
   CREATE_EPISODE (state) {
     state.episode.creating = true
+  },
+  UPDATE_PODCAST_ITEMS (state, data) {
+    state.detail.data.items = data
   },
   CREATE_EPISODE_SUCCESS (state, data) {
     // state.episode.creating = true
@@ -141,6 +143,9 @@ export const mutations = {
   },
   GET_EPISODELIST_FAILURE (state) {
     state.episodeList.fetching = false
+  },
+  UPDATE_EPISODE_LIST(state, list) {
+    state.episodeList.data.data = list
   },
   GET_EPISODE_LIST_SUCCESS (state, action) {
     state.episodeList.fetching = false
