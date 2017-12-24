@@ -65,7 +65,8 @@ $purple-500: #7d5be2 !default;
 $red-100: #f95359 !default;
 $red-200: #ed1c24 !default;
 $red-300: #d35847 !default;
-$red-400: #ed1c24 !default;
+//$red-400: #ed1c24 !default;
+$red-400: #F26175 !default;
 $red-500: #db161e !default;
 
 $orange-100: #f8c95d !default;
@@ -79,6 +80,7 @@ $color-mute: $grey-800 !default;
 $color-success: $green-200 !default;
 $color-info: $blue-300 !default;
 $color-warning: $orange-300 !default;
+//$alert-red:              #F26175;
 $color-danger: $red-400 !default;
 $color-fancy: $purple-400 !default;
 

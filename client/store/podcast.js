@@ -90,7 +90,7 @@ export const mutations = {
   // 更新 podcast 关联的 item 的状态
   CHANGE_EPISODE_STATUS (state, {episode, status}) {
     for (const item of state.detail.data.items) {
-      if (item.id === episode.id.toString()) {
+      if (item.id === episode.id.toString() || item.id === episode.id) {
         item.status = status
       }
     }
@@ -126,6 +126,7 @@ export const mutations = {
   CREATE_EPISODE_SUCCESS (state, data) {
     // state.episode.creating = true
     state.episode.id = data.id
+    state.detail.data.items.unshift({id: data.id, status: 'unapproved'})
     // state.detail.data.children.push(data)
     // Object.assign(state.user, user);
   },

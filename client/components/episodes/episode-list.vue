@@ -81,20 +81,45 @@
       @addEpisode="push"
       @cancel="cancel"
       @updateAudio="updateAudio"></episode-form>
+    <div v-if="files.length" class="u-mb-medium">
+      <card class="episode-detail is-uploading" v-for="(file, index) in files" :key="file.id" :class="file.error ? 'is-upload__error' : ''">
+
+        <div class="episode-detail__header is-preview"><!---->
+          <div class="episode-detail__header-content">
+            <div class="episode-detail__author-preview">
+              <div class="episode-detail__order u-text-mute" style="width: 80px;">
+                {{file.size | formatSize}}
+              </div>
+              <div class="episode-detail__author-info">
+                <div class="episode-detail__author-info-element">
+                  {{file.name}}
+                </div>
+              </div>
+            </div>
+            <div class="episode-detail__episode-preview">
+              <span v-if="file.error" class="u-text-danger u-text-middle">
+                <svg class="gridicon gridicons-notice" height="18" width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 15h-2v-2h2v2zm0-4h-2l-.5-6h3l-.5 6z"></path></g></svg>
+                {{file.error}}</span>
+              <div class="emojify u-text-success u-text-small" v-else>
+                {{file.progress}}%
+              </div>
+            </div>
+          </div>
+          <button v-if="file.error" class="button episode-detail__action-collapse is-borderless">
+            <svg class="gridicon gridicons-cross" height="24" width="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g><path d="M18.36 19.78L12 13.41l-6.36 6.37-1.42-1.42L10.59 12 4.22 5.64l1.42-1.42L12 10.59l6.36-6.36 1.41 1.41L13.41 12l6.36 6.36z"></path></g></svg>
+          </button>
+          <div class="episode-detail__action-collapse u-align-items-center u-justify-center u-pd-auto" style="width: 60px;" v-else>
+            <hr class="spinner-line u-m-auto" v-if="file.active || file.progress !== '0.00'" :style="{width: file.progress + '%'}">
+            <span class="u-text-mute u-text-middle" v-else>队列</span>
+            <span v-if="file.success" class="u-text-success">上传成功</span>
+          </div>
+
+        </div>
+      </card>
+    </div>
 
     <span class="episode-list__transition-wrapper">
 
-      <ul v-if="files.length">
-            <li v-for="(file, index) in files" :key="file.id">
-              <span>{{file.name}}</span> -
-              <span>{{file.size | formatSize}}</span> -
-              <span v-if="file.error">{{file.error}}</span>
-              <span v-else-if="file.success">success</span>
-              <span v-else-if="file.active">active</span>
-              <span v-else-if="file.active">active</span>
-              <span v-else></span>
-            </li>
-      </ul>
       <draggable v-model="myList">
         <episode-item :key="item.id" v-for="(item, index) in myList"
                       :order="myList.length - index-1"
@@ -104,19 +129,6 @@
                       @update="updateEpisode" v-if="!creating"></episode-item>
         <!--<div class="card u-bg-behance" v-for="(item, index) in parent.items" :key="item">{{item}}</div>-->
       </draggable>
-      <!-- Key 如果有问题会拖拽失败 -->
-      <!-- 应该改为 item -->
-      <!--
-      <draggable v-model="myList" @end="onEnd" :move="onMove">
-              <episode-detail :key="item.id" v-for="(item, index) in myList"
-                              :order="index"
-                              :id="item.id"
-                              :episode="item"
-                              @episode-del="del"
-                              @update="updateEpisode" v-if="!creating">
-      </episode-detail>
-      </draggable>
-      -->
     </span>
 
     <empty-content title="节目列表为空，添加内容？" v-show="episodeList.length < 0">
@@ -142,11 +154,46 @@
   </div>
 </template>
 <style lang="scss">
-/*
-  .animate-box {
-    opacity: 0;
+  @-webkit-keyframes twinkling{	/*透明度由0到1*/
+    0%{
+      opacity:0;				/*透明度为0*/
+    }
+    100%{
+      opacity:1;				/*透明度为1*/
+    }
   }
-*/
+  .is-upload__error {
+    box-shadow: inset 4px 0 0 0 #F26175, 0 0 0 1px transparentize(lighten(#87A6BC, 20%), 0.5),
+    0 1px 2px lighten(#87A6BC, 30%);
+  }
+  @keyframes spinner-line__animation {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 600px 0;
+    }
+  }
+
+  hr.spinner-line {
+    border: none;
+    height: 3px;
+    /*margin: 24px 0;*/
+    background-image: linear-gradient(
+        to right,
+        lighten(#4ab866, 10%) 0%,
+        lighten(#4ab866, 20%) 50%,
+        lighten(#4ab866, 10%) 100%
+    );
+    background-size: 300px 100%;
+    animation: spinner-line__animation 1.2s infinite linear;
+  }
+
+  /*
+    .animate-box {
+      opacity: 0;
+    }
+  */
 
   .fadeInUp {
     -webkit-animation-name: fadeInUp;
@@ -154,10 +201,10 @@
   }
 
   /*.animated-fast {*/
-    /*-webkit-animation-duration: .5s;*/
-    /*animation-duration: .5s;*/
-    /*-webkit-animation-fill-mode: both;*/
-    /*animation-fill-mode: both;*/
+  /*-webkit-animation-duration: .5s;*/
+  /*animation-duration: .5s;*/
+  /*-webkit-animation-fill-mode: both;*/
+  /*animation-fill-mode: both;*/
   /*}*/
 
   @keyframes fadeInUp {
@@ -255,7 +302,7 @@
         files: [],
         uploadProgress: '',
         accept: 'audio/mp3, audio/x-m4a, audio/m4a',
-        size: 1024 * 1024 * 10,
+        size: 1024 * 1024 * 20,
         curItem: {
           title: ''
         },
@@ -456,45 +503,40 @@
           if (newFile.active && !oldFile.active) {
             // this.beforeSend(newFile)
             // min size
-            if (newFile.size >= 0 && newFile.size < 100 * 1024) {
-              // newFile = this.$refs.upload.update(newFile, {error: 'size'})
-            }
+            // if (newFile.size >= 0 && newFile.size < 200 * 1024) {
+            //   newFile = this.$refs.upload.update(newFile, {error: '不能超过 10M'})
+            // }
           }
           if (newFile.progress !== oldFile.progress) {
             this.uploadProgress = newFile.progress
           }
           if (newFile.error && !oldFile.error) {
             // this.error(newFile)
-            // console.log('error', newFile.error, newFile.response)
+            if (newFile.error === 'size') {
+              newFile.error = '文件超出 20MB 限制'
+            }
+            console.log('error', newFile.error, newFile.response)
+            // if (newFile.size >= 0 && newFile.size < 100 * 1024) {
+            //   newFile = this.$refs.upload.update(newFile, {error: '不能超过 10M'})
+            // }
           }
           if (newFile.success && !oldFile.success) {
             // this.success(newFile)
             const data = newFile.response.data
-            // this.curItem.url = data.url
-            // this.curItem.meta = {
-            //   _audio_id: data.id
-            // }
             this.uploadProgress = ''
-              const newEpisode = {
-                title: newFile.name,
-                author: this.parent.author.id,
-                parent: this.parent.id,
-                relateStatus: 'unapproved',
-                category: '5',
-                relateTo: this.parent.id,
-                meta: {
-                  _audio_id: data.id
-                }
+            const newEpisode = {
+              title: newFile.name.substring(0, newFile.name.lastIndexOf('.')),
+              author: this.parent.author.id,
+              parent: this.parent.id,
+              relateStatus: 'unapproved',
+              category: '5',
+              relateTo: this.parent.id,
+              meta: {
+                _audio_id: data.id
               }
-              const res = this.$store.dispatch('episodeCreate', newEpisode)
-            this.$toast.success('lalal : ' + JSON.stringify(res))
-            // this.episode = Object.assign({}, newEpisode)
-            // this.episode.id = res
-            // 如果不是新建就更新
-            // if (!this.creating) {
-            //   this.$store.commit('posts/UPDATE_ITEM')
-            //   this.$emit('podcast_item_update', this.curItem, this.curItem.id)
-            // }
+            }
+            const res = this.$store.dispatch('episodeCreate', newEpisode)
+            this.$refs.upload.remove(newFile)
           }
         }
         if (!newFile && oldFile) {
@@ -507,20 +549,6 @@
             this.$refs.upload.active = true
           }
         }
-        // 自动开始
-        // if (newFile && !oldFile && !this.$refs.upload.active) {
-        //   const newEpisode = {
-        //     title: newFile.name,
-        //     author: this.parent.author,
-        //     parent: this.parent.id,
-        //     status: 'unapproved',
-        //     category: '5'
-        //   }
-        //   const res = this.$store.dispatch('episodeCreate', newEpisode)
-          // this.episode = Object.assign({}, newEpisode)
-          // this.episode.id = res
-          // this.$refs.upload.active = true
-        // }
       },
       inputFilter (newFile, oldFile, prevent) {
         if (newFile && !oldFile) {
