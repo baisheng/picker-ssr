@@ -338,8 +338,8 @@
         const form = {
           id: this.podcast.id,
           title: e.target.value,
-          format: this.format,
-          category: this.categoryId
+          format: this.format
+          // category: this.categoryId
         }
         this.$emit('save', form)
       },
@@ -347,8 +347,8 @@
         const form = {
           id: this.podcast.id,
           content: e.target.value,
-          format: this.format,
-          category: this.categoryId
+          format: this.format
+          // category: this.categoryId
         }
         this.$emit('save', form)
       },
@@ -382,8 +382,8 @@
           id: this.podcast.id,
           author: selected.id,
           authorInfo: selected,
-          format: this.format,
-          category: this.categoryId
+          format: this.format
+          // category: this.categoryId
         }
 //        let form = Object.assign({
 //          author: selected.id,
