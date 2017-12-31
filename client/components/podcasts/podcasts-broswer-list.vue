@@ -1,11 +1,15 @@
 <template>
   <div>
+    <!--<card>-->
+      <!--<div class="section-header__label"><span class="section-header__label-text">精选</span></div>-->
 
+    <!--</card>-->
     <foldable-card class="is-compact">
       <div class="connected-application-item__header is-p" slot="header">
         <div class="plugin-icon connected-application-icon animate__appear"
              :class="term.featured_image ? '' : 'site-icon is-blank'">
-          <img
+          {{index + 1}}
+ <!--         <img
             class="plugin-icon__img"
             :src="term.featured_image" v-if="term.featured_image">
           <svg class="gridicon gridicons-globe" height="74" width="74" xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +18,7 @@
               <path
                 d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
             </g>
-          </svg>
+          </svg>-->
         </div>
         <h3>{{ term.name }}</h3>
 
@@ -162,7 +166,7 @@
 
 <script>
   /* eslint-disable key-spacing,comma-spacing,no-spaced-func */
-
+  import {Card} from '~/components/card'
   import FoldableCard from '~/components/foldable-card'
   import EmptyContent from '~/components/empty-content'
   import FileUpload from 'vue-upload-component/src'
@@ -171,6 +175,7 @@
   export default {
     name: 'PodcastsBrowserList',
     components: {
+      Card,
       FoldableCard,
       EmptyContent,
       FileUpload,
@@ -188,6 +193,10 @@
       term: {
         type: Object,
         required: true
+      },
+      index: {
+        type: String,
+        default: 1
       }
     },
     data () {
@@ -286,7 +295,7 @@
         }
         if (this.slug) {
           // 详情
-          const data = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?pagesize=50`, {params})).data.data
+          const data = (await this.$axios.get(`/apps/${this.$store.getters.appId}/posts?pagesize=100`, {params})).data.data
           this.list = data.data
         } else {
           // 首页展示

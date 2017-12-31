@@ -13,7 +13,7 @@
       <h3>{{ podcast.title }}</h3>
     </div>
     <div slot="summary">
-      <span class="button is-borderless" v-if="podcast.status == 'publish'">
+      <span class="button is-borderless" v-if="podcast.status === 'publish'">
           已上架
       </span>
       <div v-else>

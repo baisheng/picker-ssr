@@ -10,7 +10,7 @@
               <nuxt-link to="/podcasts" tag="li" class="section-nav-tab">
                 <a class="section-nav-tab__link">
                   <span class="section-nav-tab__text">
-                  全部类别
+                  全部
                   </span>
                 </a>
               </nuxt-link>

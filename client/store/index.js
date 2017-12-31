@@ -270,8 +270,10 @@ export const actions = {
     const {data} = await this.$axios.post(`/apps/${this.getters.appId}/posts/${form.id}`, form)
     if (data.errno > 0) {
       commit('podcast/UPDATE_DETAIL_FAILURE')
+      this.$toast.success('操作失败')
     } else {
       commit('podcast/UPDATE_DETAIL_SUCCESS', data.data)
+      this.$toast.success('操作成功')
     }
     return data
   },

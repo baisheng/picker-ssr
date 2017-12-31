@@ -91,6 +91,7 @@
             <ul class="token-field__suggestions-list" tabindex="-1"></ul>
           </div>
         </div>
+        <!--
         <fieldset class="form-fieldset">
           <label class="form-label">内容类型
             <span style="color: #A1a1a1; font-size: 12px; font-weight: 400;"> {{postFormat}}</span>
@@ -131,15 +132,16 @@
             </ul>
           </section>
         </fieldset>
+        -->
         <fieldset class="form-fieldset myinput">
           <label for="" class="form-label">
             当前内容分类
-            <span style="color: #A1a1a1; font-size: 12px; font-weight: 400;"> {{categoryName}}</span>
+            <!--<span style="color: #A1a1a1; font-size: 12px; font-weight: 400;"> {{categoryName}}</span>-->
 
           </label>
 
-          <!--<div class="token-field categories__field">-->
-<!--            <multiselect
+          <div class="token-field categories__field">
+            <multiselect
               class="cateselect categories__field-input"
               v-model="term"
               :options="terms"
@@ -152,13 +154,13 @@
               分类信息未找到
             </span>
             </multiselect>
-            <div class="categories__field-action">
-              <button class="button is-busy" @click.prevent="saveTerms">
-                更新类别
-              </button>
-            </div>-->
-          <!--</div>-->
-          <!--<p></p>-->
+            <!--<div class="categories__field-action">-->
+              <!--<button class="button is-busy" @click.prevent="saveTerms">-->
+                <!--更新类别-->
+              <!--</button>-->
+            <!--</div>-->
+          </div>
+          <p></p>
         </fieldset>
         <fieldset class="form-fieldset">
           <label for="role" class="form-label">
@@ -170,7 +172,7 @@
               v-model="userValue"
               :options="users"
               track-by="user_login"
-              label="user_nicename"
+              label="nicename"
               :searchable="false"
               :close-on-select="true"
               :show-labels="false"
@@ -290,7 +292,7 @@
     },
     mounted () {
       this.$nextTick()
-      this.userValue = this.podcast.authorInfo
+      this.userValue = this.podcast.author
       if (this.podcast.categories) {
         this.term = this.podcast.categories
       }
@@ -350,13 +352,20 @@
         }
         this.$emit('save', form)
       },
-      termRemove (removedOption, id) {
-//        console.log(id + ':' + JSON.stringify(removedOption))
+      termRemove (selected, id) {
+        const form = {
+          id: this.podcast.id,
+          author: this.podcast.author.id,
+          categories: `${JSON.stringify(selected.term_taxonomy_id)}`
+        }
+        this.$emit('save', form)
+       // console.log(id + ':' + JSON.stringify(removedOption))
       },
       termSelect (selected) {
 //        console.log(JSON.stringify(this.term))
         const form = {
           id: this.podcast.id,
+          author: this.podcast.author.id,
           categories: `${JSON.stringify(selected.term_taxonomy_id)}`
         }
         this.$emit('save', form)

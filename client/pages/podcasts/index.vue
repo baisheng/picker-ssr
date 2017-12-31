@@ -22,6 +22,7 @@
 <template>
   <main class="main is-wide-layout">
     <v-dialog/>
+
     <!--<multiselect v-model="value" :options="selects" :multiple="true" :close-on-select="false" :clear-on-select="false"-->
                  <!--:hide-selected="true" :preserve-search="true" placeholder="Pick some" label="name" track-by="name">-->
       <!--<template slot="tag" slot-scope="props"><span class="custom__tag"><span>{{ props.option.language }}</span><span-->
@@ -36,14 +37,24 @@
     <!--<button @click="$modal.show('foo')">-->
     <!--Open modal-->
     <!--</button>-->
-    <podcasts-browser-list v-for="term in categories" :key="term.id" :term="term" v-if="categories"/>
-
+    <stickys-list></stickys-list>
+    <draggable v-model="categories">
+      <podcasts-browser-list
+        v-for="(term, index) in categories"
+        :key="term.id"
+        :term="term"
+        :index="index"
+        v-if="categories"/>
+    </draggable>
 
   </main>
 </template>
 <script>
+  import Draggable from 'vuedraggable'
+  // import Stickys from '~/components/stickys'
   //  import ActionMenu from '../../components/podcast/podcast-action'
   import {PodcastsBrowserMainHeader, PodcastsBrowserList} from '~/components/podcasts'
+  import StickysList from "../../components/stickys/stickys";
 //  import Multiselect from 'vue-multiselect'
 
   export default {
@@ -56,6 +67,8 @@
       }
     },
     components: {
+      Draggable,
+      StickysList,
       PodcastsBrowserMainHeader,
       PodcastsBrowserList
     },
