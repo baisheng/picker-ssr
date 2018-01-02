@@ -64,5 +64,17 @@ export const mutations = {
   REQUEST_CATEGORIES_FAILURE (state) {
     state.categories.fetching = false
     state.categories.data = []
+  },
+
+  UPDATE_CATEGORY_SUCCESS (state, action) {
+    state.detail.status = 'success'
+    for (let item of state.data.list) {
+      if (item.term_id === action.term_id) {
+        item = Object.assign(item, action)
+      }
+    }
+  },
+  UPDATE_CATEGORY_FAILURE (state) {
+    state.detail.status = 'error'
   }
 }

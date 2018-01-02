@@ -106,12 +106,34 @@
                   <ul>
                     <nuxt-link to="/podcasts" tag="li">
                       <a>
-                        <icon name="dot-circle-o" class="gridicon"></icon>
-                        <span class="menu-link-text">内容</span>
+                        <svg class="gridicon gridicons-posts" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24">
+                          <g>
+                            <path
+                              d="M16 19H3v-2h13v2zm5-10H3v2h18V9zM3 5v2h11V5H3zm14 0v2h4V5h-4zm-6 8v2h10v-2H11zm-8 0v2h5v-2H3z"></path>
+                          </g>
+                        </svg>
+                        <!--<icon name="dot-circle-o" class="gridicon"></icon>-->
+                        <span class="menu-link-text">节目</span>
                       </a>
                       <a href="" @click="addPodcast" class="sidebar__button">添加</a>
                       <!--<a href="/podcast" class="sidebar__button">添加</a>-->
                     </nuxt-link>
+
+                    <nuxt-link to="/comments" tag="li">
+
+                      <a>
+                        <svg class="gridicon gridicons-chat" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24">
+                          <g>
+                            <path
+                              d="M3 12c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v5c0 1.1-.9 2-2 2H9v3l-3-3H3zM21 18c1.1 0 2-.9 2-2v-5c0-1.1-.9-2-2-2h-6v1c0 2.2-1.8 4-4 4v2c0 1.1.9 2 2 2h2v3l3-3h3z"></path>
+                          </g>
+                        </svg>
+                        <!--<icon name="comments" class="gridicon"></icon>-->
+                        <span class="menu-link-text">评论</span></a>
+                    </nuxt-link>
+
                     <!--
                     <li class="" data-post-type="media">
                       <a>
@@ -154,17 +176,17 @@
                         <span class="menu-link-text">人员</span></a>
                       <a href="/people/new" class="sidebar__button">添加</a>
                     </nuxt-link>
-<!--                    <nuxt-link class="settings" to="/podcasts/settings/general" tag="li">
-                      <a>
-                        <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                          <g>
-                            <path
-                              d="M20 12c0-.568-.06-1.122-.174-1.656l1.834-1.612-2-3.464-2.322.786c-.82-.736-1.787-1.308-2.86-1.657L14 2h-4l-.48 2.396c-1.07.35-2.04.92-2.858 1.657L4.34 5.268l-2 3.464 1.834 1.612C4.06 10.878 4 11.432 4 12s.06 1.122.174 1.656L2.34 15.268l2 3.464 2.322-.786c.82.736 1.787 1.308 2.86 1.657L10 22h4l.48-2.396c1.07-.35 2.038-.92 2.858-1.657l2.322.786 2-3.464-1.834-1.613c.113-.535.174-1.09.174-1.657zm-8 4c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
-                          </g>
-                        </svg>
-                        <span class="menu-link-text">设置</span></a>
-                    </nuxt-link>-->
+                    <!--                    <nuxt-link class="settings" to="/podcasts/settings/general" tag="li">
+                                          <a>
+                                            <svg class="gridicon gridicons-cog" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                                                 viewBox="0 0 24 24">
+                                              <g>
+                                                <path
+                                                  d="M20 12c0-.568-.06-1.122-.174-1.656l1.834-1.612-2-3.464-2.322.786c-.82-.736-1.787-1.308-2.86-1.657L14 2h-4l-.48 2.396c-1.07.35-2.04.92-2.858 1.657L4.34 5.268l-2 3.464 1.834 1.612C4.06 10.878 4 11.432 4 12s.06 1.122.174 1.656L2.34 15.268l2 3.464 2.322-.786c.82.736 1.787 1.308 2.86 1.657L10 22h4l.48-2.396c1.07-.35 2.038-.92 2.858-1.657l2.322.786 2-3.464-1.834-1.613c.113-.535.174-1.09.174-1.657zm-8 4c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
+                                              </g>
+                                            </svg>
+                                            <span class="menu-link-text">设置</span></a>
+                                        </nuxt-link>-->
                   </ul>
                 </li>
                 <!---->

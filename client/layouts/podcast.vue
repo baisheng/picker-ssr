@@ -124,11 +124,13 @@
                                multiple="" class="media-library__upload-button-input">
                       </form>
                     </li>
+                                                            -->
                     <li class="">
                       <a>
                         <icon name="comments" class="gridicon"></icon>
                         <span class="menu-link-text">评论</span></a>
                     </li>
+                  <!--
                     <li>
                       <a>
                         <icon name="life-ring" class="gridicon">

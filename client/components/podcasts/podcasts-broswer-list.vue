@@ -1,15 +1,14 @@
 <template>
   <div>
     <!--<card>-->
-      <!--<div class="section-header__label"><span class="section-header__label-text">精选</span></div>-->
+    <!--<div class="section-header__label"><span class="section-header__label-text">精选</span></div>-->
 
     <!--</card>-->
     <foldable-card class="is-compact">
       <div class="connected-application-item__header is-p" slot="header">
         <div class="plugin-icon connected-application-icon animate__appear"
              :class="term.featured_image ? '' : 'site-icon is-blank'">
-          {{index + 1}}
- <!--         <img
+          <img
             class="plugin-icon__img"
             :src="term.featured_image" v-if="term.featured_image">
           <svg class="gridicon gridicons-globe" height="74" width="74" xmlns="http://www.w3.org/2000/svg"
@@ -18,10 +17,9 @@
               <path
                 d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
             </g>
-          </svg>-->
+          </svg>
         </div>
-        <h3>{{ term.name }}</h3>
-
+        <h3> {{index + 1}} . {{ term.name }}</h3>
       </div>
 
       <div slot="summary">
@@ -45,10 +43,11 @@
         <button type="submit" class="button is-compact is-scary" @click="deleteCategory(term.slug)">
           删除分类
         </button>
-        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">
-          设为默认
-        </button>
-        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">保存
+        <!--<button style="margin-left: 5px;" type="submit" class="button is-compact is-empty">-->
+          <!--设为默认-->
+        <!--</button>-->
+        <button style="margin-left: 5px;" type="submit" class="button is-compact is-empty" @click="save">
+          保存
         </button>
       </div>
       <div class="site-settings">
@@ -60,7 +59,7 @@
               </label>
               <input type="text" name="name" id="termname"
                      data-tip-target="site-title-input" :value="term.name"
-                     class="form-text-input">
+                     class="form-text-input" @change="updateName">
             </fieldset>
             <fieldset class="form-fieldset">
               <label for="blogdescription" class="form-label">
@@ -69,7 +68,7 @@
               <input type="text" name="blogdescription" id="blogdescription"
                      data-tip-target="site-tagline-input"
                      :value="term.description"
-                     class="form-text-input">
+                     class="form-text-input" @change="updateDescription">
               <p class="form-setting-explanation">简要描述该分类。</p></fieldset>
           </div>
           <fieldset class="site-icon-setting form-fieldset">
@@ -82,20 +81,6 @@
                 d="M13 9h-2V7h2v2zm0 2h-2v6h2v-6zm-1-7c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8m0-2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"></path></g></svg>
             </span>
             </label>
-            <!--<button type="button" class="site-icon-setting__icon">-->
-            <!--<div class="site-icon" style="height: 96px; width: 96px; line-height: 96px; font-size: 96px;"-->
-            <!--:class="featuredImage ? '' : 'is-blank'">-->
-            <!--<img class="site-icon__img image" :src="featuredImage" alt="" v-if="featuredImage">-->
-
-            <!--<svg class="gridicon gridicons-globe" height="74" width="74" xmlns="http://www.w3.org/2000/svg"-->
-            <!--viewBox="0 0 24 24" v-else>-->
-            <!--<g>-->
-            <!--<path-->
-            <!--d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>-->
-            <!--</g>-->
-            <!--</svg>-->
-            <!--</div>-->
-            <!--</button>-->
 
             <div :class="classes" style="height: 96px; width: 96px; line-height: 96px; font-size: 96px;">
               <img class="site-icon__img image" :src="term.featured_image"
@@ -137,9 +122,18 @@
         <li class="podcasts-browser-item" v-for="item in list" :key="item.id">
           <nuxt-link :to="`${term.slug}/post/${item.id}`" class="podcasts-browser-item__link">
             <div class="podcasts-browser-item__info">
-              <div class="plugin-icon">
-                <img class="plugin-icon__img"
-                     :src="item.featured_image">
+              <div class="plugin-icon" style="background: #ededed;">
+                <img
+                  class="plugin-icon__img"
+                  :src="item.featured_image" v-if="item.featured_image">
+                <svg class="gridicon gridicons-globe" height="74" width="74" xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 24 24" v-else>
+                  <g>
+                    <path
+                      fill="#fff"
+                      d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18l2-2 1-1v-2h-2v-1l-1-1H9v3l2 2v1.93c-3.94-.494-7-3.858-7-7.93l1 1h2v-2h2l3-3V6h-2L9 5v-.41C9.927 4.21 10.94 4 12 4s2.073.212 3 .59V6l-1 1v2l1 1 3.13-3.13c.752.897 1.304 1.964 1.606 3.13H18l-2 2v2l1 1h2l.286.286C18.03 18.06 15.24 20 12 20z"></path>
+                  </g>
+                </svg>
               </div>
               <div class="podcasts-browser-item__title">{{item.title}}</div>
               <div class="podcasts-browser-item__author">{{ item.author.nicename }}</div>
@@ -195,7 +189,7 @@
         required: true
       },
       index: {
-        type: String,
+        type: Number,
         default: 1
       }
     },
@@ -211,19 +205,15 @@
           title: '添加节目',
           url: '/podcast'
         },
-        transient: false
+        transient: false,
+        form: {},
+        isChange: false
       }
     },
     mounted () {
-
       (async () => {
         await this.load()
       })()
-//      this.$nextTick(() => {
-//        (async () => {
-//          await this.load()
-//        })()
-//      })
     },
     computed: {
       requestHeader () {
@@ -232,7 +222,7 @@
       uploadAction () {
         const appId = this.$store.getters.appId
         const baseURL = process.env.baseURL
-        return `${baseURL}/app/${appId}/file`
+        return `${baseURL}/apps/${appId}/file`
       },
       classes () {
         return [
@@ -243,19 +233,23 @@
           }
         ]
       },
-//      featuredImage () {
-//        if (this.term.hasOwnProperty('featured_image')) {
-//          return this.term.featured_image
-//        }
-//        return false
-//      },
       isNotEmpty () {
         return this.list.length > 0
       }
     },
     methods: {
-      showButtonsDialog () {
-
+      updateName (e) {
+        this.form.name = e.target.value
+        // this.isChange = true
+      },
+      updateDescription (e) {
+        this.form.decription = e.target.value
+        // this.isChange = true
+      },
+      async save () {
+        this.form.slug = this.term.slug
+        await this.$store.dispatch('saveCategory', {form: this.form})
+        this.isChange = false
       },
       deleteCategory (slug) {
         this.$modal.show('dialog', {
@@ -325,10 +319,16 @@
           if (newFile.success && !oldFile.success) {
             // 文件上传成功后更新用户信息
             const data = newFile.response.data
-            this.term.meta = {
-              '_thumbnail_id': data.id
+            // this.term.meta = {
+            //   '_thumbnail_id': data.id
+            // }
+            this.form = {
+              slug: this.term.slug,
+              meta: {
+                '_thumbnail_id': data.id
+              }
             }
-            await this.$store.dispatch('updateTerm', {form: this.term})
+            await this.$store.dispatch('saveCategory', {form: this.form})
 //            this.$emit('avatar_upload', this.user)
             // 处理上传之后的头像异步加载显示，主要为了显示的体验更好。
             const readAndPreview = async (result) => {

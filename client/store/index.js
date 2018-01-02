@@ -476,6 +476,7 @@ export const actions = {
     // console.log(JSON.stringify(data))
     return data
   },
+
   async updateTerm ({commit}, {form}) {
     // console.log(JSON.stringify(form))
     // commit('users/UPDATE_DETAIL')
@@ -499,6 +500,15 @@ export const actions = {
     }
     // const data = (await )
   },
+  async saveCategory ({commit}, {form}) {
+    const {data} = await this.$axios.post(`/apps/${this.getters.appId}/categories/slug:${form.slug}`, form)
+    if (data.errno > 0) {
+      return data
+    } else {
+      commit('categories/UPDATE_CATEGORY_SUCCESS', data.data)
+      this.$toast.success('保存成功')
+    }
+  },
   async newCategory ({commit}, {form}) {
     const {data} = await this.$axios.post(`/apps/${this.getters.appId}/categories/new`, form)
     if (data.errno > 0) {
@@ -521,6 +531,15 @@ export const actions = {
       // }
       // await this.loadCategories(commit)
       // commit('categories/NEW_CATEGORY_SUCCESS', data.data)
+    }
+  },
+  async getComments({commit}) {
+    commit('comments/REQUEST_LIST')
+    const data = await this.$axios.$get(`/apps/${this.getters.appId}/comments`)
+    if (data && data.errno === 0) {
+      commit('comments/GET_LIST_SUCCESS', data)
+    } else {
+      commit('comments/GET_LIST_FAILURE')
     }
   }
 }
